@@ -33,9 +33,17 @@ export const metadata: Metadata = {
     title: "Fabrica — The Next AI Exit",
     description:
       "Business-First, Coding-First Agentic Development Environment. Direct multi-agent crews with parallel execution and real business guardrails.",
-    url: "https://fabrica.ai",
+    url: "https://fabrica-ai.vercel.app",
     siteName: "Fabrica",
     type: "website",
+    images: [
+      {
+        url: "https://fabrica-ai.vercel.app/images/carousel/fabrica-247-ai-autonomy-vs-manual-work.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fabrica — Autonomous AI crew command center",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
