@@ -13,6 +13,8 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Reveal } from './Reveal'
+import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarBadge } from '@/components/ui/avatar'
 
 const crewRoles = [
   {
@@ -37,7 +39,7 @@ const crewRoles = [
       { type: 'add', text: '+  const fresh = await issueSignedToken(token);' },
       { type: 'add', text: '+  await redis.setex(cacheKey, 60, JSON.stringify(fresh));' },
       { type: 'add', text: '+  return fresh;' },
-      { type: 'success', text: '✓ 16/16 Unit Tests Passed (0.42s) | Clean Diff Ready for Approval' },
+      { type: 'success', text: 'Ã¢Å“â€œ 16/16 Unit Tests Passed (0.42s) | Clean Diff Ready for Approval' },
     ],
   },
   {
@@ -89,9 +91,9 @@ const crewRoles = [
       coreAngle: 'The Anti-Chat IDE: Replace 14 Browser Tabs with 1 Crew Command Center',
       targetPersona: 'Solo SaaS Builders, Technical Consultants & Agency Leads',
       hooks: [
-        '“Every AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.”',
-        '“Stop being the founder, dev, copywriter, and analyst all at once. Direct the crew.”',
-        '“Parallel git worktrees for your AI agents. Zero merge conflicts.”',
+        'Ã¢â‚¬Å“Every AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.Ã¢â‚¬Â',
+        'Ã¢â‚¬Å“Stop being the founder, dev, copywriter, and analyst all at once. Direct the crew.Ã¢â‚¬Â',
+        'Ã¢â‚¬Å“Parallel git worktrees for your AI agents. Zero merge conflicts.Ã¢â‚¬Â',
       ],
       distributionPlan: 'Hacker News Show HN + X Deep Dive Thread + Founder Substack Edition',
     },
@@ -122,23 +124,23 @@ export const CrewSection = () => {
   const current = crewRoles.find((r) => r.id === activeRole) || crewRoles[0]
 
   return (
-    <section id="crew" className="relative py-20 lg:py-32 border-t border-white/5 bg-[#090A0F] overflow-hidden">
+    <section id="crew" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background radial accent */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Header */}
         <Reveal className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Sparkles className="h-3.5 w-3.5" />
             <span>SPECIALIZED CREW MEMBERS</span>
-          </div>
+          </Badge>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight">
             Meet Your Autonomous Crew
           </h2>
 
-          <p className="text-base sm:text-lg text-[#8A8A94]">
+          <p className="text-base sm:text-lg text-[var(--text-muted)]">
             Define dedicated agent roles instead of forcing one single prompt window to do four incompatible jobs.
           </p>
         </Reveal>
@@ -155,25 +157,23 @@ export const CrewSection = () => {
                 className={cn(
                   'p-4 rounded-2xl border text-left transition-all flex flex-col justify-between min-h-[110px]',
                   isActive
-                    ? 'bg-[#151722] border-orange-500/60 shadow-lg shadow-orange-950/30'
-                    : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.05] hover:border-white/20'
+                    ? 'bg-[var(--surface-card)] border-orange-500/60 shadow-lg shadow-orange-950/30'
+                    : 'bg-[var(--overlay-weak)] border-[var(--border-subtle)] hover:bg-[var(--overlay-5)] hover:border-[var(--border-subtle)]'
                 )}
               >
                 <div className="flex items-center justify-between w-full">
-                  <div
-                    className={cn(
-                      'p-2 rounded-xl',
-                      isActive ? 'bg-orange-500/20 text-orange-400' : 'bg-white/5 text-[#8A8A94]'
-                    )}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A94]">
+                  <Avatar size="sm" className="border border-[var(--border-subtle)] bg-[var(--overlay-5)]">
+                    <AvatarFallback className="bg-orange-950/40 text-orange-400">
+                      <Icon className="h-3.5 w-3.5" />
+                    </AvatarFallback>
+                    {isActive && <AvatarBadge className="bg-emerald-500 ring-[var(--surface-card)]" />}
+                  </Avatar>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                     {role.badge}
                   </span>
                 </div>
                 <div className="mt-3">
-                  <h3 className="text-sm font-bold text-white">{role.title}</h3>
+                  <h3 className="text-sm font-bold text-[var(--text-strong)]">{role.title}</h3>
                 </div>
               </button>
             )
@@ -181,43 +181,43 @@ export const CrewSection = () => {
         </div>
 
         {/* Active Role Deep-Dive Card */}
-        <div className="mt-6 rounded-2xl border border-white/15 bg-[#11121B] shadow-2xl p-6 sm:p-8">
+        <div className="mt-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-2xl p-6 sm:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left: Role Description & Example Task (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <current.icon className="h-6 w-6 text-orange-400" />
-                  <h3 className="text-2xl font-bold text-white">{current.title}</h3>
+                  <h3 className="text-2xl font-bold text-[var(--text-strong)]">{current.title}</h3>
                 </div>
                 <p className="text-sm font-medium text-orange-300">{current.tagline}</p>
-                <p className="text-sm text-[#8A8A94] leading-relaxed pt-1">{current.description}</p>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed pt-1">{current.description}</p>
               </div>
 
               {/* Example Task Box */}
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2">
-                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#8A8A94] flex items-center gap-1.5">
+              <div className="p-4 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-subtle)] space-y-2">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-muted)] flex items-center gap-1.5">
                   <Layers className="h-3.5 w-3.5 text-blue-400" />
                   Example Mission Assigned:
                 </span>
-                <p className="text-xs text-[#F5F5F7] font-mono leading-relaxed bg-[#0A0A0F] p-3 rounded-lg border border-white/5">
+                <p className="text-xs text-[var(--text-strong)] font-mono leading-relaxed bg-[var(--surface-page)] p-3 rounded-lg border border-[var(--border-faint)]">
                   &ldquo;{current.exampleTask}&rdquo;
                 </p>
               </div>
 
               <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
                 <CheckCircle2 className="h-4 w-4" />
-                <span>Isolated Execution • Strict Scoped Permissions</span>
+                <span>Isolated Execution Ã¢â‚¬Â¢ Strict Scoped Permissions</span>
               </div>
             </div>
 
             {/* Right: Live Simulated Output View (7 cols) */}
-            <div className="lg:col-span-7 rounded-xl border border-white/10 bg-[#0A0A0F] overflow-hidden">
+            <div className="lg:col-span-7 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-page)] overflow-hidden command-frame">
               {/* Output Header */}
-              <div className="flex items-center justify-between px-4 py-2.5 bg-[#050508] border-b border-white/10 text-xs font-mono">
-                <div className="flex items-center gap-2 text-[#8A8A94]">
+              <div className="flex items-center justify-between px-4 py-2.5 bg-[#050508] border-b border-[var(--border-subtle)] text-xs font-mono">
+                <div className="flex items-center gap-2 text-[var(--text-muted)]">
                   <FileCode2 className="h-4 w-4 text-orange-400" />
-                  <span className="text-white font-semibold">{current.outputTitle}</span>
+                  <span className="text-[var(--text-strong)] font-semibold">{current.outputTitle}</span>
                 </div>
                 <span className="text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]">
                   VERIFIED OUTPUT
@@ -234,7 +234,7 @@ export const CrewSection = () => {
                         key={idx}
                         className={cn(
                           'px-2 py-0.5 rounded text-xs leading-relaxed',
-                          line.type === 'header' && 'text-[#8A8A94] font-bold border-b border-white/5 pb-1',
+                          line.type === 'header' && 'text-[var(--text-muted)] font-bold border-b border-[var(--border-faint)] pb-1',
                           line.type === 'info' && 'text-blue-400',
                           line.type === 'remove' && 'bg-red-950/40 text-red-300 border-l-2 border-red-500',
                           line.type === 'add' && 'bg-emerald-950/40 text-emerald-300 border-l-2 border-emerald-500',
@@ -255,7 +255,7 @@ export const CrewSection = () => {
                     ).map((item, idx) => (
                       <div
                         key={idx}
-                        className="p-3 rounded-lg bg-white/[0.02] border border-white/5 space-y-1"
+                        className="p-3 rounded-lg bg-[var(--overlay-weak)] border border-[var(--border-faint)] space-y-1"
                       >
                         <div className="flex items-center justify-between text-xs font-mono">
                           <span className="text-orange-400 font-semibold">{item.source}</span>
@@ -263,7 +263,7 @@ export const CrewSection = () => {
                             {item.confidence}
                           </span>
                         </div>
-                        <p className="text-xs text-[#8A8A94]">{item.insight}</p>
+                        <p className="text-xs text-[var(--text-muted)]">{item.insight}</p>
                       </div>
                     ))}
                   </div>
@@ -285,14 +285,14 @@ export const CrewSection = () => {
                             <span className="text-[11px] font-mono text-orange-400 uppercase font-semibold">
                               Primary Angle:
                             </span>
-                            <p className="text-sm font-bold text-white mt-1">{data.coreAngle}</p>
+                            <p className="text-sm font-bold text-[var(--text-strong)] mt-1">{data.coreAngle}</p>
                           </div>
                           <div className="space-y-1.5 pt-1">
-                            <span className="text-[11px] font-mono text-[#8A8A94] uppercase font-semibold">
+                            <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase font-semibold">
                               High-Resonance Hooks:
                             </span>
                             {data.hooks.map((h, i) => (
-                              <div key={i} className="p-2 rounded bg-white/[0.02] border border-white/5 text-white/90">
+                              <div key={i} className="p-2 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)] text-[var(--text-strong)]">
                                 {h}
                               </div>
                             ))}
@@ -311,7 +311,7 @@ export const CrewSection = () => {
                   <div className="space-y-2">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="border-b border-white/10 text-[11px] font-mono text-[#8A8A94]">
+                        <tr className="border-b border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]">
                           <th className="pb-2">Metric</th>
                           <th className="pb-2">Current Value</th>
                           <th className="pb-2">Benchmark Target</th>
@@ -327,10 +327,10 @@ export const CrewSection = () => {
                             status: string
                           }>
                         ).map((row, idx) => (
-                          <tr key={idx} className="hover:bg-white/[0.02]">
-                            <td className="py-2.5 font-semibold text-white">{row.metric}</td>
+                          <tr key={idx} className="hover:bg-[var(--overlay-weak)]">
+                            <td className="py-2.5 font-semibold text-[var(--text-strong)]">{row.metric}</td>
                             <td className="py-2.5 text-orange-400 font-bold">{row.value}</td>
-                            <td className="py-2.5 text-[#8A8A94]">{row.benchmark}</td>
+                            <td className="py-2.5 text-[var(--text-muted)]">{row.benchmark}</td>
                             <td className="py-2.5">
                               <span className="text-[10px] text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
                                 {row.status}

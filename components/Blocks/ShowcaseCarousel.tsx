@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
 
 const slides = [
   {
@@ -11,7 +12,7 @@ const slides = [
     label: 'AUTONOMY ENGINE',
     title: '24/7 AI autonomy vs manual work',
     caption:
-      'Background daemons keep shipping while you sleep — no babysitting a single prompt window.',
+      'Background daemons keep shipping while you sleep Ã¢â‚¬â€ no babysitting a single prompt window.',
   },
   {
     image: '/images/carousel/fabrica-futuristic-holographic-network-nodes-interface.jpg',
@@ -39,7 +40,7 @@ const slides = [
     label: 'DIRECT THE FLOW',
     title: 'Architecture you can direct',
     caption:
-      'Visual system flows and approval gates, right from your desk — or your phone.',
+      'Visual system flows and approval gates, right from your desk Ã¢â‚¬â€ or your phone.',
   },
 ]
 
@@ -71,13 +72,13 @@ export const ShowcaseCarousel = () => {
   const slide = slides[current]
 
   return (
-    <section className="relative py-16 sm:py-24 bg-[#0A0B11] border-b border-white/5 overflow-hidden">
+    <section className="relative py-16 sm:py-24 bg-[var(--surface-section)] border-b border-[var(--border-faint)] overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Play className="h-3.5 w-3.5" />
             <span>THE VISION, VISUALIZED</span>
-          </span>
+          </Badge>
         </div>
 
         <div
@@ -85,7 +86,7 @@ export const ShowcaseCarousel = () => {
           onMouseEnter={stopAutoplay}
           onMouseLeave={() => playing && startAutoplay()}
         >
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-2xl border border-white/10 bg-[#11121B] overflow-hidden shadow-2xl shadow-black/60">
+          <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] overflow-hidden shadow-2xl shadow-black/60">
             <AnimatePresence mode="wait">
               <motion.img
                 key={slide.image}
@@ -101,7 +102,7 @@ export const ShowcaseCarousel = () => {
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B11]/95 via-[#0A0B11]/30 to-transparent" />
 
-            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 command-frame">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={slide.image}
@@ -114,10 +115,10 @@ export const ShowcaseCarousel = () => {
                   <span className="text-[10px] sm:text-xs font-mono tracking-widest text-orange-400">
                     {slide.label}
                   </span>
-                  <h3 className="mt-2 text-xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <h3 className="mt-2 text-xl sm:text-3xl font-extrabold text-[var(--text-strong)] tracking-tight">
                     {slide.title}
                   </h3>
-                  <p className="mt-2 text-sm sm:text-base text-[#B9B9C2] leading-relaxed">
+                  <p className="mt-2 text-sm sm:text-base text-[var(--text-subtle)] leading-relaxed">
                     {slide.caption}
                   </p>
                 </motion.div>
@@ -127,14 +128,14 @@ export const ShowcaseCarousel = () => {
             <button
               aria-label="Previous slide"
               onClick={() => go(current - 1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-white/15 bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/40 text-[var(--text-strong)] opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next slide"
               onClick={() => go(current + 1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-white/15 bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/40 text-[var(--text-strong)] opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -144,7 +145,7 @@ export const ShowcaseCarousel = () => {
             <button
               aria-label={playing ? 'Pause autoplay' : 'Play autoplay'}
               onClick={() => setPlaying((p) => !p)}
-              className="h-8 w-8 flex items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 hover:text-orange-400 hover:border-orange-500/50 transition-colors"
+              className="h-8 w-8 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--overlay-5)] text-[var(--text-strong)] hover:text-orange-400 hover:border-orange-500/50 transition-colors"
             >
               {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
             </button>
@@ -158,7 +159,7 @@ export const ShowcaseCarousel = () => {
                   'h-1.5 rounded-full transition-all duration-300',
                   index === current
                     ? 'w-8 bg-orange-500'
-                    : 'w-4 bg-white/25 hover:bg-white/50'
+                    : 'w-4 bg-white/25 hover:bg-[var(--overlay-5)]0'
                 )}
               />
             ))}

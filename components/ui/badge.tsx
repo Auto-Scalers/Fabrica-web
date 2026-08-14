@@ -12,6 +12,8 @@ const badgeVariants = cva(
         default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         copper:
           "bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] text-white [a]:hover:brightness-110",
+        "copper-outline":
+          "border border-orange-500/30 bg-[var(--overlay-weak)] text-orange-500 dark:bg-orange-950/30 dark:text-orange-400 [a]:hover:border-orange-500/60",
         secondary:
           "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
         destructive:

@@ -8,6 +8,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -23,11 +24,11 @@ export const Navbar = () => {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0F]/80 backdrop-blur-xl border-b border-white/10 transition-all">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-[var(--border-subtle)] transition-all">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.06] border border-white/10 p-1 shadow-lg shadow-black/40 transition-transform group-hover:scale-105">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--overlay-5)] border border-[var(--border-subtle)] p-1 shadow-lg shadow-black/40 transition-transform group-hover:scale-105">
             <img
               src="/fabrica-logo_icon.svg"
               alt="Fabrica Logo"
@@ -35,7 +36,7 @@ export const Navbar = () => {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
+            <span className="text-lg font-bold tracking-tight text-[var(--text-strong)] flex items-center gap-1.5">
               Fabrica
               <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-orange-950/60 border border-orange-500/30 text-orange-400 font-normal">
                 v3.0
@@ -45,12 +46,12 @@ export const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[#8A8A94]">
+        <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[var(--text-muted)]">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="transition-colors hover:text-white"
+              className="transition-colors hover:text-[var(--text-strong)]"
             >
               {link.name}
             </a>
@@ -59,6 +60,7 @@ export const Navbar = () => {
 
         {/* Action CTAs */}
         <div className="hidden md:flex items-center gap-3">
+          <AnimatedThemeToggler className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-5)] transition-colors" aria-label="Toggle theme" />
           <ShimmerButton
             shimmerColor="#FFD0A6"
             borderRadius="12px"
@@ -74,7 +76,7 @@ export const Navbar = () => {
         {/* Mobile Menu Toggle Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-[#8A8A94] hover:text-white hover:bg-white/5 transition-colors"
+          className="md:hidden p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-5)] transition-colors"
           aria-label="Toggle navigation menu"
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -83,24 +85,25 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#0A0A0F]/95 backdrop-blur-2xl px-4 py-6 space-y-4">
-          <nav className="flex flex-col space-y-3 text-sm font-medium text-[#8A8A94]">
+        <div className="md:hidden border-b border-[var(--border-subtle)] bg-background/95 backdrop-blur-2xl px-4 py-6 space-y-4">
+          <nav className="flex flex-col space-y-3 text-sm font-medium text-[var(--text-muted)]">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-white transition-colors"
+                className="py-1 hover:text-[var(--text-strong)] transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </nav>
-          <div className="pt-4 border-t border-white/10">
+          <div className="pt-4 border-t border-[var(--border-subtle)]">
+            <AnimatedThemeToggler className="w-full flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] py-2.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors" aria-label="Toggle theme" />
             <a
               href="#waitlist"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] py-2.5 text-xs font-semibold text-white shadow-md"
+              className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] py-2.5 text-xs font-semibold text-white shadow-md"
             >
               <span>Get Early Access</span>
               <ArrowRight className="h-3.5 w-3.5" />

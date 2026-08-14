@@ -17,7 +17,7 @@ import { FinalCta } from "@/components/Blocks/FinalCta";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0F] text-[#F5F5F7]">
+    <main className="min-h-screen bg-[var(--surface-page)] text-[var(--text-strong)]">
       {/* 1. Hero: Lead with the pain, mechanical promise & interactive command center */}
       <Hero />
 

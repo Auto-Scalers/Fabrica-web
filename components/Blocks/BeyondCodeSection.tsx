@@ -9,6 +9,7 @@ import {
   Boxes,
 } from 'lucide-react'
 import { Reveal } from './Reveal'
+import { Badge } from '@/components/ui/badge'
 
 const pluginCapabilities = [
   {
@@ -39,23 +40,23 @@ const pluginCapabilities = [
 
 export const BeyondCodeSection = () => {
   return (
-    <section className="relative py-20 lg:py-28 border-t border-white/5 bg-[#0C0D14] overflow-hidden">
+    <section className="relative py-20 lg:py-28 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[400px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Section Header */}
         <Reveal className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Boxes className="h-3.5 w-3.5" />
             <span>EXTENSIBLE BUSINESS RUNTIME</span>
-          </div>
+          </Badge>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
             Beyond Code: Agents for your entire business.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#8A8A94] leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
             Fabrica is not just an IDE for software developers. The same multi-agent crews, parallel isolation, and financial guardrails orchestrate market intelligence, campaign planning, and operations.
           </p>
         </Reveal>
@@ -67,22 +68,22 @@ export const BeyondCodeSection = () => {
             return (
               <div
                 key={idx}
-                className="p-6 sm:p-7 rounded-2xl border border-white/10 bg-[#11121B] hover:border-orange-500/30 transition-all space-y-3 group"
+                className="p-6 sm:p-7 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] hover:border-orange-500/30 transition-all space-y-3 group"
               >
                 <div className="flex items-center justify-between">
                   <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400 group-hover:bg-orange-500/20 transition-colors">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                  <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--overlay-5)] px-2 py-0.5 rounded border border-[var(--border-subtle)]">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-orange-300 transition-colors">
+                <h3 className="text-lg font-bold text-[var(--text-strong)] group-hover:text-orange-300 transition-colors">
                   {item.title}
                 </h3>
 
-                <p className="text-sm text-[#8A8A94] leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
               </div>
             )
           })}

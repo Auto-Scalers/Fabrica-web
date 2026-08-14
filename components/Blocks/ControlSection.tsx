@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Reveal } from './Reveal'
+import { Badge } from '@/components/ui/badge'
 
 export const ControlSection = () => {
   const [gateStatus, setGateStatus] = useState<'pending' | 'approved' | 'rejected'>('pending')
@@ -51,7 +52,7 @@ export const ControlSection = () => {
   const currentGate = gateDetails[selectedGateType]
 
   return (
-    <section id="controls" className="relative py-20 lg:py-32 border-t border-white/5 bg-[#090A0F] overflow-hidden">
+    <section id="controls" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[500px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-1/4 w-[500px] h-[400px] bg-blue-600/10 blur-3xl pointer-events-none -z-10" />
@@ -59,16 +60,16 @@ export const ControlSection = () => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Header */}
         <Reveal className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <ShieldCheck className="h-3.5 w-3.5" />
             <span>FIELD OPS & OPERATIONAL OVERSIGHT</span>
-          </div>
+          </Badge>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
             Autonomy without financial, credential, or operational anxiety.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#8A8A94] leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
             Other tools run wild with unmonitored API loops and cloud-leaked credentials. Fabrica wraps parallel autonomous crews in client-side encryption, hard financial auto-stops, and 1-tap mobile approval gates for all high-risk operations.
           </p>
         </Reveal>
@@ -76,7 +77,7 @@ export const ControlSection = () => {
         {/* 4 Core Control Pillars Grid */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Card 1: Interactive Field Ops & Approval Gates */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -84,8 +85,8 @@ export const ControlSection = () => {
                     <Lock className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Human-in-the-Loop Field Gates</h3>
-                    <span className="text-[11px] font-mono text-[#8A8A94]">Desktop & Mobile Companion</span>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Human-in-the-Loop Field Gates</h3>
+                    <span className="text-[11px] font-mono text-[var(--text-muted)]">Desktop & Mobile Companion</span>
                   </div>
                 </div>
 
@@ -105,8 +106,8 @@ export const ControlSection = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-[#8A8A94] leading-relaxed">
-                Agents draft, build, and verify in isolated worktrees, but high-stakes milestones — live payment bindings, staging deployments, or public campaigns — require your explicit 1-click authorization.
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                Agents draft, build, and verify in isolated worktrees, but high-stakes milestones Ã¢â‚¬â€ live payment bindings, staging deployments, or public campaigns Ã¢â‚¬â€ require your explicit 1-click authorization.
               </p>
 
               {/* Gate Category Selector */}
@@ -122,33 +123,33 @@ export const ControlSection = () => {
                       'px-2.5 py-1 rounded-lg border text-[11px] transition-all',
                       selectedGateType === type
                         ? 'bg-orange-500/20 text-orange-400 border-orange-500/40 font-bold'
-                        : 'bg-white/5 text-[#8A8A94] border-white/10 hover:text-white'
+                        : 'bg-[var(--overlay-5)] text-[var(--text-muted)] border-[var(--border-subtle)] hover:text-[var(--text-strong)]'
                     )}
                   >
-                    {type === 'payment' && '💳 Payment Gate'}
-                    {type === 'deploy' && '🚀 Deploy Gate'}
-                    {type === 'social' && '📢 Social/Email Gate'}
+                    {type === 'payment' && 'Ã°Å¸â€™Â³ Payment Gate'}
+                    {type === 'deploy' && 'Ã°Å¸Å¡â‚¬ Deploy Gate'}
+                    {type === 'social' && 'Ã°Å¸â€œÂ¢ Social/Email Gate'}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Interactive Gate Trigger Box */}
-            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between text-[#8A8A94] text-[11px] pb-2 border-b border-white/5">
+            <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between text-[var(--text-muted)] text-[11px] pb-2 border-b border-[var(--border-faint)]">
                 <span>{currentGate.id}</span>
                 <span className="text-amber-400 font-bold">{currentGate.risk}</span>
               </div>
 
-              <div className="text-white font-sans text-xs font-semibold">
+              <div className="text-[var(--text-strong)] font-sans text-xs font-semibold">
                 {currentGate.title}
               </div>
 
-              <p className="text-[#8A8A94] text-[11px] leading-relaxed font-sans">
+              <p className="text-[var(--text-muted)] text-[11px] leading-relaxed font-sans">
                 {currentGate.desc}
               </p>
 
-              <div className="flex items-center justify-between text-[10px] text-[#8A8A94] pt-1">
+              <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] pt-1">
                 <span>Agent: <strong className="text-orange-400">{currentGate.agent}</strong></span>
                 <span className="text-blue-400">{currentGate.worktree}</span>
               </div>
@@ -160,7 +161,7 @@ export const ControlSection = () => {
                   className={cn(
                     'py-2.5 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5',
                     gateStatus === 'approved'
-                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/40'
+                      ? 'bg-emerald-600 text-[var(--text-strong)] shadow-lg shadow-emerald-950/40'
                       : 'bg-emerald-950/30 hover:bg-emerald-900/50 text-emerald-400 border border-emerald-500/30'
                   )}
                 >
@@ -173,7 +174,7 @@ export const ControlSection = () => {
                   className={cn(
                     'py-2.5 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5',
                     gateStatus === 'rejected'
-                      ? 'bg-red-600 text-white shadow-lg shadow-red-950/40'
+                      ? 'bg-red-600 text-[var(--text-strong)] shadow-lg shadow-red-950/40'
                       : 'bg-red-950/30 hover:bg-red-900/50 text-red-400 border border-red-500/30'
                   )}
                 >
@@ -185,7 +186,7 @@ export const ControlSection = () => {
           </div>
 
           {/* Card 2: Client-Side Credential Vault */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -193,7 +194,7 @@ export const ControlSection = () => {
                     <KeyRound className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Client-Side Credential Vault</h3>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Client-Side Credential Vault</h3>
                     <span className="text-[11px] font-mono text-emerald-400">Zero Cloud Key Storage</span>
                   </div>
                 </div>
@@ -202,35 +203,35 @@ export const ControlSection = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-[#8A8A94] leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 Your API keys, SSH credentials, and OAuth tokens never touch external servers. They remain locally encrypted inside your desktop app keystore and are only injected during isolated task execution.
               </p>
             </div>
 
             {/* Keystore Status Widget */}
-            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-2.5 text-xs font-mono">
-              <div className="flex items-center justify-between pb-1.5 border-b border-white/5 text-[#8A8A94]">
+            <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-2.5 text-xs font-mono">
+              <div className="flex items-center justify-between pb-1.5 border-b border-[var(--border-faint)] text-[var(--text-muted)]">
                 <span>LOCAL KEYSTORE VAULT</span>
                 <span className="text-emerald-400">ENCRYPTED & LOCKED</span>
               </div>
 
-              <div className="flex items-center justify-between text-white/90">
+              <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   OpenAI / Anthropic / Gemini Keys
                 </span>
-                <span className="text-[#8A8A94]">Stored locally</span>
+                <span className="text-[var(--text-muted)]">Stored locally</span>
               </div>
 
-              <div className="flex items-center justify-between text-white/90">
+              <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   Git SSH / GitHub Personal Access
                 </span>
-                <span className="text-[#8A8A94]">Isolated per repo</span>
+                <span className="text-[var(--text-muted)]">Isolated per repo</span>
               </div>
 
-              <div className="flex items-center justify-between text-white/90">
+              <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   Stripe & Cloud Deployment Tokens
@@ -238,15 +239,15 @@ export const ControlSection = () => {
                 <span className="text-amber-400">Gated on approval</span>
               </div>
 
-              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-[#8A8A94]">
+              <div className="pt-2 border-t border-[var(--border-faint)] flex items-center justify-between text-[11px] text-[var(--text-muted)]">
                 <span>Key Rotation: Automated</span>
-                <span className="text-emerald-400">✓ Zero 3rd-party egress</span>
+                <span className="text-emerald-400">Ã¢Å“â€œ Zero 3rd-party egress</span>
               </div>
             </div>
           </div>
 
           {/* Card 3: Hard Budget Limits & Real-Time Auto-Stops */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -254,7 +255,7 @@ export const ControlSection = () => {
                     <DollarSign className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Hard Budget Limits & Auto-Stops</h3>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Hard Budget Limits & Auto-Stops</h3>
                     <span className="text-[11px] font-mono text-orange-400">Per-Task & Per-Project Caps</span>
                   </div>
                 </div>
@@ -263,36 +264,36 @@ export const ControlSection = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-[#8A8A94] leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 Set per-task, per-agent, or per-project spending thresholds. The moment an autonomous thread hits its monetary ceiling, Fabrica immediately halts execution, releases worktree locks, and alerts you.
               </p>
             </div>
 
             {/* Interactive Budget Tracker Widget */}
-            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3">
+            <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3">
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[#8A8A94]">Current Spend vs Cap</span>
-                <span className="text-white font-bold">
+                <span className="text-[var(--text-muted)]">Current Spend vs Cap</span>
+                <span className="text-[var(--text-strong)] font-bold">
                   ${currentSpend.toFixed(2)} / ${monthlyCap.toFixed(2)}
                 </span>
               </div>
 
-              <div className="h-2.5 w-full bg-white/10 rounded-full overflow-hidden">
+              <div className="h-2.5 w-full bg-[var(--overlay-10)] rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-orange-400 transition-all duration-300 rounded-full"
                   style={{ width: `${(currentSpend / monthlyCap) * 100}%` }}
                 />
               </div>
 
-              <div className="flex items-center justify-between text-[11px] font-mono text-[#8A8A94] pt-1">
+              <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-1">
                 <span>{(100 - (currentSpend / monthlyCap) * 100).toFixed(1)}% runway remaining</span>
-                <span className="text-emerald-400">✓ Auto-kill killswitch active</span>
+                <span className="text-emerald-400">Ã¢Å“â€œ Auto-kill killswitch active</span>
               </div>
             </div>
           </div>
 
           {/* Card 4: Dynamic Autonomy Spectrum & Priority Matrix */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+          <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -300,7 +301,7 @@ export const ControlSection = () => {
                     <Sliders className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Dynamic Autonomy Dial</h3>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Dynamic Autonomy Dial</h3>
                     <span className="text-[11px] font-mono text-blue-400">Continuous 24/7 Daemons</span>
                   </div>
                 </div>
@@ -313,22 +314,22 @@ export const ControlSection = () => {
                 </span>
               </div>
 
-              <p className="text-sm text-[#8A8A94] leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 Dial up autonomy for routine competitor research, unit tests, and copy variants; dial it back to require step-by-step confirmation for production database migrations.
               </p>
             </div>
 
             {/* Slider Widget */}
-            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3">
+            <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3">
               <input
                 type="range"
                 min="0"
                 max="100"
                 value={autonomyValue}
                 onChange={(e) => setAutonomyValue(Number(e.target.value))}
-                className="w-full accent-orange-500 cursor-pointer h-2 bg-white/10 rounded-lg"
+                className="w-full accent-orange-500 cursor-pointer h-2 bg-[var(--overlay-10)] rounded-lg"
               />
-              <div className="flex justify-between text-[11px] font-mono text-[#8A8A94]">
+              <div className="flex justify-between text-[11px] font-mono text-[var(--text-muted)]">
                 <span>Step-by-Step Approval</span>
                 <span>Guided Autonomy</span>
                 <span>Continuous 24/7 Daemons</span>

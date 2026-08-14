@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { motion } from 'motion/react'
+import { Badge } from '@/components/ui/badge'
 import {
   Users,
   GitBranch,
@@ -18,14 +19,14 @@ const pillars = [
     title: 'Multi-Agent Crews',
     badge: 'PARALLEL ROLES',
     description:
-      'Developer, Researcher, Marketer, and Analyst agents run toward one goal in parallel — instead of forcing a single prompt window to do four incompatible jobs.',
+      'Developer, Researcher, Marketer, and Analyst agents run toward one goal in parallel Ã¢â‚¬â€ instead of forcing a single prompt window to do four incompatible jobs.',
   },
   {
     icon: GitBranch,
     title: 'Parallel Isolated Worktrees',
     badge: 'ZERO COLLISIONS',
     description:
-      'Every task executes on its own isolated git worktree or disk sandbox. Your main branch stays pristine — no stashing, no merge conflicts, no cross-task pollution.',
+      'Every task executes on its own isolated git worktree or disk sandbox. Your main branch stays pristine Ã¢â‚¬â€ no stashing, no merge conflicts, no cross-task pollution.',
   },
   {
     icon: DollarSign,
@@ -39,7 +40,7 @@ const pillars = [
     title: 'Visual Approval Gates',
     badge: '1-TAP SIGN-OFF',
     description:
-      'High-stakes milestones — payment bindings, production deploys, public campaigns — pause for a clean AST diff review and one-tap authorization.',
+      'High-stakes milestones Ã¢â‚¬â€ payment bindings, production deploys, public campaigns Ã¢â‚¬â€ pause for a clean AST diff review and one-tap authorization.',
   },
   {
     icon: KeyRound,
@@ -59,7 +60,7 @@ const pillars = [
 
 export const WhyFabrica = () => {
   return (
-    <section id="product-pillars" className="relative py-20 lg:py-28 border-t border-white/5 bg-[#0C0D14] overflow-hidden">
+    <section id="product-pillars" className="relative py-20 lg:py-28 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background ambient glow */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[400px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
@@ -71,16 +72,16 @@ export const WhyFabrica = () => {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Sparkles className="h-3.5 w-3.5" />
             <span>THE CORE PILLARS</span>
-          </div>
+          </Badge>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight">
             Why founders direct the crew.
           </h2>
 
-          <p className="text-base sm:text-lg text-[#8A8A94] leading-relaxed">
+          <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
             Six mechanical promises that turn chaotic prompt-juggling into a supervised, budget-capped autonomous factory.
           </p>
         </motion.div>
@@ -95,7 +96,7 @@ export const WhyFabrica = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative group p-6 sm:p-7 rounded-2xl border border-white/10 bg-[#11121B] hover:border-orange-500/40 hover:shadow-lg hover:shadow-orange-950/20 transition-all space-y-3"
+                className="relative group p-6 sm:p-7 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] hover:border-orange-500/40 hover:shadow-lg hover:shadow-orange-950/20 transition-all space-y-3"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -103,16 +104,16 @@ export const WhyFabrica = () => {
                   <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400 group-hover:bg-orange-500/20 transition-colors">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A94] bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] bg-[var(--overlay-5)] px-2 py-0.5 rounded border border-[var(--border-subtle)]">
                     {pillar.badge}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-orange-300 transition-colors">
+                <h3 className="text-lg font-bold text-[var(--text-strong)] group-hover:text-orange-300 transition-colors">
                   {pillar.title}
                 </h3>
 
-                <p className="text-sm text-[#8A8A94] leading-relaxed">{pillar.description}</p>
+                <p className="text-sm text-[var(--text-muted)] leading-relaxed">{pillar.description}</p>
               </motion.div>
             )
           })}

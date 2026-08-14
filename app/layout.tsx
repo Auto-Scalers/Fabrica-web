@@ -51,7 +51,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark scroll-smooth", geistSans.variable, geistMono.variable)}>
+    <html lang="en" className={cn("scroll-smooth", geistSans.variable, geistMono.variable)}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';if(t==='dark'||t===null)document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-primary/30 selection:text-white">
         <Navbar />
         {children}

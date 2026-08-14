@@ -23,6 +23,8 @@ import {
   ExternalLink,
   Loader2,
 } from 'lucide-react'
+import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { Badge } from '@/components/ui/badge'
 
 type PlatformId = 'mac' | 'win' | 'linux' | 'mobile'
 
@@ -210,36 +212,36 @@ export const FinalCta = () => {
   const platformDisplay = selectedPlatform ? selectedPlatform.toUpperCase() : 'YOUR PLATFORM'
 
   return (
-    <section id="waitlist" className="relative py-24 lg:py-32 border-t border-white/5 bg-[#090A0F] overflow-hidden scroll-mt-16">
+    <section id="waitlist" className="relative py-24 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-16">
       {/* Background molten forge glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-8">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+        <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
           <img
             src="/fabrica-logo_icon.svg"
             alt=""
             className="h-4 w-4 object-contain"
           />
           <span>JOIN THE FOUNDING COHORT</span>
-        </div>
+        </Badge>
 
         {/* Headline */}
-        <h2 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+        <h2 className="text-4xl sm:text-6xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
           The Next AI Exit.
           <span className="block text-2xl sm:text-4xl font-normal text-orange-400 mt-3">
             Close the tabs. Direct the crew.
           </span>
         </h2>
 
-        <p className="text-base sm:text-xl text-[#8A8A94] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-xl text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
           Stop being the founder, developer, copywriter, and analyst all at once. Experience parallel isolated execution on your desktop with mobile oversight and hard financial guardrails.
         </p>
 
         {/* Enhanced Platform Selector */}
         <div className="max-w-2xl mx-auto space-y-2">
-          <p className="text-xs font-mono uppercase tracking-wider text-[#8A8A94]">
+          <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
             Choose your platform <span className="text-orange-400">*</span>
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -256,7 +258,7 @@ export const FinalCta = () => {
                   className={`relative flex flex-col items-start gap-2 rounded-xl border p-3.5 text-left transition-all cursor-pointer ${
                     active
                       ? 'border-orange-500/60 bg-orange-500/10 text-orange-300'
-                      : 'border-white/10 bg-white/[0.03] text-[#8A8A94] hover:border-white/25 hover:text-white'
+                      : 'border-[var(--border-subtle)] bg-[var(--overlay-weak)] text-[var(--text-muted)] hover:border-[var(--border-subtle)] hover:text-[var(--text-strong)]'
                   }`}
                 >
                   <p.icon className="h-5 w-5" />
@@ -281,7 +283,7 @@ export const FinalCta = () => {
         {/* Interactive Waitlist Form */}
         <div className="max-w-md mx-auto pt-2">
           {submitted ? (
-            <div className="p-6 rounded-2xl bg-[#141624] border border-emerald-500/40 text-center space-y-4 shadow-2xl">
+            <div className="p-6 rounded-2xl bg-[var(--surface-card)] border border-emerald-500/40 text-center space-y-4 shadow-2xl">
               <div className="flex items-center justify-center gap-2 text-emerald-400 font-bold text-base">
                 <CheckCircle2 className="h-5 w-5" />
                 <span>
@@ -290,14 +292,14 @@ export const FinalCta = () => {
                     : 'You are on the priority access list!'}
                 </span>
               </div>
-              <p className="text-xs text-[#8A8A94]">
+              <p className="text-xs text-[var(--text-muted)]">
                 {existingUser ? (
                   <>
-                    Your profile for <span className="text-white font-mono font-semibold">{email || 'your account'}</span> is saved. Review or update your details below.
+                    Your profile for <span className="text-[var(--text-strong)] font-mono font-semibold">{email || 'your account'}</span> is saved. Review or update your details below.
                   </>
                 ) : (
                   <>
-                    We have registered <span className="text-white font-mono font-semibold">{email || 'your account'}</span> for <strong className="text-orange-400 font-mono uppercase">{platformDisplay}</strong> priority access.
+                    We have registered <span className="text-[var(--text-strong)] font-mono font-semibold">{email || 'your account'}</span> for <strong className="text-orange-400 font-mono uppercase">{platformDisplay}</strong> priority access.
                   </>
                 )}
               </p>
@@ -314,7 +316,7 @@ export const FinalCta = () => {
             <form onSubmit={handleOpenModal} noValidate className="space-y-3">
               <div className="flex flex-col sm:flex-row gap-2.5">
                 <div className="relative flex-1">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8A8A94]" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
                   <input
                     type="email"
                     value={email}
@@ -323,13 +325,16 @@ export const FinalCta = () => {
                       if (error) setError('')
                     }}
                     placeholder="Enter your work email..."
-                    className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-[#11121B] border border-white/15 text-sm text-white placeholder:text-[#8A8A94] focus:outline-none focus:border-orange-500 transition-colors"
+                    className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] text-sm text-[var(--text-strong)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-orange-500 transition-colors"
                   />
                 </div>
-                <button
+                <ShimmerButton
                   type="submit"
                   disabled={isChecking}
-                  className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] text-white font-semibold text-sm shadow-xl shadow-orange-950/50 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer disabled:opacity-60"
+                  shimmerColor="#FFD0A6"
+                  borderRadius="12px"
+                  background="linear-gradient(90deg, #E8590C, #FF8A3D)"
+                  className="px-6 py-3.5 text-sm font-semibold shadow-xl shadow-orange-950/50 disabled:opacity-60 shrink-0"
                 >
                   {isChecking ? (
                     <>
@@ -342,14 +347,14 @@ export const FinalCta = () => {
                       <ArrowRight className="h-4 w-4" />
                     </>
                   )}
-                </button>
+                </ShimmerButton>
               </div>
 
               {error && <p className="text-xs text-red-400 text-left pl-2">{error}</p>}
 
-              <p className="text-[11px] font-mono text-[#8A8A94] flex items-center justify-center gap-2 pt-1">
+              <p className="text-[11px] font-mono text-[var(--text-muted)] flex items-center justify-center gap-2 pt-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                <span>Zero Cloud Key Storage • Free tier available • BYOK supported</span>
+                <span>Zero Cloud Key Storage Ã¢â‚¬Â¢ Free tier available Ã¢â‚¬Â¢ BYOK supported</span>
               </p>
             </form>
           )}
@@ -377,7 +382,7 @@ export const FinalCta = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.94, y: 16 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-2xl bg-[#0D0E17] border border-white/20 p-5 sm:p-7 shadow-2xl shadow-orange-950/80 z-10 overflow-hidden text-left"
+                  className="relative w-full max-w-xl max-h-[90vh] flex flex-col rounded-2xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] p-5 sm:p-7 shadow-2xl shadow-orange-950/80 z-10 overflow-hidden text-left"
                 >
                   {/* Decorative glow lights */}
                   <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-orange-500/20 blur-3xl pointer-events-none" />
@@ -387,7 +392,7 @@ export const FinalCta = () => {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="absolute top-4 right-4 p-2 rounded-xl text-[#8A8A94] hover:text-white hover:bg-white/10 transition-colors cursor-pointer z-20"
+                    className="absolute top-4 right-4 p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-10)] transition-colors cursor-pointer z-20"
                     aria-label="Close modal"
                   >
                     <X className="h-5 w-5" />
@@ -401,21 +406,21 @@ export const FinalCta = () => {
                         <Sparkles className="h-3.5 w-3.5" />
                         <span>{existingUser ? 'YOUR PROFILE IS SAVED' : 'EARLY ACCESS REQUEST RECEIVED'}</span>
                       </div>
-                      <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-strong)] tracking-tight">
                         {existingUser ? 'Welcome back. Update your details.' : "We've received your request!"}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#8A8A94] leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                         {existingUser ? (
                           <>
                             We found your existing registration for{' '}
-                            <span className="text-white font-mono font-bold">{email || 'your email'}</span> on{' '}
+                            <span className="text-[var(--text-strong)] font-mono font-bold">{email || 'your email'}</span> on{' '}
                             <span className="text-orange-400 font-mono font-bold uppercase">{platformDisplay}</span>.
                             Edit anything below and your changes will be saved automatically.
                           </>
                         ) : (
                           <>
                             Our founding engineering team will review your application and reach out directly to{' '}
-                            <span className="text-white font-mono font-bold">{email || 'your email'}</span> with your custom desktop installer invite and onboarding key for{' '}
+                            <span className="text-[var(--text-strong)] font-mono font-bold">{email || 'your email'}</span> with your custom desktop installer invite and onboarding key for{' '}
                             <span className="text-orange-400 font-mono font-bold uppercase">{platformDisplay}</span>.
                           </>
                         )}
@@ -423,16 +428,16 @@ export const FinalCta = () => {
                     </div>
 
                     {/* Priority Referral Link */}
-                    <div className="rounded-xl bg-[#141624] border border-white/10 p-4 space-y-2.5">
+                    <div className="rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 space-y-2.5">
                       <div className="flex items-center justify-between text-xs font-mono">
-                        <span className="text-[#8A8A94]">FAST-TRACK INVITE LINK</span>
+                        <span className="text-[var(--text-muted)]">FAST-TRACK INVITE LINK</span>
                         <span className="text-orange-400 font-bold">#FAB-COHORT-2026</span>
                       </div>
-                      <p className="text-[11px] text-[#8A8A94]">
+                      <p className="text-[11px] text-[var(--text-muted)]">
                         Share your link with colleagues or other developers to move up the rollout schedule:
                       </p>
                       <div className="flex items-center gap-2">
-                        <div className="flex-1 px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-xs font-mono text-zinc-300 truncate">
+                        <div className="flex-1 px-3 py-2 rounded-lg bg-black/40 border border-[var(--border-subtle)] text-xs font-mono text-zinc-300 truncate">
                           {typeof window !== 'undefined'
                             ? `${window.location.origin}?ref=${encodeURIComponent(email || 'early-access')}`
                             : `https://fabric.dev/?ref=${email}`}
@@ -440,7 +445,7 @@ export const FinalCta = () => {
                         <button
                           type="button"
                           onClick={handleCopyLink}
-                          className="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-mono font-semibold flex items-center gap-1.5 transition-all cursor-pointer shrink-0"
+                          className="px-3.5 py-2 rounded-lg bg-[var(--overlay-10)] hover:bg-white/15 border border-[var(--border-subtle)] text-[var(--text-strong)] text-xs font-mono font-semibold flex items-center gap-1.5 transition-all cursor-pointer shrink-0"
                         >
                           {copied ? (
                             <>
@@ -449,7 +454,7 @@ export const FinalCta = () => {
                             </>
                           ) : (
                             <>
-                              <Copy className="h-3.5 w-3.5 text-[#8A8A94]" />
+                              <Copy className="h-3.5 w-3.5 text-[var(--text-muted)]" />
                               <span>Copy</span>
                             </>
                           )}
@@ -458,13 +463,13 @@ export const FinalCta = () => {
                     </div>
 
                     {/* Optional Enterprise Profile & Founder Note */}
-                    <div className="rounded-xl bg-[#141624] border border-white/10 p-4 sm:p-5 space-y-4">
+                    <div className="rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 sm:p-5 space-y-4">
                       <div className="space-y-1">
-                        <div className="flex items-center gap-2 text-white font-semibold text-xs sm:text-sm">
+                        <div className="flex items-center gap-2 text-[var(--text-strong)] font-semibold text-xs sm:text-sm">
                           <Building2 className="h-4 w-4 text-orange-400" />
                           <span>{existingUser ? 'Your Profile (Editable)' : 'Fast-Track Your Access (Optional)'}</span>
                         </div>
-                        <p className="text-[11px] text-[#8A8A94]">
+                        <p className="text-[11px] text-[var(--text-muted)]">
                           {existingUser
                             ? 'Update your setup and team requirements below.'
                             : 'Tell us a bit about your setup and team requirements to help us tailor your environment:'}
@@ -480,7 +485,7 @@ export const FinalCta = () => {
                         <form onSubmit={handleSendEnterpriseNote} className="space-y-3.5 text-xs">
                           {/* Work Email in Modal */}
                           <div className="space-y-1">
-                            <label className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider block">
+                            <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                               Work Email
                             </label>
                             <input
@@ -488,14 +493,14 @@ export const FinalCta = () => {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               placeholder="name@company.com"
-                              className="w-full px-3 py-2 rounded-lg bg-[#0F101A] border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500"
+                              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] placeholder:text-zinc-600 focus:outline-none focus:border-orange-500"
                             />
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {/* Company Name */}
                             <div className="space-y-1">
-                              <label className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider block">
+                              <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                                 Company / Organization
                               </label>
                               <input
@@ -503,23 +508,23 @@ export const FinalCta = () => {
                                 value={company}
                                 onChange={(e) => setCompany(e.target.value)}
                                 placeholder="e.g. Autonomous Labs, Acme"
-                                className="w-full px-3 py-2 rounded-lg bg-[#0F101A] border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500"
+                                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] placeholder:text-zinc-600 focus:outline-none focus:border-orange-500"
                               />
                             </div>
 
                             {/* Team Size */}
                             <div className="space-y-1">
-                              <label className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider block">
+                              <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                                 Team Size
                               </label>
                               <select
                                 value={teamSize}
                                 onChange={(e) => setTeamSize(e.target.value)}
-                                className="w-full px-3 py-2 rounded-lg bg-[#0F101A] border border-white/10 text-white focus:outline-none focus:border-orange-500"
+                                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] focus:outline-none focus:border-orange-500"
                               >
                                 <option value="solo">Solo Hacker / Independent Builder</option>
-                                <option value="2-10">2 – 10 Engineers</option>
-                                <option value="11-50">11 – 50 Engineers</option>
+                                <option value="2-10">2 Ã¢â‚¬â€œ 10 Engineers</option>
+                                <option value="11-50">11 Ã¢â‚¬â€œ 50 Engineers</option>
                                 <option value="50+">50+ Enterprise Team</option>
                               </select>
                             </div>
@@ -527,13 +532,13 @@ export const FinalCta = () => {
 
                           {/* Primary Use Case */}
                           <div className="space-y-1">
-                            <label className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider block">
+                            <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                               Primary Use Case
                             </label>
                             <select
                               value={useCase}
                               onChange={(e) => setUseCase(e.target.value)}
-                              className="w-full px-3 py-2 rounded-lg bg-[#0F101A] border border-white/10 text-white focus:outline-none focus:border-orange-500"
+                              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] focus:outline-none focus:border-orange-500"
                             >
                               <option value="agent_crews">Parallel Multi-Agent Crews & Worktrees</option>
                               <option value="mobile_oversight">Mobile Remote Oversight & Slack Approvals</option>
@@ -544,7 +549,7 @@ export const FinalCta = () => {
 
                           {/* Message / Specific Requirements */}
                           <div className="space-y-1">
-                            <label className="text-[11px] font-mono text-[#8A8A94] uppercase tracking-wider block">
+                            <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
                               Send a Note / Specific Requirements
                             </label>
                             <textarea
@@ -552,14 +557,14 @@ export const FinalCta = () => {
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
                               placeholder="Tell us what you're building, model preferences (Claude 3.7/Gemini 2.5/Ollama), or any specific security/compliance needs..."
-                              className="w-full px-3 py-2 rounded-lg bg-[#0F101A] border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-orange-500 resize-none"
+                              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] placeholder:text-zinc-600 focus:outline-none focus:border-orange-500 resize-none"
                             />
                           </div>
 
                           <button
                             type="submit"
                             disabled={savingNote}
-                            className="w-full py-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-white font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                            className="w-full py-2.5 rounded-lg bg-[var(--overlay-10)] hover:bg-white/15 border border-[var(--border-subtle)] text-[var(--text-strong)] font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                           >
                             {savingNote ? (
                               <>
@@ -583,7 +588,7 @@ export const FinalCta = () => {
                         href="https://discord.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-between text-[#8A8A94] hover:text-white transition-colors"
+                        className="p-3 rounded-xl bg-[var(--overlay-5)] hover:bg-[var(--overlay-10)] border border-[var(--border-subtle)] flex items-center justify-between text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors"
                       >
                         <div className="flex items-center gap-2">
                           <Users className="h-4 w-4 text-indigo-400" />
@@ -594,7 +599,7 @@ export const FinalCta = () => {
 
                       <a
                         href="mailto:founders@fabric.dev?subject=Enterprise%20Early%20Access%20Inquiry"
-                        className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-between text-[#8A8A94] hover:text-white transition-colors"
+                        className="p-3 rounded-xl bg-[var(--overlay-5)] hover:bg-[var(--overlay-10)] border border-[var(--border-subtle)] flex items-center justify-between text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors"
                       >
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4 text-orange-400" />
@@ -605,13 +610,16 @@ export const FinalCta = () => {
                     </div>
 
                     {/* Close Button */}
-                    <button
+                    <ShimmerButton
                       type="button"
                       onClick={() => setIsModalOpen(false)}
-                      className="w-full py-3 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] text-white font-semibold text-xs shadow-lg shadow-orange-950/50 hover:brightness-110 active:scale-98 transition-all cursor-pointer text-center"
+                      shimmerColor="#FFD0A6"
+                      borderRadius="12px"
+                      background="linear-gradient(90deg, #E8590C, #FF8A3D)"
+                      className="w-full py-3 text-xs font-semibold shadow-lg shadow-orange-950/50"
                     >
                       Done & Close
-                    </button>
+                    </ShimmerButton>
                   </div>
                 </motion.div>
               </div>

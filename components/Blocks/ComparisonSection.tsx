@@ -3,6 +3,7 @@
 import React from 'react'
 import { Check, X, Sparkles, Flame } from 'lucide-react'
 import { Reveal } from './Reveal'
+import { Badge } from '@/components/ui/badge'
 
 // Typed comparison matrix data for easy customization
 const comparisonRows = [
@@ -58,43 +59,43 @@ const comparisonRows = [
 
 export const ComparisonSection = () => {
   return (
-    <section id="comparison" className="relative py-20 lg:py-32 border-t border-white/5 bg-[#090A0F] overflow-hidden">
+    <section id="comparison" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Section Header */}
         <Reveal className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+          <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Sparkles className="h-3.5 w-3.5" />
             <span>THE ARCHITECTURAL DIFFERENCE</span>
-          </div>
+          </Badge>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight">
             How Fabrica Compares
           </h2>
 
-          <p className="text-base sm:text-lg text-[#8A8A94]">
+          <p className="text-base sm:text-lg text-[var(--text-muted)]">
             Why solo builders, agency leads, and lean teams switch from fragile prompt windows to an Agentic Development Environment.
           </p>
         </Reveal>
 
         {/* Comparison Table */}
         <div className="mt-12 overflow-x-auto">
-          <div className="min-w-[720px] rounded-2xl border border-white/10 bg-[#0E0F17] shadow-2xl overflow-hidden">
+          <div className="min-w-[720px] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-panel)] shadow-2xl overflow-hidden">
             {/* Header Row */}
-            <div className="grid grid-cols-12 bg-[#08090D] border-b border-white/10 p-4 text-xs font-mono">
-              <div className="col-span-4 text-[#8A8A94] uppercase font-bold tracking-wider">
+            <div className="grid grid-cols-12 bg-[var(--surface-panel)] border-b border-[var(--border-subtle)] p-4 text-xs font-mono">
+              <div className="col-span-4 text-[var(--text-muted)] uppercase font-bold tracking-wider">
                 Capability / Workflow
               </div>
               <div className="col-span-3 text-orange-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                 <Flame className="h-4 w-4" />
                 Fabrica
               </div>
-              <div className="col-span-3 text-[#8A8A94] uppercase font-bold tracking-wider">
+              <div className="col-span-3 text-[var(--text-muted)] uppercase font-bold tracking-wider">
                 Doing It Alone
               </div>
-              <div className="col-span-2 text-[#8A8A94] uppercase font-bold tracking-wider">
+              <div className="col-span-2 text-[var(--text-muted)] uppercase font-bold tracking-wider">
                 Generic AI Chats
               </div>
             </div>
@@ -104,10 +105,10 @@ export const ComparisonSection = () => {
               {comparisonRows.map((row, idx) => (
                 <div
                   key={idx}
-                  className="grid grid-cols-12 p-4 items-center text-xs hover:bg-white/[0.02] transition-colors"
+                  className="grid grid-cols-12 p-4 items-center text-xs hover:bg-[var(--overlay-weak)] transition-colors"
                 >
                   {/* Capability Column */}
-                  <div className="col-span-4 font-semibold text-white pr-3">
+                  <div className="col-span-4 font-semibold text-[var(--text-strong)] pr-3">
                     {row.capability}
                   </div>
 
@@ -120,7 +121,7 @@ export const ComparisonSection = () => {
                   </div>
 
                   {/* Doing it alone Column */}
-                  <div className="col-span-3 text-[#8A8A94] flex items-center gap-2 pr-3">
+                  <div className="col-span-3 text-[var(--text-muted)] flex items-center gap-2 pr-3">
                     <div className="p-1 rounded-full bg-red-950/40 text-red-400">
                       <X className="h-3.5 w-3.5" />
                     </div>
@@ -128,7 +129,7 @@ export const ComparisonSection = () => {
                   </div>
 
                   {/* Generic Chat Column */}
-                  <div className="col-span-2 text-[#8A8A94] flex items-center gap-2">
+                  <div className="col-span-2 text-[var(--text-muted)] flex items-center gap-2">
                     <div className="p-1 rounded-full bg-red-950/40 text-red-400">
                       <X className="h-3.5 w-3.5" />
                     </div>
