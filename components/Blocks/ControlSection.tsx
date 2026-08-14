@@ -1,0 +1,343 @@
+'use client'
+
+import React, { useState } from 'react'
+import {
+  ShieldCheck,
+  DollarSign,
+  Sliders,
+  CheckCircle2,
+  XCircle,
+  Lock,
+  Clock,
+  KeyRound,
+} from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Reveal } from './Reveal'
+
+export const ControlSection = () => {
+  const [gateStatus, setGateStatus] = useState<'pending' | 'approved' | 'rejected'>('pending')
+  const [selectedGateType, setSelectedGateType] = useState<'payment' | 'deploy' | 'social'>('payment')
+  const [autonomyValue, setAutonomyValue] = useState(65)
+  const monthlyCap = 150
+  const currentSpend = 64.8
+
+  const gateDetails = {
+    payment: {
+      id: '#GATE-PAY-904',
+      title: 'Stripe Webhook & Production Key Activation',
+      risk: 'Payment Critical',
+      desc: 'Developer agent completed test webhooks (14/14 passed) and requests live secret key binding.',
+      agent: 'Developer Agent',
+      worktree: 'worktree/stripe-prod',
+    },
+    deploy: {
+      id: '#GATE-DEP-112',
+      title: 'Production Staging Zero-Downtime Rollout',
+      risk: 'High Infrastructure Impact',
+      desc: 'AST diff verified: 4 modified files, 0 schema breaking changes, all migration tests green.',
+      agent: 'Developer Agent',
+      worktree: 'worktree/staging-v3',
+    },
+    social: {
+      id: '#GATE-PUB-440',
+      title: 'Multi-Channel Product Launch Campaign Blast',
+      risk: 'Public Brand Action',
+      desc: 'Marketer agent drafted launch announcement and outreach emails for 1,200 verified beta testers.',
+      agent: 'Marketer Agent',
+      worktree: 'campaigns/launch-blast',
+    },
+  }
+
+  const currentGate = gateDetails[selectedGateType]
+
+  return (
+    <section id="controls" className="relative py-20 lg:py-32 border-t border-white/5 bg-[#090A0F] overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[500px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-10 left-1/4 w-[500px] h-[400px] bg-blue-600/10 blur-3xl pointer-events-none -z-10" />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Header */}
+        <Reveal className="max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs font-mono text-orange-400">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>FIELD OPS & OPERATIONAL OVERSIGHT</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Autonomy without financial, credential, or operational anxiety.
+          </h2>
+
+          <p className="text-base sm:text-lg text-[#8A8A94] leading-relaxed">
+            Other tools run wild with unmonitored API loops and cloud-leaked credentials. Fabrica wraps parallel autonomous crews in client-side encryption, hard financial auto-stops, and 1-tap mobile approval gates for all high-risk operations.
+          </p>
+        </Reveal>
+
+        {/* 4 Core Control Pillars Grid */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Card 1: Interactive Field Ops & Approval Gates */}
+          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+                    <Lock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Human-in-the-Loop Field Gates</h3>
+                    <span className="text-[11px] font-mono text-[#8A8A94]">Desktop & Mobile Companion</span>
+                  </div>
+                </div>
+
+                {/* Live Status Badge */}
+                <span
+                  className={cn(
+                    'text-xs font-mono px-2.5 py-1 rounded-full border flex items-center gap-1.5 transition-all',
+                    gateStatus === 'approved' && 'bg-emerald-950/50 text-emerald-400 border-emerald-500/40',
+                    gateStatus === 'rejected' && 'bg-red-950/50 text-red-400 border-red-500/40',
+                    gateStatus === 'pending' && 'bg-amber-950/50 text-amber-400 border-amber-500/40'
+                  )}
+                >
+                  {gateStatus === 'approved' && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />}
+                  {gateStatus === 'rejected' && <XCircle className="h-3.5 w-3.5 text-red-400" />}
+                  {gateStatus === 'pending' && <Clock className="h-3.5 w-3.5 text-amber-400 animate-pulse" />}
+                  <span>{gateStatus.toUpperCase()}</span>
+                </span>
+              </div>
+
+              <p className="text-sm text-[#8A8A94] leading-relaxed">
+                Agents draft, build, and verify in isolated worktrees, but high-stakes milestones — live payment bindings, staging deployments, or public campaigns — require your explicit 1-click authorization.
+              </p>
+
+              {/* Gate Category Selector */}
+              <div className="flex gap-2 pt-1 font-mono text-xs">
+                {(['payment', 'deploy', 'social'] as const).map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => {
+                      setSelectedGateType(type)
+                      setGateStatus('pending')
+                    }}
+                    className={cn(
+                      'px-2.5 py-1 rounded-lg border text-[11px] transition-all',
+                      selectedGateType === type
+                        ? 'bg-orange-500/20 text-orange-400 border-orange-500/40 font-bold'
+                        : 'bg-white/5 text-[#8A8A94] border-white/10 hover:text-white'
+                    )}
+                  >
+                    {type === 'payment' && '💳 Payment Gate'}
+                    {type === 'deploy' && '🚀 Deploy Gate'}
+                    {type === 'social' && '📢 Social/Email Gate'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Interactive Gate Trigger Box */}
+            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between text-[#8A8A94] text-[11px] pb-2 border-b border-white/5">
+                <span>{currentGate.id}</span>
+                <span className="text-amber-400 font-bold">{currentGate.risk}</span>
+              </div>
+
+              <div className="text-white font-sans text-xs font-semibold">
+                {currentGate.title}
+              </div>
+
+              <p className="text-[#8A8A94] text-[11px] leading-relaxed font-sans">
+                {currentGate.desc}
+              </p>
+
+              <div className="flex items-center justify-between text-[10px] text-[#8A8A94] pt-1">
+                <span>Agent: <strong className="text-orange-400">{currentGate.agent}</strong></span>
+                <span className="text-blue-400">{currentGate.worktree}</span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <button
+                  onClick={() => setGateStatus('approved')}
+                  className={cn(
+                    'py-2.5 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5',
+                    gateStatus === 'approved'
+                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/40'
+                      : 'bg-emerald-950/30 hover:bg-emerald-900/50 text-emerald-400 border border-emerald-500/30'
+                  )}
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                  <span>1-Tap Approve</span>
+                </button>
+
+                <button
+                  onClick={() => setGateStatus('rejected')}
+                  className={cn(
+                    'py-2.5 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5',
+                    gateStatus === 'rejected'
+                      ? 'bg-red-600 text-white shadow-lg shadow-red-950/40'
+                      : 'bg-red-950/30 hover:bg-red-900/50 text-red-400 border border-red-500/30'
+                  )}
+                >
+                  <XCircle className="h-4 w-4" />
+                  <span>Reject & Re-Plan</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Client-Side Credential Vault */}
+          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+                    <KeyRound className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Client-Side Credential Vault</h3>
+                    <span className="text-[11px] font-mono text-emerald-400">Zero Cloud Key Storage</span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
+                  AES-256 GCM
+                </span>
+              </div>
+
+              <p className="text-sm text-[#8A8A94] leading-relaxed">
+                Your API keys, SSH credentials, and OAuth tokens never touch external servers. They remain locally encrypted inside your desktop app keystore and are only injected during isolated task execution.
+              </p>
+            </div>
+
+            {/* Keystore Status Widget */}
+            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-2.5 text-xs font-mono">
+              <div className="flex items-center justify-between pb-1.5 border-b border-white/5 text-[#8A8A94]">
+                <span>LOCAL KEYSTORE VAULT</span>
+                <span className="text-emerald-400">ENCRYPTED & LOCKED</span>
+              </div>
+
+              <div className="flex items-center justify-between text-white/90">
+                <span className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  OpenAI / Anthropic / Gemini Keys
+                </span>
+                <span className="text-[#8A8A94]">Stored locally</span>
+              </div>
+
+              <div className="flex items-center justify-between text-white/90">
+                <span className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Git SSH / GitHub Personal Access
+                </span>
+                <span className="text-[#8A8A94]">Isolated per repo</span>
+              </div>
+
+              <div className="flex items-center justify-between text-white/90">
+                <span className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Stripe & Cloud Deployment Tokens
+                </span>
+                <span className="text-amber-400">Gated on approval</span>
+              </div>
+
+              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-[#8A8A94]">
+                <span>Key Rotation: Automated</span>
+                <span className="text-emerald-400">✓ Zero 3rd-party egress</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Hard Budget Limits & Real-Time Auto-Stops */}
+          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+                    <DollarSign className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Hard Budget Limits & Auto-Stops</h3>
+                    <span className="text-[11px] font-mono text-orange-400">Per-Task & Per-Project Caps</span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
+                  REAL-TIME GUARD
+                </span>
+              </div>
+
+              <p className="text-sm text-[#8A8A94] leading-relaxed">
+                Set per-task, per-agent, or per-project spending thresholds. The moment an autonomous thread hits its monetary ceiling, Fabrica immediately halts execution, releases worktree locks, and alerts you.
+              </p>
+            </div>
+
+            {/* Interactive Budget Tracker Widget */}
+            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3">
+              <div className="flex items-center justify-between text-xs font-mono">
+                <span className="text-[#8A8A94]">Current Spend vs Cap</span>
+                <span className="text-white font-bold">
+                  ${currentSpend.toFixed(2)} / ${monthlyCap.toFixed(2)}
+                </span>
+              </div>
+
+              <div className="h-2.5 w-full bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-orange-400 transition-all duration-300 rounded-full"
+                  style={{ width: `${(currentSpend / monthlyCap) * 100}%` }}
+                />
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-[#8A8A94] pt-1">
+                <span>{(100 - (currentSpend / monthlyCap) * 100).toFixed(1)}% runway remaining</span>
+                <span className="text-emerald-400">✓ Auto-kill killswitch active</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Dynamic Autonomy Spectrum & Priority Matrix */}
+          <div className="p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#11121B] shadow-xl flex flex-col justify-between space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+                    <Sliders className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Dynamic Autonomy Dial</h3>
+                    <span className="text-[11px] font-mono text-blue-400">Continuous 24/7 Daemons</span>
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-orange-400 font-bold">
+                  {autonomyValue < 35
+                    ? 'Strict Approval'
+                    : autonomyValue < 70
+                    ? 'Guided Guardrails'
+                    : '24/7 Full Autonomy'}
+                </span>
+              </div>
+
+              <p className="text-sm text-[#8A8A94] leading-relaxed">
+                Dial up autonomy for routine competitor research, unit tests, and copy variants; dial it back to require step-by-step confirmation for production database migrations.
+              </p>
+            </div>
+
+            {/* Slider Widget */}
+            <div className="p-4 rounded-xl bg-[#090A0E] border border-white/10 space-y-3">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={autonomyValue}
+                onChange={(e) => setAutonomyValue(Number(e.target.value))}
+                className="w-full accent-orange-500 cursor-pointer h-2 bg-white/10 rounded-lg"
+              />
+              <div className="flex justify-between text-[11px] font-mono text-[#8A8A94]">
+                <span>Step-by-Step Approval</span>
+                <span>Guided Autonomy</span>
+                <span>Continuous 24/7 Daemons</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
