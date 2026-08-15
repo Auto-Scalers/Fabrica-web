@@ -14,39 +14,41 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
 
-const workflowSteps = [
-  {
-    step: '01',
-    name: 'Draft Spec & Scope',
-    tagline: 'Define the objective in plain business terms.',
-    desc: 'Assign the outcome to a crew role. No fragile prompt crafting Ã¢â‚¬â€ Fabrica generates structured execution plans with clear test suites and file change proposals.',
-  },
-  {
-    step: '02',
-    name: 'Plan & Worktree Scaffold',
-    tagline: 'Isolate execution in dedicated git worktrees.',
-    desc: 'Each agent spins up an isolated disk folder or git worktree. Tasks run in parallel without touching your master branch, stashing uncommitted code, or polluting workspace files.',
-  },
-  {
-    step: '03',
-    name: 'Parallel GPU Execution',
-    tagline: 'Autonomous execution inside budget & permission bounds.',
-    desc: 'Ghostty-speed multiplexed terminals run background daemons for Developer, Researcher, and Marketer simultaneously under hard monetary auto-stops.',
-  },
-  {
-    step: '04',
-    name: 'Inspect, QA & Sign-Off',
-    tagline: 'AST diff review, headless browser QA, and mobile 1-tap sign-off.',
-    desc: 'Review unified AST diffs, test results, Playwright UI assertions, and sourced reports in the visual command center or on your phone before merging.',
-  },
-]
-
 export const OrchestrationSection = () => {
+  const t = useTranslations('orchestration')
   const [activeStep, setActiveStep] = useState(1)
   const [simProgress, setSimProgress] = useState(74)
   const [activeEngineView, setActiveEngineView] = useState<'worktrees' | 'spec_editor' | 'terminals' | 'browser_qa' | 'mobile_sync'>('worktrees')
+
+  const workflowSteps = [
+    {
+      step: '01',
+      name: t('step1.name'),
+      tagline: t('step1.tagline'),
+      desc: t('step1.desc'),
+    },
+    {
+      step: '02',
+      name: t('step2.name'),
+      tagline: t('step2.tagline'),
+      desc: t('step2.desc'),
+    },
+    {
+      step: '03',
+      name: t('step3.name'),
+      tagline: t('step3.tagline'),
+      desc: t('step3.desc'),
+    },
+    {
+      step: '04',
+      name: t('step4.name'),
+      tagline: t('step4.tagline'),
+      desc: t('step4.desc'),
+    },
+  ]
 
   // Simulation effect
   useEffect(() => {
@@ -70,18 +72,18 @@ export const OrchestrationSection = () => {
         <Reveal className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/30 px-3.5 py-1 text-xs font-mono text-blue-400">
             <Cpu className="h-3.5 w-3.5" />
-            <span>HOW IT ACTUALLY WORKS</span>
+            <span>{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
-            Parallel Isolated Worktrees.
+            {t('headline')}
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] to-[#E8590C]">
-              Zero Collisions. 24/7 Autonomy.
+              {t('headlineGradient')}
             </span>
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
-            Instead of bottlenecking on a single prompt window, Fabrica pairs Ghostty-speed terminal orchestration with isolated Git worktrees, Markdown plan drafting, Playwright browser QA, and phone-synced approvals.
+            {t('paragraph')}
           </p>
         </Reveal>
 
@@ -103,7 +105,7 @@ export const OrchestrationSection = () => {
                   <span className="text-xs font-mono text-orange-400 font-bold">{s.step}</span>
                   {activeStep === idx && (
                     <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded">
-                      ACTIVE PHASE
+                      {t('activePhase')}
                     </span>
                   )}
                 </div>
@@ -130,7 +132,7 @@ export const OrchestrationSection = () => {
                 )}
               >
                 <GitBranch className="h-3.5 w-3.5" />
-                <span>Git Worktrees (3)</span>
+                <span>{t('gitWorktrees')}</span>
               </button>
 
               <button
@@ -143,7 +145,7 @@ export const OrchestrationSection = () => {
                 )}
               >
                 <FileText className="h-3.5 w-3.5" />
-                <span>Markdown Plan Spec</span>
+                <span>{t('markdownPlan')}</span>
               </button>
 
               <button
@@ -156,7 +158,7 @@ export const OrchestrationSection = () => {
                 )}
               >
                 <Terminal className="h-3.5 w-3.5" />
-                <span>GPU Terminals</span>
+                <span>{t('gpuTerminals')}</span>
               </button>
 
               <button
@@ -169,7 +171,7 @@ export const OrchestrationSection = () => {
                 )}
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span>Headless QA Browser</span>
+                <span>{t('headlessQA')}</span>
               </button>
 
               <button
@@ -182,7 +184,7 @@ export const OrchestrationSection = () => {
                 )}
               >
                 <Smartphone className="h-3.5 w-3.5" />
-                <span>Phone Companion</span>
+                <span>{t('phoneCompanion')}</span>
               </button>
             </div>
 
@@ -192,12 +194,12 @@ export const OrchestrationSection = () => {
                 className="flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
-                <span>Reset</span>
+                <span>{t('reset')}</span>
               </button>
               <div className="h-4 w-px bg-[var(--overlay-10)]" />
               <span className="text-emerald-400 flex items-center gap-1.5 text-[11px]">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                Local & Remote Daemons Synced
+                {t('localRemoteSynced')}
               </span>
             </div>
           </div>
@@ -213,7 +215,7 @@ export const OrchestrationSection = () => {
                     <span className="text-[var(--text-strong)] font-bold">worktree/feat-auth</span>
                   </div>
                   <span className="text-[10px] text-orange-400 bg-orange-950/40 px-1.5 py-0.5 rounded">
-                    DEVELOPER
+                    {t('developer')}
                   </span>
                 </div>
                 <div className="space-y-1.5 text-[11px] text-[var(--text-muted)]">
@@ -224,7 +226,7 @@ export const OrchestrationSection = () => {
                 {/* Progress bar */}
                 <div className="space-y-1 pt-1">
                   <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
-                    <span>Execution Progress</span>
+                    <span>{t('executionProgress')}</span>
                     <span className="text-orange-400">{simProgress}%</span>
                   </div>
                   <div className="h-1.5 w-full bg-[var(--overlay-10)] rounded-full overflow-hidden">
@@ -236,7 +238,7 @@ export const OrchestrationSection = () => {
                 </div>
                 <div className="text-[10px] text-emerald-400 flex items-center gap-1">
                   <CheckCircle2 className="h-3 w-3" />
-                  0 collision with main branch
+                  {t('collisionFree')}
                 </div>
               </div>
 
@@ -248,18 +250,18 @@ export const OrchestrationSection = () => {
                     <span className="text-[var(--text-strong)] font-bold">worktree/research-api</span>
                   </div>
                   <span className="text-[10px] text-blue-400 bg-blue-950/40 px-1.5 py-0.5 rounded">
-                    RESEARCHER
+                    {t('researcher')}
                   </span>
                 </div>
                 <div className="space-y-1.5 text-[11px] text-[var(--text-muted)]">
                   <div className="text-[var(--text-strong)]">Task: Token pricing & latency benchmarks</div>
                   <div>Status: Polling Stripe vs Paddle latency specs</div>
-                  <div className="text-emerald-400">Ã¢Å“â€œ Sourced 8 primary technical papers</div>
+                  <div className="text-emerald-400">Ã¢Å"â€œ {t('sourcedPapers')}</div>
                 </div>
                 {/* Progress bar */}
                 <div className="space-y-1 pt-1">
                   <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
-                    <span>Synthesis Confidence</span>
+                    <span>{t('synthesisConfidence')}</span>
                     <span className="text-blue-400">96.4%</span>
                   </div>
                   <div className="h-1.5 w-full bg-[var(--overlay-10)] rounded-full overflow-hidden">
@@ -268,7 +270,7 @@ export const OrchestrationSection = () => {
                 </div>
                 <div className="text-[10px] text-blue-400 flex items-center gap-1">
                   <FileCheck className="h-3 w-3" />
-                  Report logged: /outcomes/latency.md
+                  {t('reportLogged')}: /outcomes/latency.md
                 </div>
               </div>
 
@@ -278,23 +280,23 @@ export const OrchestrationSection = () => {
                   <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
                     <div className="flex items-center gap-2">
                       <GitMerge className="h-4 w-4 text-emerald-400" />
-                      <span className="text-[var(--text-strong)] font-bold">Verification Gate</span>
+                      <span className="text-[var(--text-strong)] font-bold">{t('verificationGate')}</span>
                     </div>
                     <span className="text-[10px] text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">
-                      STAGE 4
+                      {t('stage4')}
                     </span>
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">
-                    Changes tested in isolation. Ready to merge into primary release with zero manual stash juggling.
+                    {t('mergeReady')}
                   </p>
                   <div className="p-2 rounded bg-black/40 border border-[var(--border-faint)] text-[10px] text-emerald-300">
-                    Ã¢Å“â€œ Diff checked Ã¢â‚¬Â¢ 0 Regression Risks Ã¢â‚¬Â¢ Budget Spent: $14.20
+                    Ã¢Å"â€œ {t('diffChecked')}
                   </div>
                 </div>
 
                 <button className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-[var(--text-strong)] font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
                   <GitMerge className="h-3.5 w-3.5" />
-                  <span>Approve & Merge Worktrees</span>
+                  <span>{t('approveMerge')}</span>
                 </button>
               </div>
             </div>
@@ -312,20 +314,20 @@ export const OrchestrationSection = () => {
                   <span className="text-emerald-400 text-[10px]">PARSED BY AGENT</span>
                 </div>
                 <div className="space-y-2 text-[var(--text-muted)] leading-relaxed">
-                  <p className="text-[var(--text-strong)] font-semibold"># Objective: Zero-downtime JWT Key Rotation</p>
-                  <p>1. Introduce dual-key verification in <code className="text-orange-300">src/auth/jwt.ts</code>.</p>
-                  <p>2. Verify incoming request headers against primary and grace keys.</p>
-                  <p>3. Emit structured telemetry to Prometheus buffer.</p>
+                  <p className="text-[var(--text-strong)] font-semibold">{t('specObjective')}</p>
+                  <p>{t('specStep1')}</p>
+                  <p>{t('specStep2')}</p>
+                  <p>{t('specStep3')}</p>
                   <div className="p-2.5 rounded bg-black/50 border border-[var(--border-faint)] text-[11px] text-amber-300">
-                    Ã¢Å¡Â Ã¯Â¸Â Guardrail: Auto-kill if migration token spend exceeds $20.00.
+                    Ã¢Å¡Â Ã¯Â¸Â {t('specGuardrail')}
                   </div>
                 </div>
               </div>
 
               <div className="lg:col-span-6 p-4 rounded-xl bg-[var(--surface-section)] border border-[var(--border-subtle)] space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)] text-[var(--text-muted)]">
-                  <span className="text-[var(--text-strong)] font-bold">PROPOSED FILE MODIFICATIONS (3)</span>
-                  <span className="text-orange-400 font-bold">+42 / -8 lines</span>
+                  <span className="text-[var(--text-strong)] font-bold">{t('fileMods')}</span>
+                  <span className="text-orange-400 font-bold">{t('linesChanged')}</span>
                 </div>
                 <div className="space-y-2 text-[11px]">
                   <div className="p-2 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center justify-between text-[var(--text-strong)]">
@@ -338,12 +340,12 @@ export const OrchestrationSection = () => {
                   </div>
                   <div className="p-2 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center justify-between text-[var(--text-strong)]">
                     <span>tests/auth/rotation.test.ts</span>
-                    <span className="text-emerald-400 font-mono">NEW FILE (8 tests)</span>
+                    <span className="text-emerald-400 font-mono">{t('newFile')}</span>
                   </div>
                 </div>
                 <div className="pt-2 flex justify-between items-center text-[10px] text-[var(--text-muted)]">
-                  <span>AST Parse: Clean</span>
-                  <span className="text-emerald-400 font-bold">Ã¢Å“â€œ Ready for isolated branch dispatch</span>
+                  <span>{t('astClean')}</span>
+                  <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('readyDispatch')}</span>
                 </div>
               </div>
             </div>
@@ -355,31 +357,31 @@ export const OrchestrationSection = () => {
               <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)] text-[var(--text-muted)]">
                 <div className="flex items-center gap-2">
                   <Terminal className="h-4 w-4 text-orange-400" />
-                  <span className="text-[var(--text-strong)] font-bold">Ghostty GPU-Accelerated Multiplexer (3 Active Terminals)</span>
+                  <span className="text-[var(--text-strong)] font-bold">{t('ghosttyTitle')}</span>
                 </div>
-                <span className="text-emerald-400 text-[10px]">120 FPS Native Render</span>
+                <span className="text-emerald-400 text-[10px]">{t('fpsRender')}</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-3.5 rounded-xl bg-black border border-orange-500/30 space-y-1.5">
                   <div className="flex items-center justify-between text-[11px] text-orange-400 pb-1 border-b border-[var(--border-subtle)]">
                     <span>TTY-1 // claude-code agent [worktree/feat-auth]</span>
-                    <span className="text-emerald-400">ACTIVE</span>
+                    <span className="text-emerald-400">{t('active')}</span>
                   </div>
                   <p className="text-[var(--text-muted)]">$ git worktree add ../auth-branch -b feat/jwt</p>
-                  <p className="text-[var(--text-strong)]">Ã¢Å“â€œ Created worktree in 14ms</p>
+                  <p className="text-[var(--text-strong)]">Ã¢Å"â€œ Created worktree in 14ms</p>
                   <p className="text-[var(--text-muted)]">$ npx vitest run --silent</p>
-                  <p className="text-emerald-400">Ã¢Å“â€œ 8 tests passed (0 failures)</p>
+                  <p className="text-emerald-400">Ã¢Å"â€œ 8 tests passed (0 failures)</p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-black border border-blue-500/30 space-y-1.5">
                   <div className="flex items-center justify-between text-[11px] text-blue-400 pb-1 border-b border-[var(--border-subtle)]">
                     <span>TTY-2 // researcher agent [worktree/intel]</span>
-                    <span className="text-blue-400">STREAMING</span>
+                    <span className="text-blue-400">{t('streaming')}</span>
                   </div>
                   <p className="text-[var(--text-muted)]">$ fabrica research --deep --topic=&apos;stripe vs lemon&apos;</p>
-                  <p className="text-blue-300">Ã¢â€ â€™ Polling 34 merchant of record pricing tiers</p>
-                  <p className="text-[var(--text-strong)]">Ã¢Å“â€œ Generated structured comparative analysis</p>
+                  <p className="text-blue-300">Ã¢â€ â€™ Polling 34 merchant of record pricing tiers</p>
+                  <p className="text-[var(--text-strong)]">Ã¢Å"â€œ Generated structured comparative analysis</p>
                 </div>
               </div>
             </div>
@@ -391,28 +393,28 @@ export const OrchestrationSection = () => {
               <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-emerald-400" />
-                  <span className="text-[var(--text-strong)] font-bold">Playwright Headless Browser QA Engine</span>
+                  <span className="text-[var(--text-strong)] font-bold">{t('playwrightTitle')}</span>
                 </div>
-                <span className="text-emerald-400 text-[10px]">ALL ASSERTIONS GREEN</span>
+                <span className="text-emerald-400 text-[10px]">{t('allGreen')}</span>
               </div>
 
               <div className="p-4 rounded-xl bg-black/60 border border-[var(--border-subtle)] space-y-3">
                 <div className="flex items-center justify-between text-[var(--text-muted)] text-[11px]">
-                  <span>Scenario: Auth Flow E2E Login & Token Refresh</span>
-                  <span className="text-emerald-400 font-bold">Status: 200 OK (210ms)</span>
+                  <span>{t('scenario')}</span>
+                  <span className="text-emerald-400 font-bold">{t('status200')}</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px]">
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
-                    <span className="text-[var(--text-muted)] block">Step 1: POST /api/login</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å“â€œ Cookie Dispatched</span>
+                    <span className="text-[var(--text-muted)] block">{t('step1Label')}</span>
+                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step1Status')}</span>
                   </div>
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
-                    <span className="text-[var(--text-muted)] block">Step 2: Refresh Trigger</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å“â€œ Dual Key Validated</span>
+                    <span className="text-[var(--text-muted)] block">{t('step2Label')}</span>
+                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step2Status')}</span>
                   </div>
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
-                    <span className="text-[var(--text-muted)] block">Step 3: Visual Regression</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å“â€œ 0px Diff Detected</span>
+                    <span className="text-[var(--text-muted)] block">{t('step3Label')}</span>
+                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step3Status')}</span>
                   </div>
                 </div>
               </div>
@@ -425,18 +427,18 @@ export const OrchestrationSection = () => {
               <div className="space-y-3 max-w-md">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-blue-950/40 border border-blue-500/30 text-blue-400 text-[10px]">
                   <Smartphone className="h-3.5 w-3.5" />
-                  <span>iOS & Android Native Mobile App</span>
+                  <span>{t('mobileApp')}</span>
                 </div>
                 <h3 className="text-base font-bold text-[var(--text-strong)] font-sans">
-                  Direct your crews while away from your keyboard.
+                  {t('mobileTitle')}
                 </h3>
                 <p className="text-xs text-[var(--text-muted)] leading-relaxed font-sans">
-                  Get instant push notifications when agents complete a worktree branch, trigger approval gates for payments/deployments, or hit 80% budget ceilings.
+                  {t('mobileDesc')}
                 </p>
                 <div className="flex gap-3 text-[11px]">
-                  <span className="text-emerald-400">Ã¢Å“â€œ 1-Tap Approvals</span>
-                  <span className="text-orange-400">Ã¢Å“â€œ Live TTY Streaming</span>
-                  <span className="text-blue-400">Ã¢Å“â€œ Killswitch Toggle</span>
+                  <span className="text-emerald-400">Ã¢Å"â€œ {t('tapApprovals')}</span>
+                  <span className="text-orange-400">Ã¢Å"â€œ {t('liveTty')}</span>
+                  <span className="text-blue-400">Ã¢Å"â€œ {t('killswitch')}</span>
                 </div>
               </div>
 
@@ -444,18 +446,18 @@ export const OrchestrationSection = () => {
               <div className="w-full max-w-[260px] p-3 rounded-2xl bg-black border-2 border-[var(--border-subtle)] shadow-2xl space-y-2.5">
                 <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] pb-1 border-b border-[var(--border-subtle)]">
                   <span>9:41 AM</span>
-                  <span className="text-emerald-400">Fabrica Mobile</span>
+                  <span className="text-emerald-400">{t('fabricaMobile')}</span>
                 </div>
                 <div className="p-2 rounded-lg bg-[var(--surface-card)] border border-blue-500/30 space-y-1">
-                  <span className="text-[10px] text-orange-400 block font-bold">Approval Required</span>
-                  <p className="text-[10px] text-[var(--text-strong)]">Developer agent ready to deploy staging patch #882.</p>
+                  <span className="text-[10px] text-orange-400 block font-bold">{t('approvalRequired')}</span>
+                  <p className="text-[10px] text-[var(--text-strong)]">{t('approvalDesc')}</p>
                 </div>
                 <div className="flex gap-1.5">
                   <button className="flex-1 py-1 rounded bg-emerald-600 text-[var(--text-strong)] font-bold text-[10px]">
-                    Approve
+                    {t('approve')}
                   </button>
                   <button className="flex-1 py-1 rounded bg-[var(--overlay-10)] text-[var(--text-muted)] text-[10px]">
-                    Inspect
+                    {t('inspect')}
                   </button>
                 </div>
               </div>
@@ -466,4 +468,3 @@ export const OrchestrationSection = () => {
     </section>
   )
 }
-

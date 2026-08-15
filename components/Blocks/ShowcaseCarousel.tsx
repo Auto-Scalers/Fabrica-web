@@ -3,62 +3,59 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 
-const slides = [
-  {
-    image: '/images/carousel/fabrica-247-ai-autonomy-vs-manual-work.jpg',
-    label: 'AUTONOMY ENGINE',
-    title: '24/7 AI autonomy vs manual work',
-    caption:
-      'Background daemons keep shipping while you sleep Ã¢â‚¬â€ no babysitting a single prompt window.',
-  },
-  {
-    image: '/images/carousel/fabrica-futuristic-holographic-network-nodes-interface.jpg',
-    label: 'COMMAND CENTER',
-    title: 'The crew, visualized',
-    caption:
-      'Multiple agents executing in parallel across isolated worktrees, mapped into one holographic control plane.',
-  },
-  {
-    image: '/images/carousel/fabrica-messy-data-to-organized-dashboard-workspace.jpg',
-    label: 'MISSION CONTROL',
-    title: 'From messy data to organized dashboard',
-    caption:
-      'Scattered tabs and broken stashes collapse into a single organized workspace you can direct.',
-  },
-  {
-    image: '/images/carousel/fabrica-stressed-developer-coding-late-night.jpg',
-    label: 'NO MORE 11 PM BOTTLENECK',
-    title: 'End the late-night context juggling',
-    caption:
-      'Hand the busywork to a supervised crew and keep your focus on the decisions only you can make.',
-  },
-  {
-    image: '/images/carousel/fabrica-system-architecture-flowchart-tablet-desk.jpg',
-    label: 'DIRECT THE FLOW',
-    title: 'Architecture you can direct',
-    caption:
-      'Visual system flows and approval gates, right from your desk Ã¢â‚¬â€ or your phone.',
-  },
-]
-
 export const ShowcaseCarousel = () => {
+  const t = useTranslations('showcase')
   const [current, setCurrent] = useState(0)
   const [playing, setPlaying] = useState(true)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  const slides = [
+    {
+      image: '/images/carousel/fabrica-247-ai-autonomy-vs-manual-work.jpg',
+      label: t('slides.s1.label'),
+      title: t('slides.s1.title'),
+      caption: t('slides.s1.caption'),
+    },
+    {
+      image: '/images/carousel/fabrica-futuristic-holographic-network-nodes-interface.jpg',
+      label: t('slides.s2.label'),
+      title: t('slides.s2.title'),
+      caption: t('slides.s2.caption'),
+    },
+    {
+      image: '/images/carousel/fabrica-messy-data-to-organized-dashboard-workspace.jpg',
+      label: t('slides.s3.label'),
+      title: t('slides.s3.title'),
+      caption: t('slides.s3.caption'),
+    },
+    {
+      image: '/images/carousel/fabrica-stressed-developer-coding-late-night.jpg',
+      label: t('slides.s4.label'),
+      title: t('slides.s4.title'),
+      caption: t('slides.s4.caption'),
+    },
+    {
+      image: '/images/carousel/fabrica-system-architecture-flowchart-tablet-desk.jpg',
+      label: t('slides.s5.label'),
+      title: t('slides.s5.title'),
+      caption: t('slides.s5.caption'),
+    },
+  ]
+
   const go = useCallback((index: number) => {
     setCurrent((index + slides.length) % slides.length)
-  }, [])
+  }, [slides.length])
 
   const startAutoplay = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current)
     timerRef.current = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length)
     }, 5000)
-  }, [])
+  }, [slides.length])
 
   const stopAutoplay = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current)
@@ -77,7 +74,7 @@ export const ShowcaseCarousel = () => {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Play className="h-3.5 w-3.5" />
-            <span>THE VISION, VISUALIZED</span>
+            <span>{t('badge')}</span>
           </Badge>
         </div>
 

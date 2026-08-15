@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import {
   Cpu,
   ShieldCheck,
@@ -30,147 +31,9 @@ import { cn } from '@/lib/utils'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 
-// Agent role mock definitions for the live interactive simulator
-const crewMembers = [
-  {
-    id: 'dev',
-    name: 'Developer Agent',
-    icon: Code2,
-    role: 'Fullstack & Worktree Isolation',
-    status: 'Running in worktree/auth-guard',
-    state: 'active',
-    task: 'Building token refresh middleware & patch diffs',
-    spend: '$18.40',
-    worktree: 'worktree/auth-guard',
-    logs: [
-      'Ã¢Å¡Â¡ [worktree/auth-guard] Checked out isolated disk branch',
-      'Ã°Å¸â€Â AST analysis: src/auth/session-provider.tsx',
-      'Ã¢Å“ÂÃ¯Â¸Â Refactored JWT token expiration handler',
-      'Ã°Å¸Â§Âª Running test suite: 14/14 unit tests passed',
-      'Ã°Å¸â€œÂ¦ Generating diff preview for visual human sign-off...',
-    ],
-  },
-  {
-    id: 'research',
-    name: 'Researcher Agent',
-    icon: Search,
-    role: 'Market & Source Intelligence',
-    status: 'Running deep search matrix',
-    state: 'active',
-    task: 'Synthesizing competitor pricing models & API costs',
-    spend: '$12.10',
-    worktree: 'scratchpad/market-intel',
-    logs: [
-      'Ã°Å¸Å’Â [isolated-scratchpad] Polling 42 public benchmark docs',
-      'Ã°Å¸â€œÅ  Extracted token-cost structures across top 5 providers',
-      'Ã°Å¸â€œË† Built cost-per-active-agent breakdown matrix',
-      'Ã°Å¸â€œÂ Formatted executive brief: /outcomes/research-brief.md',
-    ],
-  },
-  {
-    id: 'mkt',
-    name: 'Marketer Agent',
-    icon: Megaphone,
-    role: 'Messaging & Growth Angles',
-    status: 'Awaiting review',
-    state: 'pending',
-    task: 'Refining copy for 3 cold-outreach segments',
-    spend: '$8.50',
-    worktree: 'campaigns/launch-v3',
-    logs: [
-      'Ã°Å¸Å½Â¯ Target audience: Solo founders & boutique dev agencies',
-      'Ã°Å¸â€™Â¡ Hook iteration 1: "Stop re-explaining context every 15 min"',
-      'Ã°Å¸â€™Â¡ Hook iteration 2: "Your entire company in one command center"',
-      'Ã°Å¸â€œâ€˜ Output draft ready for review: /campaigns/launch-v3.md',
-    ],
-  },
-  {
-    id: 'analyst',
-    name: 'Business Analyst Agent',
-    icon: TrendingUp,
-    role: 'Unit Economics & Financial Guardrails',
-    status: 'Verified',
-    state: 'verified',
-    task: 'Audited monthly token spend vs client retainer target',
-    spend: '$9.20',
-    worktree: 'ops/financial-model',
-    logs: [
-      'Ã°Å¸â€™Â° Running financial simulation across 500 active tasks',
-      'Ã°Å¸â€œÅ  Calculated margin: 78.4% gross margin at $149/mo tier',
-      'Ã°Å¸â€ºÂ¡Ã¯Â¸Â Hard budget threshold verified: spend is 51.8% under cap',
-      'Ã¢Å“â€¦ Audit complete. Report saved to /ops/fin-model.json',
-    ],
-  },
-]
-
-// Kanban items for the interactive mission control board
-const initialKanbanCols = {
-  backlog: [
-    { id: 'k1', title: 'Synthesize 50 Competitor Whitepapers', agent: 'Researcher', priority: 'High', spend: '$3.20' },
-    { id: 'k2', title: 'SEO Programmatic Cluster Generation', agent: 'Marketer', priority: 'Medium', spend: '$1.80' },
-  ],
-  in_progress: [
-    { id: 'k3', title: 'JWT Refresh Token Worktree Migration', agent: 'Developer', priority: 'Urgent', spend: '$14.20', branch: 'worktree/auth-guard' },
-    { id: 'k4', title: 'SaaS Gross Margin Forecast Simulation', agent: 'Analyst', priority: 'High', spend: '$8.40', branch: 'ops/fin-model' },
-  ],
-  approval: [
-    { id: 'k5', title: 'Stripe Webhook Event Signature Verifier', agent: 'Developer', priority: 'High', spend: '$18.40', risk: 'Payment Critical' },
-  ],
-  verified: [
-    { id: 'k6', title: 'Landing Page Copy Matrix & Angles', agent: 'Marketer', priority: 'High', spend: '$6.50' },
-    { id: 'k7', title: 'Database Index Optimization Diffs', agent: 'Developer', priority: 'Medium', spend: '$4.10' },
-  ],
-}
-
-// Eisenhower Quadrants
-const eisenhowerQuadrants = [
-  {
-    id: 'q1',
-    title: 'Q1: Urgent & Important (Do First)',
-    subtitle: 'High-risk operations & core infrastructure',
-    badge: 'Immediate Action',
-    badgeColor: 'bg-red-500/20 text-red-400 border-red-500/30',
-    tasks: [
-      { name: 'Stripe Webhook Signature Verification Gate', agent: 'Developer', status: 'Pending Human Sign-off', icon: AlertTriangle },
-      { name: 'Production Staging Deploy with 0 Regression Diff', agent: 'Developer', status: 'Worktree Ready', icon: ShieldCheck },
-    ],
-  },
-  {
-    id: 'q2',
-    title: 'Q2: Important & Non-Urgent (Schedule)',
-    subtitle: 'Strategic architecture, moat & unit economics',
-    badge: 'High Value',
-    badgeColor: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-    tasks: [
-      { name: 'Autonomous Competitor Pricing Model Synthesis', agent: 'Researcher', status: 'Background Daemon Running', icon: Search },
-      { name: 'LTV/CAC Unit Economics Simulation Model', agent: 'Analyst', status: '78.4% Margin Forecasted', icon: TrendingUp },
-    ],
-  },
-  {
-    id: 'q3',
-    title: 'Q3: Urgent & Low Importance (Delegate)',
-    subtitle: 'Autonomous crew routines & continuous tasks',
-    badge: 'Delegated to Crew',
-    badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-    tasks: [
-      { name: 'Draft 3 Cold Outreach Positioning Variations', agent: 'Marketer', status: 'Drafted in /campaigns', icon: Megaphone },
-      { name: 'Generate TypeScript AST Diffs for Form Validation', agent: 'Developer', status: 'AST Clean', icon: Code2 },
-    ],
-  },
-  {
-    id: 'q4',
-    title: 'Q4: Neither (Auto-Filtered)',
-    subtitle: 'Token burn prevention & auto-kill thresholds',
-    badge: 'Auto-Guarded',
-    badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-    tasks: [
-      { name: 'Repetitive Chat Re-Prompting Loops', agent: 'Fabrica Engine', status: 'Eliminated via Task Queues', icon: Zap },
-      { name: 'Manual Tracking Spreadsheet Syncing', agent: 'Fabrica Engine', status: 'Automated via Daemon Telemetry', icon: CheckSquare },
-    ],
-  },
-]
-
 export default function Hero() {
+  const t = useTranslations('hero')
+
   const [selectedAgent, setSelectedAgent] = useState('dev')
   const [isRunning, setIsRunning] = useState(true)
   const [activeLogIndex, setActiveLogIndex] = useState(2)
@@ -178,7 +41,6 @@ export default function Hero() {
   const [activeTab, setActiveTab] = useState<'daemons' | 'kanban' | 'eisenhower' | 'field_ops'>('daemons')
   const [executionTarget, setExecutionTarget] = useState<'local' | 'remote'>('local')
 
-  // Simulation timer for dynamic log streaming
   useEffect(() => {
     if (!isRunning) return
     const interval = setInterval(() => {
@@ -187,14 +49,149 @@ export default function Hero() {
     return () => clearInterval(interval)
   }, [isRunning])
 
+const crewMembers = [
+    {
+      id: 'dev',
+      name: t('crewMembers.dev.name'),
+      icon: Code2,
+      role: t('crewMembers.dev.role'),
+      status: t('crewMembers.dev.status'),
+      state: 'active',
+      task: t('crewMembers.dev.task'),
+      spend: t('crewMembers.dev.spend'),
+      worktree: t('crewMembers.dev.worktree'),
+      logs: [
+        '✅ [worktree/auth-guard] Checked out isolated disk branch',
+        '🔍 AST analysis: src/auth/session-provider.tsx',
+        '🛠️ Refactored JWT token expiration handler',
+        '📊 Running test suite: 14/14 unit tests passed',
+        '🔗 Generating diff preview for visual human sign-off...',
+      ],
+    },
+    {
+      id: 'research',
+      name: t('crewMembers.research.name'),
+      icon: Search,
+      role: t('crewMembers.research.role'),
+      status: t('crewMembers.research.status'),
+      state: 'active',
+      task: t('crewMembers.research.task'),
+      spend: t('crewMembers.research.spend'),
+      worktree: t('crewMembers.research.worktree'),
+      logs: [
+        '📋 [isolated-scratchpad] Polling 42 public benchmark docs',
+        '📝 Extracted token-cost structures across top 5 providers',
+        '📈 Built cost-per-active-agent breakdown matrix',
+        '📄 Formatted executive brief: /outcomes/research-brief.md',
+      ],
+    },
+    {
+      id: 'mkt',
+      name: t('crewMembers.mkt.name'),
+      icon: Megaphone,
+      role: t('crewMembers.mkt.role'),
+      status: t('crewMembers.mkt.status'),
+      state: 'pending',
+      task: t('crewMembers.mkt.task'),
+      spend: t('crewMembers.mkt.spend'),
+      worktree: t('crewMembers.mkt.worktree'),
+      logs: [
+        '🎯 Target audience: Solo founders & boutique dev agencies',
+        '💡 Hook iteration 1: "Stop re-explaining context every 15 min"',
+        '💡 Hook iteration 2: "Your entire company in one command center"',
+        '✨ Output draft ready for review: /campaigns/launch-v3.md',
+      ],
+    },
+    {
+      id: 'analyst',
+      name: t('crewMembers.analyst.name'),
+      icon: TrendingUp,
+      role: t('crewMembers.analyst.role'),
+      status: t('crewMembers.analyst.status'),
+      state: 'verified',
+      task: t('crewMembers.analyst.task'),
+      spend: t('crewMembers.analyst.spend'),
+      worktree: t('crewMembers.analyst.worktree'),
+      logs: [
+        '📊 Running financial simulation across 500 active tasks',
+        '📈 Calculated margin: 78.4% gross margin at $149/mo tier',
+        '⚠️ Hard budget threshold verified: spend is 51.8% under cap',
+        '📋 Audit complete. Report saved to /ops/fin-model.json',
+      ],
+    },
+  ]
+
+  const initialKanbanCols = {
+    backlog: [
+      { id: 'k1', title: t('kanban.k1'), agent: t('kanbanCols.backlog.0.agent'), priority: t('kanbanCols.backlog.0.priority'), spend: '$3.20' },
+      { id: 'k2', title: t('kanban.k2'), agent: t('kanbanCols.backlog.1.agent'), priority: t('kanbanCols.backlog.1.priority'), spend: '$1.80' },
+    ],
+    in_progress: [
+      { id: 'k3', title: t('kanban.k3'), agent: t('kanbanCols.inProgress.0.agent'), priority: t('kanbanCols.inProgress.0.priority'), spend: '$14.20', branch: 'worktree/auth-guard' },
+      { id: 'k4', title: t('kanban.k4'), agent: t('kanbanCols.inProgress.1.agent'), priority: t('kanbanCols.inProgress.1.priority'), spend: '$8.40', branch: 'ops/fin-model' },
+    ],
+    approval: [
+      { id: 'k5', title: t('kanban.k5'), agent: t('kanbanCols.approval.0.agent'), priority: t('kanbanCols.approval.0.priority'), spend: '$18.40', risk: t('kanbanCols.approval.0.risk') },
+    ],
+    verified: [
+      { id: 'k6', title: t('kanban.k6'), agent: t('kanbanCols.verified.0.agent'), priority: t('kanbanCols.verified.0.priority'), spend: '$6.50' },
+      { id: 'k7', title: t('kanban.k7'), agent: t('kanbanCols.verified.1.agent'), priority: t('kanbanCols.verified.1.priority'), spend: '$4.10' },
+    ],
+  }
+
+  const eisenhowerQuadrants = [
+    {
+      id: 'q1',
+      title: t('eisenhower.q1.title'),
+      subtitle: t('eisenhower.q1.subtitle'),
+      badge: t('eisenhower.q1.badge'),
+      badgeColor: 'bg-red-500/20 text-red-400 border-red-500/30',
+      tasks: [
+        { name: t('eisenhower.t1'), agent: t('eisenhowerTasks.t1.agent'), status: t('eisenhower.statusPending'), icon: AlertTriangle },
+        { name: t('eisenhower.t2'), agent: t('eisenhowerTasks.t2.agent'), status: t('eisenhower.statusWorktreeReady'), icon: ShieldCheck },
+      ],
+    },
+    {
+      id: 'q2',
+      title: t('eisenhower.q2.title'),
+      subtitle: t('eisenhower.q2.subtitle'),
+      badge: t('eisenhower.q2.badge'),
+      badgeColor: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
+      tasks: [
+        { name: t('eisenhower.t3'), agent: t('eisenhowerTasks.t3.agent'), status: t('eisenhower.statusDaemon'), icon: Search },
+        { name: t('eisenhower.t4'), agent: t('eisenhowerTasks.t4.agent'), status: t('eisenhower.statusMargin'), icon: TrendingUp },
+      ],
+    },
+    {
+      id: 'q3',
+      title: t('eisenhower.q3.title'),
+      subtitle: t('eisenhower.q3.subtitle'),
+      badge: t('eisenhower.q3.badge'),
+      badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+      tasks: [
+        { name: t('eisenhower.t5'), agent: t('eisenhowerTasks.t5.agent'), status: t('eisenhower.statusDrafted'), icon: Megaphone },
+        { name: t('eisenhower.t6'), agent: t('eisenhowerTasks.t6.agent'), status: t('eisenhower.statusAst'), icon: Code2 },
+      ],
+    },
+    {
+      id: 'q4',
+      title: t('eisenhower.q4.title'),
+      subtitle: t('eisenhower.q4.subtitle'),
+      badge: t('eisenhower.q4.badge'),
+      badgeColor: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+      tasks: [
+        { name: t('eisenhower.t7'), agent: t('eisenhowerTasks.t7.agent'), status: t('eisenhower.statusEliminated'), icon: Zap },
+        { name: t('eisenhower.t8'), agent: t('eisenhowerTasks.t8.agent'), status: t('eisenhower.statusAutomated'), icon: CheckSquare },
+      ],
+    },
+  ]
+
   const currentAgent = crewMembers.find((a) => a.id === selectedAgent) || crewMembers[0]
 
   return (
     <section id="product" className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
-      {/* Subtle forge amber ambient background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-orange-600/15 via-orange-950/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
-      {/* Molten forge texture */}
       <img
         src="/images/forge_molten_texture.jpg"
         alt=""
@@ -203,48 +200,44 @@ export default function Hero() {
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Main Headline & Pain Anchor */}
         <div className="text-center max-w-4xl mx-auto space-y-6">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs sm:text-sm font-medium text-orange-400 backdrop-blur-md">
             <img
               src="/fabrica-logo_icon.svg"
               alt=""
               className="h-4 w-4 object-contain"
             />
-            <span className="font-mono uppercase tracking-wider text-[11px] sm:text-xs">The Next AI Exit</span>
+            <span className="font-mono uppercase tracking-wider text-[11px] sm:text-xs">{t('badgeLabel')}</span>
             <span className="text-[var(--text-subtle)]">|</span>
-            <span className="text-[var(--text-strong)]">Business-First & Coding-First ADE</span>
+            <span className="text-[var(--text-strong)]">{t('badgeSub')}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
-            Fourteen tabs. Three broken contexts.{' '}
+            {t('headline1')}{' '}
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] via-[#E8590C] to-orange-400">
-              It&apos;s 11 PM. Direct the crew instead.
+              {t('headline2')}
             </span>
           </h1>
 
           <p className="text-lg sm:text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
-            Stop prompting. Define your multi-agent crews (Researchers, Developers, Marketers, Business Analysts), control budget, approvals, security and let parallel AI coding agents work across isolated worktrees or plain disk folders on 24/7 Autonomy and Scale.
+            {t('subheadline')}
           </p>
 
-          {/* Platform Support Badges & Runtime Selector */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-mono text-[var(--text-muted)] pt-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--overlay-5)] border border-[var(--border-subtle)] text-[var(--text-strong)]">
               <Monitor className="h-3.5 w-3.5 text-orange-400" />
-              <span>macOS Ã¢â‚¬Â¢ Windows Ã¢â‚¬Â¢ Linux Desktop</span>
+              <span>{t('platformDesktop')}</span>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--overlay-5)] border border-[var(--border-subtle)] text-[var(--text-strong)]">
               <Smartphone className="h-3.5 w-3.5 text-blue-400" />
-              <span>iOS & Android Phone Companion</span>
+              <span>{t('platformMobile')}</span>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400">
               <Zap className="h-3.5 w-3.5" />
-              <span>Zero Technical Setup</span>
+              <span>{t('platformSetup')}</span>
             </div>
           </div>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <ShimmerButton
               shimmerColor="#FFD0A6"
@@ -253,61 +246,57 @@ export default function Hero() {
               className="w-full sm:w-auto px-7 py-3.5 text-base font-semibold shadow-xl shadow-orange-950/50"
               onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <span>Get Early Access</span>
+              <span>{t('ctaEarlyAccess')}</span>
               <ArrowRight className="h-4 w-4" />
             </ShimmerButton>
             <a
               href="#command-center"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-6 py-3.5 text-base font-medium text-[var(--text-strong)] hover:bg-[var(--overlay-10)] hover:border-[var(--border-subtle)] transition-all"
             >
-              <span>Explore Command Center</span>
+              <span>{t('ctaExplore')}</span>
               <Terminal className="h-4 w-4 text-orange-400" />
             </a>
           </div>
 
-          {/* 4 Core Value Pillars Bar */}
           <div className="pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-left">
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <Zap className="h-4 w-4 text-orange-400 shrink-0" />
               <div>
-                <span className="text-[var(--text-strong)] block font-semibold">Zero-Prompt Auto</span>
-                <span className="text-[10px] text-[var(--text-muted)]">24/7 background daemons</span>
+                <span className="text-[var(--text-strong)] block font-semibold">{t('pillarZeroPrompt')}</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{t('pillarZeroPromptSub')}</span>
               </div>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <LayoutGrid className="h-4 w-4 text-blue-400 shrink-0" />
               <div>
-                <span className="text-[var(--text-strong)] block font-semibold">Eisenhower & Kanban</span>
-                <span className="text-[10px] text-[var(--text-muted)]">Operational oversight</span>
+                <span className="text-[var(--text-strong)] block font-semibold">{t('pillarEisenhower')}</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{t('pillarEisenhowerSub')}</span>
               </div>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
               <div>
-                <span className="text-[var(--text-strong)] block font-semibold">Field Ops & Safety</span>
-                <span className="text-[10px] text-[var(--text-muted)]">1-tap approval gates</span>
+                <span className="text-[var(--text-strong)] block font-semibold">{t('pillarFieldOps')}</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{t('pillarFieldOpsSub')}</span>
               </div>
             </div>
 
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <Lock className="h-4 w-4 text-amber-400 shrink-0" />
               <div>
-                <span className="text-[var(--text-strong)] block font-semibold">Client-Side Vault</span>
-                <span className="text-[10px] text-[var(--text-muted)]">Zero cloud key leaks</span>
+                <span className="text-[var(--text-strong)] block font-semibold">{t('pillarVault')}</span>
+                <span className="text-[10px] text-[var(--text-muted)]">{t('pillarVaultSub')}</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Interactive Mission Control Command Center Visual */}
         <div id="command-center" className="mt-12 sm:mt-16 relative scroll-mt-24">
-          {/* Subtle Outer Frame glow */}
           <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-orange-500/20 via-blue-500/10 to-orange-500/20 blur-xl opacity-60 pointer-events-none" />
 
           <div className="relative rounded-2xl border border-[var(--border-subtle)] bg-[#0D0E15] shadow-2xl overflow-hidden command-frame">
-            {/* Command Center Window Chrome */}
             <div className="flex flex-wrap items-center justify-between px-4 py-3 border-b border-[var(--border-subtle)] bg-[var(--surface-panel)] gap-3">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-red-500/80" />
@@ -319,11 +308,10 @@ export default function Hero() {
                     alt=""
                     className="h-4 w-4 object-contain"
                   />
-                  fabrica-desktop v3.0 // project: saas-nexus (main)
+                  {t('windowTitle')}
                 </span>
               </div>
 
-              {/* View Switcher: Daemons vs Kanban vs Eisenhower vs Field Ops */}
               <ToggleGroup
                 value={[activeTab]}
                 onValueChange={(value) => {
@@ -337,32 +325,31 @@ export default function Hero() {
                   className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <Cpu className="h-3.5 w-3.5" />
-                  <span>Daemons &amp; Stream</span>
+                  <span>{t('tabDaemons')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="kanban"
                   className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <Layers className="h-3.5 w-3.5" />
-                  <span>Kanban Queue</span>
+                  <span>{t('tabKanban')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="eisenhower"
                   className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <LayoutGrid className="h-3.5 w-3.5" />
-                  <span>Eisenhower Matrix</span>
+                  <span>{t('tabEisenhower')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="field_ops"
                   className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <ShieldCheck className="h-3.5 w-3.5" />
-                  <span>Field Ops &amp; Vault</span>
+                  <span>{t('tabFieldOps')}</span>
                 </ToggleGroupItem>
               </ToggleGroup>
 
-              {/* Local vs Remote Daemon Target Toggle */}
               <div className="flex items-center gap-2 text-xs font-mono">
                 <ToggleGroup
                   value={[executionTarget]}
@@ -376,13 +363,13 @@ export default function Hero() {
                     value="local"
                     className="px-2 py-0.5 rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-orange-500/20 data-[state=on]:text-orange-400 data-[state=on]:font-bold"
                   >
-                    Local Daemon
+                    {t('localDaemon')}
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="remote"
                     className="px-2 py-0.5 rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-blue-500/20 data-[state=on]:text-blue-400 data-[state=on]:font-bold"
                   >
-                    Remote Worker
+                    {t('remoteWorker')}
                   </ToggleGroupItem>
                 </ToggleGroup>
 
@@ -393,29 +380,27 @@ export default function Hero() {
                   {isRunning ? (
                     <>
                       <Pause className="h-3 w-3 text-amber-400" />
-                      <span className="text-[11px]">RUNNING</span>
+                      <span className="text-[11px]">{t('running')}</span>
                     </>
                   ) : (
                     <>
                       <Play className="h-3 w-3 text-emerald-400" />
-                      <span className="text-[11px]">PAUSED</span>
+                      <span className="text-[11px]">{t('paused')}</span>
                     </>
                   )}
                 </button>
               </div>
             </div>
 
-            {/* TAB CONTENT 1: DAEMONS & STREAM */}
             {activeTab === 'daemons' && (
               <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
-                {/* Left Rail: Multi-Agent Crew List (4 Cols) */}
                 <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-[var(--border-subtle)] bg-[var(--surface-card)] p-4 flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between pb-2 border-b border-[var(--border-faint)]">
                       <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                        Autonomous Crew (4)
+                        {t('autonomousCrew')}
                       </span>
-                      <span className="text-[11px] font-mono text-orange-400">Zero-Prompt Queue</span>
+                      <span className="text-[11px] font-mono text-orange-400">{t('zeroPromptQueue')}</span>
                     </div>
 
                     <div className="space-y-2">
@@ -452,19 +437,19 @@ export default function Hero() {
                                 {agent.state === 'active' && (
                                   <span className="flex items-center gap-1 text-orange-400">
                                     <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
-                                    Active Daemon
+                                    {t('activeDaemon')}
                                   </span>
                                 )}
                                 {agent.state === 'pending' && (
                                   <span className="flex items-center gap-1 text-amber-400">
                                     <Clock className="h-2.5 w-2.5" />
-                                    Approval Gate
+                                    {t('approvalGate')}
                                   </span>
                                 )}
                                 {agent.state === 'verified' && (
                                   <span className="flex items-center gap-1 text-emerald-400">
                                     <CheckCircle2 className="h-2.5 w-2.5" />
-                                    Verified
+                                    {t('verified')}
                                   </span>
                                 )}
                               </div>
@@ -475,17 +460,14 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  {/* Workflow state pill */}
                   <div className="mt-4 pt-3 border-t border-[var(--border-faint)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
-                    <span>Engine: Draft Ã¢â€ â€™ Plan Ã¢â€ â€™ Run Ã¢â€ â€™ Verify</span>
+                    <span>{t('engineWorkflow')}</span>
                     <GitBranch className="h-3.5 w-3.5 text-blue-400" />
                   </div>
                 </div>
 
-                {/* Center Panel: Parallel Execution & Stream Logs (5 Cols) */}
                 <div className="lg:col-span-5 p-4 bg-[var(--surface-page)] border-b lg:border-b-0 lg:border-r border-[var(--border-subtle)] flex flex-col justify-between font-mono text-xs">
                   <div className="space-y-3">
-                    {/* Top Bar for active agent */}
                     <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
                       <div className="flex items-center gap-2">
                         <currentAgent.icon className="h-4 w-4 text-orange-400" />
@@ -496,14 +478,13 @@ export default function Hero() {
                       </span>
                     </div>
 
-                    {/* Streaming Monospace Log Viewer */}
                     <div className="bg-[#050508] rounded-xl p-3.5 border border-[var(--border-subtle)] space-y-2 min-h-[260px]">
                       <div className="text-[11px] text-blue-400 flex items-center justify-between pb-1 border-b border-[var(--border-faint)]">
                         <span>$ fabrica daemon --target={executionTarget} --role={selectedAgent}</span>
                         <span className="text-emerald-400 font-mono">PID 7104 [24/7 Autonomy]</span>
                       </div>
 
-                      {currentAgent.logs.map((log, index) => (
+                      {currentAgent.logs.map((log: string, index: number) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, x: -6 }}
@@ -521,39 +502,35 @@ export default function Hero() {
                       {isRunning && (
                         <div className="flex items-center gap-1.5 text-orange-400 pt-2 animate-pulse">
                           <span className="inline-block w-2 h-3.5 bg-orange-500" />
-                          <span className="text-[11px]">Executing subtask in isolated git worktree / disk sandbox...</span>
+                          <span className="text-[11px]">{t('executingSubtask')}</span>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Diff / Verification Preview Status */}
                   <div className="mt-3 p-2.5 rounded-lg bg-[var(--overlay-weak)] border border-[var(--border-subtle)] flex items-center justify-between text-[11px]">
                     <span className="text-[var(--text-muted)] flex items-center gap-1.5">
                       <FileCheck className="h-3.5 w-3.5 text-emerald-400" />
-                      Zero branch collisions detected
+                      {t('zeroCollisions')}
                     </span>
-                    <span className="text-orange-400 font-semibold">100% Isolated Disk</span>
+                    <span className="text-orange-400 font-semibold">{t('isolatedDisk')}</span>
                   </div>
                 </div>
 
-                {/* Right Rail: Business Control Layer (3 Cols) */}
                 <div className="lg:col-span-3 p-4 bg-[var(--surface-panel)] flex flex-col justify-between space-y-4">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
                       <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                        Field Controls
+                        {t('fieldControls')}
                       </span>
                       <ShieldCheck className="h-4 w-4 text-emerald-400" />
                     </div>
 
-                    {/* Budget Cap Card */}
                     <div className="p-3 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-subtle)] space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-[var(--text-muted)] font-medium">Monthly Task Budget</span>
+                        <span className="text-[var(--text-muted)] font-medium">{t('monthlyTaskBudget')}</span>
                         <span className="text-[var(--text-strong)] font-mono font-bold">$48.20 / $100.00</span>
                       </div>
-                      {/* Progress Bar */}
                       <div className="h-2 w-full rounded-full bg-[var(--overlay-10)] overflow-hidden">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-400 transition-all duration-500"
@@ -561,14 +538,13 @@ export default function Hero() {
                         />
                       </div>
                       <p className="text-[10px] text-emerald-400 font-mono">
-                        Ã¢Å“â€œ Hard auto-stop guardrail active
+                        Ã¢Å"â€œ {t('hardAutoStop')}
                       </p>
                     </div>
 
-                    {/* Approval Gate Widget */}
                     <div className="p-3 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-subtle)] space-y-2.5">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-[var(--text-muted)] font-medium">Pending Approval Gate</span>
+                        <span className="text-xs text-[var(--text-muted)] font-medium">{t('pendingApproval')}</span>
                         <span
                           className={cn(
                             'text-[10px] font-mono px-1.5 py-0.5 rounded',
@@ -577,11 +553,11 @@ export default function Hero() {
                               : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
                           )}
                         >
-                          {approvalGranted ? 'APPROVED' : 'AWAITING SIGN-OFF'}
+                          {approvalGranted ? t('approved') : t('awaitingSignOff')}
                         </span>
                       </div>
                       <p className="text-[11px] text-[var(--text-strong)] leading-tight">
-                        Developer requests merge into staging with 0 regression risks.
+                        {t('approvalRequest')}
                       </p>
                       <button
                         onClick={() => setApprovalGranted(!approvalGranted)}
@@ -592,56 +568,53 @@ export default function Hero() {
                             : 'bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] hover:brightness-110 text-white'
                         )}
                       >
-                        {approvalGranted ? 'Ã¢Å“â€œ Action Verified & Merged' : 'Sign-Off & Approve Step'}
+                        {approvalGranted ? t('actionVerified') : t('signOffApprove')}
                       </button>
                     </div>
 
-                    {/* Phone Companion Sync Status */}
                     <div className="p-3 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-subtle)] space-y-1.5 text-xs">
                       <div className="flex items-center justify-between text-[var(--text-muted)]">
                         <span className="flex items-center gap-1.5">
                           <Smartphone className="h-3.5 w-3.5 text-blue-400" />
-                          Phone App Sync
+                          {t('phoneAppSync')}
                         </span>
-                        <span className="text-emerald-400 font-mono text-[10px]">CONNECTED</span>
+                        <span className="text-emerald-400 font-mono text-[10px]">{t('connected')}</span>
                       </div>
                       <p className="text-[10px] text-[var(--text-muted)]">
-                        1-tap field approval ready on iOS / Android.
+                        {t('phoneSyncDesc')}
                       </p>
                     </div>
                   </div>
 
                   <div className="text-[10px] text-center font-mono text-[var(--text-muted)] pt-2 border-t border-[var(--border-faint)]">
-                    Fabrica Desktop Engine Ã¢â‚¬Â¢ Client-Side Keystore Active
+                    {t('engineStatus')}
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB CONTENT 2: KANBAN QUEUE */}
             {activeTab === 'kanban' && (
               <div className="p-6 bg-[#0B0C12] min-h-[460px]">
                 <div className="flex items-center justify-between pb-4 mb-4 border-b border-[var(--border-subtle)]">
                   <div>
                     <h3 className="text-sm font-bold text-[var(--text-strong)] flex items-center gap-2">
                       <Layers className="h-4 w-4 text-orange-400" />
-                      Continuous Task Queue & Kanban Workflow
+                      {t('kanban.title')}
                     </h3>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Background daemons automatically pull prioritized tickets into isolated git worktrees.
+                      {t('kanban.desc')}
                     </p>
                   </div>
                   <div className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-3 py-1 rounded-lg border border-emerald-500/30">
-                    7 Active Tasks Ã¢â‚¬Â¢ 0 Blockers
+                    {t('kanban.activeTasks')}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  {/* Column 1: Backlog */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono font-semibold text-[var(--text-muted)] pb-1 border-b border-[var(--border-subtle)]">
-                      <span>BACKLOG ({initialKanbanCols.backlog.length})</span>
-                      <span className="text-[10px]">Auto-Scheduled</span>
+                      <span>{t('kanban.backlog')} ({initialKanbanCols.backlog.length})</span>
+                      <span className="text-[10px]">{t('kanban.autoScheduled')}</span>
                     </div>
                     {initialKanbanCols.backlog.map((item) => (
                       <div key={item.id} className="p-3 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] space-y-2">
@@ -650,17 +623,16 @@ export default function Hero() {
                         </div>
                         <div className="flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)]">
                           <span className="text-orange-400">@{item.agent}</span>
-                          <span>Budget: {item.spend}</span>
+                          <span>{t('kanban.budget')}: {item.spend}</span>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Column 2: In Isolated Worktree */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono font-semibold text-blue-400 pb-1 border-b border-blue-500/30">
-                      <span>IN WORKTREE ({initialKanbanCols.in_progress.length})</span>
-                      <span className="text-[10px] animate-pulse">Running</span>
+                      <span>{t('kanban.inWorktree')} ({initialKanbanCols.in_progress.length})</span>
+                      <span className="text-[10px] animate-pulse">{t('kanban.running')}</span>
                     </div>
                     {initialKanbanCols.in_progress.map((item) => (
                       <div key={item.id} className="p-3 rounded-xl bg-[var(--surface-card)] border border-blue-500/30 space-y-2 shadow-lg">
@@ -670,17 +642,16 @@ export default function Hero() {
                         </div>
                         <div className="flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)] pt-1">
                           <span className="text-orange-400">@{item.agent}</span>
-                          <span className="text-emerald-400 font-bold">Spend: {item.spend}</span>
+                          <span className="text-emerald-400 font-bold">{t('kanban.spend')}: {item.spend}</span>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Column 3: Approval Gates */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono font-semibold text-amber-400 pb-1 border-b border-amber-500/30">
-                      <span>APPROVAL GATE ({initialKanbanCols.approval.length})</span>
-                      <span className="text-[10px]">Field Review</span>
+                      <span>{t('kanban.approvalGate')} ({initialKanbanCols.approval.length})</span>
+                      <span className="text-[10px]">{t('kanban.fieldReview')}</span>
                     </div>
                     {initialKanbanCols.approval.map((item) => (
                       <div key={item.id} className="p-3 rounded-xl bg-[var(--surface-section)] border border-amber-500/40 space-y-2.5">
@@ -695,17 +666,16 @@ export default function Hero() {
                           onClick={() => setApprovalGranted(true)}
                           className="w-full py-1.5 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 text-[var(--text-strong)] font-semibold text-[11px] shadow hover:brightness-110"
                         >
-                          1-Click Sign-Off
+                          {t('kanban.signOff')}
                         </button>
                       </div>
                     ))}
                   </div>
 
-                  {/* Column 4: Verified & Merged */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono font-semibold text-emerald-400 pb-1 border-b border-emerald-500/30">
-                      <span>VERIFIED & SHIPPED ({initialKanbanCols.verified.length})</span>
-                      <span className="text-[10px]">Done</span>
+                      <span>{t('kanban.verifiedShipped')} ({initialKanbanCols.verified.length})</span>
+                      <span className="text-[10px]">{t('kanban.done')}</span>
                     </div>
                     {initialKanbanCols.verified.map((item) => (
                       <div key={item.id} className="p-3 rounded-xl bg-[var(--surface-section)] border border-emerald-500/30 space-y-1.5 opacity-90">
@@ -724,21 +694,20 @@ export default function Hero() {
               </div>
             )}
 
-            {/* TAB CONTENT 3: EISENHOWER PRIORITIZATION MATRIX */}
             {activeTab === 'eisenhower' && (
               <div className="p-6 bg-[#0B0C12] min-h-[460px] space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                   <div>
                     <h3 className="text-sm font-bold text-[var(--text-strong)] flex items-center gap-2">
                       <LayoutGrid className="h-4 w-4 text-orange-400" />
-                      Eisenhower Strategic Prioritization Matrix
+                      {t('eisenhower.title')}
                     </h3>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Autonomous crew filters noise and isolates high-leverage outcomes from low-impact chores.
+                      {t('eisenhower.desc')}
                     </p>
                   </div>
                   <div className="text-xs font-mono text-orange-400 bg-orange-950/40 px-3 py-1 rounded-lg border border-orange-500/30">
-                    Goal Tracking: 94% on target
+                    {t('eisenhower.goalTracking')}
                   </div>
                 </div>
 
@@ -766,7 +735,7 @@ export default function Hero() {
                               <div className="flex-1 min-w-0">
                                 <div className="text-[var(--text-strong)] font-medium truncate">{task.name}</div>
                                 <div className="flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)] mt-1">
-                                  <span>Assigned: {task.agent}</span>
+                                  <span>{t('eisenhower.assigned')}: {task.agent}</span>
                                   <span className="text-emerald-400">{task.status}</span>
                                 </div>
                               </div>
@@ -780,68 +749,64 @@ export default function Hero() {
               </div>
             )}
 
-            {/* TAB CONTENT 4: FIELD OPS & LOCAL SECURITY VAULT */}
             {activeTab === 'field_ops' && (
               <div className="p-6 bg-[#0B0C12] min-h-[460px] space-y-6">
                 <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                   <div>
                     <h3 className="text-sm font-bold text-[var(--text-strong)] flex items-center gap-2">
                       <ShieldCheck className="h-4 w-4 text-emerald-400" />
-                      Field Ops, Human Approvals & Client-Side Vault
+                      {t('fieldOps.title')}
                     </h3>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Credentials remain 100% encrypted on your machine. Critical operations trigger multi-device approval alerts.
+                      {t('fieldOps.desc')}
                     </p>
                   </div>
                   <div className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-3 py-1 rounded-lg border border-emerald-500/30 flex items-center gap-1.5">
                     <Lock className="h-3 w-3" />
-                    <span>AES-256 Client Keystore Sealed</span>
+                    <span>{t('fieldOps.aesSealed')}</span>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* High Risk Approval Trigger 1 */}
                   <div className="p-4 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[var(--text-strong)]">Payment & Billing Gate</span>
-                      <span className="text-[10px] font-mono text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded">High Risk</span>
+                      <span className="text-xs font-bold text-[var(--text-strong)]">{t('fieldOps.paymentGate')}</span>
+                      <span className="text-[10px] font-mono text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded">{t('fieldOps.highRisk')}</span>
                     </div>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Agents cannot trigger Stripe payouts, invoice creation, or subscription mutations without explicit approval.
+                      {t('fieldOps.paymentGateDesc')}
                     </p>
                     <div className="p-2.5 rounded bg-[var(--surface-panel)] text-[11px] font-mono text-[var(--text-strong)] flex items-center justify-between">
-                      <span>Threshold: &gt; $0.00</span>
-                      <span className="text-emerald-400">Enforced</span>
+                      <span>{t('fieldOps.threshold')}</span>
+                      <span className="text-emerald-400">{t('fieldOps.enforced')}</span>
                     </div>
                   </div>
 
-                  {/* High Risk Approval Trigger 2 */}
                   <div className="p-4 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[var(--text-strong)]">Production Deployments</span>
-                      <span className="text-[10px] font-mono text-red-400 bg-red-950/40 px-2 py-0.5 rounded">Critical</span>
+                      <span className="text-xs font-bold text-[var(--text-strong)]">{t('fieldOps.productionDeploy')}</span>
+                      <span className="text-[10px] font-mono text-red-400 bg-red-950/40 px-2 py-0.5 rounded">{t('fieldOps.critical')}</span>
                     </div>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Worktrees build & test in isolation. Merges into production require visual AST diff review and manual confirmation.
+                      {t('fieldOps.productionDeployDesc')}
                     </p>
                     <div className="p-2.5 rounded bg-[var(--surface-panel)] text-[11px] font-mono text-[var(--text-strong)] flex items-center justify-between">
-                      <span>Zero-Regression Check</span>
-                      <span className="text-emerald-400">14/14 Tests Passed</span>
+                      <span>{t('fieldOps.zeroRegression')}</span>
+                      <span className="text-emerald-400">{t('fieldOps.testsPassed')}</span>
                     </div>
                   </div>
 
-                  {/* Phone Companion Quick Alert */}
                   <div className="p-4 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[var(--text-strong)]">Mobile Companion App</span>
-                      <span className="text-[10px] font-mono text-blue-400 bg-blue-950/40 px-2 py-0.5 rounded">iOS / Android</span>
+                      <span className="text-xs font-bold text-[var(--text-strong)]">{t('fieldOps.mobileCompanion')}</span>
+                      <span className="text-[10px] font-mono text-blue-400 bg-blue-950/40 px-2 py-0.5 rounded">{t('fieldOps.iosAndroid')}</span>
                     </div>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Away from your desk? Receive push notifications for pending approval gates and sign off with a single tap.
+                      {t('fieldOps.mobileCompanionDesc')}
                     </p>
                     <div className="p-2.5 rounded bg-[var(--surface-panel)] text-[11px] font-mono text-[var(--text-strong)] flex items-center justify-between">
-                      <span>Sync Latency</span>
-                      <span className="text-emerald-400">&lt; 40ms WebSockets</span>
+                      <span>{t('fieldOps.syncLatency')}</span>
+                      <span className="text-emerald-400">{t('fieldOps.lowLatency')}</span>
                     </div>
                   </div>
                 </div>
@@ -853,4 +818,3 @@ export default function Hero() {
     </section>
   )
 }
-

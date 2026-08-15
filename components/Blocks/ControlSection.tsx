@@ -14,8 +14,10 @@ import {
 import { cn } from '@/lib/utils'
 import { Reveal } from './Reveal'
 import { Badge } from '@/components/ui/badge'
+import { useTranslations } from 'next-intl'
 
 export const ControlSection = () => {
+  const t = useTranslations('control')
   const [gateStatus, setGateStatus] = useState<'pending' | 'approved' | 'rejected'>('pending')
   const [selectedGateType, setSelectedGateType] = useState<'payment' | 'deploy' | 'social'>('payment')
   const [autonomyValue, setAutonomyValue] = useState(65)
@@ -24,28 +26,28 @@ export const ControlSection = () => {
 
   const gateDetails = {
     payment: {
-      id: '#GATE-PAY-904',
-      title: 'Stripe Webhook & Production Key Activation',
-      risk: 'Payment Critical',
-      desc: 'Developer agent completed test webhooks (14/14 passed) and requests live secret key binding.',
-      agent: 'Developer Agent',
-      worktree: 'worktree/stripe-prod',
+      id: t('gates.payment.id'),
+      title: t('gates.payment.title'),
+      risk: t('gates.payment.risk'),
+      desc: t('gates.payment.desc'),
+      agent: t('gates.payment.agent'),
+      worktree: t('gates.payment.worktree'),
     },
     deploy: {
-      id: '#GATE-DEP-112',
-      title: 'Production Staging Zero-Downtime Rollout',
-      risk: 'High Infrastructure Impact',
-      desc: 'AST diff verified: 4 modified files, 0 schema breaking changes, all migration tests green.',
-      agent: 'Developer Agent',
-      worktree: 'worktree/staging-v3',
+      id: t('gates.deploy.id'),
+      title: t('gates.deploy.title'),
+      risk: t('gates.deploy.risk'),
+      desc: t('gates.deploy.desc'),
+      agent: t('gates.deploy.agent'),
+      worktree: t('gates.deploy.worktree'),
     },
     social: {
-      id: '#GATE-PUB-440',
-      title: 'Multi-Channel Product Launch Campaign Blast',
-      risk: 'Public Brand Action',
-      desc: 'Marketer agent drafted launch announcement and outreach emails for 1,200 verified beta testers.',
-      agent: 'Marketer Agent',
-      worktree: 'campaigns/launch-blast',
+      id: t('gates.social.id'),
+      title: t('gates.social.title'),
+      risk: t('gates.social.risk'),
+      desc: t('gates.social.desc'),
+      agent: t('gates.social.agent'),
+      worktree: t('gates.social.worktree'),
     },
   }
 
@@ -53,28 +55,25 @@ export const ControlSection = () => {
 
   return (
     <section id="controls" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
-      {/* Background ambient lighting */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[500px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-1/4 w-[500px] h-[400px] bg-blue-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Header */}
         <Reveal className="max-w-3xl space-y-4">
           <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span>FIELD OPS & OPERATIONAL OVERSIGHT</span>
+            <span>{t('badge')}</span>
           </Badge>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
-            Autonomy without financial, credential, or operational anxiety.
+            {t('headline')}
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
-            Other tools run wild with unmonitored API loops and cloud-leaked credentials. Fabrica wraps parallel autonomous crews in client-side encryption, hard financial auto-stops, and 1-tap mobile approval gates for all high-risk operations.
+            {t('paragraph')}
           </p>
         </Reveal>
 
-        {/* 4 Core Control Pillars Grid */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Card 1: Interactive Field Ops & Approval Gates */}
           <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
@@ -85,12 +84,11 @@ export const ControlSection = () => {
                     <Lock className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Human-in-the-Loop Field Gates</h3>
-                    <span className="text-[11px] font-mono text-[var(--text-muted)]">Desktop & Mobile Companion</span>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">{t('card1.title')}</h3>
+                    <span className="text-[11px] font-mono text-[var(--text-muted)]">{t('card1.subtitle')}</span>
                   </div>
                 </div>
 
-                {/* Live Status Badge */}
                 <span
                   className={cn(
                     'text-xs font-mono px-2.5 py-1 rounded-full border flex items-center gap-1.5 transition-all',
@@ -107,10 +105,9 @@ export const ControlSection = () => {
               </div>
 
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Agents draft, build, and verify in isolated worktrees, but high-stakes milestones Ã¢â‚¬â€ live payment bindings, staging deployments, or public campaigns Ã¢â‚¬â€ require your explicit 1-click authorization.
+                {t('card1.desc')}
               </p>
 
-              {/* Gate Category Selector */}
               <div className="flex gap-2 pt-1 font-mono text-xs">
                 {(['payment', 'deploy', 'social'] as const).map((type) => (
                   <button
@@ -126,15 +123,14 @@ export const ControlSection = () => {
                         : 'bg-[var(--overlay-5)] text-[var(--text-muted)] border-[var(--border-subtle)] hover:text-[var(--text-strong)]'
                     )}
                   >
-                    {type === 'payment' && 'Ã°Å¸â€™Â³ Payment Gate'}
-                    {type === 'deploy' && 'Ã°Å¸Å¡â‚¬ Deploy Gate'}
-                    {type === 'social' && 'Ã°Å¸â€œÂ¢ Social/Email Gate'}
+                    {type === 'payment' && t('card1.paymentGate')}
+                    {type === 'deploy' && t('card1.deployGate')}
+                    {type === 'social' && t('card1.socialGate')}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Interactive Gate Trigger Box */}
             <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3 font-mono text-xs">
               <div className="flex items-center justify-between text-[var(--text-muted)] text-[11px] pb-2 border-b border-[var(--border-faint)]">
                 <span>{currentGate.id}</span>
@@ -154,7 +150,6 @@ export const ControlSection = () => {
                 <span className="text-blue-400">{currentGate.worktree}</span>
               </div>
 
-              {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
                   onClick={() => setGateStatus('approved')}
@@ -166,7 +161,7 @@ export const ControlSection = () => {
                   )}
                 >
                   <CheckCircle2 className="h-4 w-4" />
-                  <span>1-Tap Approve</span>
+                  <span>{t('card1.approve')}</span>
                 </button>
 
                 <button
@@ -179,7 +174,7 @@ export const ControlSection = () => {
                   )}
                 >
                   <XCircle className="h-4 w-4" />
-                  <span>Reject & Re-Plan</span>
+                  <span>{t('card1.reject')}</span>
                 </button>
               </div>
             </div>
@@ -194,8 +189,8 @@ export const ControlSection = () => {
                     <KeyRound className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Client-Side Credential Vault</h3>
-                    <span className="text-[11px] font-mono text-emerald-400">Zero Cloud Key Storage</span>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">{t('card2.title')}</h3>
+                    <span className="text-[11px] font-mono text-emerald-400">{t('card2.subtitle')}</span>
                   </div>
                 </div>
                 <span className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
@@ -204,44 +199,43 @@ export const ControlSection = () => {
               </div>
 
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Your API keys, SSH credentials, and OAuth tokens never touch external servers. They remain locally encrypted inside your desktop app keystore and are only injected during isolated task execution.
+                {t('card2.desc')}
               </p>
             </div>
 
-            {/* Keystore Status Widget */}
             <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-2.5 text-xs font-mono">
               <div className="flex items-center justify-between pb-1.5 border-b border-[var(--border-faint)] text-[var(--text-muted)]">
-                <span>LOCAL KEYSTORE VAULT</span>
-                <span className="text-emerald-400">ENCRYPTED & LOCKED</span>
+                <span>{t('card2.keystore')}</span>
+                <span className="text-emerald-400">{t('card2.encrypted')}</span>
               </div>
 
               <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  OpenAI / Anthropic / Gemini Keys
+                  {t('card2.openaiKeys')}
                 </span>
-                <span className="text-[var(--text-muted)]">Stored locally</span>
+                <span className="text-[var(--text-muted)]">{t('card2.storedLocally')}</span>
               </div>
 
               <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  Git SSH / GitHub Personal Access
+                  {t('card2.gitKeys')}
                 </span>
-                <span className="text-[var(--text-muted)]">Isolated per repo</span>
+                <span className="text-[var(--text-muted)]">{t('card2.isolatedPerRepo')}</span>
               </div>
 
               <div className="flex items-center justify-between text-[var(--text-strong)]">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  Stripe & Cloud Deployment Tokens
+                  {t('card2.stripeKeys')}
                 </span>
-                <span className="text-amber-400">Gated on approval</span>
+                <span className="text-amber-400">{t('card2.gatedApproval')}</span>
               </div>
 
               <div className="pt-2 border-t border-[var(--border-faint)] flex items-center justify-between text-[11px] text-[var(--text-muted)]">
-                <span>Key Rotation: Automated</span>
-                <span className="text-emerald-400">Ã¢Å“â€œ Zero 3rd-party egress</span>
+                <span>{t('card2.keyRotation')}</span>
+                <span className="text-emerald-400">{t('card2.zeroEgress')}</span>
               </div>
             </div>
           </div>
@@ -255,8 +249,8 @@ export const ControlSection = () => {
                     <DollarSign className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Hard Budget Limits & Auto-Stops</h3>
-                    <span className="text-[11px] font-mono text-orange-400">Per-Task & Per-Project Caps</span>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">{t('card3.title')}</h3>
+                    <span className="text-[11px] font-mono text-orange-400">{t('card3.subtitle')}</span>
                   </div>
                 </div>
                 <span className="text-xs font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
@@ -265,14 +259,13 @@ export const ControlSection = () => {
               </div>
 
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Set per-task, per-agent, or per-project spending thresholds. The moment an autonomous thread hits its monetary ceiling, Fabrica immediately halts execution, releases worktree locks, and alerts you.
+                {t('card3.desc')}
               </p>
             </div>
 
-            {/* Interactive Budget Tracker Widget */}
             <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3">
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[var(--text-muted)]">Current Spend vs Cap</span>
+                <span className="text-[var(--text-muted)]">{t('card3.spendVsCap')}</span>
                 <span className="text-[var(--text-strong)] font-bold">
                   ${currentSpend.toFixed(2)} / ${monthlyCap.toFixed(2)}
                 </span>
@@ -286,8 +279,8 @@ export const ControlSection = () => {
               </div>
 
               <div className="flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)] pt-1">
-                <span>{(100 - (currentSpend / monthlyCap) * 100).toFixed(1)}% runway remaining</span>
-                <span className="text-emerald-400">Ã¢Å“â€œ Auto-kill killswitch active</span>
+                <span>{(100 - (currentSpend / monthlyCap) * 100).toFixed(1)}% {t('card3.runway')}</span>
+                <span className="text-emerald-400">{t('card3.autoKill')}</span>
               </div>
             </div>
           </div>
@@ -301,25 +294,24 @@ export const ControlSection = () => {
                     <Sliders className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[var(--text-strong)]">Dynamic Autonomy Dial</h3>
-                    <span className="text-[11px] font-mono text-blue-400">Continuous 24/7 Daemons</span>
+                    <h3 className="text-lg font-bold text-[var(--text-strong)]">{t('card4.title')}</h3>
+                    <span className="text-[11px] font-mono text-blue-400">{t('card4.subtitle')}</span>
                   </div>
                 </div>
                 <span className="text-xs font-mono text-orange-400 font-bold">
                   {autonomyValue < 35
-                    ? 'Strict Approval'
+                    ? t('card4.strict')
                     : autonomyValue < 70
-                    ? 'Guided Guardrails'
-                    : '24/7 Full Autonomy'}
+                    ? t('card4.guided')
+                    : t('card4.fullAutonomy')}
                 </span>
               </div>
 
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Dial up autonomy for routine competitor research, unit tests, and copy variants; dial it back to require step-by-step confirmation for production database migrations.
+                {t('card4.desc')}
               </p>
             </div>
 
-            {/* Slider Widget */}
             <div className="p-4 rounded-xl bg-[var(--surface-panel)] border border-[var(--border-subtle)] space-y-3">
               <input
                 type="range"
@@ -330,9 +322,9 @@ export const ControlSection = () => {
                 className="w-full accent-orange-500 cursor-pointer h-2 bg-[var(--overlay-10)] rounded-lg"
               />
               <div className="flex justify-between text-[11px] font-mono text-[var(--text-muted)]">
-                <span>Step-by-Step Approval</span>
-                <span>Guided Autonomy</span>
-                <span>Continuous 24/7 Daemons</span>
+                <span>{t('card4.stepByStep')}</span>
+                <span>{t('card4.guidedAutonomy')}</span>
+                <span>{t('card4.continuous')}</span>
               </div>
             </div>
           </div>
@@ -341,4 +333,3 @@ export const ControlSection = () => {
     </section>
   )
 }
-

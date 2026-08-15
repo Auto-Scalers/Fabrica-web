@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import {
   ArrowRight,
   CheckCircle2,
@@ -35,13 +36,6 @@ interface PlatformOption {
   icon: React.ComponentType<{ className?: string }>
 }
 
-const PLATFORMS: PlatformOption[] = [
-  { id: 'mac', label: 'macOS', detail: 'Apple Silicon & Intel', icon: Apple },
-  { id: 'win', label: 'Windows', detail: 'x64 / ARM64', icon: Monitor },
-  { id: 'linux', label: 'Linux', detail: '.AppImage / .deb', icon: Terminal },
-  { id: 'mobile', label: 'Mobile', detail: 'iOS / Android Companion', icon: Smartphone },
-]
-
 interface ExistingSignup {
   email: string
   platform: string | null
@@ -54,6 +48,15 @@ interface ExistingSignup {
 const emptySubscribe = () => () => {}
 
 export const FinalCta = () => {
+  const t = useTranslations('cta')
+
+  const PLATFORMS: PlatformOption[] = [
+    { id: 'mac', label: t('platforms.mac'), detail: t('platforms.macDetail'), icon: Apple },
+    { id: 'win', label: t('platforms.win'), detail: t('platforms.winDetail'), icon: Monitor },
+    { id: 'linux', label: t('platforms.linux'), detail: t('platforms.linuxDetail'), icon: Terminal },
+    { id: 'mobile', label: t('platforms.mobile'), detail: t('platforms.mobileDetail'), icon: Smartphone },
+  ]
+
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
@@ -121,13 +124,13 @@ export const FinalCta = () => {
 
     let hasError = false
     if (!trimmedEmail || !trimmedEmail.includes('@')) {
-      setError('Please enter a valid work email.')
+      setError(t('invalidEmail'))
       hasError = true
     } else {
       setError('')
     }
     if (!platform) {
-      setPlatformError('Please select your platform to continue.')
+      setPlatformError(t('selectPlatform'))
       hasError = true
     } else {
       setPlatformError('')
@@ -224,25 +227,25 @@ export const FinalCta = () => {
             alt=""
             className="h-4 w-4 object-contain"
           />
-          <span>JOIN THE FOUNDING COHORT</span>
+          <span>{t('badge')}</span>
         </Badge>
 
         {/* Headline */}
         <h2 className="text-4xl sm:text-6xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
-          The Next AI Exit.
+          {t('headline')}
           <span className="block text-2xl sm:text-4xl font-normal text-orange-400 mt-3">
-            Close the tabs. Direct the crew.
+            {t('subheadline')}
           </span>
         </h2>
 
         <p className="text-base sm:text-xl text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
-          Stop being the founder, developer, copywriter, and analyst all at once. Experience parallel isolated execution on your desktop with mobile oversight and hard financial guardrails.
+          {t('paragraph')}
         </p>
 
         {/* Enhanced Platform Selector */}
         <div className="max-w-2xl mx-auto space-y-2">
           <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
-            Choose your platform <span className="text-orange-400">*</span>
+            {t('choosePlatform')} <span className="text-orange-400">{t('required')}</span>
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {PLATFORMS.map((p) => {
@@ -288,8 +291,8 @@ export const FinalCta = () => {
                 <CheckCircle2 className="h-5 w-5" />
                 <span>
                   {existingUser
-                    ? 'We found your existing profile!'
-                    : 'You are on the priority access list!'}
+                    ? t('foundProfile')
+                    : t('onList')}
                 </span>
               </div>
               <p className="text-xs text-[var(--text-muted)]">
@@ -309,7 +312,7 @@ export const FinalCta = () => {
                 className="w-full py-2.5 rounded-xl bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/40 text-orange-300 text-xs font-mono font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Sparkles className="h-4 w-4" />
-                <span>{existingUser ? 'View & Update Your Profile' : 'View Founding Pass & Custom Setup Options'}</span>
+                <span>{existingUser ? t('viewProfile') : t('viewPass')}</span>
               </button>
             </div>
           ) : (
@@ -324,7 +327,7 @@ export const FinalCta = () => {
                       setEmail(e.target.value)
                       if (error) setError('')
                     }}
-                    placeholder="Enter your work email..."
+                    placeholder={t('enterEmail')}
                     className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] text-sm text-[var(--text-strong)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-orange-500 transition-colors"
                   />
                 </div>
@@ -339,11 +342,11 @@ export const FinalCta = () => {
                   {isChecking ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      <span>Checking...</span>
+                      <span>{t('checking')}</span>
                     </>
                   ) : (
                     <>
-                      <span>Get Early Access</span>
+                      <span>{t('getEarlyAccess')}</span>
                       <ArrowRight className="h-4 w-4" />
                     </>
                   )}
@@ -354,7 +357,7 @@ export const FinalCta = () => {
 
               <p className="text-[11px] font-mono text-[var(--text-muted)] flex items-center justify-center gap-2 pt-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                <span>Zero Cloud Key Storage Ã¢â‚¬Â¢ Free tier available Ã¢â‚¬Â¢ BYOK supported</span>
+                <span>{t('trustText')}</span>
               </p>
             </form>
           )}
@@ -404,10 +407,10 @@ export const FinalCta = () => {
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-semibold">
                         <Sparkles className="h-3.5 w-3.5" />
-                        <span>{existingUser ? 'YOUR PROFILE IS SAVED' : 'EARLY ACCESS REQUEST RECEIVED'}</span>
+                        <span>{existingUser ? t('modal.profileSaved') : t('modal.requestReceived')}</span>
                       </div>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-strong)] tracking-tight">
-                        {existingUser ? 'Welcome back. Update your details.' : "We've received your request!"}
+                        {existingUser ? t('modal.welcomeBack') : t('modal.requestTitle')}
                       </h3>
                       <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
                         {existingUser ? (
@@ -415,11 +418,11 @@ export const FinalCta = () => {
                             We found your existing registration for{' '}
                             <span className="text-[var(--text-strong)] font-mono font-bold">{email || 'your email'}</span> on{' '}
                             <span className="text-orange-400 font-mono font-bold uppercase">{platformDisplay}</span>.
-                            Edit anything below and your changes will be saved automatically.
+                            {t('modal.editProfile')}
                           </>
                         ) : (
                           <>
-                            Our founding engineering team will review your application and reach out directly to{' '}
+                            {t('modal.reviewApplication')}{' '}
                             <span className="text-[var(--text-strong)] font-mono font-bold">{email || 'your email'}</span> with your custom desktop installer invite and onboarding key for{' '}
                             <span className="text-orange-400 font-mono font-bold uppercase">{platformDisplay}</span>.
                           </>
@@ -430,11 +433,11 @@ export const FinalCta = () => {
                     {/* Priority Referral Link */}
                     <div className="rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] p-4 space-y-2.5">
                       <div className="flex items-center justify-between text-xs font-mono">
-                        <span className="text-[var(--text-muted)]">FAST-TRACK INVITE LINK</span>
-                        <span className="text-orange-400 font-bold">#FAB-COHORT-2026</span>
+                        <span className="text-[var(--text-muted)]">{t('modal.inviteLink')}</span>
+                        <span className="text-orange-400 font-bold">{t('modal.cohort')}</span>
                       </div>
                       <p className="text-[11px] text-[var(--text-muted)]">
-                        Share your link with colleagues or other developers to move up the rollout schedule:
+                        {t('modal.shareLink')}
                       </p>
                       <div className="flex items-center gap-2">
                         <div className="flex-1 px-3 py-2 rounded-lg bg-black/40 border border-[var(--border-subtle)] text-xs font-mono text-zinc-300 truncate">
@@ -450,12 +453,12 @@ export const FinalCta = () => {
                           {copied ? (
                             <>
                               <Check className="h-3.5 w-3.5 text-emerald-400" />
-                              <span className="text-emerald-400">Copied!</span>
+                              <span className="text-emerald-400">{t('modal.copied')}</span>
                             </>
                           ) : (
                             <>
                               <Copy className="h-3.5 w-3.5 text-[var(--text-muted)]" />
-                              <span>Copy</span>
+                              <span>{t('modal.copy')}</span>
                             </>
                           )}
                         </button>
@@ -467,26 +470,26 @@ export const FinalCta = () => {
                       <div className="space-y-1">
                         <div className="flex items-center gap-2 text-[var(--text-strong)] font-semibold text-xs sm:text-sm">
                           <Building2 className="h-4 w-4 text-orange-400" />
-                          <span>{existingUser ? 'Your Profile (Editable)' : 'Fast-Track Your Access (Optional)'}</span>
+                          <span>{existingUser ? t('modal.yourProfile') : t('modal.fastTrack')}</span>
                         </div>
                         <p className="text-[11px] text-[var(--text-muted)]">
                           {existingUser
-                            ? 'Update your setup and team requirements below.'
-                            : 'Tell us a bit about your setup and team requirements to help us tailor your environment:'}
+                            ? t('modal.updateSetup')
+                            : t('modal.tellUs')}
                         </p>
                       </div>
 
                       {noteSent ? (
                         <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono flex items-center gap-2">
                           <CheckCircle2 className="h-4 w-4 shrink-0" />
-                          <span>{existingUser ? 'Your profile has been updated!' : 'Note sent to the founding engineers! We have flagged your priority onboarding.'}</span>
+                          <span>{existingUser ? t('modal.profileUpdated') : t('modal.noteSent')}</span>
                         </div>
                       ) : (
                         <form onSubmit={handleSendEnterpriseNote} className="space-y-3.5 text-xs">
                           {/* Work Email in Modal */}
                           <div className="space-y-1">
                             <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
-                              Work Email
+                              {t('modal.workEmail')}
                             </label>
                             <input
                               type="email"
@@ -501,7 +504,7 @@ export const FinalCta = () => {
                             {/* Company Name */}
                             <div className="space-y-1">
                               <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
-                                Company / Organization
+                                {t('modal.company')}
                               </label>
                               <input
                                 type="text"
@@ -515,17 +518,17 @@ export const FinalCta = () => {
                             {/* Team Size */}
                             <div className="space-y-1">
                               <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
-                                Team Size
+                                {t('modal.teamSize')}
                               </label>
                               <select
                                 value={teamSize}
                                 onChange={(e) => setTeamSize(e.target.value)}
                                 className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] focus:outline-none focus:border-orange-500"
                               >
-                                <option value="solo">Solo Hacker / Independent Builder</option>
-                                <option value="2-10">2 Ã¢â‚¬â€œ 10 Engineers</option>
-                                <option value="11-50">11 Ã¢â‚¬â€œ 50 Engineers</option>
-                                <option value="50+">50+ Enterprise Team</option>
+                                <option value="solo">{t('modal.solo')}</option>
+                                <option value="2-10">{t('modal.team210')}</option>
+                                <option value="11-50">{t('modal.team1150')}</option>
+                                <option value="50+">{t('modal.team50plus')}</option>
                               </select>
                             </div>
                           </div>
@@ -533,30 +536,30 @@ export const FinalCta = () => {
                           {/* Primary Use Case */}
                           <div className="space-y-1">
                             <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
-                              Primary Use Case
+                              {t('modal.useCase')}
                             </label>
                             <select
                               value={useCase}
                               onChange={(e) => setUseCase(e.target.value)}
                               className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] focus:outline-none focus:border-orange-500"
                             >
-                              <option value="agent_crews">Parallel Multi-Agent Crews & Worktrees</option>
-                              <option value="mobile_oversight">Mobile Remote Oversight & Slack Approvals</option>
-                              <option value="cost_guardrails">Hard Financial Guardrails & Local Execution</option>
-                              <option value="custom_daemons">Enterprise Daemon & CI/CD Tooling</option>
+                              <option value="agent_crews">{t('modal.useCrews')}</option>
+                              <option value="mobile_oversight">{t('modal.useMobile')}</option>
+                              <option value="cost_guardrails">{t('modal.useCost')}</option>
+                              <option value="custom_daemons">{t('modal.useDaemons')}</option>
                             </select>
                           </div>
 
                           {/* Message / Specific Requirements */}
                           <div className="space-y-1">
                             <label className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
-                              Send a Note / Specific Requirements
+                              {t('modal.note')}
                             </label>
                             <textarea
                               rows={3}
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
-                              placeholder="Tell us what you're building, model preferences (Claude 3.7/Gemini 2.5/Ollama), or any specific security/compliance needs..."
+                              placeholder={t('modal.notePlaceholder')}
                               className="w-full px-3 py-2 rounded-lg bg-[var(--surface-card)] border border-[var(--border-subtle)] text-[var(--text-strong)] placeholder:text-zinc-600 focus:outline-none focus:border-orange-500 resize-none"
                             />
                           </div>
@@ -569,12 +572,12 @@ export const FinalCta = () => {
                             {savingNote ? (
                               <>
                                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                                <span>{existingUser ? 'Saving Changes...' : 'Updating Priority...'}</span>
+                                <span>{existingUser ? t('modal.saving') : t('modal.updating')}</span>
                               </>
                             ) : (
                               <>
                                 <Send className="h-3.5 w-3.5 text-orange-400" />
-                                <span>{existingUser ? 'Save Changes to My Profile' : 'Send Note to Founding Team'}</span>
+                                <span>{existingUser ? t('modal.saveChanges') : t('modal.sendNote')}</span>
                               </>
                             )}
                           </button>
@@ -592,7 +595,7 @@ export const FinalCta = () => {
                       >
                         <div className="flex items-center gap-2">
                           <Users className="h-4 w-4 text-indigo-400" />
-                          <span>Join Discord Community</span>
+                          <span>{t('modal.discord')}</span>
                         </div>
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
@@ -603,7 +606,7 @@ export const FinalCta = () => {
                       >
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4 text-orange-400" />
-                          <span>Email Founder Team</span>
+                          <span>{t('modal.emailTeam')}</span>
                         </div>
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
@@ -618,7 +621,7 @@ export const FinalCta = () => {
                       background="linear-gradient(90deg, #E8590C, #FF8A3D)"
                       className="w-full py-3 text-xs font-semibold shadow-lg shadow-orange-950/50"
                     >
-                      Done & Close
+                      {t('modal.doneClose')}
                     </ShimmerButton>
                   </div>
                 </motion.div>

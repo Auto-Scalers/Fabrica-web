@@ -8,33 +8,33 @@ import {
   FileSpreadsheet,
   Clock,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
 
-const painPoints = [
-  {
-    icon: Layers,
-    title: 'Fourteen browser tabs, zero cohesion',
-    description:
-      'You copy context from a chat window into a scratchpad, format it for a terminal, and paste the error back into the first tab. By prompt four, the model has forgotten the database schema.',
-    metric: '3.5 hrs/day lost to prompt-juggling',
-  },
-  {
-    icon: AlertTriangle,
-    title: 'Runaway bills and runaway diffs',
-    description:
-      'Agent loops run unchecked until your API bill spikes or a rogue patch overwrites your git staging branch without approval. You spend your evening cleaning up what was supposed to save you time.',
-    metric: 'Zero financial guardrails in standard tools',
-  },
-  {
-    icon: FileSpreadsheet,
-    title: 'Spreadsheets, notes, and broken stashes',
-    description:
-      'You are simultaneously the architect, coder, copywriter, and business analyst. Work stalls because parallel tasks collide on the same working branch.',
-    metric: 'Single-thread bottleneck on founder attention',
-  },
-]
-
 export const PainSection = () => {
+  const t = useTranslations('pain')
+
+  const painPoints = [
+    {
+      icon: Layers,
+      title: t('p1Title'),
+      description: t('p1Desc'),
+      metric: t('p1Metric'),
+    },
+    {
+      icon: AlertTriangle,
+      title: t('p2Title'),
+      description: t('p2Desc'),
+      metric: t('p2Metric'),
+    },
+    {
+      icon: FileSpreadsheet,
+      title: t('p3Title'),
+      description: t('p3Desc'),
+      metric: t('p3Metric'),
+    },
+  ]
+
   return (
     <section id="pain" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Subtle background ambient light */}
@@ -45,15 +45,15 @@ export const PainSection = () => {
         <Reveal className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-950/30 px-3.5 py-1 text-xs font-mono text-red-400">
             <Clock className="h-3.5 w-3.5" />
-            <span>THE 11 PM BOTTLENECK</span>
+            <span>{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
-            You shouldn&apos;t have to be the glue between four different chatbots.
+            {t('headline')}
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
-            Every founder, consultant, and solo builder knows this desk. The screen glow, the endless prompt engineering, the dread that one hallucinated diff will wipe hours of manual work.
+            {t('paragraph')}
           </p>
         </Reveal>
 
@@ -64,7 +64,7 @@ export const PainSection = () => {
             <div className="relative aspect-[4/3] w-full">
               <Image
                 src="/images/desk_pain_11pm.jpg"
-                alt="11 PM founder desk chaos with 14 browser tabs and context fatigue"
+                alt={t('altPain')}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -75,10 +75,10 @@ export const PainSection = () => {
 
             <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[var(--surface-panel)]/90 border border-[var(--border-subtle)] backdrop-blur-md">
               <p className="text-xs font-mono text-orange-400 font-semibold">
-                SCENE: 11:42 PM // Founder Workstation
+                {t('sceneLabel')}
               </p>
               <p className="text-xs text-[var(--text-muted)] mt-1">
-                Context window expired. 14 tabs open. 2 unmerged git branches. Manual copy-paste fatigue.
+                {t('sceneDesc')}
               </p>
             </div>
           </div>

@@ -6,58 +6,35 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Marquee } from '@/components/ui/marquee'
 import { Reveal } from './Reveal'
-
-// TODO: replace with real customer testimonials before launch
-const testimonials = [
-  {
-    role: 'Beta User Ã¢â‚¬â€ Solo Founder & SaaS Builder',
-    focus: 'Full-stack Product Execution',
-    quote:
-      'I was spending half my evening copying code between chat tabs and praying nothing broke. Having dedicated agents working in isolated git worktrees with strict budget caps gave me my entire week back.',
-    metric: '14+ hrs saved per sprint',
-  },
-  {
-    role: 'Beta User Ã¢â‚¬â€ Independent Technical Consultant',
-    focus: 'Client Architecture & Research',
-    quote:
-      'The Researcher and Developer crew pattern is a game changer for client deliveries. The researcher pulls verified benchmarks while the developer builds the patch in a sandbox. Zero context collisions.',
-    metric: '3x faster client turnaround',
-  },
-  {
-    role: 'Beta User Ã¢â‚¬â€ Growth Lead at Early-Stage Startup',
-    focus: 'Multi-Campaign Synthesis & Ops',
-    quote:
-      'The ability to set hard monetary caps on autonomous runs removed the fear of runaway API bills. We run market sweeps and positioning tests 24/7 without worrying about budget blowouts.',
-    metric: '100% budget adherence',
-  },
-]
+import { useTranslations } from 'next-intl'
 
 export const TestimonialSection = () => {
+  const t = useTranslations('testimonials')
+
+  const testimonialKeys = ['t1', 't2', 't3'] as const
+
   return (
     <section id="testimonials" className="relative py-20 lg:py-28 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
-      {/* Background radial accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Section Header */}
         <Reveal className="text-center max-w-3xl mx-auto space-y-4">
           <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <UserCheck className="h-3.5 w-3.5" />
-            <span>EARLY ADOPTER FEEDBACK</span>
+            <span>{t('badge')}</span>
           </Badge>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight">
-            Built for those who carry the whole company.
+            {t('headline')}
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)]">
-            How solo founders, independent consultants, and lean operators direct multi-agent crews.
+            {t('paragraph')}
           </p>
         </Reveal>
 
-        {/* 3-Card Grid */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, idx) => (
+          {testimonialKeys.map((key, idx) => (
             <div
               key={idx}
               className="p-6 sm:p-7 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] flex flex-col justify-between space-y-6 hover:border-orange-500/30 transition-all"
@@ -65,7 +42,7 @@ export const TestimonialSection = () => {
               <div className="space-y-4">
                 <Quote className="h-6 w-6 text-orange-400 opacity-60" />
                 <p className="text-sm text-[var(--text-strong)] leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
+                  &ldquo;{t(`${key}.quote`)}&rdquo;
                 </p>
               </div>
 
@@ -76,31 +53,30 @@ export const TestimonialSection = () => {
                   </AvatarFallback>
                 </Avatar>
                 <div className="space-y-0.5">
-                  <div className="text-xs font-bold text-[var(--text-strong)]">{t.role}</div>
-                  <div className="text-[11px] text-[var(--text-muted)] font-mono">{t.focus}</div>
+                  <div className="text-xs font-bold text-[var(--text-strong)]">{t(`${key}.role`)}</div>
+                  <div className="text-[11px] text-[var(--text-muted)] font-mono">{t(`${key}.focus`)}</div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-[var(--border-faint)]">
-                <div className="text-xs font-mono text-orange-400 font-semibold">{t.metric}</div>
+                <div className="text-xs font-mono text-orange-400 font-semibold">{t(`${key}.metric`)}</div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Scrolling Proof Strip */}
         <div className="relative mt-10 overflow-hidden command-frame border-y border-[var(--border-faint)] bg-[var(--surface-section)] py-3">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--surface-section)] to-transparent z-10" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--surface-section)] to-transparent z-10" />
           <Marquee className="[--duration:45s] [--gap:2.5rem]" pauseOnHover>
-            {[...testimonials, ...testimonials].map((t, idx) => (
+            {[...testimonialKeys, ...testimonialKeys].map((key, idx) => (
               <div
                 key={idx}
                 className="flex items-center gap-2.5 text-xs font-mono text-[var(--text-muted)] whitespace-nowrap"
               >
                 <Star className="h-3.5 w-3.5 text-orange-400" />
-                <span className="font-semibold text-[var(--text-strong)]">{t.metric}</span>
-                <span>&mdash; {t.focus}</span>
+                <span className="font-semibold text-[var(--text-strong)]">{t(`${key}.metric`)}</span>
+                <span>&mdash; {t(`${key}.focus`)}</span>
               </div>
             ))}
           </Marquee>

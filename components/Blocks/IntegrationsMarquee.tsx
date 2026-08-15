@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Marquee } from '@/components/ui/marquee'
 import {
   Github,
@@ -40,14 +43,16 @@ function IntegrationChip({ name, Icon }: { name: string; Icon: React.ComponentTy
 }
 
 export const IntegrationsMarquee = () => {
+  const t = useTranslations('integrations')
+
   return (
     <section className="relative py-14 sm:py-20 bg-[var(--surface-section)] border-b border-[var(--border-faint)] overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 mb-8 text-center space-y-2">
         <span className="text-xs font-mono uppercase tracking-[0.25em] text-orange-400">
-          Bring your own keys
+          {t('header')}
         </span>
         <p className="text-sm sm:text-base text-[var(--text-muted)]">
-          Runs on the stack you already trust Ã¢â‚¬â€ model-agnostic, wallet-first.
+          {t('paragraph')}
         </p>
       </div>
 

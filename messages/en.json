@@ -1,0 +1,866 @@
+{
+  "nav": {
+    "product": "Product",
+    "crew": "Crew",
+    "howItWorks": "How It Works",
+    "controls": "Controls",
+    "comparison": "Comparison",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "getEarlyAccess": "Get Early Access"
+  },
+  "hero": {
+    "badgeLabel": "The Next AI Exit",
+    "badgeSub": "Business-First & Coding-First ADE",
+    "headline1": "Fourteen tabs. Three broken contexts.",
+    "headline2": "It's 11 PM. Direct the crew instead.",
+    "subheadline": "Stop prompting. Define your multi-agent crews (Researchers, Developers, Marketers, Business Analysts), control budget, approvals, security and let parallel AI coding agents work across isolated worktrees or plain disk folders on 24/7 Autonomy and Scale.",
+    "platformDesktop": "macOS • Windows • Linux Desktop",
+    "platformMobile": "iOS & Android Phone Companion",
+    "platformSetup": "Zero Technical Setup",
+    "ctaEarlyAccess": "Get Early Access",
+    "ctaExplore": "Explore Command Center",
+    "pillarZeroPrompt": "Zero-Prompt Auto",
+    "pillarZeroPromptSub": "24/7 background daemons",
+    "pillarEisenhower": "Eisenhower & Kanban",
+    "pillarEisenhowerSub": "Operational oversight",
+    "pillarFieldOps": "Field Ops & Safety",
+    "pillarFieldOpsSub": "1-tap approval gates",
+    "pillarVault": "Client-Side Vault",
+    "pillarVaultSub": "Zero cloud key leaks",
+    "windowTitle": "fabrica-desktop v3.0 // project: saas-nexus (main)",
+    "tabDaemons": "Daemons & Stream",
+    "tabKanban": "Kanban Queue",
+    "tabEisenhower": "Eisenhower Matrix",
+    "tabFieldOps": "Field Ops & Vault",
+    "localDaemon": "Local Daemon",
+    "remoteWorker": "Remote Worker",
+    "running": "RUNNING",
+    "paused": "PAUSED",
+    "autonomousCrew": "Autonomous Crew (4)",
+    "zeroPromptQueue": "Zero-Prompt Queue",
+    "activeDaemon": "Active Daemon",
+    "approvalGate": "Approval Gate",
+    "verified": "Verified",
+    "engineWorkflow": "Engine: Draft → Plan → Run → Verify",
+    "executingSubtask": "Executing subtask in isolated git worktree / disk sandbox...",
+    "zeroCollisions": "Zero branch collisions detected",
+    "isolatedDisk": "100% Isolated Disk",
+    "fieldControls": "Field Controls",
+    "monthlyTaskBudget": "Monthly Task Budget",
+    "hardAutoStop": "Hard auto-stop guardrail active",
+    "pendingApproval": "Pending Approval Gate",
+    "awaitingSignOff": "AWAITING SIGN-OFF",
+    "approved": "APPROVED",
+    "approvalRequest": "Developer requests merge into staging with 0 regression risks.",
+    "signOffApprove": "Sign-Off & Approve Step",
+    "actionVerified": "Action Verified & Merged",
+    "phoneAppSync": "Phone App Sync",
+    "connected": "CONNECTED",
+    "phoneSyncDesc": "1-tap field approval ready on iOS / Android.",
+    "engineStatus": "Fabrica Desktop Engine • Client-Side Keystore Active",
+    "daemon1": "[daemon/crew-01] checkered — build passed (2.4s)",
+    "daemon2": "[daemon/researcher] milestone gate → awaiting approval",
+    "daemon3": "[daemon/codex] task #0423 locked into worktree:feature/ticket-091",
+    "daemon4": "[wallet/escrow] +0.0842 spent · cap 2.50 remaining",
+    "daemon5": "[daemon/marketer] draft drafted · 3 variants queued",
+    "daemon6": "[daemon/analyst] 14 tab-sessions merged → 1 insight",
+    "daemon7": "[vault/byok] key accessed locally · AES-256 · never egressed",
+    "daemon8": "[approver/you] signed off payment bind @ 02:13:47",
+    "daemon9": "[daemon/crew-01] idle → pausing spend · releasing locks",
+    "daemon10": "[mobile/companion] killswitch armed · state synced",
+    "kanban": {
+      "title": "Continuous Task Queue & Kanban Workflow",
+      "desc": "Background daemons automatically pull prioritized tickets into isolated git worktrees.",
+      "activeTasks": "7 Active Tasks • 0 Blockers",
+      "backlog": "BACKLOG",
+      "autoScheduled": "Auto-Scheduled",
+      "inWorktree": "IN WORKTREE",
+      "running": "Running",
+      "approvalGate": "APPROVAL GATE",
+      "fieldReview": "Field Review",
+      "verifiedShipped": "VERIFIED & SHIPPED",
+      "done": "Done",
+      "signOff": "1-Click Sign-Off",
+      "budget": "Budget",
+      "spend": "Spend",
+      "k1": "Synthesize 50 Competitor Whitepapers",
+      "k2": "SEO Programmatic Cluster Generation",
+      "k3": "JWT Refresh Token Worktree Migration",
+      "k4": "SaaS Gross Margin Forecast Simulation",
+      "k5": "Stripe Webhook Event Signature Verifier",
+      "k6": "Landing Page Copy Matrix & Angles",
+      "k7": "Database Index Optimization Diffs",
+      "paymentCritical": "Payment Critical"
+    },
+    "eisenhower": {
+      "title": "Eisenhower Strategic Prioritization Matrix",
+      "desc": "Autonomous crew filters noise and isolates high-leverage outcomes from low-impact chores.",
+      "goalTracking": "Goal Tracking: 94% on target",
+      "q1": {
+        "title": "Q1: Urgent & Important (Do First)",
+        "subtitle": "High-risk operations & core infrastructure",
+        "badge": "Immediate Action"
+      },
+      "q2": {
+        "title": "Q2: Important & Non-Urgent (Schedule)",
+        "subtitle": "Strategic architecture, moat & unit economics",
+        "badge": "High Value"
+      },
+      "q3": {
+        "title": "Q3: Urgent & Low Importance (Delegate)",
+        "subtitle": "Autonomous crew routines & continuous tasks",
+        "badge": "Delegated to Crew"
+      },
+      "q4": {
+        "title": "Q4: Neither (Auto-Filtered)",
+        "subtitle": "Token burn prevention & auto-kill thresholds",
+        "badge": "Auto-Guarded"
+      },
+      "t1": "Stripe Webhook Signature Verification Gate",
+      "t2": "Production Staging Deploy with 0 Regression Diff",
+      "t3": "Autonomous Competitor Pricing Model Synthesis",
+      "t4": "LTV/CAC Unit Economics Simulation Model",
+      "t5": "Draft 3 Cold Outreach Positioning Variations",
+      "t6": "Generate TypeScript AST Diffs for Form Validation",
+      "t7": "Repetitive Chat Re-Prompting Loops",
+      "t8": "Manual Tracking Spreadsheet Syncing",
+      "statusPending": "Pending Human Sign-off",
+      "statusWorktreeReady": "Worktree Ready",
+      "statusDaemon": "Background Daemon Running",
+      "statusMargin": "78.4% Margin Forecasted",
+      "statusDrafted": "Drafted in /campaigns",
+      "statusAst": "AST Clean",
+      "statusEliminated": "Eliminated via Task Queues",
+      "statusAutomated": "Automated via Daemon Telemetry",
+      "assigned": "Assigned"
+    },
+    "fieldOps": {
+      "title": "Field Ops, Human Approvals & Client-Side Vault",
+      "desc": "Credentials remain 100% encrypted on your machine. Critical operations trigger multi-device approval alerts.",
+      "aesSealed": "AES-256 Client Keystore Sealed",
+      "paymentGate": "Payment & Billing Gate",
+      "highRisk": "High Risk",
+      "paymentGateDesc": "Agents cannot trigger Stripe payouts, invoice creation, or subscription mutations without explicit approval.",
+      "threshold": "Threshold: > $0.00",
+      "enforced": "Enforced",
+      "productionDeploy": "Production Deployments",
+      "critical": "Critical",
+      "productionDeployDesc": "Worktrees build & test in isolation. Merges into production require visual AST diff review and manual confirmation.",
+      "zeroRegression": "Zero-Regression Check",
+      "testsPassed": "14/14 Tests Passed",
+      "mobileCompanion": "Mobile Companion App",
+      "iosAndroid": "iOS / Android",
+      "mobileCompanionDesc": "Away from your desk? Receive push notifications for pending approval gates and sign off with a single tap.",
+      "syncLatency": "Sync Latency",
+      "lowLatency": "< 40ms WebSockets"
+    },
+    "crewMembers": {
+      "dev": {
+        "name": "Developer Agent",
+        "role": "Fullstack & Worktree Isolation",
+        "status": "Running in worktree/auth-guard",
+        "task": "Building token refresh middleware & patch diffs",
+        "spend": "$18.40",
+        "worktree": "worktree/auth-guard",
+        "logs": [
+          "✅ [worktree/auth-guard] Checked out isolated disk branch",
+          "🔍 AST analysis: src/auth/session-provider.tsx",
+          "🛠️ Refactored JWT token expiration handler",
+          "📊 Running test suite: 14/14 unit tests passed",
+          "🔗 Generating diff preview for visual human sign-off..."
+        ]
+      },
+      "research": {
+        "name": "Researcher Agent",
+        "role": "Market & Source Intelligence",
+        "status": "Running deep search matrix",
+        "task": "Synthesizing competitor pricing models & API costs",
+        "spend": "$12.10",
+        "worktree": "scratchpad/market-intel",
+        "logs": [
+          "📋 [isolated-scratchpad] Polling 42 public benchmark docs",
+          "📝 Extracted token-cost structures across top 5 providers",
+          "📈 Built cost-per-active-agent breakdown matrix",
+          "📄 Formatted executive brief: /outcomes/research-brief.md"
+        ]
+      },
+      "mkt": {
+        "name": "Marketer Agent",
+        "role": "Messaging & Growth Angles",
+        "status": "Awaiting review",
+        "task": "Refining copy for 3 cold-outreach segments",
+        "spend": "$8.50",
+        "worktree": "campaigns/launch-v3",
+        "logs": [
+          "🎯 Target audience: Solo founders & boutique dev agencies",
+          "💡 Hook iteration 1: \"Stop re-explaining context every 15 min\"",
+          "💡 Hook iteration 2: \"Your entire company in one command center\"",
+          "✨ Output draft ready for review: /campaigns/launch-v3.md"
+        ]
+      },
+      "analyst": {
+        "name": "Business Analyst Agent",
+        "role": "Unit Economics & Financial Guardrails",
+        "status": "Verified",
+        "task": "Audited monthly token spend vs client retainer target",
+        "spend": "$9.20",
+        "worktree": "ops/financial-model",
+        "logs": [
+          "📊 Running financial simulation across 500 active tasks",
+          "📈 Calculated margin: 78.4% gross margin at $149/mo tier",
+          "⚠️ Hard budget threshold verified: spend is 51.8% under cap",
+          "📋 Audit complete. Report saved to /ops/fin-model.json"
+        ]
+      }
+    },
+    "kanbanCols": {
+      "backlog": [
+        { "agent": "Researcher", "priority": "High" },
+        { "agent": "Marketer", "priority": "Medium" }
+      ],
+      "inProgress": [
+        { "agent": "Developer", "priority": "Urgent", "branch": "worktree/auth-guard" },
+        { "agent": "Analyst", "priority": "High", "branch": "ops/fin-model" }
+      ],
+      "approval": [
+        { "agent": "Developer", "priority": "High", "risk": "Payment Critical" }
+      ],
+      "verified": [
+        { "agent": "Marketer", "priority": "High" },
+        { "agent": "Developer", "priority": "Medium" }
+      ]
+    },
+    "eisenhowerTasks": {
+      "t1": { "agent": "Developer" },
+      "t2": { "agent": "Developer" },
+      "t3": { "agent": "Researcher" },
+      "t4": { "agent": "Analyst" },
+      "t5": { "agent": "Marketer" },
+      "t6": { "agent": "Developer" },
+      "t7": { "agent": "Fabrica Engine" },
+      "t8": { "agent": "Fabrica Engine" }
+    }
+  },
+  "pain": {
+    "badge": "THE 11 PM BOTTLENECK",
+    "headline": "You shouldn't have to be the glue between four different chatbots.",
+    "paragraph": "Every founder, consultant, and solo builder knows this desk. The screen glow, the endless prompt engineering, the dread that one hallucinated diff will wipe hours of manual work.",
+    "sceneLabel": "SCENE: 11:42 PM // Founder Workstation",
+    "sceneDesc": "Context window expired. 14 tabs open. 2 unmerged git branches. Manual copy-paste fatigue.",
+    "p1Title": "Fourteen browser tabs, zero cohesion",
+    "p1Desc": "You copy context from a chat window into a scratchpad, format it for a terminal, and paste the error back into the first tab. By prompt four, the model has forgotten the database schema.",
+    "p1Metric": "3.5 hrs/day lost to prompt-juggling",
+    "p2Title": "Runaway bills and runaway diffs",
+    "p2Desc": "Agent loops run unchecked until your API bill spikes or a rogue patch overwrites your git staging branch without approval. You spend your evening cleaning up what was supposed to save you time.",
+    "p2Metric": "Zero financial guardrails in standard tools",
+    "p3Title": "Spreadsheets, notes, and broken stashes",
+    "p3Desc": "You are simultaneously the architect, coder, copywriter, and business analyst. Work stalls because parallel tasks collide on the same working branch.",
+    "p3Metric": "Single-thread bottleneck on founder attention",
+    "altPain": "11 PM founder desk chaos with 14 browser tabs and context fatigue"
+  },
+  "turn": {
+    "badge": "THE PIVOT POINT",
+    "headline": "This is Fabrica.",
+    "subheadline": "One command center. Your entire crew in parallel.",
+    "paragraph": "Instead of manually shepherding one AI through twelve prompts, you assign goals to specialized agent roles. They execute in isolated git worktrees, respect real-time budget caps, and report back with verified diffs.",
+    "parallelLabel": "Parallel execution:",
+    "parallelDesc": "Developer, Researcher, and Marketer run simultaneously without branch collisions.",
+    "budgetLabel": "Hard budget caps:",
+    "budgetDesc": "Execution halts automatically the instant token spend reaches your limit.",
+    "reviewLabel": "Zero-friction review:",
+    "reviewDesc": "Visual approval gates let you inspect clean diffs before merging.",
+    "statusLabel": "STATUS: Calm Execution // All Worktrees Synced",
+    "statusDesc": "4 parallel crew threads active. Hard budget limit set. Zero branch collisions.",
+    "altCalm": "Calm, organized Fabrica command center workspace"
+  },
+  "crew": {
+    "badge": "SPECIALIZED CREW MEMBERS",
+    "headline": "Meet Your Autonomous Crew",
+    "paragraph": "Define dedicated agent roles instead of forcing one single prompt window to do four incompatible jobs.",
+    "exampleMission": "Example Mission Assigned:",
+    "isolatedExecution": "Isolated Execution • Strict Scoped Permissions",
+    "verifiedOutput": "VERIFIED OUTPUT",
+    "metric": "Metric",
+    "currentValue": "Current Value",
+    "benchmarkTarget": "Benchmark Target",
+    "auditStatus": "Audit Status",
+    "primaryAngle": "Primary Angle:",
+    "highResonanceHooks": "High-Resonance Hooks:",
+    "distribution": "Distribution",
+    "roles": {
+      "dev": {
+        "title": "Developer Agent",
+        "badge": "Code & Architecture",
+        "tagline": "Writes, tests, and diffs code in isolated git worktrees.",
+        "desc": "Spins up dedicated worktrees to implement full features, patch bugs, run test suites, and generate clean diff previews. Never pollutes master or collides with other work.",
+        "task": "Implement webhook idempotency guard and refactor session token refresh middleware with test coverage.",
+        "output": "worktree/auth-idempotency.patch"
+      },
+      "researcher": {
+        "title": "Researcher Agent",
+        "badge": "Intelligence & Synthesis",
+        "tagline": "Extracts, cross-references, and synthesizes market data.",
+        "desc": "Gathers competitor benchmarks, technical specs, regulatory updates, and market intelligence. Cites primary sources with verified confidence ratings.",
+        "task": "Synthesize pricing models, token consumption rates, and margins for the top 4 AI agent platforms.",
+        "output": "outcomes/competitor-intelligence-synthesis.md"
+      },
+      "marketer": {
+        "title": "Marketer Agent",
+        "badge": "Messaging & Campaigns",
+        "tagline": "Drafts high-converting positioning, briefs, and launch angles.",
+        "desc": "Transforms complex product capabilities into razor-sharp value propositions, cold outreach copy, newsletter editions, and launch distribution playbooks.",
+        "task": "Generate 3 high-resonance launch angles for solo founders frustrated by context-losing AI chats.",
+        "output": "campaigns/launch-angles-v3.md",
+        "coreAngle": "The Anti-Chat IDE: Replace 14 Browser Tabs with 1 Crew Command Center",
+        "targetPersona": "Solo SaaS Builders, Technical Consultants & Agency Leads",
+        "hook1": "\u201cEvery AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.\u201d",
+        "hook2": "\u201cStop being the founder, dev, copywriter, and analyst all at once. Direct the crew.\u201d",
+        "hook3": "\u201cParallel git worktrees for your AI agents. Zero merge conflicts.\u201d",
+        "distributionPlan": "Hacker News Show HN + X Deep Dive Thread + Founder Substack Edition"
+      },
+      "analyst": {
+        "title": "Business Analyst Agent",
+        "badge": "Unit Economics & Ops",
+        "tagline": "Audits unit economics, budget thresholds, and operational KPI.",
+        "desc": "Monitors API burn rate, calculates customer payback periods, validates SaaS margins, and ensures autonomous execution stays within strict fiscal bounds.",
+        "task": "Audit current month token burn rate across 20 active client projects and model gross margin targets.",
+        "output": "ops/unit-economics-model.json"
+      }
+    }
+  },
+  "orchestration": {
+    "badge": "HOW IT ACTUALLY WORKS",
+    "headline": "Parallel Isolated Worktrees.",
+    "headlineGradient": "Zero Collisions. 24/7 Autonomy.",
+    "paragraph": "Instead of bottlenecking on a single prompt window, Fabrica pairs Ghostty-speed terminal orchestration with isolated Git worktrees, Markdown plan drafting, Playwright browser QA, and phone-synced approvals.",
+    "step1": {
+      "name": "Draft Spec & Scope",
+      "tagline": "Define the objective in plain business terms.",
+      "desc": "Assign the outcome to a crew role. No fragile prompt crafting — Fabrica generates structured execution plans with clear test suites and file change proposals."
+    },
+    "step2": {
+      "name": "Plan & Worktree Scaffold",
+      "tagline": "Isolate execution in dedicated git worktrees.",
+      "desc": "Each agent spins up an isolated disk folder or git worktree. Tasks run in parallel without touching your master branch, stashing uncommitted code, or polluting workspace files."
+    },
+    "step3": {
+      "name": "Parallel GPU Execution",
+      "tagline": "Autonomous execution inside budget & permission bounds.",
+      "desc": "Ghostty-speed multiplexed terminals run background daemons for Developer, Researcher, and Marketer simultaneously under hard monetary auto-stops."
+    },
+    "step4": {
+      "name": "Inspect, QA & Sign-Off",
+      "tagline": "AST diff review, headless browser QA, and mobile 1-tap sign-off.",
+      "desc": "Review unified AST diffs, test results, Playwright UI assertions, and sourced reports in the visual command center or on your phone before merging."
+    },
+    "activePhase": "ACTIVE PHASE",
+    "gitWorktrees": "Git Worktrees (3)",
+    "markdownPlan": "Markdown Plan Spec",
+    "gpuTerminals": "GPU Terminals",
+    "headlessQA": "Headless QA Browser",
+    "phoneCompanion": "Phone Companion",
+    "reset": "Reset",
+    "localRemoteSynced": "Local & Remote Daemons Synced",
+    "developer": "DEVELOPER",
+    "researcher": "RESEARCHER",
+    "stage4": "STAGE 4",
+    "active": "ACTIVE",
+    "streaming": "STREAMING",
+    "verificationGate": "Verification Gate",
+    "mergeReady": "Changes tested in isolation. Ready to merge into primary release with zero manual stash juggling.",
+    "diffChecked": "Diff checked • 0 Regression Risks • Budget Spent: $14.20",
+    "approveMerge": "Approve & Merge Worktrees",
+    "executionProgress": "Execution Progress",
+    "synthesisConfidence": "Synthesis Confidence",
+    "reportLogged": "Report logged",
+    "collisionFree": "0 collision with main branch",
+    "specObjective": "# Objective: Zero-downtime JWT Key Rotation",
+    "specStep1": "1. Introduce dual-key verification in src/auth/jwt.ts.",
+    "specStep2": "2. Verify incoming request headers against primary and grace keys.",
+    "specStep3": "3. Emit structured telemetry to Prometheus buffer.",
+    "specGuardrail": "Guardrail: Auto-kill if migration token spend exceeds $20.00.",
+    "sourcedPapers": "Sourced 8 primary technical papers",
+    "fileMods": "PROPOSED FILE MODIFICATIONS (3)",
+    "linesChanged": "+42 / -8 lines",
+    "newFile": "NEW FILE (8 tests)",
+    "astClean": "AST Parse: Clean",
+    "readyDispatch": "Ready for isolated branch dispatch",
+    "ghosttyTitle": "Ghostty GPU-Accelerated Multiplexer (3 Active Terminals)",
+    "fpsRender": "120 FPS Native Render",
+    "playwrightTitle": "Playwright Headless Browser QA Engine",
+    "allGreen": "ALL ASSERTIONS GREEN",
+    "scenario": "Scenario: Auth Flow E2E Login & Token Refresh",
+    "status200": "Status: 200 OK (210ms)",
+    "step1Label": "Step 1: POST /api/login",
+    "step1Status": "Cookie Dispatched",
+    "step2Label": "Step 2: Refresh Trigger",
+    "step2Status": "Dual Key Validated",
+    "step3Label": "Step 3: Visual Regression",
+    "step3Status": "0px Diff Detected",
+    "mobileApp": "iOS & Android Native Mobile App",
+    "mobileTitle": "Direct your crews while away from your keyboard.",
+    "mobileDesc": "Get instant push notifications when agents complete a worktree branch, trigger approval gates for payments/deployments, or hit 80% budget ceilings.",
+    "tapApprovals": "1-Tap Approvals",
+    "liveTty": "Live TTY Streaming",
+    "killswitch": "Killswitch Toggle",
+    "fabricaMobile": "Fabrica Mobile",
+    "approvalRequired": "Approval Required",
+    "approvalDesc": "Developer agent ready to deploy staging patch #882.",
+    "approve": "Approve",
+    "inspect": "Inspect"
+  },
+  "control": {
+    "badge": "FIELD OPS & OPERATIONAL OVERSIGHT",
+    "headline": "Autonomy without financial, credential, or operational anxiety.",
+    "paragraph": "Other tools run wild with unmonitored API loops and cloud-leaked credentials. Fabrica wraps parallel autonomous crews in client-side encryption, hard financial auto-stops, and 1-tap mobile approval gates for all high-risk operations.",
+    "card1": {
+      "title": "Human-in-the-Loop Field Gates",
+      "subtitle": "Desktop & Mobile Companion",
+      "desc": "Agents draft, build, and verify in isolated worktrees, but high-stakes milestones — live payment bindings, staging deployments, or public campaigns — require your explicit 1-click authorization.",
+      "paymentGate": "Payment Gate",
+      "deployGate": "Deploy Gate",
+      "socialGate": "Social/Email Gate",
+      "approve": "1-Tap Approve",
+      "reject": "Reject & Re-Plan"
+    },
+    "card2": {
+      "title": "Client-Side Credential Vault",
+      "subtitle": "Zero Cloud Key Storage",
+      "desc": "Your API keys, SSH credentials, and OAuth tokens never touch external servers. They remain locally encrypted inside your desktop app keystore and are only injected during isolated task execution.",
+      "keystore": "LOCAL KEYSTORE VAULT",
+      "encrypted": "ENCRYPTED & LOCKED",
+      "openaiKeys": "OpenAI / Anthropic / Gemini Keys",
+      "storedLocally": "Stored locally",
+      "gitKeys": "Git SSH / GitHub Personal Access",
+      "isolatedPerRepo": "Isolated per repo",
+      "stripeKeys": "Stripe & Cloud Deployment Tokens",
+      "gatedApproval": "Gated on approval",
+      "keyRotation": "Key Rotation: Automated",
+      "zeroEgress": "Zero 3rd-party egress"
+    },
+    "card3": {
+      "title": "Hard Budget Limits & Auto-Stops",
+      "subtitle": "Per-Task & Per-Project Caps",
+      "desc": "Set per-task, per-agent, or per-project spending thresholds. The moment an autonomous thread hits its monetary ceiling, Fabrica immediately halts execution, releases worktree locks, and alerts you.",
+      "spendVsCap": "Current Spend vs Cap",
+      "runway": "runway remaining",
+      "autoKill": "Auto-kill killswitch active"
+    },
+    "card4": {
+      "title": "Dynamic Autonomy Dial",
+      "subtitle": "Continuous 24/7 Daemons",
+      "desc": "Dial up autonomy for routine competitor research, unit tests, and copy variants; dial it back to require step-by-step confirmation for production database migrations.",
+      "strict": "Strict Approval",
+      "guided": "Guided Guardrails",
+      "fullAutonomy": "24/7 Full Autonomy",
+      "stepByStep": "Step-by-Step Approval",
+      "guidedAutonomy": "Guided Autonomy",
+      "continuous": "Continuous 24/7 Daemons"
+    },
+    "gates": {
+      "payment": {
+        "id": "#GATE-PAY-904",
+        "title": "Stripe Webhook & Production Key Activation",
+        "risk": "Payment Critical",
+        "desc": "Developer agent completed test webhooks (14/14 passed) and requests live secret key binding.",
+        "agent": "Developer Agent",
+        "worktree": "worktree/stripe-prod"
+      },
+      "deploy": {
+        "id": "#GATE-DEP-112",
+        "title": "Production Staging Zero-Downtime Rollout",
+        "risk": "High Infrastructure Impact",
+        "desc": "AST diff verified: 4 modified files, 0 schema breaking changes, all migration tests green.",
+        "agent": "Developer Agent",
+        "worktree": "worktree/staging-v3"
+      },
+      "social": {
+        "id": "#GATE-PUB-440",
+        "title": "Multi-Channel Product Launch Campaign Blast",
+        "risk": "Public Brand Action",
+        "desc": "Marketer agent drafted launch announcement and outreach emails for 1,200 verified beta testers.",
+        "agent": "Marketer Agent",
+        "worktree": "campaigns/launch-blast"
+      }
+    }
+  },
+  "beyond": {
+    "badge": "EXTENSIBLE BUSINESS RUNTIME",
+    "headline": "Beyond Code: Agents for your entire business.",
+    "paragraph": "Fabrica is not just an IDE for software developers. The same multi-agent crews, parallel isolation, and financial guardrails orchestrate market intelligence, campaign planning, and operations.",
+    "plugins": {
+      "market": {
+        "title": "Market & Competitor Tracking",
+        "badge": "Research Plugin",
+        "desc": "Agents automatically monitor industry whitepapers, competitor pricing tables, changelogs, and patent filings to deliver synthesized executive memos."
+      },
+      "outreach": {
+        "title": "Outreach & Campaign Synthesis",
+        "badge": "Growth Plugin",
+        "desc": "Generate customized copy angles, cold-outreach templates, landing page positioning tests, and product launch sequences tailored to exact ICP segments."
+      },
+      "financial": {
+        "title": "Financial & Unit Economics Audits",
+        "badge": "Operations Plugin",
+        "desc": "Analyze token spend, track gross margin thresholds, model CAC/LTV payback curves, and flag cost anomalies before they hit your monthly billing statement."
+      },
+      "custom": {
+        "title": "Custom Workflow & Skill Extensions",
+        "badge": "Extensible Engine",
+        "desc": "Connect custom internal skills, proprietary databases, and specialized business logic. Build recurring agent routines that run 24/7 without intervention."
+      }
+    }
+  },
+  "integrations": {
+    "header": "Bring your own keys",
+    "paragraph": "Runs on the stack you already trust — model-agnostic, wallet-first."
+  },
+  "features": {
+    "badge": "THE CORE PILLARS",
+    "headline": "Why founders direct the crew.",
+    "paragraph": "Six mechanical promises that turn chaotic prompt-juggling into a supervised, budget-capped autonomous factory.",
+    "pillars": {
+      "crews": {
+        "title": "Multi-Agent Crews",
+        "badge": "PARALLEL ROLES",
+        "desc": "Developer, Researcher, Marketer, and Analyst agents run toward one goal in parallel — instead of forcing a single prompt window to do four incompatible jobs."
+      },
+      "worktrees": {
+        "title": "Parallel Isolated Worktrees",
+        "badge": "ZERO COLLISIONS",
+        "desc": "Every task executes on its own isolated git worktree or disk sandbox. Your main branch stays pristine — no stashing, no merge conflicts, no cross-task pollution."
+      },
+      "budget": {
+        "title": "Hard Budget Auto-Stops",
+        "badge": "FINANCIAL GUARDRAILS",
+        "desc": "Set per-task, per-agent, or per-project monetary caps. The instant a thread hits its ceiling, Fabrica halts execution and releases worktree locks."
+      },
+      "gates": {
+        "title": "Visual Approval Gates",
+        "badge": "1-TAP SIGN-OFF",
+        "desc": "High-stakes milestones — payment bindings, production deploys, public campaigns — pause for a clean AST diff review and one-tap authorization."
+      },
+      "vault": {
+        "title": "BYOK Client-Side Vault",
+        "badge": "AES-256 GCM",
+        "desc": "Your API keys, SSH credentials, and OAuth tokens are encrypted locally in your OS keychain. Zero cloud key storage, zero third-party egress."
+      },
+      "autonomy": {
+        "title": "24/7 Autonomy & Mobile Oversight",
+        "badge": "DAEMONS + COMPANION",
+        "desc": "Background daemons keep shipping while you sleep. Approve gates, inspect diffs, or hit the killswitch from your iOS / Android companion."
+      }
+    }
+  },
+  "comparison": {
+    "badge": "THE ARCHITECTURAL DIFFERENCE",
+    "headline": "How Fabrica Compares",
+    "paragraph": "Why solo builders, agency leads, and lean teams switch from fragile prompt windows to an Agentic Development Environment.",
+    "headerCapability": "Capability / Workflow",
+    "headerFabrica": "Fabrica",
+    "headerAlone": "Doing It Alone",
+    "headerGeneric": "Generic AI Chats",
+    "rows": {
+      "r1": {
+        "capability": "Multi-Agent Crews (Roles)",
+        "fabrica": "Built-in (Dev, Research, Mkt, Analyst)",
+        "alone": "Single person does everything",
+        "generic": "Single bot prompted repeatedly"
+      },
+      "r2": {
+        "capability": "Parallel Isolated Git Worktrees",
+        "fabrica": "Native zero-collision worktrees",
+        "alone": "Manual branch juggling & stashing",
+        "generic": "No file/repo awareness"
+      },
+      "r3": {
+        "capability": "Real-time Budget Caps & Auto-Stops",
+        "fabrica": "Strict per-task monetary limits",
+        "alone": "Manual spreadsheet tracking",
+        "generic": "Unpredictable token burn"
+      },
+      "r4": {
+        "capability": "Explicit Visual Approval Gates",
+        "fabrica": "1-click sign-off for critical steps",
+        "alone": "High manual review bottleneck",
+        "generic": "Blind paste or no execution control"
+      },
+      "r5": {
+        "capability": "Persistent Workspace Context",
+        "fabrica": "Remembers full project architecture",
+        "alone": "Scattered notes & broken tabs",
+        "generic": "Context wiped every few prompts"
+      },
+      "r6": {
+        "capability": "Visual Command Center (No Prompt Craft)",
+        "fabrica": "Outcome-driven UI controls",
+        "alone": "Brittle bash scripts & copy-paste",
+        "generic": "Endless prompt re-engineering"
+      },
+      "r7": {
+        "capability": "24/7 Autonomous Execution (Local & Remote)",
+        "fabrica": "Runs independently with guardrails",
+        "alone": "You must stay awake at 11 PM",
+        "generic": "Requires active chat session"
+      },
+      "r8": {
+        "capability": "Extends Beyond Code to Ops & Growth",
+        "fabrica": "Native business skills & plugins",
+        "alone": "Context fragmented across 5 SaaS tools",
+        "generic": "Shallow general-purpose text"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "EARLY ADOPTER FEEDBACK",
+    "headline": "Built for those who carry the whole company.",
+    "paragraph": "How solo founders, independent consultants, and lean operators direct multi-agent crews.",
+    "t1": {
+      "role": "Beta User — Solo Founder & SaaS Builder",
+      "focus": "Full-stack Product Execution",
+      "quote": "I was spending half my evening copying code between chat tabs and praying nothing broke. Having dedicated agents working in isolated git worktrees with strict budget caps gave me my entire week back.",
+      "metric": "14+ hrs saved per sprint"
+    },
+    "t2": {
+      "role": "Beta User — Independent Technical Consultant",
+      "focus": "Client Architecture & Research",
+      "quote": "The Researcher and Developer crew pattern is a game changer for client deliveries. The researcher pulls verified benchmarks while the developer builds the patch in a sandbox. Zero context collisions.",
+      "metric": "3x faster client turnaround"
+    },
+    "t3": {
+      "role": "Beta User — Growth Lead at Early-Stage Startup",
+      "focus": "Multi-Campaign Synthesis & Ops",
+      "quote": "The ability to set hard monetary caps on autonomous runs removed the fear of runaway API bills. We run market sweeps and positioning tests 24/7 without worrying about budget blowouts.",
+      "metric": "100% budget adherence"
+    }
+  },
+  "pricing": {
+    "badge": "TRANSPARENT PRICING",
+    "headline": "Predictable investment.",
+    "headlineGradient": "Zero runaway bills.",
+    "paragraph": "Every tier includes hard budget ceilings so autonomous execution never surprises you.",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "save20": "SAVE 20%",
+    "includedCapabilities": "Included capabilities:",
+    "tiers": {
+      "solo": {
+        "name": "Solo Builder",
+        "tagline": "For solo founders and consultants replacing disjointed chat tabs.",
+        "cta": "Get Started Free",
+        "features": [
+          "1 Concurrent Agent Crew (4 Roles)",
+          "Parallel Isolated Git Worktrees",
+          "Unified Desktop Command Center",
+          "Hard Monthly Budget Auto-Stops",
+          "Visual Approval Checkpoints",
+          "Community Support & Templates"
+        ]
+      },
+      "pro": {
+        "name": "Pro Studio",
+        "tagline": "For growth leads, active agencies, and multi-project operators.",
+        "badge": "MOST POPULAR",
+        "cta": "Start Pro Trial",
+        "features": [
+          "Unlimited Parallel Agent Crews",
+          "Isolated Multi-Repo & Disk Sandboxing",
+          "Extensible Business Skills & Plugins",
+          "Custom Autonomy Spectrum Dials",
+          "Per-Project Budget Allocation Rules",
+          "Priority Model Router & Local LLM Support",
+          "24/7 Autonomous Background Execution"
+        ]
+      },
+      "team": {
+        "name": "Agency & Team",
+        "tagline": "For boutique agencies and engineering squads managing multiple client scopes.",
+        "badge": "SCALE",
+        "cta": "Get Team Access",
+        "features": [
+          "Multi-User Collaboration & Role Permissions",
+          "Shared Crew Knowledge Base & Memories",
+          "Centralized Team Budget & Audit Vault",
+          "Dedicated Client Workspaces",
+          "Custom Plugin & Skill Development SDK",
+          "Dedicated Onboarding & Slack Channel"
+        ]
+      }
+    }
+  },
+  "faq": {
+    "badge": "COMMON QUESTIONS",
+    "headline": "Frequently Asked Questions",
+    "paragraph": "Everything you need to know about the Fabrica Agentic Development Environment.",
+    "items": {
+      "q1": "What is an Agentic Development Environment (ADE)?",
+      "a1": "An Agentic Development Environment (ADE) is a dedicated desktop control plane that orchestrates multi-agent crews (Developer, Researcher, Marketer, Business Analyst) working in parallel. Unlike generic single-prompt chat windows that forget context and require constant manual steering, an ADE gives agents isolated git worktrees, Ghostty-speed GPU terminals, persistent project awareness, and real business guardrails.",
+      "q2": "How does Bring Your Own Key (BYOK) and client-side encryption work?",
+      "a2": "Fabrica is 100% BYOK. Your OpenAI, Anthropic, Gemini, DeepSeek, Stripe, and GitHub credentials are encrypted locally on your machine using AES-256 GCM in your operating system keychain. They never touch external cloud servers and are only decrypted in memory during isolated task execution.",
+      "q3": "How do Git worktrees prevent collisions when running 5+ agents?",
+      "a3": "Git worktrees allow multiple working directories to be linked to a single repository simultaneously. When Fabrica dispatches 3 developer tasks and 2 research sweeps, each task runs on its own isolated branch and disk tree. Your main working branch remains pristine with zero unstaged clutter, zero merge conflicts, and zero manual stash juggling.",
+      "q4": "How does the Mobile Companion app work?",
+      "a4": "The Fabrica iOS and Android companion app connects to your local desktop daemon or remote cloud workspace via end-to-end encrypted tunnels. You can inspect live terminal feeds, review unified diff summaries, toggle killswitches, and approve 1-click payment/deployment gates directly from your phone while away from your desk.",
+      "q5": "Do I need to know how to code to direct Fabrica?",
+      "a5": "No. While Fabrica is coding-first under the hood, the day-to-day command center is visual and outcome-driven. You assign objectives in plain language, set budget limits, and review unified diffs or reports before approving. Technical leads love the terminal multiplexing and AST diffs, while non-technical founders use it to direct full-stack execution without writing bash scripts.",
+      "q6": "How much control do I have over what agents do autonomously?",
+      "a6": "Complete control via a dynamic autonomy dial. You can configure Fabrica on strict step-by-step confirmation (every diff, external web request, or file write requires your 1-click approval) or allow continuous autonomous execution within hard financial caps and scoped directory permissions.",
+      "q7": "Can agents help with business work other than writing software?",
+      "a7": "Yes. Fabrica is built business-first. Your crew includes specialized Researcher, Marketer, and Business Analyst roles with extensible skills for competitor benchmarking, cold-outreach positioning, customer interview synthesis, unit economics modeling, and automated KPI auditing.",
+      "q8": "Local vs. Remote — what changes between running locally or in the cloud?",
+      "a8": "Fabrica operates natively on your local workstation (macOS, Windows, Linux) using local git worktrees and Ghostty-speed terminal emulation. For 24/7 background routines or heavy parallel sweeps, tasks can seamlessly dispatch to a headless remote VM or cloud worker over an encrypted SSH daemon tunnel."
+    }
+  },
+  "cta": {
+    "badge": "JOIN THE FOUNDING COHORT",
+    "headline": "The Next AI Exit.",
+    "subheadline": "Close the tabs. Direct the crew.",
+    "paragraph": "Stop being the founder, developer, copywriter, and analyst all at once. Experience parallel isolated execution on your desktop with mobile oversight and hard financial guardrails.",
+    "choosePlatform": "Choose your platform",
+    "required": "*",
+    "enterEmail": "Enter your work email...",
+    "getEarlyAccess": "Get Early Access",
+    "checking": "Checking...",
+    "trustText": "Zero Cloud Key Storage • Free tier available • BYOK supported",
+    "invalidEmail": "Please enter a valid work email.",
+    "selectPlatform": "Please select your platform to continue.",
+    "onList": "You are on the priority access list!",
+    "foundProfile": "We found your existing profile!",
+    "viewPass": "View Founding Pass & Custom Setup Options",
+    "viewProfile": "View & Update Your Profile",
+    "modal": {
+      "profileSaved": "YOUR PROFILE IS SAVED",
+      "requestReceived": "EARLY ACCESS REQUEST RECEIVED",
+      "welcomeBack": "Welcome back. Update your details.",
+      "requestTitle": "We've received your request!",
+      "reviewApplication": "Our founding engineering team will review your application and reach out directly to",
+      "editProfile": "Edit anything below and your changes will be saved automatically.",
+      "inviteLink": "FAST-TRACK INVITE LINK",
+      "cohort": "#FAB-COHORT-2026",
+      "shareLink": "Share your link with colleagues or other developers to move up the rollout schedule:",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "yourProfile": "Your Profile (Editable)",
+      "fastTrack": "Fast-Track Your Access (Optional)",
+      "updateSetup": "Update your setup and team requirements below.",
+      "tellUs": "Tell us a bit about your setup and team requirements to help us tailor your environment:",
+      "workEmail": "Work Email",
+      "company": "Company / Organization",
+      "teamSize": "Team Size",
+      "solo": "Solo Hacker / Independent Builder",
+      "team210": "2 — 10 Engineers",
+      "team1150": "11 — 50 Engineers",
+      "team50plus": "50+ Enterprise Team",
+      "useCase": "Primary Use Case",
+      "useCrews": "Parallel Multi-Agent Crews & Worktrees",
+      "useMobile": "Mobile Remote Oversight & Slack Approvals",
+      "useCost": "Hard Financial Guardrails & Local Execution",
+      "useDaemons": "Enterprise Daemon & CI/CD Tooling",
+      "note": "Send a Note / Specific Requirements",
+      "notePlaceholder": "Tell us what you're building, model preferences (Claude 3.7/Gemini 2.5/Ollama), or any specific security/compliance needs...",
+      "saveChanges": "Save Changes to My Profile",
+      "sendNote": "Send Note to Founding Team",
+      "saving": "Saving Changes...",
+      "updating": "Updating Priority...",
+      "profileUpdated": "Your profile has been updated!",
+      "noteSent": "Note sent to the founding engineers! We have flagged your priority onboarding.",
+      "discord": "Join Discord Community",
+      "emailTeam": "Email Founder Team",
+      "doneClose": "Done & Close"
+    },
+    "platforms": {
+      "mac": "macOS",
+      "macDetail": "Apple Silicon & Intel",
+      "win": "Windows",
+      "winDetail": "x64 / ARM64",
+      "linux": "Linux",
+      "linuxDetail": ".AppImage / .deb",
+      "mobile": "Mobile",
+      "mobileDetail": "iOS / Android Companion"
+    }
+  },
+  "footer": {
+    "tagline": "Business-First, Coding-First Agentic Development Environment for solo founders, independent consultants, and lean teams.",
+    "operational": "All Systems Operational (v3.0.4)",
+    "product": "Product",
+    "capabilities": "Capabilities",
+    "company": "Company",
+    "links": {
+      "crews": "Multi-Agent Crews",
+      "commandCenter": "Command Center",
+      "worktrees": "Isolated Git Worktrees",
+      "controlLayer": "Business Control Layer",
+      "pricing": "Pricing & Plans",
+      "devAgent": "Developer Agent",
+      "researchAgent": "Researcher Agent",
+      "mktAgent": "Marketer Agent",
+      "analystAgent": "Business Analyst Agent",
+      "plugins": "Extensible Plugins",
+      "manifesto": "Founding Manifesto",
+      "comparison": "Comparison Matrix",
+      "changelog": "Changelog",
+      "docs": "Documentation",
+      "support": "Contact & Support",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "security": "Security & Isolation Specs"
+    },
+    "copyright": "© {year} Fabrica Systems Inc. All rights reserved. \"The Next AI Exit.\"",
+    "securitySandbox": "Security & Sandboxing",
+    "pricingGuardrails": "Pricing Guardrails",
+    "priorityAccess": "Priority Access"
+  },
+  "showcase": {
+    "badge": "THE VISION, VISUALIZED",
+    "slides": {
+      "s1": {
+        "label": "AUTONOMY ENGINE",
+        "title": "24/7 AI autonomy vs manual work",
+        "caption": "Background daemons keep shipping while you sleep — no babysitting a single prompt window."
+      },
+      "s2": {
+        "label": "COMMAND CENTER",
+        "title": "The crew, visualized",
+        "caption": "Multiple agents executing in parallel across isolated worktrees, mapped into one holographic control plane."
+      },
+      "s3": {
+        "label": "MISSION CONTROL",
+        "title": "From messy data to organized dashboard",
+        "caption": "Scattered tabs and broken stashes collapse into a single organized workspace you can direct."
+      },
+      "s4": {
+        "label": "NO MORE 11 PM BOTTLENECK",
+        "title": "End the late-night context juggling",
+        "caption": "Hand the busywork to a supervised crew and keep your focus on the decisions only you can make."
+      },
+      "s5": {
+        "label": "DIRECT THE FLOW",
+        "title": "Architecture you can direct",
+        "caption": "Visual system flows and approval gates, right from your desk — or your phone."
+      }
+    }
+  },
+  "layout": {
+    "title": "Fabrica — The Next AI Exit | Business-First Agentic Development Environment",
+    "description": "Direct autonomous crews of Researcher, Developer, Marketer, and Analyst agents in parallel, isolated environments with strict business controls, budget limits, and approval gates.",
+    "ogTitle": "Fabrica — The Next AI Exit",
+    "ogDescription": "Business-First, Coding-First Agentic Development Environment. Direct multi-agent crews with parallel execution and real business guardrails.",
+    "twitterDescription": "Direct autonomous crews in parallel, isolated environments with strict business control.",
+    "keywords": [
+      "Agentic Development Environment",
+      "Multi-agent crews",
+      "Autonomous AI agents",
+      "Solo founders",
+      "Parallel agent execution",
+      "AI command center",
+      "Fabrica"
+    ]
+  },
+  "metadata": {
+    "title": "Fabrica — The Next AI Exit | Business-First Agentic Development Environment",
+    "description": "Direct autonomous crews of Researcher, Developer, Marketer, and Analyst agents in parallel, isolated environments with strict business controls, budget limits, and approval gates.",
+    "ogTitle": "Fabrica — The Next AI Exit",
+    "ogDescription": "Business-First, Coding-First Agentic Development Environment. Direct multi-agent crews with parallel execution and real business guardrails."
+  }
+}

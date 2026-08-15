@@ -2,37 +2,40 @@
 
 import React from 'react'
 import Link from 'next/link'
-
-const footerLinks = {
-  product: [
-    { name: 'Multi-Agent Crews', href: '#crew' },
-    { name: 'Command Center', href: '#command-center' },
-    { name: 'Isolated Git Worktrees', href: '#command-center' },
-    { name: 'Business Control Layer', href: '#controls' },
-    { name: 'Pricing & Plans', href: '#pricing' },
-  ],
-  capabilities: [
-    { name: 'Developer Agent', href: '#crew' },
-    { name: 'Researcher Agent', href: '#crew' },
-    { name: 'Marketer Agent', href: '#crew' },
-    { name: 'Business Analyst Agent', href: '#crew' },
-    { name: 'Extensible Plugins', href: '#controls' },
-  ],
-  company: [
-    { name: 'Founding Manifesto', href: '#product' },
-    { name: 'Comparison Matrix', href: '#comparison' },
-    { name: 'Changelog', href: '#waitlist' },
-    { name: 'Documentation', href: '#faq' },
-    { name: 'Contact & Support', href: '#waitlist' },
-  ],
-  legal: [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Security & Isolation Specs', href: '#controls' },
-  ],
-}
+import { useTranslations } from 'next-intl'
 
 export const Footer = () => {
+  const t = useTranslations('footer')
+
+  const footerLinks = {
+    product: [
+      { name: t('links.crews'), href: '#crew' },
+      { name: t('links.commandCenter'), href: '#command-center' },
+      { name: t('links.worktrees'), href: '#command-center' },
+      { name: t('links.controlLayer'), href: '#controls' },
+      { name: t('links.pricing'), href: '#pricing' },
+    ],
+    capabilities: [
+      { name: t('links.devAgent'), href: '#crew' },
+      { name: t('links.researchAgent'), href: '#crew' },
+      { name: t('links.mktAgent'), href: '#crew' },
+      { name: t('links.analystAgent'), href: '#crew' },
+      { name: t('links.plugins'), href: '#controls' },
+    ],
+    company: [
+      { name: t('links.manifesto'), href: '#product' },
+      { name: t('links.comparison'), href: '#comparison' },
+      { name: t('links.changelog'), href: '#waitlist' },
+      { name: t('links.docs'), href: '#faq' },
+      { name: t('links.support'), href: '#waitlist' },
+    ],
+    legal: [
+      { name: t('links.privacy'), href: '#' },
+      { name: t('links.terms'), href: '#' },
+      { name: t('links.security'), href: '#controls' },
+    ],
+  }
+
   return (
     <footer className="border-t border-[var(--border-subtle)] bg-[#07080C] text-[var(--text-muted)] text-xs command-frame">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 lg:py-16">
@@ -51,19 +54,19 @@ export const Footer = () => {
             </Link>
 
             <p className="text-xs text-[var(--text-muted)] max-w-sm leading-relaxed">
-              Business-First, Coding-First Agentic Development Environment for solo founders, independent consultants, and lean teams.
+              {t('tagline')}
             </p>
 
             {/* Operational Status */}
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[var(--overlay-weak)] border border-[var(--border-subtle)] text-[11px] font-mono text-emerald-400">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>All Systems Operational (v3.0.4)</span>
+              <span>{t('operational')}</span>
             </div>
           </div>
 
           {/* Nav Column 1 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">Product</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">{t('product')}</h4>
             <ul className="space-y-2">
               {footerLinks.product.map((item, i) => (
                 <li key={i}>
@@ -77,7 +80,7 @@ export const Footer = () => {
 
           {/* Nav Column 2 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">Capabilities</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">{t('capabilities')}</h4>
             <ul className="space-y-2">
               {footerLinks.capabilities.map((item, i) => (
                 <li key={i}>
@@ -91,7 +94,7 @@ export const Footer = () => {
 
           {/* Nav Column 3 */}
           <div className="space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">Company</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">{t('company')}</h4>
             <ul className="space-y-2">
               {footerLinks.company.map((item, i) => (
                 <li key={i}>
@@ -106,16 +109,16 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-[var(--border-faint)] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-[var(--text-muted)]">
-          <p>Ã‚Â© {new Date().getFullYear()} Fabrica Systems Inc. All rights reserved. &ldquo;The Next AI Exit.&rdquo;</p>
+          <p>{t('copyright', { year: new Date().getFullYear() })}</p>
           <div className="flex items-center gap-6">
             <a href="#controls" className="hover:text-[var(--text-strong)] transition-colors">
-              Security & Sandboxing
+              {t('securitySandbox')}
             </a>
             <a href="#pricing" className="hover:text-[var(--text-strong)] transition-colors">
-              Pricing Guardrails
+              {t('pricingGuardrails')}
             </a>
             <a href="#waitlist" className="hover:text-[var(--text-strong)] transition-colors">
-              Priority Access
+              {t('priorityAccess')}
             </a>
           </div>
         </div>

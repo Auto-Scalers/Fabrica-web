@@ -7,21 +7,54 @@ import {
   X,
   ArrowRight,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useRouter, usePathname } from '@/src/i18n/navigation'
+import { useLocale } from 'next-intl'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const t = useTranslations('nav')
+  const router = useRouter()
+  const pathname = usePathname()
+  const locale = useLocale()
 
   const navLinks = [
-    { name: 'Product', href: '#product' },
-    { name: 'Crew', href: '#crew' },
-    { name: 'How It Works', href: '#command-center' },
-    { name: 'Controls', href: '#controls' },
-    { name: 'Comparison', href: '#comparison' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' },
+    { name: t('product'), href: '#product' },
+    { name: t('crew'), href: '#crew' },
+    { name: t('howItWorks'), href: '#command-center' },
+    { name: t('controls'), href: '#controls' },
+    { name: t('comparison'), href: '#comparison' },
+    { name: t('pricing'), href: '#pricing' },
+    { name: t('faq'), href: '#faq' },
   ]
+
+  const locales = ['en', 'fr', 'ar'] as const
+
+  const switchLocale = (l: string) => {
+    const hash = window.location.hash
+    router.replace(pathname + hash, { locale: l })
+  }
+
+  const localeSwitcher = (
+    <div className="flex items-center gap-1">
+      {locales.map((l) => (
+        <button
+          key={l}
+          onClick={() => switchLocale(l)}
+          className={`px-1.5 py-0.5 text-[10px] font-mono rounded transition-colors ${
+            locale === l
+              ? 'text-orange-400 bg-orange-950/60 border border-orange-500/30'
+              : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
+          }`}
+          aria-label={`Switch to ${l.toUpperCase()}`}
+        >
+          {l.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  )
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-[var(--border-subtle)] transition-all">
@@ -60,6 +93,7 @@ export const Navbar = () => {
 
         {/* Action CTAs */}
         <div className="hidden md:flex items-center gap-3">
+          {localeSwitcher}
           <AnimatedThemeToggler className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-5)] transition-colors" aria-label="Toggle theme" />
           <ShimmerButton
             shimmerColor="#FFD0A6"
@@ -68,7 +102,7 @@ export const Navbar = () => {
             className="px-4 py-2 text-xs font-semibold shadow-md shadow-orange-950/50"
             onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span>Get Early Access</span>
+            <span>{t('getEarlyAccess')}</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </ShimmerButton>
         </div>
@@ -99,13 +133,29 @@ export const Navbar = () => {
             ))}
           </nav>
           <div className="pt-4 border-t border-[var(--border-subtle)]">
+            <div className="flex items-center justify-center gap-1 mb-3">
+              {locales.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => switchLocale(l)}
+                  className={`px-2 py-1 text-[10px] font-mono rounded transition-colors ${
+                    locale === l
+                      ? 'text-orange-400 bg-orange-950/60 border border-orange-500/30'
+                      : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
+                  }`}
+                  aria-label={`Switch to ${l.toUpperCase()}`}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
             <AnimatedThemeToggler className="w-full flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] py-2.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors" aria-label="Toggle theme" />
             <a
               href="#waitlist"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] py-2.5 text-xs font-semibold text-white shadow-md"
             >
-              <span>Get Early Access</span>
+              <span>{t('getEarlyAccess')}</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>

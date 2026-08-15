@@ -3,10 +3,13 @@
 import React from 'react'
 import Image from 'next/image'
 import { Sparkles, CheckCircle2, ShieldCheck, GitBranch } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
 import { Badge } from '@/components/ui/badge'
 
 export const TurnSection = () => {
+  const t = useTranslations('turn')
+
   return (
     <section className="relative py-20 lg:py-28 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
       {/* Background molten forge glow */}
@@ -18,33 +21,33 @@ export const TurnSection = () => {
           <Reveal className="lg:col-span-6 space-y-6">
             <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>THE PIVOT POINT</span>
+              <span>{t('badge')}</span>
             </Badge>
 
             <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
-              This is Fabrica.
+              {t('headline')}
               <span className="block text-2xl sm:text-4xl font-normal text-[var(--text-muted)] mt-2">
-                One command center. Your entire crew in parallel.
+                {t('subheadline')}
               </span>
             </h2>
 
             <p className="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed">
-              Instead of manually shepherding one AI through twelve prompts, you assign goals to specialized agent roles. They execute in isolated git worktrees, respect real-time budget caps, and report back with verified diffs.
+              {t('paragraph')}
             </p>
 
             {/* Core mechanical shifts */}
             <div className="space-y-3 pt-2">
               <div className="flex items-start gap-3 text-sm text-[var(--text-strong)]">
                 <CheckCircle2 className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" />
-                <span><strong className="text-[var(--text-strong)]">Parallel execution:</strong> Developer, Researcher, and Marketer run simultaneously without branch collisions.</span>
+                <span><strong className="text-[var(--text-strong)]">{t('parallelLabel')}</strong> {t('parallelDesc')}</span>
               </div>
               <div className="flex items-start gap-3 text-sm text-[var(--text-strong)]">
                 <ShieldCheck className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong className="text-[var(--text-strong)]">Hard budget caps:</strong> Execution halts automatically the instant token spend reaches your limit.</span>
+                <span><strong className="text-[var(--text-strong)]">{t('budgetLabel')}</strong> {t('budgetDesc')}</span>
               </div>
               <div className="flex items-start gap-3 text-sm text-[var(--text-strong)]">
                 <GitBranch className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
-                <span><strong className="text-[var(--text-strong)]">Zero-friction review:</strong> Visual approval gates let you inspect clean diffs before merging.</span>
+                <span><strong className="text-[var(--text-strong)]">{t('reviewLabel')}</strong> {t('reviewDesc')}</span>
               </div>
             </div>
           </Reveal>
@@ -54,7 +57,7 @@ export const TurnSection = () => {
             <div className="relative aspect-[4/3] w-full">
               <Image
                 src="/images/desk_solution_forge.jpg"
-                alt="Calm, organized Fabrica command center workspace"
+                alt={t('altCalm')}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -66,10 +69,10 @@ export const TurnSection = () => {
             <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[var(--surface-panel)]/90 border border-[var(--border-subtle)] backdrop-blur-md">
               <p className="text-xs font-mono text-emerald-400 font-semibold flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                STATUS: Calm Execution // All Worktrees Synced
+                {t('statusLabel')}
               </p>
               <p className="text-xs text-[var(--text-muted)] mt-1">
-                4 parallel crew threads active. Hard budget limit set. Zero branch collisions.
+                {t('statusDesc')}
               </p>
             </div>
           </div>

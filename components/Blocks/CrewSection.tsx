@@ -12,113 +12,112 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarBadge } from '@/components/ui/avatar'
 
-const crewRoles = [
-  {
-    id: 'dev',
-    title: 'Developer Agent',
-    badge: 'Code & Architecture',
-    icon: Code2,
-    tagline: 'Writes, tests, and diffs code in isolated git worktrees.',
-    description:
-      'Spins up dedicated worktrees to implement full features, patch bugs, run test suites, and generate clean diff previews. Never pollutes master or collides with other work.',
-    exampleTask: 'Implement webhook idempotency guard and refactor session token refresh middleware with test coverage.',
-    outputType: 'diff',
-    outputTitle: 'worktree/auth-idempotency.patch',
-    outputData: [
-      { type: 'header', text: 'diff --git a/src/auth/session.ts b/src/auth/session.ts' },
-      { type: 'info', text: '@@ -42,8 +42,16 @@ export async function refreshToken(token: string) {' },
-      { type: 'remove', text: '-  const decoded = jwt.decode(token);' },
-      { type: 'remove', text: '-  return issueNewToken(decoded.sub);' },
-      { type: 'add', text: '+  const cacheKey = `idemp:${sha256(token)}`;' },
-      { type: 'add', text: '+  const existing = await redis.get(cacheKey);' },
-      { type: 'add', text: '+  if (existing) return JSON.parse(existing);' },
-      { type: 'add', text: '+  const fresh = await issueSignedToken(token);' },
-      { type: 'add', text: '+  await redis.setex(cacheKey, 60, JSON.stringify(fresh));' },
-      { type: 'add', text: '+  return fresh;' },
-      { type: 'success', text: 'Ã¢Å“â€œ 16/16 Unit Tests Passed (0.42s) | Clean Diff Ready for Approval' },
-    ],
-  },
-  {
-    id: 'researcher',
-    title: 'Researcher Agent',
-    badge: 'Intelligence & Synthesis',
-    icon: Search,
-    tagline: 'Extracts, cross-references, and synthesizes market data.',
-    description:
-      'Gathers competitor benchmarks, technical specs, regulatory updates, and market intelligence. Cites primary sources with verified confidence ratings.',
-    exampleTask: 'Synthesize pricing models, token consumption rates, and margins for the top 4 AI agent platforms.',
-    outputType: 'report',
-    outputTitle: 'outcomes/competitor-intelligence-synthesis.md',
-    outputData: [
-      {
-        source: 'Competitor A (Docs & API Pricing v2)',
-        insight: 'Flat $0.03/min execution fee + 20% token markup. No isolated worktree support.',
-        confidence: '98% Verified',
-      },
-      {
-        source: 'Competitor B (Public Whitepaper & Pricing)',
-        insight: 'Seats priced at $79/mo but throttles concurrent agent threads to 2.',
-        confidence: '94% Verified',
-      },
-      {
-        source: 'Industry Benchmark (Gartner & SaaS Metrics)',
-        insight: 'Solo founders prioritize visual budget control over raw agent speed by 4.2x.',
-        confidence: '99% Verified',
-      },
-      {
-        source: 'Synthesis Recommendation',
-        insight: 'Position Fabrica on unlimited parallel isolated worktrees with hard budget auto-kill switches.',
-        confidence: 'Actionable',
-      },
-    ],
-  },
-  {
-    id: 'marketer',
-    title: 'Marketer Agent',
-    badge: 'Messaging & Campaigns',
-    icon: Megaphone,
-    tagline: 'Drafts high-converting positioning, briefs, and launch angles.',
-    description:
-      'Transforms complex product capabilities into razor-sharp value propositions, cold outreach copy, newsletter editions, and launch distribution playbooks.',
-    exampleTask: 'Generate 3 high-resonance launch angles for solo founders frustrated by context-losing AI chats.',
-    outputType: 'brief',
-    outputTitle: 'campaigns/launch-angles-v3.md',
-    outputData: {
-      coreAngle: 'The Anti-Chat IDE: Replace 14 Browser Tabs with 1 Crew Command Center',
-      targetPersona: 'Solo SaaS Builders, Technical Consultants & Agency Leads',
-      hooks: [
-        'Ã¢â‚¬Å“Every AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.Ã¢â‚¬Â',
-        'Ã¢â‚¬Å“Stop being the founder, dev, copywriter, and analyst all at once. Direct the crew.Ã¢â‚¬Â',
-        'Ã¢â‚¬Å“Parallel git worktrees for your AI agents. Zero merge conflicts.Ã¢â‚¬Â',
-      ],
-      distributionPlan: 'Hacker News Show HN + X Deep Dive Thread + Founder Substack Edition',
-    },
-  },
-  {
-    id: 'analyst',
-    title: 'Business Analyst Agent',
-    badge: 'Unit Economics & Ops',
-    icon: TrendingUp,
-    tagline: 'Audits unit economics, budget thresholds, and operational KPI.',
-    description:
-      'Monitors API burn rate, calculates customer payback periods, validates SaaS margins, and ensures autonomous execution stays within strict fiscal bounds.',
-    exampleTask: 'Audit current month token burn rate across 20 active client projects and model gross margin targets.',
-    outputType: 'kpi',
-    outputTitle: 'ops/unit-economics-model.json',
-    outputData: [
-      { metric: 'Avg Token Cost / Task', value: '$0.14', benchmark: 'Target < $0.35', status: 'Healthy' },
-      { metric: 'Simulated Gross Margin', value: '82.4%', benchmark: 'Target > 75.0%', status: 'Optimal' },
-      { metric: 'Payback Period', value: '1.4 Mo', benchmark: 'Industry Avg 4.2 Mo', status: 'Optimal' },
-      { metric: 'Budget Cap Adherence', value: '100.0%', benchmark: '0 Runaway Overages', status: 'Protected' },
-    ],
-  },
-]
-
 export const CrewSection = () => {
+  const t = useTranslations('crew')
+
+  const crewRoles = [
+    {
+      id: 'dev',
+      title: t('roles.dev.title'),
+      badge: t('roles.dev.badge'),
+      icon: Code2,
+      tagline: t('roles.dev.tagline'),
+      description: t('roles.dev.desc'),
+      exampleTask: t('roles.dev.task'),
+      outputType: 'diff',
+      outputTitle: t('roles.dev.output'),
+      outputData: [
+        { type: 'header', text: 'diff --git a/src/auth/session.ts b/src/auth/session.ts' },
+        { type: 'info', text: '@@ -42,8 +42,16 @@ export async function refreshToken(token: string) {' },
+        { type: 'remove', text: '-  const decoded = jwt.decode(token);' },
+        { type: 'remove', text: '-  return issueNewToken(decoded.sub);' },
+        { type: 'add', text: '+  const cacheKey = `idemp:${sha256(token)}`;' },
+        { type: 'add', text: '+  const existing = await redis.get(cacheKey);' },
+        { type: 'add', text: '+  if (existing) return JSON.parse(existing);' },
+        { type: 'add', text: '+  const fresh = await issueSignedToken(token);' },
+        { type: 'add', text: '+  await redis.setex(cacheKey, 60, JSON.stringify(fresh));' },
+        { type: 'add', text: '+  return fresh;' },
+        { type: 'success', text: 'Ã¢Å"â€œ 16/16 Unit Tests Passed (0.42s) | Clean Diff Ready for Approval' },
+      ],
+    },
+    {
+      id: 'researcher',
+      title: t('roles.researcher.title'),
+      badge: t('roles.researcher.badge'),
+      icon: Search,
+      tagline: t('roles.researcher.tagline'),
+      description: t('roles.researcher.desc'),
+      exampleTask: t('roles.researcher.task'),
+      outputType: 'report',
+      outputTitle: t('roles.researcher.output'),
+      outputData: [
+        {
+          source: 'Competitor A (Docs & API Pricing v2)',
+          insight: 'Flat $0.03/min execution fee + 20% token markup. No isolated worktree support.',
+          confidence: '98% Verified',
+        },
+        {
+          source: 'Competitor B (Public Whitepaper & Pricing)',
+          insight: 'Seats priced at $79/mo but throttles concurrent agent threads to 2.',
+          confidence: '94% Verified',
+        },
+        {
+          source: 'Industry Benchmark (Gartner & SaaS Metrics)',
+          insight: 'Solo founders prioritize visual budget control over raw agent speed by 4.2x.',
+          confidence: '99% Verified',
+        },
+        {
+          source: 'Synthesis Recommendation',
+          insight: 'Position Fabrica on unlimited parallel isolated worktrees with hard budget auto-kill switches.',
+          confidence: 'Actionable',
+        },
+      ],
+    },
+    {
+      id: 'marketer',
+      title: t('roles.marketer.title'),
+      badge: t('roles.marketer.badge'),
+      icon: Megaphone,
+      tagline: t('roles.marketer.tagline'),
+      description: t('roles.marketer.desc'),
+      exampleTask: t('roles.marketer.task'),
+      outputType: 'brief',
+      outputTitle: t('roles.marketer.output'),
+      outputData: {
+        coreAngle: t('roles.marketer.coreAngle'),
+        targetPersona: t('roles.marketer.targetPersona'),
+        hooks: [
+          t('roles.marketer.hook1'),
+          t('roles.marketer.hook2'),
+          t('roles.marketer.hook3'),
+        ],
+        distributionPlan: t('roles.marketer.distributionPlan'),
+      },
+    },
+    {
+      id: 'analyst',
+      title: t('roles.analyst.title'),
+      badge: t('roles.analyst.badge'),
+      icon: TrendingUp,
+      tagline: t('roles.analyst.tagline'),
+      description: t('roles.analyst.desc'),
+      exampleTask: t('roles.analyst.task'),
+      outputType: 'kpi',
+      outputTitle: t('roles.analyst.output'),
+      outputData: [
+        { metric: 'Avg Token Cost / Task', value: '$0.14', benchmark: 'Target < $0.35', status: 'Healthy' },
+        { metric: 'Simulated Gross Margin', value: '82.4%', benchmark: 'Target > 75.0%', status: 'Optimal' },
+        { metric: 'Payback Period', value: '1.4 Mo', benchmark: 'Industry Avg 4.2 Mo', status: 'Optimal' },
+        { metric: 'Budget Cap Adherence', value: '100.0%', benchmark: '0 Runaway Overages', status: 'Protected' },
+      ],
+    },
+  ]
+
   const [activeRole, setActiveRole] = useState(crewRoles[0].id)
 
   const current = crewRoles.find((r) => r.id === activeRole) || crewRoles[0]
@@ -133,15 +132,15 @@ export const CrewSection = () => {
         <Reveal className="text-center max-w-3xl mx-auto space-y-4">
           <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>SPECIALIZED CREW MEMBERS</span>
+            <span>{t('badge')}</span>
           </Badge>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--text-strong)] tracking-tight">
-            Meet Your Autonomous Crew
+            {t('headline')}
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-muted)]">
-            Define dedicated agent roles instead of forcing one single prompt window to do four incompatible jobs.
+            {t('paragraph')}
           </p>
         </Reveal>
 
@@ -198,7 +197,7 @@ export const CrewSection = () => {
               <div className="p-4 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-subtle)] space-y-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-muted)] flex items-center gap-1.5">
                   <Layers className="h-3.5 w-3.5 text-blue-400" />
-                  Example Mission Assigned:
+                  {t('exampleMission')}
                 </span>
                 <p className="text-xs text-[var(--text-strong)] font-mono leading-relaxed bg-[var(--surface-page)] p-3 rounded-lg border border-[var(--border-faint)]">
                   &ldquo;{current.exampleTask}&rdquo;
@@ -207,7 +206,7 @@ export const CrewSection = () => {
 
               <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
                 <CheckCircle2 className="h-4 w-4" />
-                <span>Isolated Execution Ã¢â‚¬Â¢ Strict Scoped Permissions</span>
+                <span>{t('isolatedExecution')}</span>
               </div>
             </div>
 
@@ -220,7 +219,7 @@ export const CrewSection = () => {
                   <span className="text-[var(--text-strong)] font-semibold">{current.outputTitle}</span>
                 </div>
                 <span className="text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]">
-                  VERIFIED OUTPUT
+                  {t('verifiedOutput')}
                 </span>
               </div>
 
@@ -283,13 +282,13 @@ export const CrewSection = () => {
                         <>
                           <div className="p-3 rounded-lg bg-orange-950/20 border border-orange-500/20">
                             <span className="text-[11px] font-mono text-orange-400 uppercase font-semibold">
-                              Primary Angle:
+                              {t('primaryAngle')}
                             </span>
                             <p className="text-sm font-bold text-[var(--text-strong)] mt-1">{data.coreAngle}</p>
                           </div>
                           <div className="space-y-1.5 pt-1">
                             <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase font-semibold">
-                              High-Resonance Hooks:
+                              {t('highResonanceHooks')}
                             </span>
                             {data.hooks.map((h, i) => (
                               <div key={i} className="p-2 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)] text-[var(--text-strong)]">
@@ -298,7 +297,7 @@ export const CrewSection = () => {
                             ))}
                           </div>
                           <div className="text-xs font-mono text-blue-400 pt-1">
-                            Distribution: {data.distributionPlan}
+                            {t('distribution')}: {data.distributionPlan}
                           </div>
                         </>
                       )
@@ -312,10 +311,10 @@ export const CrewSection = () => {
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="border-b border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]">
-                          <th className="pb-2">Metric</th>
-                          <th className="pb-2">Current Value</th>
-                          <th className="pb-2">Benchmark Target</th>
-                          <th className="pb-2">Audit Status</th>
+                          <th className="pb-2">{t('metric')}</th>
+                          <th className="pb-2">{t('currentValue')}</th>
+                          <th className="pb-2">{t('benchmarkTarget')}</th>
+                          <th className="pb-2">{t('auditStatus')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-white/5 text-xs font-mono">
