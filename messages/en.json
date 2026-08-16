@@ -14,7 +14,7 @@
     "badgeSub": "Business-First & Coding-First ADE",
     "headline1": "Fourteen tabs. Three broken contexts.",
     "headline2": "It's 11 PM. Direct the crew instead.",
-    "subheadline": "Stop prompting. Define your multi-agent crews (Researchers, Developers, Marketers, Business Analysts), control budget, approvals, security and let parallel AI coding agents work across isolated worktrees or plain disk folders on 24/7 Autonomy and Scale.",
+    "subheadline": "Stop prompting. Define your multi-agent crews (Researchers, Developers, Marketers, Business Analysts), control budget, approvals, security and let parallel AI coding agents work across isolated worktrees or plain disk folders on 24/7 Autonomy at Scale.",
     "platformDesktop": "macOS • Windows • Linux Desktop",
     "platformMobile": "iOS & Android Phone Companion",
     "platformSetup": "Zero Technical Setup",
@@ -412,7 +412,7 @@
   },
   "control": {
     "badge": "FIELD OPS & OPERATIONAL OVERSIGHT",
-    "headline": "Autonomy without financial, credential, or operational anxiety.",
+    "headline": "Autonomy without financial, credential, or operational risk.",
     "paragraph": "Other tools run wild with unmonitored API loops and cloud-leaked credentials. Fabrica wraps parallel autonomous crews in client-side encryption, hard financial auto-stops, and 1-tap mobile approval gates for all high-risk operations.",
     "card1": {
       "title": "Human-in-the-Loop Field Gates",
@@ -519,7 +519,7 @@
   "features": {
     "badge": "THE CORE PILLARS",
     "headline": "Why founders direct the crew.",
-    "paragraph": "Six mechanical promises that turn chaotic prompt-juggling into a supervised, budget-capped autonomous factory.",
+    "paragraph": "Six hard promises that turn chaotic prompt-juggling into a supervised, budget-capped autonomous factory.",
     "pillars": {
       "crews": {
         "title": "Multi-Agent Crews",

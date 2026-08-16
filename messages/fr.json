@@ -244,7 +244,7 @@
   },
   "pain": {
     "badge": "LE GOULET DE 23 H",
-    "headline": "Vous ne devriez pas être la colle entre quatre chatbots différents.",
+    "headline": "Vous ne devriez pas faire le liant entre quatre chatbots différents.",
     "paragraph": "Chaque fondateur, consultant et bâtisseur solo connaît ce bureau. La lueur d'écran, l'ingénierie de prompts sans fin, la peur qu'un diff halluciné efface des heures de travail manuel.",
     "sceneLabel": "SCÈNE : 23:42 // Poste de travail du fondateur",
     "sceneDesc": "Fenêtre de contexte expirée. 14 onglets ouverts. 2 branches git non fusionnées. Fatigue du copier-coller manuel.",
@@ -276,7 +276,7 @@
   },
   "crew": {
     "badge": "MEMBRES D'ÉQUIPE SPÉCIALISÉS",
-    "headline": "Rencontrez votre équipe autonome",
+    "headline": "Découvrez votre équipe autonome",
     "paragraph": "Définissez des rôles d'agents dédiés au lieu de forcer une seule fenêtre de prompt à faire quatre métiers incompatibles.",
     "exampleMission": "Mission assignée (exemple) :",
     "isolatedExecution": "Exécution isolée • permissions strictes et ciblées",
@@ -412,8 +412,8 @@
   },
   "control": {
     "badge": "OPS TERRAIN & SUPERVISION OPÉRATIONNELLE",
-    "headline": "Autonomie sans anxiété financière, d'identifiants ou opérationnelle.",
-    "paragraph": "D'autres outils s'emballent avec des boucles API non surveillées et des identifiants fuites dans le cloud. Fabrica enveloppe les équipes autonomes parallèles dans un chiffrement côté client, des auto-stops financiers stricts et des portes d'approbation mobile 1 clic pour toutes les opérations à haut risque.",
+    "headline": "Autonomie sans crainte financière, ni fuite d'identifiants, ni stress opérationnel.",
+    "paragraph": "D'autres outils s'emballent avec des boucles API non surveillées et des identifiants divulgués dans le cloud. Fabrica enveloppe les équipes autonomes parallèles dans un chiffrement côté client, des auto-stops financiers stricts et des portes d'approbation mobile 1 clic pour toutes les opérations à haut risque.",
     "card1": {
       "title": "Portes terrain à superviseur humain",
       "subtitle": "Companion desktop & mobile",
@@ -519,12 +519,12 @@
   "features": {
     "badge": "LES PILIERS CENTRAUX",
     "headline": "Pourquoi les fondateurs dirigent l'équipe.",
-    "paragraph": "Six promesses mécaniques qui transforment le jonglage de prompts chaotique en une usine autonome supervisée, à budget plafonné.",
+    "paragraph": "Six garanties concrètes qui transforment le jonglage de prompts chaotique en une usine autonome supervisée, à budget plafonné.",
     "pillars": {
       "crews": {
         "title": "Équipes multi-agents",
         "badge": "RÔLES PARALLÈLES",
-        "desc": "Les agents Développeur, Chercheur, Marketeur et Analyste convergent vers un objectif en parallèle — au lieu de forcer une seule fenêtre de prompt à faire quatre métiers incompatibles."
+        "desc": "Les agents Développeur, Chercheur, Marketeur et Analyste convergent vers un objectif en parallèle — au lieu de forcer une seule fenêtre de prompt à faire quatre tâches incompatibles."
       },
       "worktrees": {
         "title": "Worktrees isolés parallèles",
@@ -555,7 +555,7 @@
   },
   "comparison": {
     "badge": "LA DIFFÉRENCE ARCHITECTURALE",
-    "headline": "Comment Fabrica se compare",
+    "headline": "En quoi Fabrica se distingue",
     "paragraph": "Pourquoi les bâtisseurs solo, responsables d'agence et équipes lean passent de fenêtres de prompt fragiles à un Agentic Development Environment.",
     "headerCapability": "Capacité / Workflow",
     "headerFabrica": "Fabrica",
