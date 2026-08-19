@@ -8,7 +8,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { useRouter, usePathname } from '@/src/i18n/navigation'
+import { useRouter, usePathname, Link as IntlLink } from '@/src/i18n/navigation'
 import { useLocale } from 'next-intl'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
@@ -28,7 +28,27 @@ export const Navbar = () => {
     { name: t('comparison'), href: '#comparison' },
     { name: t('pricing'), href: '#pricing' },
     { name: t('faq'), href: '#faq' },
+    { name: t('docs'), href: '/docs' },
   ]
+
+  const renderNavItem = (link: { name: string; href: string }) =>
+    link.href.startsWith('/') ? (
+      <IntlLink
+        key={link.name}
+        href={link.href}
+        className="transition-colors hover:text-[var(--text-strong)]"
+      >
+        {link.name}
+      </IntlLink>
+    ) : (
+      <a
+        key={link.name}
+        href={link.href}
+        className="transition-colors hover:text-[var(--text-strong)]"
+      >
+        {link.name}
+      </a>
+    )
 
   const locales = ['en', 'fr', 'ar'] as const
 
@@ -80,15 +100,7 @@ export const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[var(--text-muted)]">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="transition-colors hover:text-[var(--text-strong)]"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map(renderNavItem)}
         </nav>
 
         {/* Action CTAs */}
@@ -121,16 +133,20 @@ export const Navbar = () => {
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-[var(--border-subtle)] bg-background/95 backdrop-blur-2xl px-4 py-6 space-y-4">
           <nav className="flex flex-col space-y-3 text-sm font-medium text-[var(--text-muted)]">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[var(--text-strong)] transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const el = renderNavItem(link);
+              if (link.href.startsWith('/')) return el;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 hover:text-[var(--text-strong)] transition-colors"
+                >
+                  {link.name}
+                </a>
+              );
+            })}
           </nav>
           <div className="pt-4 border-t border-[var(--border-subtle)]">
             <div className="flex items-center justify-center gap-1 mb-3">

@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { Link as IntlLink } from '@/src/i18n/navigation'
 import { useTranslations } from 'next-intl'
 
 export const Footer = () => {
@@ -26,7 +27,7 @@ export const Footer = () => {
       { name: t('links.manifesto'), href: '#product' },
       { name: t('links.comparison'), href: '#comparison' },
       { name: t('links.changelog'), href: '#waitlist' },
-      { name: t('links.docs'), href: '#faq' },
+      { name: t('links.docs'), href: '/docs' },
       { name: t('links.support'), href: '#waitlist' },
     ],
     legal: [
@@ -96,13 +97,21 @@ export const Footer = () => {
           <div className="space-y-3">
             <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-strong)]">{t('company')}</h4>
             <ul className="space-y-2">
-              {footerLinks.company.map((item, i) => (
-                <li key={i}>
-                  <a href={item.href} className="hover:text-[var(--text-strong)] transition-colors">
-                    {item.name}
-                  </a>
-                </li>
-              ))}
+              {footerLinks.company.map((item, i) =>
+                item.href.startsWith('/') ? (
+                  <li key={i}>
+                    <IntlLink href={item.href} className="hover:text-[var(--text-strong)] transition-colors">
+                      {item.name}
+                    </IntlLink>
+                  </li>
+                ) : (
+                  <li key={i}>
+                    <a href={item.href} className="hover:text-[var(--text-strong)] transition-colors">
+                      {item.name}
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

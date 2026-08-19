@@ -20,13 +20,13 @@ These endpoints serve the desktop app. The app already has client code pointing 
 
 | # | Endpoint | Purpose | Status | Notes |
 |---|----------|---------|--------|-------|
-| W1 | `/api/auth/authorize` | OAuth authorize (PKCE) | **TODO** | Supabase auth |
-| W2 | `/api/auth/session` | Session management | **TODO** | |
-| W3 | `/api/auth/refresh` | Token refresh | **TODO** | |
-| W4 | `/api/auth/logout` | Session destroy | **TODO** | |
-| W5 | `/api/share/*` | Artifact sharing CRUD | **TODO** | Supabase Storage |
-| W6 | `/api/diagnostics/*` | Crash/feedback upload | **TODO** | |
-| W7 | `/api/telemetry` | Analytics events (fallback) | **TODO** | PostHog is primary |
+| W1 | `/api/auth/authorize` | OAuth authorize (PKCE) | **VERIFY** | Supabase auth |
+| W2 | `/api/auth/session` | Session management | **VERIFY** | |
+| W3 | `/api/auth/refresh` | Token refresh | **VERIFY** | |
+| W4 | `/api/auth/logout` | Session destroy | **VERIFY** | |
+| W5 | `/api/share/*` | Artifact sharing CRUD | **VERIFY** | Supabase Storage |
+| W6 | `/api/diagnostics/*` | Crash/feedback upload | **VERIFY** | |
+| W7 | `/api/telemetry` | Analytics events (fallback) | **VERIFY** | PostHog is primary |
 
 ---
 
@@ -34,9 +34,9 @@ These endpoints serve the desktop app. The app already has client code pointing 
 
 | # | File | Purpose | Status | Notes |
 |---|------|---------|--------|-------|
-| W8 | `/whats-new/changelog.json` | In-app changelog display | **TODO** | |
-| W9 | `/whats-new/nudge.json` | Update nudge config | **TODO** | |
-| W10 | `/plugins/kill-list.json` | Plugin block list | **TODO** | |
+| W8 | `/whats-new/changelog.json` | In-app changelog display | **VERIFY** | Created in public/whats-new/ |
+| W9 | `/whats-new/nudge.json` | Update nudge config | **VERIFY** | Created in public/whats-new/ |
+| W10 | `/plugins/kill-list.json` | Plugin block list | **VERIFY** | Created in public/plugins/ |
 
 ---
 
@@ -44,7 +44,7 @@ These endpoints serve the desktop app. The app already has client code pointing 
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| W11 | `/docs/*` — documentation pages | **TODO** | Static/SSR. Migrate from `www.onorca.dev/docs` |
+| W11 | `/docs/*` — documentation pages | **DONE** | Created layout, catch-all page, sidebar, prose, content, nav. Build compiles. Zero orca/stablyai refs. |
 
 ---
 
@@ -84,6 +84,22 @@ These endpoints serve the desktop app. The app already has client code pointing 
 - [~] Early-access signup flow (`/api/early-access` → Supabase)
 - [~] Dark theme + copper/amber palette
 - [~] Vercel deployment pipeline
+
+---
+
+## Session Ledger
+
+> Tracks orchestration sessions and workers for this task file. Updated when sessions are created, released, or worktrees merged.
+
+| Session Handle | Type | Task/Group | Status | Created | Worktree Branch | Merged |
+|---------------|------|-----------|--------|---------|----------------|--------|
+| `term_0adb1b43-ceeb-47c7-ad47-f65f6df17d3e` | orchestrator | web-orchestrator | **active** | Aug 2026 | `main` (Fabrica-web/) | — |
+
+**Rules:**
+- Only the main orchestrator creates sessions in this ledger
+- Workers are released after review
+- Worktrees are merged immediately after approval
+- Never leave orphaned sessions
 
 ---
 
