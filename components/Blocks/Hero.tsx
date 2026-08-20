@@ -189,19 +189,27 @@ const crewMembers = [
   const currentAgent = crewMembers.find((a) => a.id === selectedAgent) || crewMembers[0]
 
   return (
-    <section id="product" className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-orange-600/15 via-orange-950/10 to-transparent blur-3xl pointer-events-none -z-10" />
-
-      <img
-        src="/images/forge_molten_texture.jpg"
-        alt=""
-        aria-hidden
-        className="absolute inset-0 h-full w-full object-cover opacity-[0.05] mix-blend-screen pointer-events-none -z-10"
+    <section
+      id="product"
+      className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden"
+    >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/images/fabrica-hero-bg.jpg)',
+          backgroundSize: '100% auto',
+          backgroundPosition: 'center 32px',
+          backgroundRepeat: 'no-repeat',
+          filter: 'blur(1px)',
+        }}
       />
+      <div className="absolute inset-0 bg-white/20 dark:bg-[#0B0C12]/60 pointer-events-none" />
+
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-orange-600/15 via-orange-950/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center max-w-4xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs sm:text-sm font-medium text-orange-400 backdrop-blur-md">
+          <div className="relative z-10 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs sm:text-sm font-medium text-orange-400 backdrop-blur-md">
             <img
               src="/fabrica-logo_icon.svg"
               alt=""
@@ -212,18 +220,18 @@ const crewMembers = [
             <span className="text-[var(--text-strong)]">{t('badgeSub')}</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
+          <h1 className="relative z-10 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
             {t('headline1')}{' '}
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] via-[#E8590C] to-orange-400">
               {t('headline2')}
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
+          <p className="relative z-10 text-lg sm:text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
             {t('subheadline')}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-mono text-[var(--text-muted)] pt-1">
+          <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-mono text-[var(--text-muted)] pt-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--overlay-5)] border border-[var(--border-subtle)] text-[var(--text-strong)]">
               <Monitor className="h-3.5 w-3.5 text-orange-400" />
               <span>{t('platformDesktop')}</span>
@@ -238,7 +246,7 @@ const crewMembers = [
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <ShimmerButton
               shimmerColor="#FFD0A6"
               borderRadius="12px"
@@ -258,7 +266,7 @@ const crewMembers = [
             </a>
           </div>
 
-          <div className="pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-left">
+          <div className="relative z-10 pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-left">
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <Zap className="h-4 w-4 text-orange-400 shrink-0" />
               <div>

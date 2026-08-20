@@ -27,12 +27,6 @@ export const ShowcaseCarousel = () => {
       caption: t('slides.s2.caption'),
     },
     {
-      image: '/images/carousel/fabrica-messy-data-to-organized-dashboard-workspace.jpg',
-      label: t('slides.s3.label'),
-      title: t('slides.s3.title'),
-      caption: t('slides.s3.caption'),
-    },
-    {
       image: '/images/carousel/fabrica-stressed-developer-coding-late-night.jpg',
       label: t('slides.s4.label'),
       title: t('slides.s4.title'),
