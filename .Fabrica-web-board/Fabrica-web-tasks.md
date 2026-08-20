@@ -54,8 +54,8 @@ These endpoints serve the desktop app. The app already has client code pointing 
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| W12 | Update any Orca references in page copy | **PLANNING** | Audit all sections |
-| W13 | Update meta tags / OG images if needed | **PLANNING** | |
+| W12 | Update any Orca references in page copy | **DONE** | Audit complete: 3 refs in public/ (historical changelog + kill-list plugin). Not page copy. No changes needed. |
+| W13 | Update meta tags / OG images if needed | **DONE** | Audit complete: all OG/Twitter/meta tags already say Fabrica with correct URLs. No changes needed. |
 
 ---
 
@@ -94,6 +94,8 @@ These endpoints serve the desktop app. The app already has client code pointing 
 | Session Handle | Type | Task/Group | Status | Created | Worktree Branch | Merged |
 |---------------|------|-----------|--------|---------|----------------|--------|
 | `term_0adb1b43-ceeb-47c7-ad47-f65f6df17d3e` | orchestrator | web-orchestrator | **active** | Aug 2026 | `main` (Fabrica-web/) | — |
+| `ctx_3325b3345a41` | worker | W12 Orca copy audit | **active** | Aug 2026 | `web-W12-audit` | — |
+| `ctx_00d2c7b7121a` | worker | W13 meta/OG rebrand | **active** | Aug 2026 | `web-W13-meta` | — |
 
 **Rules:**
 - Only the main orchestrator creates sessions in this ledger
