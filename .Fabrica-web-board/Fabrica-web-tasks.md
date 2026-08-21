@@ -91,10 +91,10 @@ These endpoints serve the desktop app. The app already has client code pointing 
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| W20 | Top background: darken text in light theme | **IN PROGRESS** | In dark theme texts are perfectly visible/readable, but in light/white theme they are too soft. Darken the TEXT only — the background itself is perfect |
-| W21 | Audit: all carousel + standalone images present? | **IN PROGRESS** | Two workers: one auditing carousel images, one auditing standalone images. Verify every image from public/images/ appears on the landing page |
-| W22 | Standalone images: side-by-side layout with relevant text | **IN PROGRESS** | Handled by the W21-standalones worker. Left/right framed layout, text strictly relevant to each image |
-| W23 | Bottom background: add blur + strengthen overlay | **IN PROGRESS** | The bottom background needs a blur effect just like the top one has. Also the texts and cards above it need to be harder/more opaque so they remain visible over the background |
+| W20 | Top background: darken text in light theme | **DONE** | Light-theme text contrast adjusted; hero headline sizes tuned per PM follow-up in-session |
+| W21 | Audit: all carousel + standalone images present? | **DONE** | Carousel: all 11 images now shown as slides s1-s11 (en/fr/ar). Standalones: all 5 visible on page load — mobile-companion image promoted out of hidden tab into always-visible block |
+| W22 | Standalone images: side-by-side layout with relevant text | **DONE** | All 5 standalones in half-width two-column layouts with strictly matching text, stacked on mobile |
+| W23 | Bottom background: add blur + strengthen overlay | **DONE** | Per PM follow-up in-session: removed blur layers that softened FinalCta text, content pinned to top with z-10, scrim tuned |
 | W24 | Deduplicate content across all sections | **TODO** | Make sure there are no duplicates across the landing page. Each section must be clear, direct, and focused on ONE thing so users don't get saturated |
 | W25 | Coverage audit vs internal marketing files | **TODO** | Read the 3 internal marketing files and map what is covered on the landing page, what is NOT covered, and how we can enhance or add missing points |
 | W26 | Top navigation bar: align with page sections | **TODO** | Make sure the top navigation bar links align with the actual page sections (correct anchors, correct scroll positions) |
@@ -145,10 +145,12 @@ These endpoints serve the desktop app. The app already has client code pointing 
 | `term_a2eb2cb3-081b-473d-a188-775a29fe6fd9` | worker | W18 FR/AR localization | **stopped** | Aug 2026 | Fabrica-web/ | — |
 | `term_3bdeae00-c2a2-4dd7-ac80-96c34ecafb92` | worker | W18 FR/AR localization | **released** | Aug 2026 | Fabrica-web/ | ✅ |
 | `term_07702fa9-702a-45a4-847d-edd2f45a02d2` | worker | W19 Mobile audit | **released** | Aug 2026 | Fabrica-web/ | ✅ |
-| `term_c980e3be-cdd7-499b-a9c6-062d9eb2af51` | worker | W20 Light theme text | **active** | Aug 2026 | Fabrica-web/ | — |
-| `term_ac62af28-0da2-4c19-a9a7-cbf55e7c0679` | worker | W21 Carousel audit | **active** | Aug 2026 | Fabrica-web/ | — |
-| `term_0f27b013-a505-4f53-a910-88b43bbc3f35` | worker | W21 Standalones + W22 | **active** | Aug 2026 | Fabrica-web/ | — |
-| `term_847538fd-65ae-4c9d-bf60-b32129175bd7` | worker | W23 Bottom bg blur | **active** | Aug 2026 | Fabrica-web/ | — |
+| `term_c980e3be-cdd7-499b-a9c6-062d9eb2af51` | worker | W20 Light theme text | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_ac62af28-0da2-4c19-a9a7-cbf55e7c0679` | worker | W21 Carousel audit + fixes | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_0f27b013-a505-4f53-a910-88b43bbc3f35` | worker | W21 Standalones + W22 | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_847538fd-65ae-4c9d-bf60-b32129175bd7` | worker | W23 Bottom bg blur | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+
+**Pushed:** commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 | `term_14e2a27c-b273-4598-85e5-01dc15e8f132` | worker | STATIC-JSON changelog+kill-list — run `run_effeaea830f9`, task `task_88c8534c1c42`, dispatch `ctx_ed060bcdc7d3` | **active** | Aug 21 2026 | Fabrica-web/ | — |
 | `term_99c98028-50a4-4c06-97d1-c45344c4ec62` | worker | W24+W26 dedupe + nav alignment — run `run_effeaea830f9`, task `task_e7d2fee2a3ed`, dispatch `ctx_2495f8df3ffc` | **active** | Aug 21 2026 | Fabrica-web/ | — |
 | `term_6180e0da-9d37-48df-a0fc-2a33fa9ed08b` | worker | W25 coverage audit (read-only) — run `run_effeaea830f9`, task `task_707a4694155d`, dispatch `ctx_3b988764f1c6` | **active** | Aug 21 2026 | Fabrica-web/ | — |
