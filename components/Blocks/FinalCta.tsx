@@ -215,36 +215,44 @@ export const FinalCta = () => {
   const platformDisplay = selectedPlatform ? selectedPlatform.toUpperCase() : 'YOUR PLATFORM'
 
   return (
-    <section id="waitlist" className="relative py-24 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-16">
-      {/* Background molten forge glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent blur-3xl pointer-events-none -z-10" />
+    <section id="waitlist" className="fabrica-cta relative pt-4 sm:pt-6 pb-72 sm:pb-96 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-16">
+      <div className="absolute inset-0 bg-white/20 dark:bg-[#0B0C12]/75 pointer-events-none" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-64 sm:h-80 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/images/fabrica-buttom-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center bottom',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-8">
+      {/* Background molten forge glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-8">
         {/* Badge */}
-        <Badge variant="copper-outline" className="h-auto gap-2 px-3.5 py-1 font-mono text-xs">
+        <Badge variant="copper-outline" className="h-auto gap-2 px-4 py-1.5 font-mono text-sm">
           <img
             src="/fabrica-logo_icon.svg"
             alt=""
-            className="h-4 w-4 object-contain"
+            className="h-5 w-5 object-contain"
           />
           <span>{t('badge')}</span>
         </Badge>
 
         {/* Headline */}
-        <h2 className="text-4xl sm:text-6xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
+        <h2 className="text-5xl sm:text-7xl font-extrabold text-[var(--text-strong)] tracking-tight leading-tight">
           {t('headline')}
-          <span className="block text-2xl sm:text-4xl font-normal text-orange-400 mt-3">
-            {t('subheadline')}
-          </span>
         </h2>
 
-        <p className="text-base sm:text-xl text-[var(--text-muted)] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg sm:text-2xl text-orange-700 dark:text-orange-200 max-w-2xl mx-auto leading-relaxed">
           {t('paragraph')}
         </p>
 
         {/* Enhanced Platform Selector */}
         <div className="max-w-2xl mx-auto space-y-2">
-          <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
+          <p className="text-sm font-mono uppercase tracking-wider text-[var(--text-muted)]">
             {t('choosePlatform')} <span className="text-orange-400">{t('required')}</span>
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -266,8 +274,8 @@ export const FinalCta = () => {
                 >
                   <p.icon className="h-5 w-5" />
                   <div>
-                    <p className="text-xs font-mono font-semibold">{p.label}</p>
-                    <p className="text-[10px] opacity-70">{p.detail}</p>
+                    <p className="text-sm font-mono font-semibold">{p.label}</p>
+                    <p className="text-xs opacity-70">{p.detail}</p>
                   </div>
                   {active && (
                     <span className="absolute top-2.5 right-2.5">

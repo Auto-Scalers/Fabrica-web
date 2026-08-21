@@ -191,16 +191,15 @@ const crewMembers = [
   return (
     <section
       id="product"
-      className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden"
+      className="fabrica-hero relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden"
     >
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="fabrica-hero-bg absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url(/images/fabrica-hero-bg.jpg)',
           backgroundSize: '100% auto',
           backgroundPosition: 'center 32px',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(1px)',
         }}
       />
       <div className="absolute inset-0 bg-white/20 dark:bg-[#0B0C12]/60 pointer-events-none" />
@@ -220,14 +219,22 @@ const crewMembers = [
             <span className="text-[var(--text-strong)]">{t('badgeSub')}</span>
           </div>
 
-          <h1 className="relative z-10 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
-            {t('headline1')}{' '}
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] via-[#E8590C] to-orange-400">
-              {t('headline2')}
+          <h1 className="hero-halo relative z-10 text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
+            <span className="block">{t('headline1a')}</span>
+            <span className="block text-2xl sm:text-3xl lg:text-5xl leading-tight">
+              {t('headline1b')}{' '}
+              <span className="[text-shadow:none] text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] via-[#E8590C] to-orange-400">
+                {t('headline2a')}
+              </span>
+            </span>
+            <span className="block mt-2 text-3xl sm:text-4xl lg:text-[4.25rem] leading-tight">
+              <span className="[text-shadow:none] text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A3D] via-[#E8590C] to-orange-400">
+                {t('headline2b')}
+              </span>
             </span>
           </h1>
 
-          <p className="relative z-10 text-lg sm:text-xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
+          <p className="hero-halo relative z-10 text-xl sm:text-2xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
             {t('subheadline')}
           </p>
 

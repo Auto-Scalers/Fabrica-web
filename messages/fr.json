@@ -12,23 +12,25 @@
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",
-    "badgeSub": "ADE : priorité au métier et au code",
-    "headline1": "Quatorze onglets. Trois contextes cassés.",
-    "headline2": "Il est 23 h. Dirigez l'équipe à la place.",
-    "subheadline": "Arrêtez de jongler avec vos prompts. Définissez vos équipes multi-agents (Chercheurs, Développeurs, Marketeurs, Analystes métier), maîtrisez budget, approbations et sécurité, et laissez des agents de codage IA parallèles œuvrer dans des worktrees isolés ou de simples dossiers disque, avec Autonomie et Échelle 24/7.",
+    "badgeSub": "Plateforme desktop de gestion d'agents CLI",
+    "headline1a": "Quatorze onglets.",
+    "headline1b": "Trois contextes cassés.",
+    "headline2a": "Il est 23 h.",
+    "headline2b": "Dirigez l'équipe à la place.",
+    "subheadline": "Gérez Claude Code, Codex, OpenCode, Cursor, Devin et autres agents CLI via des terminaux locaux. Définissez des équipes de spécialistes, fixez des plafonds budgétaires stricts, imposez une validation pour les actions critiques, et laissez des agents parallèles travailler dans des worktrees isolés — 24h/24, 7j/7.",
     "platformDesktop": "macOS • Windows • Linux Desktop",
-    "platformMobile": "iOS & Android — Companion mobile",
+    "platformMobile": "iOS & Android Companion mobile",
     "platformSetup": "Aucune configuration technique",
     "ctaEarlyAccess": "Accéder en avant-première",
     "ctaExplore": "Explorer le centre de commande",
-    "pillarZeroPrompt": "Auto zéro prompt",
-    "pillarZeroPromptSub": "Daemons en arrière-plan 24/7",
-    "pillarEisenhower": "Eisenhower & Kanban",
-    "pillarEisenhowerSub": "Supervision opérationnelle",
+    "pillarZeroPrompt": "Exécution événementielle",
+    "pillarZeroPromptSub": "Les tâches se déclenchent sur les complétions de tâches, les seuils de budget et les portes d'approbation",
+    "pillarEisenhower": "Canaux style Slack",
+    "pillarEisenhowerSub": "Les agents discutent, déléguent et rendent compte en langage clair",
     "pillarFieldOps": "Ops terrain & sécurité",
-    "pillarFieldOpsSub": "Portes d'approbation en 1 clic",
+    "pillarFieldOpsSub": "Portes d'approbation pour chaque action critique",
     "pillarVault": "Coffre côté client",
-    "pillarVaultSub": "Zéro fuite de clés dans le cloud",
+    "pillarVaultSub": "Vos clés vont directement à votre fournisseur — jamais via Fabrica",
     "windowTitle": "fabrica-desktop v3.0 // project: saas-nexus (main)",
     "tabDaemons": "Daemons & flux",
     "tabKanban": "File Kanban",
@@ -245,8 +247,8 @@
   },
   "pain": {
     "badge": "LE GOULET DE 23 H",
-    "headline": "Vous ne devriez pas faire le liant entre quatre chatbots différents.",
-    "paragraph": "Chaque fondateur, consultant et bâtisseur solo connaît ce bureau. La lueur d'écran, l'ingénierie de prompts sans fin, la peur qu'un diff halluciné efface des heures de travail manuel.",
+    "headline": "Vous êtes encore le goulot d'étranglement entre votre brief et le résultat.",
+    "paragraph": "Les fondateurs et opérateurs sont censés construire, livrer, commercialiser et gérer leur entreprise simultanément — mais les outils IA restent cloisonnés. Un agent de code tourne dans un terminal ; un agent navigateur tourne quelque part dans le cloud ; un outil de workflow connecte des API. Personne ne vous offre un endroit unique pour gérer tous vos agents CLI.",
     "sceneLabel": "SCÈNE : 23:42 // Poste de travail du fondateur",
     "sceneDesc": "Fenêtre de contexte expirée. 14 onglets ouverts. 2 branches git non fusionnées. Fatigue du copier-coller manuel.",
     "p1Title": "Quatorze onglets navigateur, zéro cohésion",
@@ -263,22 +265,22 @@
   "turn": {
     "badge": "LE POINT DE PIVOT",
     "headline": "Voici Fabrica.",
-    "subheadline": "Un centre de commande. Toute votre équipe en parallèle.",
-    "paragraph": "Au lieu de piloter manuellement une IA à travers douze prompts, vous assignez des objectifs à des rôles d'agents spécialisés. Ils exécutent dans des git worktrees isolés, respectent des plafonds budgétaires temps réel et reviennent avec des diffs vérifiés.",
+    "subheadline": "Un centre de commande desktop. Toute votre équipe en parallèle.",
+    "paragraph": "Au lieu de piloter manuellement une IA à travers douze prompts, assignez des objectifs à des rôles d'agents spécialisés. Ils exécutent dans des git worktrees isolés, respectent des plafonds budgétaires en temps réel et reviennent avec des diffs vérifiés. Vous décidez ce qui avance et ce qui attend.",
     "parallelLabel": "Exécution parallèle :",
     "parallelDesc": "Développeur, Chercheur et Marketeur tournent simultanément sans collision de branche.",
     "budgetLabel": "Plafonds budgétaires stricts :",
     "budgetDesc": "L'exécution s'arrête automatiquement dès que la dépense de tokens atteint votre limite.",
-    "reviewLabel": "Revue sans friction :",
-    "reviewDesc": "Les portes d'approbation visuelles vous laissent inspecter des diffs propres avant fusion.",
+    "reviewLabel": "Revue visuelle :",
+    "reviewDesc": "Les portes d'approbation vous permettent d'inspecter des diffs propres avant fusion.",
     "statusLabel": "STATUT : Exécution calme // tous les worktrees synchronisés",
     "statusDesc": "4 threads d'équipe parallèles actifs. Limite budgétaire stricte définie. Zéro collision de branche.",
     "altCalm": "Espace de travail calme et organisé du centre de commande Fabrica"
   },
   "crew": {
     "badge": "MEMBRES D'ÉQUIPE SPÉCIALISÉS",
-    "headline": "Découvrez votre équipe autonome",
-    "paragraph": "Définissez des rôles d'agents dédiés au lieu de forcer une seule fenêtre de prompt à faire quatre métiers incompatibles.",
+    "headline": "Mettez un équipe au travail, pas juste un prompt.",
+    "paragraph": "Définissez des rôles d'agents dédiés au lieu de forcer une seule fenêtre de prompt à faire quatre métiers incompatibles. Chaque membre de l'équipe tourne dans un worktree isolé et rend compte en langage clair.",
     "exampleMission": "Mission assignée (exemple) :",
     "isolatedExecution": "Exécution isolée • permissions strictes et ciblées",
     "verifiedOutput": "SORTIE VÉRIFIÉE",
@@ -332,13 +334,13 @@
   },
   "orchestration": {
     "badge": "FONCTIONNEMENT RÉEL",
-    "headline": "Worktrees isolés parallèles.",
-    "headlineGradient": "Zéro collision. Autonomie 24/7.",
-    "paragraph": "Au lieu de vous bloquer sur une seule fenêtre de prompt, Fabrica associe une orchestration terminale à la vitesse Ghostty avec des Git worktrees isolés, la rédaction de plans Markdown, le QA navigateur Playwright et des approbations synchronisées au téléphone.",
+    "headline": "Gérez des agents CLI via des terminaux locaux.",
+    "headlineGradient": "Collaboration d'agents. Connaissances partagées. Validation humaine.",
+    "paragraph": "Fabrica transforme des sessions terminales CLI brutes en une interface de canaux style Slack. Les agents discutent d'approches, déléguent des sous-tâches et rendent compte en langage clair. Les agents intelligents savent immédiatement quoi faire et quand — aucune orchestration manuelle requise.",
     "step1": {
       "name": "Rédiger le spec & le périmètre",
       "tagline": "Définissez l'objectif en termes métier simples.",
-      "desc": "Assignez le résultat à un rôle d'équipe. Pas de façonnage de prompt fragile — Fabrica génère des plans d'exécution structurés avec suites de tests claires et propositions de modification de fichiers."
+      "desc": "Assignez le résultat à un rôle d'équipe. Fabrica génère des plans d'exécution structurés avec des suites de tests claires et des propositions de modification de fichiers."
     },
     "step2": {
       "name": "Planifier & échafauder le worktree",
@@ -346,14 +348,14 @@
       "desc": "Chaque agent lance un dossier disque isolé ou un git worktree. Les tâches tournent en parallèle sans toucher votre branche master, sans stasher le code non commité ni polluer les fichiers de l'espace de travail."
     },
     "step3": {
-      "name": "Exécution GPU parallèle",
+      "name": "Exécution parallèle",
       "tagline": "Exécution autonome dans les limites budget et permissions.",
-      "desc": "Des terminaux multiplexés à la vitesse Ghostty exécutent des daemons d'arrière-plan pour Développeur, Chercheur et Marketeur simultanément sous des auto-stops monétaires stricts."
+      "desc": "Des agents CLI tournent simultanément sous des auto-stops monétaires stricts. Les agents collaborent dans des canaux dédiés et consultent une base de connaissances partagée."
     },
     "step4": {
       "name": "Inspecter, QA & valider",
-      "tagline": "Revue de diff AST, QA navigateur headless et validation 1 clic mobile.",
-      "desc": "Revue des diffs AST unifiés, résultats de tests, assertions UI Playwright et rapports sourcés dans le centre de commande visuel ou sur votre téléphone avant fusion."
+      "tagline": "Revue de diff, QA navigateur headless et validation 1 clic mobile.",
+      "desc": "Revue des diffs unifiés, résultats de tests et rapports sourcés dans le centre de commande visuel ou sur votre téléphone avant fusion."
     },
     "activePhase": "PHASE ACTIVE",
     "gitWorktrees": "Git Worktrees (3)",
@@ -387,9 +389,9 @@
     "newFile": "NOUVEAU FICHIER (8 tests)",
     "astClean": "Analyse AST : propre",
     "readyDispatch": "Prêt pour dispatch vers branche isolée",
-    "ghosttyTitle": "Multiplexeur Ghostty accéléré GPU (3 terminaux actifs)",
-    "fpsRender": "Rendu natif 120 FPS",
-    "playwrightTitle": "Moteur QA Playwright headless navigateur",
+    "ghosttyTitle": "Multiplexeur de terminaux (3 terminaux actifs)",
+    "fpsRender": "Rendu natif",
+    "playwrightTitle": "Moteur QA navigateur headless",
     "allGreen": "TOUTES LES ASSERTIONS VERTES",
     "scenario": "Scénario : flux auth E2E login & rafraîchissement de token",
     "status200": "Statut : 200 OK (210 ms)",
@@ -413,12 +415,12 @@
   },
   "control": {
     "badge": "OPS TERRAIN & SUPERVISION OPÉRATIONNELLE",
-    "headline": "Autonomie sans crainte financière, ni fuite d'identifiants, ni stress opérationnel.",
-    "paragraph": "D'autres outils s'emballent avec des boucles API non surveillées et des identifiants divulgués dans le cloud. Fabrica enveloppe les équipes autonomes parallèles dans un chiffrement côté client, des auto-stops financiers stricts et des portes d'approbation mobile 1 clic pour toutes les opérations à haut risque.",
+    "headline": "Les portes d'approbation, les plafonds budgétaires stricts et le suivi des dépenses vous gardent aux commandes de chaque action critique.",
+    "paragraph": "Les agents proposent ; vous approuvez. Rien ne passe une porte sans vous. Fabrica enveloppe des équipes autonomes parallèles dans un chiffrement côté client, des auto-stops financiers stricts et des portes d'approbation mobile 1 clic pour toutes les opérations à haut risque.",
     "card1": {
-      "title": "Portes terrain à superviseur humain",
-      "subtitle": "Companion desktop & mobile",
-      "desc": "Les agents rédigent, build et vérifient dans des worktrees isolés, mais les jalons à enjeux — liaisons de paiement live, déploiements staging ou campagnes publiques — exigent votre autorisation explicite en 1 clic.",
+      "title": "Portes terrain avec superviseur humain",
+      "subtitle": "Desktop & companion mobile",
+      "desc": "Les agents rédigent, construisent et vérifient dans des worktrees isolés, mais les jalons à enjeux — liaisons de paiement live, déploiements staging ou campagnes publiques — exigent votre autorisation explicite.",
       "paymentGate": "Porte paiement",
       "deployGate": "Porte déploiement",
       "socialGate": "Porte social/email",
@@ -488,8 +490,8 @@
   },
   "beyond": {
     "badge": "RUNTIME MÉTIER EXTENSIBLE",
-    "headline": "Au-delà du code : des agents pour toute votre entreprise.",
-    "paragraph": "Fabrica n'est pas qu'un IDE pour développeurs logiciels. Les mêmes équipes multi-agents, isolation parallèle et garde-fous financiers orchestrent l'intelligence marché, la planification de campagnes et les opérations.",
+    "headline": "Gérez une entreprise, pas seulement construisez-en une.",
+    "paragraph": "Fabrica n'est pas qu'un environnement de code. La même gestion d'agents CLI, l'isolation parallèle et les garde-fous financiers orchestrent l'intelligence marché, la planification de campagnes, le support client, l'ecommerce et les opérations — le tout depuis une interface desktop.",
     "plugins": {
       "market": {
         "title": "Suivi marché & concurrents",
@@ -515,12 +517,22 @@
   },
   "integrations": {
     "header": "Apportez vos propres clés",
-    "paragraph": "Fonctionne sur la stack que vous faites déjà confiance — agnostique aux modèles, wallet-first."
+    "paragraph": "Vos clés de fournisseur vont directement à vos agents CLI — jamais via Fabrica. Payez Fabrica pour la couche de gestion ; payez les fournisseurs pour le carburant."
   },
   "features": {
     "badge": "LES PILIERS CENTRAUX",
     "headline": "Pourquoi les fondateurs dirigent l'équipe.",
-    "paragraph": "Six garanties concrètes qui transforment le jonglage de prompts chaotique en une usine autonome supervisée, à budget plafonné.",
+    "paragraph": "Six promesses concrètes qui transforment le jonglage chaotique de prompts en une usine autonome supervisée, à budget plafonné.",
+    "architecture": {
+      "title": "Comment ça marche sous le capot",
+      "desc": "Fabrica pilote de vrais agents CLI exécutés sur votre machine — orchestrés via des terminaux locaux, des worktrees git isolés et des canaux de connaissances partagés.",
+      "point1Title": "Terminaux locaux",
+      "point1Desc": "Les agents CLI natifs — Claude Code, Codex, etc. — s'exécutent dans des sessions de terminal locales que vous pouvez inspecter à tout moment.",
+      "point2Title": "Worktrees isolés",
+      "point2Desc": "Chaque agent s'exécute dans son propre worktree git : les tâches parallèles n'entrent jamais en collision avec vos branches ni entre elles.",
+      "point3Title": "Exécution supervisée",
+      "point3Desc": "Plafonds budgétaires, portes d'approbation et coffre partagé gardent les exécutions autonomes sur les rails, du cahier des charges au merge."
+    },
     "pillars": {
       "crews": {
         "title": "Équipes multi-agents",
@@ -539,8 +551,8 @@
       },
       "gates": {
         "title": "Portes d'approbation visuelles",
-        "badge": "VALIDATION 1 CLIC",
-        "desc": "Les jalons à enjeux — liaisons de paiement, déploiements production, campagnes publiques — se mettent en pause pour une revue de diff AST propre et une autorisation en 1 clic."
+        "badge": "VALIDATION",
+        "desc": "Les jalons à enjeux — liaisons de paiement, déploiements production, campagnes publiques — se mettent en pause pour une revue de diff propre et une autorisation en 1 clic."
       },
       "vault": {
         "title": "Coffre BYOK côté client",
@@ -557,57 +569,57 @@
   "comparison": {
     "badge": "LA DIFFÉRENCE ARCHITECTURALE",
     "headline": "En quoi Fabrica se distingue",
-    "paragraph": "Pourquoi les bâtisseurs solo, responsables d'agence et équipes lean passent de fenêtres de prompt fragiles à un Agentic Development Environment.",
+    "paragraph": "Pourquoi les bâtisseurs solo, responsables d'agence et équipes lean passent de fenêtres de prompt fragiles à une plateforme desktop de gestion d'agents CLI.",
     "headerCapability": "Capacité / Workflow",
     "headerFabrica": "Fabrica",
     "headerAlone": "Faire seul",
     "headerGeneric": "Chats IA génériques",
     "rows": {
       "r1": {
-        "capability": "Équipes multi-agents (rôles)",
-        "fabrica": "Intégré (Dev, Recherche, Mkt, Analyste)",
+        "capability": "Gestion d'agents CLI via terminaux locaux",
+        "fabrica": "Natif — Claude Code, Codex, Cursor, Devin et autres",
         "alone": "Une seule personne fait tout",
         "generic": "Un seul bot sollicité en boucle"
       },
       "r2": {
-        "capability": "Git worktrees isolés parallèles",
-        "fabrica": "Worktrees natifs à zéro collision",
+        "capability": "Canaux de collaboration agent-à-agent",
+        "fabrica": "Canaux style Slack où les agents discutent, déléguent et s'alignent",
         "alone": "Jonglage manuel de branches et stash",
         "generic": "Aucune conscience fichier/dépôt"
       },
       "r3": {
         "capability": "Plafonds budgétaires temps réel & auto-stops",
-        "fabrica": "Limites monétaires strictes par tâche",
+        "fabrica": "Limites monétaires strictes et suivi de dépense par agent lorsque c'est exposé",
         "alone": "Suivi manuel sur tableur",
         "generic": "Consommation de tokens imprévisible"
       },
       "r4": {
         "capability": "Portes d'approbation visuelles explicites",
-        "fabrica": "Validation en 1 clic pour étapes critiques",
+        "fabrica": "Les agents proposent ; vous approuvez. Rien ne passe une porte sans vous.",
         "alone": "Goulot d'approbation manuelle élevé",
         "generic": "Collage à l'aveugle ou aucun contrôle"
       },
       "r5": {
-        "capability": "Contexte workspace persistant",
-        "fabrica": "Se souvient de toute l'architecture projet",
+        "capability": "Base de connaissances partagée",
+        "fabrica": "Un référentiel documentaire qui devient la source de vérité pour tous les agents",
         "alone": "Notes éparpillées et onglets cassés",
         "generic": "Contexte effacé tous les quelques prompts"
       },
       "r6": {
-        "capability": "Centre de commande visuel (zéro façonnage de prompt)",
-        "fabrica": "Contrôles UI orientés résultat",
+        "capability": "Plateforme desktop orientée métier",
+        "fabrica": "Interface de canaux style Slack — aucune maîtrise du terminal requise",
         "alone": "Scripts bash fragiles et copier-coller",
         "generic": "Ré-ingénierie de prompts sans fin"
       },
       "r7": {
-        "capability": "Exécution autonome 24/7 (locale & distante)",
-        "fabrica": "Tourne indépendamment avec garde-fous",
+        "capability": "Exécution 24/7",
+        "fabrica": "Support client, ecommerce, pipelines de contenu, RH — toujours actif avec portes d'approbation",
         "alone": "Vous devez veiller à 23 h",
         "generic": "Nécessite une session de chat active"
       },
       "r8": {
-        "capability": "S'étend au-delà du code vers ops & growth",
-        "fabrica": "Skills métier et plugins natifs",
+        "capability": "Intégration native n8n (400+ SaaS)",
+        "fabrica": "Chaque workflow agent peut accéder à 400+ intégrations via un plugin natif",
         "alone": "Contexte fragmenté sur 5 outils SaaS",
         "generic": "Texte généraliste superficiel"
       }
@@ -640,16 +652,16 @@
     "badge": "TARIFS TRANSPARENTS",
     "headline": "Investissement prévisible.",
     "headlineGradient": "Zéro facture qui s'envole.",
-    "paragraph": "Chaque palier inclut des plafonds budgétaires stricts pour que l'exécution autonome ne vous surprenne jamais.",
+    "paragraph": "Fabrica n'appelle pas les LLM et ne revend pas l'inférence. Vos clés de fournisseur vont directement à vos agents CLI. Payez Fabrica pour la couche de gestion ; payez les fournisseurs pour le carburant.",
     "monthly": "Mensuel",
     "annual": "Annuel",
     "save20": "ÉCONOMISEZ 20 %",
     "includedCapabilities": "Capacités incluses :",
     "tiers": {
       "solo": {
-        "name": "Bâtisseur solo",
-        "tagline": "Pour les fondateurs solo et consultants remplaçant des onglets de chat dispersés.",
-        "cta": "Commencer gratuitement",
+        "name": "Power User",
+        "tagline": "Pour les utilisateurs qui ont besoin du contrôle téléphonique et d'une exécution autonome quotidienne.",
+        "cta": "Démarrer l'essai de 14 jours",
         "features": [
           "1 équipe d'agents concurrents (4 rôles)",
           "Git worktrees isolés parallèles",
@@ -660,10 +672,10 @@
         ]
       },
       "pro": {
-        "name": "Pro Studio",
-        "tagline": "Pour les leads growth, agences actives et opérateurs multi-projets.",
+        "name": "One-Person Company",
+        "tagline": "Pour les fondateurs qui dirigent toute l'entreprise avec des agents IA.",
         "badge": "LE PLUS POPULAIRE",
-        "cta": "Démarrer l'essai Pro",
+        "cta": "Démarrer l'essai de 14 jours",
         "features": [
           "Équipes d'agents parallèles illimitées",
           "Sandboxing multi-dépôt & disque isolé",
@@ -675,10 +687,9 @@
         ]
       },
       "team": {
-        "name": "Agence & équipe",
-        "tagline": "Pour les agences boutique et escadrons d'ingénierie gérant plusieurs périmètres client.",
-        "badge": "SCALE",
-        "cta": "Obtenir l'accès équipe",
+        "name": "Agency & Teams",
+        "tagline": "Pour les agences boutique et les équipes d'ingénierie gérant plusieurs périmètres client.",
+        "cta": "Démarrer l'essai de 14 jours",
         "features": [
           "Collaboration multi-utilisateurs & permissions de rôle",
           "Base de connaissances & mémoires d'équipe partagées",
@@ -693,31 +704,31 @@
   "faq": {
     "badge": "QUESTIONS FRÉQUENTES",
     "headline": "Questions fréquemment posées",
-    "paragraph": "Tout ce que vous devez savoir sur l'Agentic Development Environment Fabrica.",
+    "paragraph": "Tout ce que vous devez savoir sur Fabrica — la plateforme desktop qui gère les agents CLI via des terminaux locaux.",
     "items": {
-      "q1": "Qu'est-ce qu'un Agentic Development Environment (ADE) ?",
-      "a1": "Un Agentic Development Environment (ADE) est un plan de contrôle desktop dédié qui orchestre des équipes multi-agents (Développeur, Chercheur, Marketeur, Business Analyst) travaillant en parallèle. Contrairement aux fenêtres de chat à prompt unique génériques qui oublient le contexte et exigent un pilotage manuel constant, un ADE donne aux agents des git worktrees isolés, des terminaux GPU à la vitesse Ghostty, une conscience projet persistante et de vrais garde-fous métier.",
+      "q1": "Qu'est-ce que Fabrica ?",
+      "a1": "Fabrica est une plateforme desktop qui gère Claude Code, Codex, OpenCode, Cursor, Devin et autres agents CLI via des terminaux locaux. Au lieu d'onglets CLI bruts, Fabrica transforme l'expérience terminale en une interface de canaux style Slack où les agents discutent d'approches, déléguent des sous-tâches et rendent compte en langage clair.",
       "q2": "Comment fonctionnent BYOK et le chiffrement côté client ?",
-      "a2": "Fabrica est 100 % BYOK. Vos identifiants OpenAI, Anthropic, Gemini, DeepSeek, Stripe et GitHub sont chiffrés localement sur votre machine via AES-256 GCM dans le trousseau de votre système d'exploitation. Ils ne touchent jamais de serveurs cloud externes et ne sont déchiffrés qu'en mémoire pendant l'exécution de tâches isolées.",
-      "q3": "Comment les Git worktrees évitent les collisions avec 5+ agents ?",
-      "a3": "Les Git worktrees permettent de lier plusieurs répertoires de travail à un seul dépôt simultanément. Quand Fabrica dispatch 3 tâches développeur et 2 balayages recherche, chaque tâche tourne sur sa propre branche isolée et son arbre disque. Votre branche de travail principale reste immaculée : zéro encombrement non indexé, zéro conflit de fusion, zéro manipulation de stash manuelle.",
+      "a2": "Fabrica est 100 % BYOK. Vos clés de fournisseur vont directement à vos agents CLI — jamais via Fabrica. Les identifiants sont chiffrés localement sur votre machine via AES-256 GCM dans le trousseau de votre système d'exploitation. Ils ne touchent jamais de serveurs cloud externes et ne sont déchiffrés qu'en mémoire pendant l'exécution de tâches isolées.",
+      "q3": "Comment les Git worktrees évitent les collisions avec plusieurs agents ?",
+      "a3": "Les Git worktrees permettent de lier plusieurs répertoires de travail à un seul dépôt simultanément. Quand Fabrica dispatch des tâches parallèles, chaque agent tourne sur sa propre branche isolée et son arbre disque. Votre branche de travail principale reste immaculée : zéro encombrement non indexé, zéro conflit de fusion, zéro manipulation de stash manuelle.",
       "q4": "Comment fonctionne l'app companion mobile ?",
-      "a4": "L'app companion iOS et Android de Fabrica se connecte à votre daemon desktop local ou à un workspace cloud distant via des tunnels chiffrés de bout en bout. Vous pouvez inspecter des flux terminaux live, revoir des résumés de diff unifiés, basculer des killswitches et approuver des portes de paiement/déploiement en 1 clic directement depuis votre téléphone, loin de votre bureau.",
+      "a4": "L'app companion iOS et Android de Fabrica se connecte à votre daemon desktop local via des tunnels chiffrés de bout en bout. Vous pouvez inspecter des flux terminaux live, revoir des résumés de diff unifiés, basculer des killswitches et approuver des portes de paiement/déploiement directement depuis votre téléphone, loin de votre bureau.",
       "q5": "Faut-il savoir coder pour diriger Fabrica ?",
-      "a5": "Non. Si Fabrica est coding-first sous le capot, le centre de commande au quotidien est visuel et orienté résultat. Vous assignez des objectifs en langage clair, définissez des limites budgétaires et revoyez des diffs ou rapports unifiés avant d'approuver. Les leads techniques adorent le multiplexage terminal et les diffs AST, tandis que les fondateurs non techniques l'utilisent pour diriger une exécution full-stack sans écrire de scripts bash.",
+      "a5": "Non. Fabrica soutient les fondateurs non techniques qui veulent diriger le travail en langage clair et voir ce qui se passe ensuite. Vous assignez des objectifs en langage clair, définissez des limites budgétaires et revoyez des diffs ou des rapports avant d'approuver. Les leads techniques peuvent toujours utiliser le terminal complet et les fonctionnalités de diff AST.",
       "q6": "Quel contrôle ai-je sur ce que font les agents en autonomie ?",
-      "a6": "Contrôle total via un cadran d'autonomie dynamique. Vous pouvez configurer Fabrica en confirmation stricte pas-à-pas (chaque diff, requête web externe ou écriture de fichier exige votre approbation 1 clic) ou autoriser une exécution autonome continue dans des limites financières stricts et des permissions de répertoire ciblées.",
+      "a6": "Contrôle total. Les portes d'approbation, les plafonds budgétaires stricts et les niveaux de risque gardent le travail conséquent dans vos règles. Vous pouvez configurer Fabrica en confirmation stricte pas-à-pas ou autoriser une exécution autonome continue dans des limites financières strictes et des permissions de répertoire ciblées. Les agents proposent ; vous approuvez.",
       "q7": "Les agents peuvent-ils aider au métier au-delà du code ?",
-      "a7": "Oui. Fabrica est conçu business-first. Votre équipe inclut des rôles spécialisés Chercheur, Marketeur et Business Analyst avec des skills extensibles pour le benchmark concurrent, le positionnement de prospection à froid, la synthèse d'interviews clients, la modélisation d'unit economics et l'audit automatisé de KPI.",
-      "q8": "Local vs distant — qu'est-ce qui change entre local et cloud ?",
-      "a8": "Fabrica fonctionne nativement sur votre poste de travail local (macOS, Windows, Linux) en utilisant des git worktrees locaux et une émulation terminal à la vitesse Ghostty. Pour les routines d'arrière-plan 24/7 ou les balayages parallèles lourds, les tâches peuvent être dispatchées de façon transparente vers une VM distante headless ou un worker cloud via un tunnel daemon SSH chiffré."
+      "a7": "Oui. Fabrica supporte les opérations 24/7 — support client, gestion ecommerce, pipelines de contenu, workflows RH et gestion d'entreprise. Les mêmes équipes multi-agents, l'isolation parallèle et les garde-fous financiers orchestrent l'intelligence marché, la planification de campagnes et les opérations.",
+      "q8": "Local vs. distant — qu'est-ce qui change entre local et cloud ?",
+      "a8": "Fabrica fonctionne nativement sur votre poste de travail local (macOS, Windows, Linux) en utilisant des git worktrees locaux et une émulation terminal. Pour les routines d'arrière-plan 24/7 ou les balayages parallèles lourds, les tâches peuvent être dispatchées vers une VM distante headless ou un worker cloud via un tunnel daemon SSH chiffré."
     }
   },
   "cta": {
     "badge": "REJOIGNEZ LA COHORTE FONDATRICE",
     "headline": "The Next AI Exit.",
     "subheadline": "Fermez les onglets. Dirigez l'équipe.",
-    "paragraph": "Arrêtez d'être à la fois fondateur, développeur, copywriter et analyste. Vivez une exécution isolée parallèle sur votre desktop avec supervision mobile et garde-fous financiers stricts.",
+    "paragraph": "Arrêtez d'être à la fois fondateur, développeur, copywriter et analyste. Mettez un équipe au travail, revoyez le plan et approuvez ce qui compte.",
     "choosePlatform": "Choisissez votre plateforme",
     "required": "*",
     "enterEmail": "Saisissez votre email pro...",
@@ -782,7 +793,7 @@
     }
   },
   "footer": {
-    "tagline": "Agentic Development Environment business-first, coding-first pour fondateurs solo, consultants indépendants et équipes lean.",
+    "tagline": "Une plateforme desktop qui gère les agents CLI via des terminaux locaux — pour les fondateurs, bâtisseurs et opérateurs.",
     "operational": "Tous les systèmes opérationnels (v3.0.4)",
     "product": "Produit",
     "capabilities": "Capacités",
@@ -816,42 +827,72 @@
     "badge": "LA VISION, VISUALISÉE",
     "slides": {
       "s1": {
-        "label": "MOTEUR D'AUTONOMIE",
-        "title": "Autonomie IA 24/7 vs travail manuel",
-        "caption": "Les daemons d'arrière-plan continuent de livrer pendant votre sommeil — sans baby-sitter une seule fenêtre de prompt."
+        "label": "MOTEUR 24/7",
+        "title": "Opérations d'arrière-plan continues",
+        "caption": "Des daemons en arrière-plan gèrent le support client, la gestion ecommerce et les pipelines de contenu sous des limites budgétaires strictes et des portes d'approbation."
       },
       "s2": {
-        "label": "CENTRE DE COMMANDE",
-        "title": "L'équipe, visualisée",
-        "caption": "Plusieurs agents s'exécutant en parallèle à travers des worktrees isolés, cartographiés dans un seul plan de contrôle holographique."
+        "label": "FABRICA EN UN COUP D'ŒIL",
+        "title": "The Next AI Exit",
+        "caption": "Une image de marque qui capture toute la vision Fabrica : équipes spécialisées, portes d'approbation et opérations 24/7."
       },
       "s3": {
-        "label": "MISSION CONTROL",
-        "title": "De données en désordre à dashboard organisé",
-        "caption": "Onglets éparpillés et stash cassés s'effondrent en un seul workspace organisé que vous pouvez diriger."
+        "label": "LE MAL DU FONDATEUR",
+        "title": "Sortez du chaos nocturne",
+        "caption": "Les fondateurs solo se noient sous les outils dispersés, le jonglage permanent et les incendies à éteindre à 2 h du matin dans chaque volet de leur activité."
       },
       "s4": {
-        "label": "FIN LE GOULET DE 23 H",
-        "title": "Terminez le jonglage de contexte tardif",
-        "caption": "Confiez les tâches ingrates à une équipe supervisée et gardez votre focus sur les décisions que vous seul pouvez prendre."
+        "label": "OPÉRATIONS AU-DELÀ DU CODE",
+        "title": "Opérations 24/7 & automatisation SaaS",
+        "caption": "Automatisez l'analyse tarifaire concurrente, les campagnes de croissance et les unit economics avec des connecteurs n8n SaaS natifs."
       },
       "s5": {
-        "label": "DIRIGEZ LE FLUX",
-        "title": "Une architecture que vous pouvez diriger",
-        "caption": "Flux système visuels et portes d'approbation, depuis votre bureau — ou votre téléphone."
+        "label": "ÉQUIPES MULTI-AGENTS PARALLÈLES",
+        "title": "Orchestrez des rôles spécialisés",
+        "caption": "Agents Développeur, Chercheur, Marketeur et Analyste exécutés en simultané sur des worktrees git isolés."
+      },
+      "s6": {
+        "label": "MATRICE DE CONTRÔLE MISSION",
+        "title": "Tous vos agents, un seul centre de commande",
+        "caption": "Surveillez l'ensemble des équipes, terminaux, budgets et approbations depuis une matrice de contrôle unique pensée pour une visibilité totale."
+      },
+      "s7": {
+        "label": "CANAUX D'AGENTS & COFFRE DE CONNAISSANCES",
+        "title": "Canaux de collaboration & coffre de documents",
+        "caption": "Les agents discutent d'architecture dans des canaux dédiés en se référant à une base de connaissances partagée comme source de vérité."
+      },
+      "s8": {
+        "label": "PORTES D'APPROBATION HUMAINES",
+        "title": "Revue visible & inspection de diffs",
+        "caption": "Inspectez les diffs en direct, les garde-fous de sécurité et les seuils budgétaires avant d'autoriser paiements ou déploiements critiques."
+      },
+      "s9": {
+        "label": "EXPÉRIENCE DESKTOP PREMIUM",
+        "title": "Un desktop taillé pour le commandement",
+        "caption": "Une interface desktop haut de gamme qui place l'orchestration des agents, les terminaux en direct et l'état du système au bout des doigts."
+      },
+      "s10": {
+        "label": "LA SÉRÉNITÉ, LIVRÉE",
+        "title": "Du chaos à une livraison apaisée",
+        "caption": "Avec Fabrica aux commandes des opérations, les fondateurs livrent avec régularité et dorment tranquilles pendant que les agents absorbent la charge."
+      },
+      "s11": {
+        "label": "LE PLAN DES AGENTS",
+        "title": "Une vue holographique de vos agents",
+        "caption": "Chaque agent, tâche et dépendance projeté sur un plan holographique unique — la clarté plutôt que la complexité."
       }
     }
   },
   "layout": {
-    "title": "Fabrica — The Next AI Exit | Agentic Development Environment business-first",
-    "description": "Dirigez des équipes autonomes de Chercheur, Développeur, Marketeur et Analyste en parallèle, dans des environnements isolés avec contrôles métier stricts, limites budgétaires et portes d'approbation.",
+    "title": "Fabrica — The Next AI Exit | Plateforme desktop de gestion d'agents CLI",
+    "description": "Gérez Claude Code, Codex, OpenCode, Cursor, Devin et autres agents CLI via des terminaux locaux. Équipes de spécialistes, portes d'approbation, contrôles budgétaires et opérations 24/7.",
     "ogTitle": "Fabrica — The Next AI Exit",
-    "ogDescription": "Agentic Development Environment business-first, coding-first. Dirigez des équipes multi-agents avec exécution parallèle et vrais garde-fous métier.",
-    "twitterDescription": "Dirigez des équipes autonomes en parallèle, dans des environnements isolés avec contrôle métier strict.",
+    "ogDescription": "Plateforme desktop de gestion d'agents CLI. Dirigez des équipes multi-agents avec exécution parallèle et vrais garde-fous métier.",
+    "twitterDescription": "Gérez des agents CLI via des terminaux locaux. Équipes de spécialistes, portes d'approbation, contrôles budgétaires.",
     "keywords": [
-      "Agentic Development Environment",
+      "Gestion d'agents CLI",
       "Équipes multi-agents",
-      "Agents IA autonomes",
+      "Plateforme desktop d'agents",
       "Fondateurs solo",
       "Exécution d'agents parallèle",
       "Centre de commande IA",
@@ -859,9 +900,9 @@
     ]
   },
   "metadata": {
-    "title": "Fabrica — The Next AI Exit | Agentic Development Environment business-first",
-    "description": "Dirigez des équipes autonomes de Chercheur, Développeur, Marketeur et Analyste en parallèle, dans des environnements isolés avec contrôles métier stricts, limites budgétaires et portes d'approbation.",
+    "title": "Fabrica — The Next AI Exit | Plateforme desktop de gestion d'agents CLI",
+    "description": "Gérez Claude Code, Codex, OpenCode, Cursor, Devin et autres agents CLI via des terminaux locaux. Équipes de spécialistes, portes d'approbation, contrôles budgétaires et opérations 24/7.",
     "ogTitle": "Fabrica — The Next AI Exit",
-    "ogDescription": "Agentic Development Environment business-first, coding-first. Dirigez des équipes multi-agents avec exécution parallèle et vrais garde-fous métier."
+    "ogDescription": "Plateforme desktop de gestion d'agents CLI. Dirigez des équipes multi-agents avec exécution parallèle et vrais garde-fous métier."
   }
 }

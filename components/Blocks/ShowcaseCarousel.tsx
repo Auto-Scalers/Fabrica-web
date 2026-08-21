@@ -15,28 +15,70 @@ export const ShowcaseCarousel = () => {
 
   const slides = [
     {
-      image: '/images/carousel/fabrica-247-ai-autonomy-vs-manual-work.jpg',
+      image: '/images/carousel/carousel-00-manual-work-vs-247-autonomy.jpg',
       label: t('slides.s1.label'),
       title: t('slides.s1.title'),
       caption: t('slides.s1.caption'),
     },
     {
-      image: '/images/carousel/fabrica-futuristic-holographic-network-nodes-interface.jpg',
+      image: '/images/carousel/carousel-01-og-image.png',
       label: t('slides.s2.label'),
       title: t('slides.s2.title'),
       caption: t('slides.s2.caption'),
     },
     {
-      image: '/images/carousel/fabrica-stressed-developer-coding-late-night.jpg',
+      image: '/images/carousel/carousel-02-pain-midnight-chaos-founder.jpg',
+      label: t('slides.s3.label'),
+      title: t('slides.s3.title'),
+      caption: t('slides.s3.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-03-beyond-code-operations.jpg',
       label: t('slides.s4.label'),
       title: t('slides.s4.title'),
       caption: t('slides.s4.caption'),
     },
     {
-      image: '/images/carousel/fabrica-system-architecture-flowchart-tablet-desk.jpg',
+      image: '/images/carousel/carousel-04-parallel-crews.jpg',
       label: t('slides.s5.label'),
       title: t('slides.s5.title'),
       caption: t('slides.s5.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-05-mission-control-matrix.jpg',
+      label: t('slides.s6.label'),
+      title: t('slides.s6.title'),
+      caption: t('slides.s6.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-06-knowledge-vault-channels.jpg',
+      label: t('slides.s7.label'),
+      title: t('slides.s7.title'),
+      caption: t('slides.s7.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-07-visual-approval-gates.jpg',
+      label: t('slides.s8.label'),
+      title: t('slides.s8.title'),
+      caption: t('slides.s8.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-08-ui-flagship-desktop-ade.jpg',
+      label: t('slides.s9.label'),
+      title: t('slides.s9.title'),
+      caption: t('slides.s9.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-09-solution-serene-shipped.jpg',
+      label: t('slides.s10.label'),
+      title: t('slides.s10.title'),
+      caption: t('slides.s10.caption'),
+    },
+    {
+      image: '/images/carousel/carousel-10-photo-solution-holographic-agent-plane.jpg',
+      label: t('slides.s11.label'),
+      title: t('slides.s11.title'),
+      caption: t('slides.s11.caption'),
     },
   ]
 
@@ -77,7 +119,7 @@ export const ShowcaseCarousel = () => {
           onMouseEnter={stopAutoplay}
           onMouseLeave={() => playing && startAutoplay()}
         >
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] overflow-hidden shadow-2xl shadow-black/60">
+          <div className="relative aspect-[16/9] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] overflow-hidden shadow-2xl shadow-black/60">
             <AnimatePresence mode="wait">
               <motion.img
                 key={slide.image}
@@ -87,7 +129,7 @@ export const ShowcaseCarousel = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-contain"
               />
             </AnimatePresence>
 
@@ -119,14 +161,14 @@ export const ShowcaseCarousel = () => {
             <button
               aria-label="Previous slide"
               onClick={() => go(current - 1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/40 text-[var(--text-strong)] opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next slide"
               onClick={() => go(current + 1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/40 text-[var(--text-strong)] opacity-0 group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -147,10 +189,10 @@ export const ShowcaseCarousel = () => {
                 aria-label={`Go to slide ${index + 1}`}
                 onClick={() => go(index)}
                 className={cn(
-                  'h-1.5 rounded-full transition-all duration-300',
+                  'h-2.5 rounded-full transition-all duration-300',
                   index === current
                     ? 'w-8 bg-orange-500'
-                    : 'w-4 bg-white/25 hover:bg-[var(--overlay-5)]0'
+                    : 'w-4 bg-white/25 hover:bg-white/40'
                 )}
               />
             ))}

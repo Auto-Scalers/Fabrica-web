@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import {
   ShieldCheck,
   DollarSign,
@@ -74,8 +75,8 @@ export const ControlSection = () => {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Card 1: Interactive Field Ops & Approval Gates */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          {/* Left: Interactive Field Ops & Approval Gates card */}
           <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -108,7 +109,7 @@ export const ControlSection = () => {
                 {t('card1.desc')}
               </p>
 
-              <div className="flex gap-2 pt-1 font-mono text-xs">
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
                 {(['payment', 'deploy', 'social'] as const).map((type) => (
                   <button
                     key={type}
@@ -117,7 +118,7 @@ export const ControlSection = () => {
                       setGateStatus('pending')
                     }}
                     className={cn(
-                      'px-2.5 py-1 rounded-lg border text-[11px] transition-all',
+                      'px-3 py-2 rounded-lg border text-[11px] transition-all min-h-[36px]',
                       selectedGateType === type
                         ? 'bg-orange-500/20 text-orange-400 border-orange-500/40 font-bold'
                         : 'bg-[var(--overlay-5)] text-[var(--text-muted)] border-[var(--border-subtle)] hover:text-[var(--text-strong)]'
@@ -180,6 +181,31 @@ export const ControlSection = () => {
             </div>
           </div>
 
+          {/* Right: Standalone approval gate image */}
+          <div className="relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--surface-panel)] group">
+            <div className="relative aspect-[16/9] w-full h-full min-h-[240px]">
+              <Image
+                src="/images/standalones/social-approval-gate.png"
+                alt={t('card1.title')}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain transition-transform duration-500 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 p-4 rounded-xl bg-[var(--surface-panel)]/90 border border-[var(--border-subtle)] backdrop-blur-md m-4">
+              <p className="text-xs font-mono text-orange-400 font-semibold flex items-center gap-2">
+                <Lock className="h-3.5 w-3.5" />
+                {t('card1.title')}
+              </p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">
+                {t('card1.subtitle')}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Card 2: Client-Side Credential Vault */}
           <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
@@ -286,7 +312,7 @@ export const ControlSection = () => {
           </div>
 
           {/* Card 4: Dynamic Autonomy Spectrum & Priority Matrix */}
-          <div className="p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
+          <div className="lg:col-span-2 p-6 sm:p-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
@@ -319,7 +345,7 @@ export const ControlSection = () => {
                 max="100"
                 value={autonomyValue}
                 onChange={(e) => setAutonomyValue(Number(e.target.value))}
-                className="w-full accent-orange-500 cursor-pointer h-2 bg-[var(--overlay-10)] rounded-lg"
+                className="w-full accent-orange-500 cursor-pointer h-3 sm:h-2 bg-[var(--overlay-10)] rounded-lg"
               />
               <div className="flex justify-between text-[11px] font-mono text-[var(--text-muted)]">
                 <span>{t('card4.stepByStep')}</span>

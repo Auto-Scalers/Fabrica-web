@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { motion } from 'motion/react'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -11,6 +12,7 @@ import {
   KeyRound,
   Smartphone,
   Sparkles,
+  Terminal,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
@@ -52,6 +54,70 @@ export const WhyFabrica = () => {
             {t('paragraph')}
           </p>
         </motion.div>
+
+        {/* Standalone architecture image + under-the-hood text (two-column) */}
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Left: Standalone architecture image */}
+          <div className="relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--surface-panel)] group order-1">
+            <div className="relative aspect-[4/3] w-full">
+              <Image
+                src="/images/standalones/hands-on-architecture.jpg"
+                alt={t('architecture.title')}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain transition-transform duration-500 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
+
+          {/* Right: Under-the-hood architecture text */}
+          <motion.div
+            className="space-y-5 order-2"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-strong)] tracking-tight leading-tight">
+              {t('architecture.title')}
+            </h3>
+
+            <p className="text-base text-[var(--text-muted)] leading-relaxed">
+              {t('architecture.desc')}
+            </p>
+
+            <div className="space-y-4 pt-1">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-400 shrink-0">
+                  <Terminal className="h-4 w-4" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-[var(--text-strong)]">{t('architecture.point1Title')}</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">{t('architecture.point1Desc')}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
+                  <GitBranch className="h-4 w-4" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-[var(--text-strong)]">{t('architecture.point2Title')}</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">{t('architecture.point2Desc')}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0">
+                  <ShieldCheck className="h-4 w-4" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-[var(--text-strong)]">{t('architecture.point3Title')}</h4>
+                  <p className="text-sm text-[var(--text-muted)] leading-relaxed">{t('architecture.point3Desc')}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pillarKeys.map((key, index) => {

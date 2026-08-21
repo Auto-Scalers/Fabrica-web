@@ -63,11 +63,11 @@ export const PainSection = () => {
           <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--surface-panel)] group">
             <div className="relative aspect-[4/3] w-full">
               <Image
-                src="/images/desk_pain_11pm.jpg"
+                src="/images/standalones/pain-exhausted-developer-11pm.jpg"
                 alt={t('altPain')}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-contain transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
             </div>

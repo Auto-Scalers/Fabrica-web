@@ -227,6 +227,52 @@ html:not(.dark) {
   --overlay-10: oklch(0.97 0.005 280 / 0.10);
 }
 
+/* W20: Hero background image. Dark theme keeps the original look
+   (blur only). In light theme the image stays blurred only — readability
+   comes from the white scrim above it, not from dimming. */
+.fabrica-hero-bg {
+  filter: blur(1px);
+}
+
+/* W20: Light-theme-only white glow around hero text so dark ink stays
+   crisp over the busy background image. No overlay or image change. */
+html:not(.dark) .hero-halo {
+  text-shadow:
+    0 1px 2px oklch(0.99 0 0 / 90%),
+    0 0 10px oklch(0.99 0 0 / 75%),
+    0 0 26px oklch(0.99 0 0 / 60%);
+}
+
+/* W20: Near-black hero text tokens in light theme. */
+html:not(.dark) .fabrica-hero {
+  --text-strong: oklch(0.09 0.02 40);
+  --text-muted: oklch(0.22 0.02 50);
+  --text-subtle: oklch(0.30 0.016 55);
+}
+
+/* W20: Pure-white hero headline in dark theme. */
+.dark .fabrica-hero h1 {
+  color: oklch(1 0 0);
+}
+
+/* FinalCta banner image sits above the scrim (DOM order), so no blur or
+   dimming is needed — it renders as a crisp bottom banner. */
+
+/* Near-black CTA text tokens in light theme (darker over the image). */
+html:not(.dark) .fabrica-cta {
+  --text-strong: oklch(0.09 0.02 40);
+  --text-muted: oklch(0.22 0.02 50);
+  --text-subtle: oklch(0.30 0.016 55);
+}
+
+/* Pure-white CTA text tokens in dark theme. html.dark matches the
+   specificity of the light rule above, so source order keeps dark winning. */
+html.dark .fabrica-cta {
+  --text-strong: oklch(1 0 0);
+  --text-muted: oklch(0.87 0.01 280);
+  --text-subtle: oklch(0.92 0.008 280);
+}
+
 /* Command-center frames stay obsidian even in light mode */
 html:not(.dark) .command-frame {
   --surface-page: oklch(0.12 0.012 280);

@@ -56,6 +56,48 @@ These endpoints serve the desktop app. The app already has client code pointing 
 |---|------|--------|-------|
 | W12 | Update any Orca references in page copy | **DONE** | Audit complete: 3 refs in public/ (historical changelog + kill-list plugin). Not page copy. No changes needed. |
 | W13 | Update meta tags / OG images if needed | **DONE** | Audit complete: all OG/Twitter/meta tags already say Fabrica with correct URLs. No changes needed. |
+| W13b | Update pricing tiers in landing page | **DONE** | Tiers renamed: Power User, One-Person Company, Agency & Teams. All CTAs say "Start 14-Day Free Trial". Updated en.json, fr.json, ar.json. Prices remain placeholders ($29/$79/$199). |
+
+---
+
+## Phase 6 — Landing Page Enhancement
+
+> **CRITICAL:** Every element of the landing page must be derived from the 3 internal marketing files. Read each file line by line, word by word. No copy should exist that doesn't align with these files.
+>
+> **Source files (read all 3 before writing any copy):**
+> - `Fabrica-marketing/internal/brand/brand-guidelines.md` — voice, tone, visual identity, word bank, blacklist, correct/incorrect usage examples
+> - `Fabrica-marketing/internal/brand/positioning-statement.md` — positioning, key differentiators, messaging hierarchy, proof points
+> - `Fabrica-marketing/internal/research/competitor-landscape.md` — competitor insights, positioning opportunities, market gaps, Fabrica response to each competitor
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| W14 | Replace carousel images with new assets from `public/images/` | **DONE** | Updated ShowcaseCarousel.tsx with correct image paths (carousel-00 through carousel-10). Fixed aspect ratio to 16/9, switched to object-contain for full images. |
+| W15 | Add standalone images with text overlays from `public/images/standalones/` | **DONE** | All 5 standalone images added: pain-exhausted-developer (PainSection), social-parallel-agents (TurnSection), social-approval-gate (ControlSection), mobile-companion-remote (OrchestrationSection), hands-on-architecture (FeatureSection). All use object-contain. |
+| W16 | Apply `fabrica-buttom-bg` as background to bottom section | **DONE** | Added fabrica-buttom-bg.png background to FinalCta.tsx following Hero.tsx pattern (absolute inset, backgroundSize 100% auto, bg-white/20 dark overlay). |
+| W17 | Rewrite ALL landing page copy using the 3 marketing internal files | **DONE** | Full rewrite of en.json using brand-guidelines.md, positioning-statement.md, and competitor-landscape.md. All sections grounded in source docs. Blacklisted terms removed. |
+| W18 | French & Arabic localization quality pass | **DONE** | fr.json and ar.json fully updated to match new en.json. Natural phrasing, brand voice preserved. All sections aligned. |
+| W19 | Mobile responsiveness audit — verify all new sections | **VERIFY** | Audit complete. Fixed: (1) ShowcaseCarousel nav buttons always visible on touch, pagination dots enlarged. (2) OrchestrationSection engine nav touch targets enlarged, overflow-hidden added. (3) FinalCta background image changed to `cover` for proper mobile scaling. (4) ControlSection gate toggles enlarged, range slider thickened. All other sections verified clean. |
+
+**Rules for W17:**
+1. Read `brand/brand-guidelines.md` — adopt the voice, use the word bank, respect the blacklist
+2. Read `brand/positioning-statement.md` — use the positioning statement, key differentiators, and messaging hierarchy verbatim where appropriate
+3. Read `research/competitor-landscape.md` — use competitor insights, proof points, and Fabrica responses for the "Why Fabrica" section
+4. Every section of the landing page must trace back to one of these 3 files
+5. No generic marketing copy — everything must be grounded in the internal docs
+
+### Phase 6b — PM Review Feedback (Aug 2026)
+
+> Feedback from PM visual review of the landing page. Execute after W14-W19.
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| W20 | Top background: darken text in light theme | **IN PROGRESS** | In dark theme texts are perfectly visible/readable, but in light/white theme they are too soft. Darken the TEXT only — the background itself is perfect |
+| W21 | Audit: all carousel + standalone images present? | **IN PROGRESS** | Two workers: one auditing carousel images, one auditing standalone images. Verify every image from public/images/ appears on the landing page |
+| W22 | Standalone images: side-by-side layout with relevant text | **IN PROGRESS** | Handled by the W21-standalones worker. Left/right framed layout, text strictly relevant to each image |
+| W23 | Bottom background: add blur + strengthen overlay | **IN PROGRESS** | The bottom background needs a blur effect just like the top one has. Also the texts and cards above it need to be harder/more opaque so they remain visible over the background |
+| W24 | Deduplicate content across all sections | **TODO** | Make sure there are no duplicates across the landing page. Each section must be clear, direct, and focused on ONE thing so users don't get saturated |
+| W25 | Coverage audit vs internal marketing files | **TODO** | Read the 3 internal marketing files and map what is covered on the landing page, what is NOT covered, and how we can enhance or add missing points |
+| W26 | Top navigation bar: align with page sections | **TODO** | Make sure the top navigation bar links align with the actual page sections (correct anchors, correct scroll positions) |
 
 ---
 
@@ -94,8 +136,22 @@ These endpoints serve the desktop app. The app already has client code pointing 
 | Session Handle | Type | Task/Group | Status | Created | Worktree Branch | Merged |
 |---------------|------|-----------|--------|---------|----------------|--------|
 | `term_0adb1b43-ceeb-47c7-ad47-f65f6df17d3e` | orchestrator | web-orchestrator | **active** | Aug 2026 | `main` (Fabrica-web/) | — |
-| `ctx_3325b3345a41` | worker | W12 Orca copy audit | **active** | Aug 2026 | `web-W12-audit` | — |
-| `ctx_00d2c7b7121a` | worker | W13 meta/OG rebrand | **active** | Aug 2026 | `web-W13-meta` | — |
+| `ctx_3325b3345a41` | worker | W12 Orca copy audit | **released** | Aug 2026 | `web-W12-audit` | ✅ |
+| `ctx_00d2c7b7121a` | worker | W13 meta/OG rebrand | **released** | Aug 2026 | `web-W13-meta` | ✅ |
+| `ctx_5685e8eae1d3` | worker | W13b Pricing tiers | **released** | Aug 2026 | `main` (Fabrica-web/) | ✅ |
+| `ctx_d2bdaef9b4b8` | worker | W14+W15+W16 Visual assets | **released** | Aug 2026 | `main` (Fabrica-web/) | ✅ |
+| `task_4799a55a4149` | task | W17 Copy rewrite | **completed** | Aug 2026 | — | ✅ |
+| `term_c9db7d6e-8ba3-45fc-95de-9c0f6276c2b8` | worker | W17 Copy rewrite | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_a2eb2cb3-081b-473d-a188-775a29fe6fd9` | worker | W18 FR/AR localization | **stopped** | Aug 2026 | Fabrica-web/ | — |
+| `term_3bdeae00-c2a2-4dd7-ac80-96c34ecafb92` | worker | W18 FR/AR localization | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_07702fa9-702a-45a4-847d-edd2f45a02d2` | worker | W19 Mobile audit | **released** | Aug 2026 | Fabrica-web/ | ✅ |
+| `term_c980e3be-cdd7-499b-a9c6-062d9eb2af51` | worker | W20 Light theme text | **active** | Aug 2026 | Fabrica-web/ | — |
+| `term_ac62af28-0da2-4c19-a9a7-cbf55e7c0679` | worker | W21 Carousel audit | **active** | Aug 2026 | Fabrica-web/ | — |
+| `term_0f27b013-a505-4f53-a910-88b43bbc3f35` | worker | W21 Standalones + W22 | **active** | Aug 2026 | Fabrica-web/ | — |
+| `term_847538fd-65ae-4c9d-bf60-b32129175bd7` | worker | W23 Bottom bg blur | **active** | Aug 2026 | Fabrica-web/ | — |
+| `term_14e2a27c-b273-4598-85e5-01dc15e8f132` | worker | STATIC-JSON changelog+kill-list — run `run_effeaea830f9`, task `task_88c8534c1c42`, dispatch `ctx_ed060bcdc7d3` | **active** | Aug 21 2026 | Fabrica-web/ | — |
+| `term_99c98028-50a4-4c06-97d1-c45344c4ec62` | worker | W24+W26 dedupe + nav alignment — run `run_effeaea830f9`, task `task_e7d2fee2a3ed`, dispatch `ctx_2495f8df3ffc` | **active** | Aug 21 2026 | Fabrica-web/ | — |
+| `term_6180e0da-9d37-48df-a0fc-2a33fa9ed08b` | worker | W25 coverage audit (read-only) — run `run_effeaea830f9`, task `task_707a4694155d`, dispatch `ctx_3b988764f1c6` | **active** | Aug 21 2026 | Fabrica-web/ | — |
 
 **Rules:**
 - Only the main orchestrator creates sessions in this ledger

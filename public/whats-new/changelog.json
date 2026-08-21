@@ -1,61 +1,9 @@
-{
-  "version": "1.4.178-rc.2",
-  "updatedAt": "2026-08-18",
-  "product": "Fabrica",
-  "entries": [
-    {
-      "version": "1.4.178-rc.2",
-      "date": "2026-08-18",
-      "title": "Reborn as Fabrica",
-      "sections": [
-        {
-          "type": "added",
-          "heading": "Added",
-          "items": [
-            "Rebranded from Orca to Fabrica across the desktop app and landing site",
-            "New in-app What's New changelog feed",
-            "Plugin marketplace kill-list enforcement"
-          ]
-        },
-        {
-          "type": "improved",
-          "heading": "Improved",
-          "items": [
-            "Faster relay handshake for the desktop command relay",
-            "Streamlined onboarding for first-run users"
-          ]
-        },
-        {
-          "type": "fixed",
-          "heading": "Fixed",
-          "items": [
-            "Resolved a crash when reconnecting after sleep",
-            "Corrected auto-updater signature verification on Windows"
-          ]
-        }
-      ]
-    },
-    {
-      "version": "1.4.0",
-      "date": "2026-07-02",
-      "title": "Foundry Foundations",
-      "sections": [
-        {
-          "type": "added",
-          "heading": "Added",
-          "items": [
-            "Dark forge theme with copper/amber accent tokens",
-            "Early-access signup flow on the landing page"
-          ]
-        },
-        {
-          "type": "fixed",
-          "heading": "Fixed",
-          "items": [
-            "Memory leak in long-running agent sessions"
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "version": "1.4.178-rc.2",
+    "title": "Reborn as Fabrica",
+    "description": "Orca is now Fabrica — a full rebrand with a new dark forge look, the plugin marketplace with safety kill-list enforcement, and a faster relay handshake.",
+    "mediaUrl": "https://fabrica-ai.vercel.app/images/carousel/carousel-00-manual-work-vs-247-autonomy.jpg",
+    "releaseNotesUrl": "https://fabrica-ai.vercel.app/changelog/1.4.178-rc.2"
+  }
+]

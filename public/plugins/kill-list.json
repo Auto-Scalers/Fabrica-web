@@ -1,30 +1,5 @@
 {
-  "updatedAt": "2026-08-18",
-  "product": "Fabrica",
-  "plugins": [
-    {
-      "id": "com.orca.legacy-bridge",
-      "name": "Orca Legacy Bridge",
-      "reason": "Deprecated legacy package no longer maintained after the Fabrica rebrand",
-      "severity": "high",
-      "versions": ["<=1.3.0"],
-      "replacement": "com.fabrica.bridge"
-    },
-    {
-      "id": "com.example.unsafe-injector",
-      "name": "Unsafe Injector",
-      "reason": "Removed for arbitrary code execution vulnerability",
-      "severity": "critical",
-      "versions": ["*"],
-      "replacement": null
-    },
-    {
-      "id": "com.example.telemetry-siphon",
-      "name": "Telemetry Siphon",
-      "reason": "Removed for exfiltrating user data without consent",
-      "severity": "critical",
-      "versions": ["*"],
-      "replacement": null
-    }
-  ]
+  "version": 1,
+  "generatedAt": "2026-08-21T00:00:00Z",
+  "plugins": []
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 import {
   GitBranch,
   RotateCcw,
@@ -118,72 +119,72 @@ export const OrchestrationSection = () => {
         </div>
 
         {/* Interactive Orchestration Command Center Simulation */}
-        <div className="mt-10 rounded-2xl border border-[var(--border-subtle)] bg-[#0D0E15] shadow-2xl overflow-hidden command-frame">
+        <div className="mt-10 rounded-2xl border border-[var(--border-subtle)] bg-[#0D0E15] shadow-2xl overflow-hidden command-frame max-w-full">
           {/* Top Engine Navigation Bar */}
-          <div className="px-5 py-3.5 bg-[#07080C] border-b border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+          <div className="px-4 sm:px-5 py-3.5 bg-[#07080C] border-b border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
             <div className="flex flex-wrap items-center gap-1 bg-black/50 p-1 rounded-lg border border-[var(--border-subtle)]">
               <button
                 onClick={() => setActiveEngineView('worktrees')}
                 className={cn(
-                  'px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5',
+                  'px-3 py-2 sm:py-1.5 rounded-md transition-all flex items-center gap-1.5 min-h-[36px]',
                   activeEngineView === 'worktrees'
                     ? 'bg-orange-500 text-[var(--text-strong)] font-bold shadow'
                     : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
                 )}
               >
-                <GitBranch className="h-3.5 w-3.5" />
+                <GitBranch className="h-3.5 w-3.5 shrink-0" />
                 <span>{t('gitWorktrees')}</span>
               </button>
 
               <button
                 onClick={() => setActiveEngineView('spec_editor')}
                 className={cn(
-                  'px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5',
+                  'px-3 py-2 sm:py-1.5 rounded-md transition-all flex items-center gap-1.5 min-h-[36px]',
                   activeEngineView === 'spec_editor'
                     ? 'bg-orange-500 text-[var(--text-strong)] font-bold shadow'
                     : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
                 )}
               >
-                <FileText className="h-3.5 w-3.5" />
+                <FileText className="h-3.5 w-3.5 shrink-0" />
                 <span>{t('markdownPlan')}</span>
               </button>
 
               <button
                 onClick={() => setActiveEngineView('terminals')}
                 className={cn(
-                  'px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5',
+                  'px-3 py-2 sm:py-1.5 rounded-md transition-all flex items-center gap-1.5 min-h-[36px]',
                   activeEngineView === 'terminals'
                     ? 'bg-orange-500 text-[var(--text-strong)] font-bold shadow'
                     : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
                 )}
               >
-                <Terminal className="h-3.5 w-3.5" />
+                <Terminal className="h-3.5 w-3.5 shrink-0" />
                 <span>{t('gpuTerminals')}</span>
               </button>
 
               <button
                 onClick={() => setActiveEngineView('browser_qa')}
                 className={cn(
-                  'px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5',
+                  'px-3 py-2 sm:py-1.5 rounded-md transition-all flex items-center gap-1.5 min-h-[36px]',
                   activeEngineView === 'browser_qa'
                     ? 'bg-orange-500 text-[var(--text-strong)] font-bold shadow'
                     : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
                 )}
               >
-                <Globe className="h-3.5 w-3.5" />
+                <Globe className="h-3.5 w-3.5 shrink-0" />
                 <span>{t('headlessQA')}</span>
               </button>
 
               <button
                 onClick={() => setActiveEngineView('mobile_sync')}
                 className={cn(
-                  'px-3 py-1.5 rounded-md transition-all flex items-center gap-1.5',
+                  'px-3 py-2 sm:py-1.5 rounded-md transition-all flex items-center gap-1.5 min-h-[36px]',
                   activeEngineView === 'mobile_sync'
                     ? 'bg-orange-500 text-[var(--text-strong)] font-bold shadow'
                     : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
                 )}
               >
-                <Smartphone className="h-3.5 w-3.5" />
+                <Smartphone className="h-3.5 w-3.5 shrink-0" />
                 <span>{t('phoneCompanion')}</span>
               </button>
             </div>
@@ -206,7 +207,7 @@ export const OrchestrationSection = () => {
 
           {/* VIEW 1: GIT WORKTREES CANVAS */}
           {activeEngineView === 'worktrees' && (
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 font-mono text-xs">
+            <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 font-mono text-xs overflow-hidden">
               {/* Thread 1: Developer Worktree */}
               <div className="p-4 rounded-xl bg-[var(--surface-card)] border border-orange-500/30 space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)]">
@@ -304,7 +305,7 @@ export const OrchestrationSection = () => {
 
           {/* VIEW 2: MARKDOWN PLAN & SPEC EDITOR */}
           {activeEngineView === 'spec_editor' && (
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 font-mono text-xs">
+            <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 font-mono text-xs overflow-hidden">
               <div className="lg:col-span-6 p-4 rounded-xl bg-[var(--surface-section)] border border-[var(--border-subtle)] space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-[var(--border-subtle)] text-[var(--text-muted)]">
                   <span className="text-[var(--text-strong)] font-bold flex items-center gap-1.5">
@@ -423,25 +424,7 @@ export const OrchestrationSection = () => {
 
           {/* VIEW 5: PHONE COMPANION APP */}
           {activeEngineView === 'mobile_sync' && (
-            <div className="p-6 bg-[var(--surface-panel)] min-h-[300px] font-mono text-xs flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="space-y-3 max-w-md">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-blue-950/40 border border-blue-500/30 text-blue-400 text-[10px]">
-                  <Smartphone className="h-3.5 w-3.5" />
-                  <span>{t('mobileApp')}</span>
-                </div>
-                <h3 className="text-base font-bold text-[var(--text-strong)] font-sans">
-                  {t('mobileTitle')}
-                </h3>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed font-sans">
-                  {t('mobileDesc')}
-                </p>
-                <div className="flex gap-3 text-[11px]">
-                  <span className="text-emerald-400">Ã¢Å"â€œ {t('tapApprovals')}</span>
-                  <span className="text-orange-400">Ã¢Å"â€œ {t('liveTty')}</span>
-                  <span className="text-blue-400">Ã¢Å"â€œ {t('killswitch')}</span>
-                </div>
-              </div>
-
+            <div className="p-6 bg-[var(--surface-panel)] min-h-[300px] font-mono text-xs flex items-center justify-center">
               {/* Mobile Simulation Frame */}
               <div className="w-full max-w-[260px] p-3 rounded-2xl bg-black border-2 border-[var(--border-subtle)] shadow-2xl space-y-2.5">
                 <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] pb-1 border-b border-[var(--border-subtle)]">
@@ -464,6 +447,53 @@ export const OrchestrationSection = () => {
             </div>
           )}
         </div>
+
+        {/* Standalone mobile companion image + remote oversight text (always visible, two-column) */}
+        <Reveal className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Left: Remote oversight text */}
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-blue-950/40 border border-blue-500/30 text-blue-400 text-[11px] font-mono">
+              <Smartphone className="h-3.5 w-3.5" />
+              <span>{t('mobileApp')}</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-strong)] tracking-tight leading-tight">
+              {t('mobileTitle')}
+            </h3>
+            <p className="text-base text-[var(--text-muted)] leading-relaxed">
+              {t('mobileDesc')}
+            </p>
+            <div className="flex flex-wrap gap-3 pt-1 text-sm">
+              <span className="inline-flex items-center gap-1.5 text-emerald-400">
+                <CheckCircle2 className="h-4 w-4" />
+                {t('tapApprovals')}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-orange-400">
+                <Terminal className="h-4 w-4" />
+                {t('liveTty')}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-blue-400">
+                <Globe className="h-4 w-4" />
+                {t('killswitch')}
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Standalone mobile companion image */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] shadow-2xl bg-[var(--surface-panel)] w-full max-w-[320px] group">
+              <div className="relative aspect-[3/4] w-full">
+                <Image
+                  src="/images/standalones/mobile-companion-remote.jpg"
+                  alt={t('mobileTitle')}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 320px"
+                  className="object-contain transition-transform duration-500 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

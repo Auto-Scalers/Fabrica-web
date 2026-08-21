@@ -57,7 +57,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://fabrica-ai.vercel.app/images/carousel/fabrica-247-ai-autonomy-vs-manual-work.jpg",
+          url: "https://fabrica-ai.vercel.app/images/carousel/carousel-01-og-image.png",
           width: 1200,
           height: 630,
           alt: "Fabrica — Autonomous AI crew command center",
