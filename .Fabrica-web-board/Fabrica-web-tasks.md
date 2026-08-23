@@ -2,6 +2,14 @@
 
 > Single source of truth for all landing page / API route work. The Roadmap (`.Fabrica-board/Fabrica-Roadmap.md`) tracks cross-cutting status only — this file owns execution details. Schema: `.Fabrica-board/Fabrica-Schema.md`.
 
+## High-Level Goals
+
+> WHAT THIS PROJECT IS FOR — read this before any task:
+
+1. **A launch-grade landing page.** Every word traceable to the 3 internal marketing files; honest claims only; flawless on mobile; en/fr/ar in perfect parity.
+2. **Working backend endpoints.** Auth/share/diagnostics/telemetry routes live and matching what the desktop client expects (lockstep with Fabrica-app).
+3. **Beta-launch ready.** Live deployment verified (fabrica-ai.vercel.app), signup flow working, static JSON contracts (changelog/nudge/kill-list) served correctly — gate for Roadmap Phase B.
+
 ---
 
 ## Rollup
@@ -9,15 +17,15 @@
 | Metric | Value |
 |---|---|
 | Total tasks | 30 |
-| ✅ DONE | 20 |
-| 🔶 IN_PROGRESS | 0 |
-| 👀 VERIFY | 10 |
+| ✅ DONE | 18 |
+| 🔶 IN_PROGRESS | 1 |
+| 👀 VERIFY | 11 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 67% |
+| Completion | 60% |
 
-_Last recount: 2026-08-23_
+_Last recount: 2026-08-23 (corrected — prior recount overstated DONE by 2; W26 is IN_PROGRESS, W19 + W1–W10 are VERIFY)_
 
 ## Parallelism & Anti-Overlap Policy
 

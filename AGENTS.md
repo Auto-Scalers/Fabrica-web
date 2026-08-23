@@ -15,6 +15,15 @@ This is the **Fabrica landing page** — a Next.js web app hosted at `fabrica-ai
 - Supabase (early-access signup)
 - Vercel Analytics
 
+## Commands
+
+Run these before claiming DONE (from `Fabrica-web/`):
+
+```bash
+npm run lint       # ESLint
+npm run build      # production build (must compile clean)
+```
+
 ## What You Should Know
 
 - This is a rebrand from Orca to Fabrica
@@ -28,6 +37,16 @@ This is the **Fabrica landing page** — a Next.js web app hosted at `fabrica-ai
 - **TypeScript strict** — no `any` types
 - **Tailwind only** — no inline styles or CSS modules
 - **Named exports** for components, default exports for pages/layouts
+
+## Definition of Done
+
+A task is DONE only when ALL of these hold:
+
+1. **Commands pass:** `npm run lint` and `npm run build` compile clean — paste real output as evidence.
+2. **Copy grounding:** every landing-page string traces to one of the 3 internal marketing files (brand-guidelines, positioning-statement, competitor-landscape).
+3. **i18n parity:** any key changed in `en.json` is mirrored in `fr.json` and `ar.json` with identical structure.
+4. **No Orca/Stably branding** in page copy or meta tags.
+5. **Tracking files updated in the same edit:** task status + Rollup recount in `.Fabrica-web-board/Fabrica-web-tasks.md`, Checkpoint table, Session Ledger row.
 
 ## What You Do NOT Do
 
@@ -70,7 +89,15 @@ public/             — Static assets (kill-list.json, changelog.json, nudge.jso
 
 ## Task File
 
-Your task file is `.Fabrica-web-board/Fabrica-web-tasks.md` — the single source of truth for all web work.
+Your task file is `.Fabrica-web-board/Fabrica-web-tasks.md` — the single source of truth for all web work. Schema for all tracking edits: `.Fabrica-board/Fabrica-Schema.md` (Tracking Schema v1 — status enum, Rollup, Checkpoint, Session Ledger).
+
+## Resume Protocol
+
+On heartbeat kick or session resume:
+
+1. Read `.Fabrica-board/Heartbeat.md` (if you are the orchestrator slot) and your task file's **Checkpoint (Current State)** table FIRST.
+2. Continue from the **Next Action** cell — never restart completed work; check Status + Notes before dispatching.
+3. Any status change updates the Rollup in the same edit.
 
 ## How to Send Results
 
