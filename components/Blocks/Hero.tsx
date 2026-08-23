@@ -114,7 +114,7 @@ const crewMembers = [
       worktree: t('crewMembers.analyst.worktree'),
       logs: [
         '📊 Running financial simulation across 500 active tasks',
-        '📈 Calculated margin: 78.4% gross margin at $149/mo tier',
+        '📈 Calculated margin: 78.4% gross margin at current tier',
         '⚠️ Hard budget threshold verified: spend is 51.8% under cap',
         '📋 Audit complete. Report saved to /ops/fin-model.json',
       ],
@@ -218,6 +218,9 @@ const crewMembers = [
             <span className="text-[var(--text-subtle)]">|</span>
             <span className="text-[var(--text-strong)]">{t('badgeSub')}</span>
           </div>
+          <p className="relative z-10 -mt-3 text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            {t('taglineClarifier')}
+          </p>
 
           <h1 className="hero-halo relative z-10 text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[var(--text-strong)] leading-[1.08]">
             <span className="block">{t('headline1a')}</span>
@@ -236,6 +239,10 @@ const crewMembers = [
 
           <p className="hero-halo relative z-10 text-xl sm:text-2xl text-[var(--text-muted)] max-w-3xl mx-auto leading-relaxed">
             {t('subheadline')}
+          </p>
+
+          <p className="relative z-10 text-lg sm:text-xl font-semibold text-[var(--text-strong)] tracking-tight">
+            {t('triad')}
           </p>
 
           <div className="relative z-10 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-mono text-[var(--text-muted)] pt-1">

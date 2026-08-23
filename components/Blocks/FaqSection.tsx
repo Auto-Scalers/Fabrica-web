@@ -17,10 +17,10 @@ export const FaqSection = () => {
   const t = useTranslations('faq')
   const [openValue, setOpenValue] = useState<string[]>(['0'])
 
-  const faqKeys = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'] as const
+  const faqKeys = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9'] as const
 
   return (
-    <section id="faq" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
+    <section id="faq" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-20">
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[350px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6">

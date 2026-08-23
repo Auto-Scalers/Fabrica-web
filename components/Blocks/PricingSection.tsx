@@ -38,7 +38,7 @@ export const PricingSection = () => {
   })
 
   return (
-    <section id="pricing" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
+    <section id="pricing" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-20">
       <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

@@ -35,6 +35,10 @@ export const TurnSection = () => {
               {t('paragraph')}
             </p>
 
+            <p className="text-lg sm:text-xl font-semibold text-orange-700 dark:text-orange-300 border-l-2 border-orange-500/60 pl-4 leading-snug">
+              {t('promise')}
+            </p>
+
             {/* Core mechanical shifts */}
             <div className="space-y-3 pt-2">
               <div className="flex items-start gap-3 text-sm text-[var(--text-strong)]">

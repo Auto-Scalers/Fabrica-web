@@ -19,7 +19,7 @@ import { useTranslations } from 'next-intl'
 export const WhyFabrica = () => {
   const t = useTranslations('features')
 
-  const pillarKeys = ['crews', 'worktrees', 'budget', 'gates', 'vault', 'autonomy'] as const
+  const pillarKeys = ['crews', 'worktrees', 'budget', 'gates', 'vault', 'autonomy', 'adaptive'] as const
   const pillarIcons: Record<string, React.ElementType> = {
     crews: Users,
     worktrees: GitBranch,
@@ -27,6 +27,7 @@ export const WhyFabrica = () => {
     gates: ShieldCheck,
     vault: KeyRound,
     autonomy: Smartphone,
+    adaptive: Sparkles,
   }
 
   return (

@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   FileSpreadsheet,
   Clock,
+  MessageSquare,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
@@ -32,6 +33,12 @@ export const PainSection = () => {
       title: t('p3Title'),
       description: t('p3Desc'),
       metric: t('p3Metric'),
+    },
+    {
+      icon: MessageSquare,
+      title: t('p4Title'),
+      description: t('p4Desc'),
+      metric: t('p4Metric'),
     },
   ]
 

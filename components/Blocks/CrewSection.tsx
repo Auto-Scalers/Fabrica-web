@@ -73,7 +73,7 @@ export const CrewSection = () => {
         },
         {
           source: 'Synthesis Recommendation',
-          insight: 'Position Fabrica on unlimited parallel isolated worktrees with hard budget auto-kill switches.',
+          insight: 'Position Fabrica on parallel isolated worktrees with hard budget auto-kill switches.',
           confidence: 'Actionable',
         },
       ],
@@ -123,7 +123,7 @@ export const CrewSection = () => {
   const current = crewRoles.find((r) => r.id === activeRole) || crewRoles[0]
 
   return (
-    <section id="crew" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
+    <section id="crew" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-20">
       {/* Background radial accent */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
 

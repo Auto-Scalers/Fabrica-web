@@ -23,7 +23,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('product'), href: '#product' },
     { name: t('crew'), href: '#crew' },
-    { name: t('howItWorks'), href: '#command-center' },
+    { name: t('howItWorks'), href: '#how-it-works' },
     { name: t('controls'), href: '#controls' },
     { name: t('comparison'), href: '#comparison' },
     { name: t('pricing'), href: '#pricing' },

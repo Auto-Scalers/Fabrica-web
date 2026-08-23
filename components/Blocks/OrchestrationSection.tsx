@@ -61,8 +61,8 @@ export const OrchestrationSection = () => {
 
   return (
     <section
-      id="command-center"
-      className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-page)] overflow-hidden"
+      id="how-it-works"
+      className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-page)] overflow-hidden scroll-mt-20"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-3xl pointer-events-none -z-10" />

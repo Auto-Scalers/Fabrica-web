@@ -46,6 +46,28 @@ messages/           — i18n translation files (en, ar, fr, etc.)
 public/             — Static assets (kill-list.json, changelog.json, nudge.json)
 ```
 
+## Parallelism & Anti-Overlap Policy
+
+> This project runs REAL 24/7 multi-terminal orchestration. Parallelism is the
+> default: unlimited tokens, multi-terminal app, massive project, close deadline.
+
+- **Minimum fleet:** the orchestrator keeps AT LEAST 3 active worker terminals at
+  all times. Fewer than 3 on resume or cycle end => launching more comes FIRST,
+  chosen from the highest-priority TODO/VERIFY tasks in this file, focused on
+  high-level goals and principles, not micro-edits.
+- **One task = one worker:** claim a task by setting its status IN_PROGRESS and
+  recording your terminal handle in the Session Ledger BEFORE starting. Claimed
+  tasks are forbidden to everyone else.
+- **One folder = one orchestrator:** never work another slot's folder.
+- **One file = one writer:** two live workers never edit the same file; such tasks
+  run sequentially.
+- **Claim-before-work:** confirm your Task ID is still unclaimed before executing;
+  if done or claimed, stop and report instead of duplicating.
+- **Cross-project dependencies:** record them as notes in the OTHER project's task
+  file; never edit another project directly.
+- **Quality bar unchanged under deadline pressure:** no DONE without verified
+  evidence; status change and Rollup update happen in the same edit.
+
 ## Task File
 
 Your task file is `.Fabrica-web-board/Fabrica-web-tasks.md` — the single source of truth for all web work.

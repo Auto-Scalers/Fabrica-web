@@ -55,7 +55,7 @@ export const ControlSection = () => {
   const currentGate = gateDetails[selectedGateType]
 
   return (
-    <section id="controls" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden">
+    <section id="controls" className="relative py-20 lg:py-32 border-t border-[var(--border-faint)] bg-[var(--surface-section)] overflow-hidden scroll-mt-20">
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[500px] bg-orange-600/10 blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-1/4 w-[500px] h-[400px] bg-blue-600/10 blur-3xl pointer-events-none -z-10" />
 

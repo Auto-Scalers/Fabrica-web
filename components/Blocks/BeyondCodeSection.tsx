@@ -6,6 +6,7 @@ import {
   Megaphone,
   TrendingUp,
   Workflow,
+  Webhook,
   Boxes,
 } from 'lucide-react'
 import { Reveal } from './Reveal'
@@ -15,12 +16,13 @@ import { useTranslations } from 'next-intl'
 export const BeyondCodeSection = () => {
   const t = useTranslations('beyond')
 
-  const pluginKeys = ['market', 'outreach', 'financial', 'custom'] as const
+  const pluginKeys = ['market', 'outreach', 'financial', 'custom', 'n8n'] as const
   const pluginIcons: Record<string, React.ElementType> = {
     market: Search,
     outreach: Megaphone,
     financial: TrendingUp,
     custom: Workflow,
+    n8n: Webhook,
   }
 
   return (
