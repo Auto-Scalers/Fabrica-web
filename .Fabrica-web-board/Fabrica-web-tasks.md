@@ -286,3 +286,13 @@ _Last updated: 2026-08-23_
 - **Notes preserved verbatim** for every task row; group prose (Phase 6 critical block, W17 rules, Phase 6b intro) carried over intact
 - **Session Ledger:** canonical columns applied (`Handle | Type | Task ID | Orchestration IDs | Status | Created | Branch | Merged`); legacy free-text statuses mapped — `active→IN_PROGRESS`, `released→RELEASED`, `stopped→DEAD (stopped)`; stray mid-ledger "Pushed:" line moved to a ledger note
 - **Discrepancies:** (1) `W13b` is a known cross-project duplicate ID (web + marketing) — kept here as `WEB-W13b`; final owner resolution pending per schema §2. (2) Ledger row originally labeled "STATIC-JSON changelog+kill-list" maps to work overlapping WEB-W8/W10 but carries no W-ID in the original — kept verbatim rather than inventing an ID. (3) Original "What Needs Verification" used `- [~]` checkboxes — normalized to unchecked `- [ ]` per schema §3 (items remain unverified).
+
+## CROSS-PROJECT NOTE from Fabrica-app (Aug 23, APP-ORCH)
+
+- **nudge.json SCHEMA MISMATCH (What's New silently broken):** Fabrica-web serves /whats-new/nudge.json with fields {enabled, channel, minimumVersion, latestVersion, severity, message, detailsUrl, downloadUrl, enforcedAtVersion, enforceMessage, updatedAt} but the desktop app parser (Fabrica-app src/main/updater-nudge.ts:5-33) requires id (non-empty string) + optional minVersion/maxVersion — without id fetchNudge returns null and the nudge never fires. Fix options: (a) rename web fields to the app schema, or (b) adapt the app parser — needs PM/coord decision. changelog.json and plugins/kill-list.json both VALIDATED PASS against app parsers.
+
+
+## CROSS-PROJECT NOTE from Fabrica-app (Aug 23, APP-ORCH) #2
+
+- **Live changelog.json release-notes copy contains old-brand prose:** the entry served at /whats-new/changelog.json includes text like 'Orca is now Fabrica - a full rebrand...'. Desktop app What's New renders this to users - old-brand word visible in UI. Recommend rewording the entry copy to avoid leading with the old name (end-to-end parse otherwise VALIDATED PASS by Fabrica-app LIVE-PARSER-CHECK). Also D7 from prior note stands: nudge.json schema still mismatches the app parser.
+
