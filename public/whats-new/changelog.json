@@ -2,7 +2,7 @@
   {
     "version": "1.4.178-rc.2",
     "title": "Reborn as Fabrica",
-    "description": "Orca is now Fabrica — a full rebrand with a new dark forge look, the plugin marketplace with safety kill-list enforcement, and a faster relay handshake.",
+    "description": "Fabrica is here — a full rebrand with a new dark forge look, the plugin marketplace with safety kill-list enforcement, and a faster relay handshake.",
     "mediaUrl": "https://fabrica-ai.vercel.app/images/carousel/carousel-00-manual-work-vs-247-autonomy.jpg",
     "releaseNotesUrl": "https://fabrica-ai.vercel.app/changelog/1.4.178-rc.2"
   }

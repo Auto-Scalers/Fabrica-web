@@ -1,13 +1,5 @@
 {
-  "enabled": true,
-  "channel": "stable",
-  "minimumVersion": "1.4.0",
-  "latestVersion": "1.4.178-rc.2",
-  "severity": "recommended",
-  "message": "A new version of Fabrica is available. Update for the latest features and fixes.",
-  "detailsUrl": "https://fabrica-ai.vercel.app/whats-new",
-  "downloadUrl": "https://fabrica-ai.vercel.app/download",
-  "enforcedAtVersion": "1.3.0",
-  "enforceMessage": "This version of Fabrica is no longer supported. Please update to continue.",
-  "updatedAt": "2026-08-18"
+  "id": "update-1.4.0",
+  "minVersion": "1.4.0",
+  "maxVersion": "2.0.0"
 }

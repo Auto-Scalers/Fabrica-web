@@ -487,7 +487,7 @@ export const OrchestrationSection = () => {
                   alt={t('mobileTitle')}
                   fill
                   sizes="(max-width: 1024px) 100vw, 320px"
-                  className="object-contain transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
               </div>

@@ -191,7 +191,7 @@ const crewMembers = [
   return (
     <section
       id="product"
-      className="fabrica-hero relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden"
+      className="fabrica-hero relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden scroll-mt-20"
     >
       <div
         className="fabrica-hero-bg absolute inset-0 pointer-events-none"
@@ -280,7 +280,7 @@ const crewMembers = [
             </a>
           </div>
 
-          <div className="relative z-10 pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-left">
+          <div className="relative z-10 pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-start">
             <div className="p-2.5 rounded-xl bg-[var(--overlay-weak)] border border-[var(--border-faint)] flex items-center gap-2">
               <Zap className="h-4 w-4 text-orange-400 shrink-0" />
               <div>
@@ -344,28 +344,28 @@ const crewMembers = [
               >
                 <ToggleGroupItem
                   value="daemons"
-                  className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
+                  className="px-2.5 py-1 min-h-[36px] rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <Cpu className="h-3.5 w-3.5" />
                   <span>{t('tabDaemons')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="kanban"
-                  className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
+                  className="px-2.5 py-1 min-h-[36px] rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <Layers className="h-3.5 w-3.5" />
                   <span>{t('tabKanban')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="eisenhower"
-                  className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
+                  className="px-2.5 py-1 min-h-[36px] rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <LayoutGrid className="h-3.5 w-3.5" />
                   <span>{t('tabEisenhower')}</span>
                 </ToggleGroupItem>
                 <ToggleGroupItem
                   value="field_ops"
-                  className="px-2.5 py-1 rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
+                  className="px-2.5 py-1 min-h-[36px] rounded flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-strong)] data-[state=on]:bg-orange-500 data-[state=on]:text-[var(--text-strong)] data-[state=on]:font-bold data-[state=on]:shadow"
                 >
                   <ShieldCheck className="h-3.5 w-3.5" />
                   <span>{t('tabFieldOps')}</span>
@@ -383,13 +383,13 @@ const crewMembers = [
                 >
                   <ToggleGroupItem
                     value="local"
-                    className="px-2 py-0.5 rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-orange-500/20 data-[state=on]:text-orange-400 data-[state=on]:font-bold"
+                    className="px-2 py-1 min-h-[32px] rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-orange-500/20 data-[state=on]:text-orange-400 data-[state=on]:font-bold"
                   >
                     {t('localDaemon')}
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="remote"
-                    className="px-2 py-0.5 rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-blue-500/20 data-[state=on]:text-blue-400 data-[state=on]:font-bold"
+                    className="px-2 py-1 min-h-[32px] rounded text-[11px] text-[var(--text-muted)] data-[state=on]:bg-blue-500/20 data-[state=on]:text-blue-400 data-[state=on]:font-bold"
                   >
                     {t('remoteWorker')}
                   </ToggleGroupItem>
@@ -397,7 +397,7 @@ const crewMembers = [
 
                 <button
                   onClick={() => setIsRunning(!isRunning)}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[var(--overlay-5)] hover:bg-[var(--overlay-10)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-strong)] transition-colors"
+                  className="flex items-center gap-1.5 px-2.5 py-1 min-h-[36px] rounded bg-[var(--overlay-5)] hover:bg-[var(--overlay-10)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-strong)] transition-colors"
                 >
                   {isRunning ? (
                     <>
@@ -501,7 +501,7 @@ const crewMembers = [
                     </div>
 
                     <div className="bg-[#050508] rounded-xl p-3.5 border border-[var(--border-subtle)] space-y-2 min-h-[260px]">
-                      <div className="text-[11px] text-blue-400 flex items-center justify-between pb-1 border-b border-[var(--border-faint)]">
+                      <div className="text-[11px] text-blue-400 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 pb-1 border-b border-[var(--border-faint)]">
                         <span>$ fabrica daemon --target={executionTarget} --role={selectedAgent}</span>
                         <span className="text-emerald-400 font-mono">PID 7104 [24/7 Autonomy]</span>
                       </div>

@@ -2,11 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAnon } from '@/lib/supabase-auth'
 
 export async function POST(req: NextRequest) {
+  let body: unknown
   try {
-    const body = await req.json()
-    const { refresh_token } = body
+    body = await req.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+  }
 
-    if (!refresh_token) {
+  try {
+    const { refresh_token } = (body ?? {}) as Record<string, unknown>
+
+    if (!refresh_token || typeof refresh_token !== 'string') {
       return NextResponse.json({ error: 'refresh_token is required' }, { status: 400 })
     }
 

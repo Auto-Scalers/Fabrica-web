@@ -161,14 +161,14 @@ export const ShowcaseCarousel = () => {
             <button
               aria-label="Previous slide"
               onClick={() => go(current - 1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute start-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next slide"
               onClick={() => go(current + 1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
+              className="absolute end-3 top-1/2 -translate-y-1/2 h-10 w-10 flex items-center justify-center rounded-full border border-[var(--border-subtle)] bg-black/60 text-[var(--text-strong)] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:border-orange-500/50 hover:text-orange-400"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -189,12 +189,17 @@ export const ShowcaseCarousel = () => {
                 aria-label={`Go to slide ${index + 1}`}
                 onClick={() => go(index)}
                 className={cn(
-                  'h-2.5 rounded-full transition-all duration-300',
-                  index === current
-                    ? 'w-8 bg-orange-500'
-                    : 'w-4 bg-white/25 hover:bg-white/40'
+                  'group h-8 flex items-center justify-center rounded-full transition-all duration-300',
+                  index === current ? 'w-10' : 'w-6'
                 )}
-              />
+              >
+                <span
+                  className={cn(
+                    'block h-2.5 rounded-full transition-all duration-300',
+                    index === current ? 'w-8 bg-orange-500' : 'w-4 bg-white/25 group-hover:bg-white/40'
+                  )}
+                />
+              </button>
             ))}
           </div>
         </div>

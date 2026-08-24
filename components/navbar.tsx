@@ -63,7 +63,7 @@ export const Navbar = () => {
         <button
           key={l}
           onClick={() => switchLocale(l)}
-          className={`px-1.5 py-0.5 text-[10px] font-mono rounded transition-colors ${
+          className={`px-2 py-1 text-[10px] font-mono rounded transition-colors ${
             locale === l
               ? 'text-orange-400 bg-orange-950/60 border border-orange-500/30'
               : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'
@@ -141,7 +141,7 @@ export const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-1 hover:text-[var(--text-strong)] transition-colors"
+                  className="py-2 hover:text-[var(--text-strong)] transition-colors"
                 >
                   {link.name}
                 </a>
@@ -154,7 +154,7 @@ export const Navbar = () => {
                 <button
                   key={l}
                   onClick={() => switchLocale(l)}
-                  className={`px-2 py-1 text-[10px] font-mono rounded transition-colors ${
+                  className={`px-3 py-2 text-[10px] font-mono rounded transition-colors ${
                     locale === l
                       ? 'text-orange-400 bg-orange-950/60 border border-orange-500/30'
                       : 'text-[var(--text-muted)] hover:text-[var(--text-strong)]'

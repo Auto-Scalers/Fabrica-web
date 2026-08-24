@@ -278,7 +278,7 @@ export const FinalCta = () => {
                     <p className="text-xs opacity-70">{p.detail}</p>
                   </div>
                   {active && (
-                    <span className="absolute top-2.5 right-2.5">
+                    <span className="absolute top-2.5 end-2.5">
                       <CheckCircle2 className="h-4 w-4 text-orange-400" />
                     </span>
                   )}
@@ -327,7 +327,7 @@ export const FinalCta = () => {
             <form onSubmit={handleOpenModal} noValidate className="space-y-3">
               <div className="flex flex-col sm:flex-row gap-2.5">
                 <div className="relative flex-1">
-                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
+                  <Mail className="absolute start-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
                   <input
                     type="email"
                     value={email}
@@ -336,7 +336,7 @@ export const FinalCta = () => {
                       if (error) setError('')
                     }}
                     placeholder={t('enterEmail')}
-                    className="w-full pl-10 pr-4 py-3.5 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] text-sm text-[var(--text-strong)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-orange-500 transition-colors"
+                    className="w-full ps-10 pe-4 py-3.5 rounded-xl bg-[var(--surface-card)] border border-[var(--border-subtle)] text-sm text-[var(--text-strong)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-orange-500 transition-colors"
                   />
                 </div>
                 <ShimmerButton
@@ -361,7 +361,7 @@ export const FinalCta = () => {
                 </ShimmerButton>
               </div>
 
-              {error && <p className="text-xs text-red-400 text-left pl-2">{error}</p>}
+              {error && <p className="text-xs text-red-400 text-start ps-2">{error}</p>}
 
               <p className="text-[11px] font-mono text-[var(--text-muted)] flex items-center justify-center gap-2 pt-1">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
@@ -403,14 +403,14 @@ export const FinalCta = () => {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="absolute top-4 right-4 p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-10)] transition-colors cursor-pointer z-20"
+                    className="absolute top-4 end-4 p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-10)] transition-colors cursor-pointer z-20"
                     aria-label="Close modal"
                   >
                     <X className="h-5 w-5" />
                   </button>
 
                   {/* Modal Body */}
-                  <div className="overflow-y-auto pr-1 space-y-6">
+                  <div className="overflow-y-auto pe-1 space-y-6">
                     {/* Header Confirmation */}
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono font-semibold">
