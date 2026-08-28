@@ -235,6 +235,14 @@ On heartbeat kick:
 
 ---
 
+## Cross-Project Dependencies (from Fabrica-app)
+
+| # | Dependency | From | Status | Notes |
+|---|-----------|------|--------|-------|
+| X1 | Deploy `/v1/desktop/*` backend API | APP-G4-FIX | ⬜ TODO | Fabrica-app desktop calls `/v1/desktop/auth/authorize`, `/v1/artifacts`, `/v1/desktop/auth/relay-token` (etc.) which do NOT exist on the current web backend (only `/api/auth/*` Supabase web login exists, different contract). Without this, cloud sign-in, artifact share/publish, and mobile relay pairing are non-functional. Either implement+deploy the desktop API, set `FABRICA_CLOUD_API_URL` env, or feature-flag those features as "coming soon". `fabrica-ai.vercel.app` also failed DNS resolution from the build env — confirm the site is actually deployed. |
+
+---
+
 ## Session Ledger
 
 > Tracks orchestration sessions and workers for this task file. Updated when sessions are created, released, or worktrees merged. Status uses the schema enum plus `RELEASED` (worker finished + released) and `DEAD` (terminal lost; cause noted).
