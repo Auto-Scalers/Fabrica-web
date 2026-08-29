@@ -4,7 +4,7 @@ import { getSupabaseUser, buildSelectOrgResponse } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/org
+// POST /v1/desktop/auth/org
 //
 // Switches the active organization for the signed-in account. The desktop sends
 // { orgId } and expects { cloud, organizations, capabilities } with the chosen

@@ -5,7 +5,7 @@ import { getSupabaseUser, buildSessionExchange } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/profile
+// POST /v1/desktop/auth/profile
 //
 // Creates/links a cloud profile for the signed-in account. The desktop sends an
 // existing Bearer session (from /session) plus optional { orgId?, name? } and

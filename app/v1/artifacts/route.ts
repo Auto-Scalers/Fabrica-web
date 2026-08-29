@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic'
 
 const LIST_PAGE_SIZE = 50
 
-// GET /api/v1/artifacts?cursor=<updatedAt>
+// GET /v1/artifacts?cursor=<updatedAt>
 // Lists the signed-in user's artifacts (most recently updated first).
 export async function GET(req: NextRequest) {
   const user = await getSupabaseUser(req)
@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
   })
 }
 
-// POST /api/v1/artifacts
+// POST /v1/artifacts
 // Shares/creates an artifact. Body mirrors artifactWriteBody:
 //   { content, contentType, fileName, title? }, plus idempotency-key header.
 // Returns ArtifactListItem & { editToken } (the desktop persists the edit token).

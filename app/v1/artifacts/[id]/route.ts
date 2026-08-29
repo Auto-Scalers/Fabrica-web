@@ -6,7 +6,7 @@ import { ARTIFACTS_TABLE, artifactsClient, buildArtifactListItem } from '@/lib/f
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// GET /api/v1/artifacts/[id]
+// GET /v1/artifacts/[id]
 // Public retrieval of a published/shared artifact (no auth required). Returns the
 // artifact metadata plus its rendered content.
 export async function GET(
@@ -38,7 +38,7 @@ export async function GET(
   })
 }
 
-// PUT /api/v1/artifacts/[id]
+// PUT /v1/artifacts/[id]
 // Edits an existing artifact. Requires the Bearer session plus the x-FABRICA-edit-token
 // header captured at creation time.
 export async function PUT(
@@ -103,7 +103,7 @@ export async function PUT(
   return NextResponse.json(buildArtifactListItem(data as Record<string, unknown>))
 }
 
-// DELETE /api/v1/artifacts/[id]
+// DELETE /v1/artifacts/[id]
 // Two modes:
 //  - Unshare: with x-FABRICA-edit-token header (and Bearer) deletes by slug + token.
 //  - Delete: with only Bearer, deletes the artifact owned by the signed-in user.
