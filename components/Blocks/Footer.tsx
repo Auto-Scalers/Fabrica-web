@@ -14,7 +14,6 @@ export const Footer = () => {
       { name: t('links.commandCenter'), href: '#command-center' },
       { name: t('links.worktrees'), href: '#command-center' },
       { name: t('links.controlLayer'), href: '#controls' },
-      { name: t('links.pricing'), href: '#pricing' },
     ],
     capabilities: [
       { name: t('links.devAgent'), href: '#crew' },
@@ -122,9 +121,6 @@ export const Footer = () => {
           <div className="flex items-center gap-6">
             <a href="#controls" className="hover:text-[var(--text-strong)] transition-colors">
               {t('securitySandbox')}
-            </a>
-            <a href="#pricing" className="hover:text-[var(--text-strong)] transition-colors">
-              {t('pricingGuardrails')}
             </a>
             <a href="#waitlist" className="hover:text-[var(--text-strong)] transition-colors">
               {t('priorityAccess')}
