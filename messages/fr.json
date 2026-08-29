@@ -221,30 +221,70 @@
     },
     "kanbanCols": {
       "backlog": [
-        { "agent": "Chercheur", "priority": "Haute" },
-        { "agent": "Marketeur", "priority": "Moyenne" }
+        {
+          "agent": "Chercheur",
+          "priority": "Haute"
+        },
+        {
+          "agent": "Marketeur",
+          "priority": "Moyenne"
+        }
       ],
       "inProgress": [
-        { "agent": "Développeur", "priority": "Urgent", "branch": "worktree/auth-guard" },
-        { "agent": "Analyste", "priority": "Haute", "branch": "ops/fin-model" }
+        {
+          "agent": "Développeur",
+          "priority": "Urgent",
+          "branch": "worktree/auth-guard"
+        },
+        {
+          "agent": "Analyste",
+          "priority": "Haute",
+          "branch": "ops/fin-model"
+        }
       ],
       "approval": [
-        { "agent": "Développeur", "priority": "Haute", "risk": "Paiement critique" }
+        {
+          "agent": "Développeur",
+          "priority": "Haute",
+          "risk": "Paiement critique"
+        }
       ],
       "verified": [
-        { "agent": "Marketeur", "priority": "Haute" },
-        { "agent": "Développeur", "priority": "Moyenne" }
+        {
+          "agent": "Marketeur",
+          "priority": "Haute"
+        },
+        {
+          "agent": "Développeur",
+          "priority": "Moyenne"
+        }
       ]
     },
     "eisenhowerTasks": {
-      "t1": { "agent": "Développeur" },
-      "t2": { "agent": "Développeur" },
-      "t3": { "agent": "Chercheur" },
-      "t4": { "agent": "Analyste" },
-      "t5": { "agent": "Marketeur" },
-      "t6": { "agent": "Développeur" },
-      "t7": { "agent": "Moteur Fabrica" },
-      "t8": { "agent": "Moteur Fabrica" }
+      "t1": {
+        "agent": "Développeur"
+      },
+      "t2": {
+        "agent": "Développeur"
+      },
+      "t3": {
+        "agent": "Chercheur"
+      },
+      "t4": {
+        "agent": "Analyste"
+      },
+      "t5": {
+        "agent": "Marketeur"
+      },
+      "t6": {
+        "agent": "Développeur"
+      },
+      "t7": {
+        "agent": "Moteur Fabrica"
+      },
+      "t8": {
+        "agent": "Moteur Fabrica"
+      }
     }
   },
   "pain": {
@@ -323,9 +363,9 @@
         "output": "campaigns/launch-angles-v3.md",
         "coreAngle": "L'anti-chat IDE : remplacez 14 onglets navigateur par 1 centre de commande d'équipe",
         "targetPersona": "Bâtisseurs SaaS solo, consultants techniques et responsables d'agence",
-        "hook1": "\u201cTous les outils IA oublient votre schéma à 23 h. Fabrica s'en souvient sur tout votre projet.\u201d",
-        "hook2": "\u201cArrêtez d'être à la fois fondateur, dev, copywriter et analyste. Dirigez l'équipe.\u201d",
-        "hook3": "\u201cFixez l'objectif une fois. Votre équipe l'exécute jour et nuit.\u201d",
+        "hook1": "“Tous les outils IA oublient votre schéma à 23 h. Fabrica s'en souvient sur tout votre projet.”",
+        "hook2": "“Arrêtez d'être à la fois fondateur, dev, copywriter et analyste. Dirigez l'équipe.”",
+        "hook3": "“Fixez l'objectif une fois. Votre équipe l'exécute jour et nuit.”",
         "distributionPlan": "Hacker News Show HN + fil X Deep Dive + édition Substack fondateur"
       },
       "analyst": {
@@ -757,8 +797,14 @@
     "preBeta": "Fabrica est en pré-bêta. Ce sont les dernières versions stables — téléchargez et lancez.",
     "allReleases": "Voir toutes les releases sur GitHub",
     "platforms": {
-      "windows": { "name": "Windows", "detail": "Pour Windows 10 & 11 • installateur .exe" },
-      "android": { "name": "Téléphone Android", "detail": "Pour votre appareil Android • .apk" }
+      "windows": {
+        "name": "Windows",
+        "detail": "Pour Windows 10 & 11 • installateur .exe"
+      },
+      "android": {
+        "name": "Téléphone Android",
+        "detail": "Pour votre appareil Android • .apk"
+      }
     },
     "downloadButton": "Télécharger"
   },
@@ -784,7 +830,46 @@
     "relayStandby": "Associez votre app de bureau ou mobile pour activer le relay.",
     "loading": "Chargement de votre espace...",
     "authError": "Impossible de charger votre espace. Veuillez vous reconnecter.",
-    "artifactTitle": "Artifact sans titre"
+    "artifactTitle": "Artifact sans titre",
+    "welcome": "Bienvenue",
+    "greeting": "Bon retour, {name}",
+    "downloadApp": "Télécharger l'app",
+    "downloadAppDesc": "Fabrica pour bureau et mobile",
+    "openDocs": "Ouvrir les docs",
+    "openDocsDesc": "Guides et référence API",
+    "invite": "Inviter",
+    "inviteDesc": "Copier votre lien d'invitation",
+    "inviteCopied": "Lien d'invitation copié",
+    "connectDesktop": "Connectez votre app de bureau",
+    "connectDesktopDesc": "Associez Fabrica sur bureau ou mobile pour activer le relay et synchroniser votre travail entre vos appareils.",
+    "relayPaired": "App de bureau connectée",
+    "relayPairedDesc": "Votre relay est actif. Les artifacts et agents se synchronisent sur vos appareils.",
+    "relayNotPaired": "Non associé",
+    "relayPairingCode": "Code d'association",
+    "relayHowTo": "Ouvrez Fabrica sur votre appareil, choisissez « Associer au web » et saisissez ce code.",
+    "relayCopy": "Copier le code",
+    "relayCopied": "Copié",
+    "relayRegenerate": "Régénérer",
+    "relayPair": "Associer l'appareil",
+    "activeOrg": "Organisation active",
+    "noActiveOrg": "Aucune organisation active",
+    "switchOrg": "Changer d'organisation",
+    "orgSwitcher": "Sélecteur d'organisation",
+    "noOrganizationsHint": "Créez-en une depuis l'app de bureau pour collaborer avec votre équipe.",
+    "on": "Activé",
+    "off": "Désactivé",
+    "capabilitiesEmpty": "Aucun indicateur de capacité pour l'instant.",
+    "usage": "Utilisation",
+    "usageRelay": "Relay",
+    "usageBeta": "Accès bêta — aucune limite d'utilisation appliquée pour l'instant.",
+    "updated": "Mis à jour",
+    "copyShare": "Copier le lien de partage",
+    "shareCopied": "Lien de partage copié",
+    "emptyArtifactsTitle": "Aucun artifact pour l'instant",
+    "emptyArtifactsDesc": "Partagez un fichier depuis l'app de bureau Fabrica pour le voir ici.",
+    "shareFirst": "Partager depuis le bureau",
+    "retry": "Réessayer",
+    "backHome": "Retour à l'accueil"
   },
   "footer": {
     "tagline": "Une plateforme desktop qui gère les agents CLI via des terminaux locaux — pour les fondateurs, bâtisseurs et opérateurs.",

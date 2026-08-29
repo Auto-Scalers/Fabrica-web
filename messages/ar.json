@@ -797,8 +797,14 @@
     "preBeta": "فابريكا في مرحلة ما قبل بيتا. هذه هي أحدث البنيات المستقرة — فقط نزّلها وشغّلها.",
     "allReleases": "عرض كل الإصدارات على GitHub",
     "platforms": {
-      "windows": { "name": "Windows", "detail": "لـ Windows 10 و11 • مثبّت .exe" },
-      "android": { "name": "هاتف Android", "detail": "لجهاز Android الخاص بك • .apk" }
+      "windows": {
+        "name": "Windows",
+        "detail": "لـ Windows 10 و11 • مثبّت .exe"
+      },
+      "android": {
+        "name": "هاتف Android",
+        "detail": "لجهاز Android الخاص بك • .apk"
+      }
     },
     "downloadButton": "تنزيل"
   },
@@ -824,7 +830,46 @@
     "relayStandby": "اقترن بتطبيق سطح المكتب أو الهاتف لتفعيل الـ relay.",
     "loading": "جارٍ تحميل مساحتك...",
     "authError": "تعذّر تحميل مساحتك. يرجى تسجيل الدخول مجددًا.",
-    "artifactTitle": "أصل بدون عنوان"
+    "artifactTitle": "أصل بدون عنوان",
+    "welcome": "أهلاً",
+    "greeting": "مرحباً بعودتك، {name}",
+    "downloadApp": "تنزيل التطبيق",
+    "downloadAppDesc": "احصل على فابريكا لسطح المكتب والجوال",
+    "openDocs": "فتح الوثائق",
+    "openDocsDesc": "الأدلة ومرجع الواجهة البرمجية",
+    "invite": "دعوة",
+    "inviteDesc": "انسخ رابط الدعوة",
+    "inviteCopied": "تم نسخ رابط الدعوة",
+    "connectDesktop": "اربط تطبيق سطح المكتب",
+    "connectDesktopDesc": "اقترن بفابريكا على سطح المكتب أو الجوال لتفعيل الـ relay ومزامنة عملك عبر أجهزتك.",
+    "relayPaired": "تطبيق سطح المكتب متصل",
+    "relayPairedDesc": "الـ relay لديك يعمل. تُزامَن الأصول والوكلاء عبر أجهزتك.",
+    "relayNotPaired": "غير مقترن",
+    "relayPairingCode": "رمز الاقتران",
+    "relayHowTo": "افتح فابريكا على جهازك، اختر «اقتران بالويب»، وأدخل هذا الرمز.",
+    "relayCopy": "نسخ الرمز",
+    "relayCopied": "تم النسخ",
+    "relayRegenerate": "إعادة التوليد",
+    "relayPair": "اقتران الجهاز",
+    "activeOrg": "المؤسسة النشطة",
+    "noActiveOrg": "لا توجد مؤسسة نشطة",
+    "switchOrg": "تبديل المؤسسة",
+    "orgSwitcher": "مبدّل المؤسسات",
+    "noOrganizationsHint": "أنشئ واحدة من تطبيق سطح المكتب لتتعاون مع فريقك.",
+    "on": "مفعّل",
+    "off": "معطّل",
+    "capabilitiesEmpty": "لا توجد علامات قدرات بعد.",
+    "usage": "الاستخدام",
+    "usageRelay": "الـ relay",
+    "usageBeta": "وصول تجريبي — لا توجد حدود استخدام مطبّقة بعد.",
+    "updated": "آخر تحديث",
+    "copyShare": "نسخ رابط المشاركة",
+    "shareCopied": "تم نسخ رابط المشاركة",
+    "emptyArtifactsTitle": "لا توجد أصول بعد",
+    "emptyArtifactsDesc": "شارك ملفاً من تطبيق فابريكا لسطح المكتب لرؤيته هنا.",
+    "shareFirst": "شارك من سطح المكتب",
+    "retry": "إعادة المحاولة",
+    "backHome": "العودة إلى الرئيسية"
   },
   "footer": {
     "tagline": "منصة سطح مكتب تدير وكلاء CLI عبر طرفيات محلية — للمؤسسين والبانين والمشغّلين.",
