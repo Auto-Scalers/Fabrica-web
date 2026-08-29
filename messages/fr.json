@@ -8,7 +8,9 @@
     "pricing": "Tarifs",
     "faq": "FAQ",
     "docs": "Docs",
-    "getEarlyAccess": "Accéder en avant-première"
+    "download": "Télécharger",
+    "signIn": "Se connecter",
+    "dashboard": "Tableau de bord"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",

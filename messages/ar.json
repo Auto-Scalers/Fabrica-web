@@ -8,7 +8,9 @@
     "pricing": "الأسعار",
     "faq": "الأسئلة الشائعة",
     "docs": "الوثائق",
-    "getEarlyAccess": "احصل على وصول مبكر"
+    "download": "تنزيل",
+    "signIn": "تسجيل الدخول",
+    "dashboard": "لوحة التحكم"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",

@@ -8,7 +8,9 @@
     "pricing": "Pricing",
     "faq": "FAQ",
     "docs": "Docs",
-    "getEarlyAccess": "Get Early Access"
+    "download": "Download",
+    "signIn": "Sign in",
+    "dashboard": "Dashboard"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",

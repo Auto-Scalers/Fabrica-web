@@ -1,11 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
   Menu,
   X,
   ArrowRight,
+  Download,
+  LogIn,
+  LayoutDashboard,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter, usePathname, Link as IntlLink } from '@/src/i18n/navigation'
@@ -13,12 +16,41 @@ import { useLocale } from 'next-intl'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler'
 
+const AUTH_TOKEN_KEY = 'fabrica_auth_tokens'
+
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isAuthed, setIsAuthed] = useState(false)
   const t = useTranslations('nav')
   const router = useRouter()
   const pathname = usePathname()
   const locale = useLocale()
+
+  useEffect(() => {
+    let active = true
+    const read = () => {
+      try {
+        const raw = window.localStorage.getItem(AUTH_TOKEN_KEY)
+        const parsed = raw ? (JSON.parse(raw) as { access_token?: string }) : null
+        if (active) setIsAuthed(!!parsed?.access_token)
+      } catch {
+        if (active) setIsAuthed(false)
+      }
+    }
+    const raf = requestAnimationFrame(read)
+    return () => {
+      active = false
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  const goToAccount = () => {
+    if (isAuthed) {
+      router.push('/dashboard')
+    } else {
+      window.location.href = '/api/auth/authorize'
+    }
+  }
 
   const navLinks = [
     { name: t('product'), href: '#product' },
@@ -107,14 +139,27 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center gap-3">
           {localeSwitcher}
           <AnimatedThemeToggler className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--overlay-5)] transition-colors" aria-label="Toggle theme" />
+          <button
+            type="button"
+            onClick={goToAccount}
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-4 py-2 text-xs font-medium text-[var(--text-strong)] transition-all hover:bg-[var(--overlay-10)]"
+          >
+            {isAuthed ? (
+              <LayoutDashboard className="h-3.5 w-3.5 text-orange-400" />
+            ) : (
+              <LogIn className="h-3.5 w-3.5 text-orange-400" />
+            )}
+            <span>{isAuthed ? t('dashboard') : t('signIn')}</span>
+          </button>
           <ShimmerButton
             shimmerColor="#FFD0A6"
             borderRadius="12px"
             background="linear-gradient(90deg, #E8590C, #FF8A3D)"
             className="px-4 py-2 text-xs font-semibold shadow-md shadow-orange-950/50"
-            onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => router.push('/download')}
           >
-            <span>{t('getEarlyAccess')}</span>
+            <Download className="h-3.5 w-3.5" />
+            <span>{t('download')}</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </ShimmerButton>
         </div>
@@ -166,14 +211,33 @@ export const Navbar = () => {
               ))}
             </div>
             <AnimatedThemeToggler className="w-full flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] py-2.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors" aria-label="Toggle theme" />
-            <a
-              href="#waitlist"
-              onClick={() => setMobileMenuOpen(false)}
-              className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] py-2.5 text-xs font-semibold text-white shadow-md"
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false)
+                goToAccount()
+              }}
+              className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] py-2.5 text-xs font-semibold text-[var(--text-strong)] transition-all hover:bg-[var(--overlay-10)]"
             >
-              <span>{t('getEarlyAccess')}</span>
+              {isAuthed ? (
+                <LayoutDashboard className="h-3.5 w-3.5 text-orange-400" />
+              ) : (
+                <LogIn className="h-3.5 w-3.5 text-orange-400" />
+              )}
+              <span>{isAuthed ? t('dashboard') : t('signIn')}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false)
+                router.push('/download')
+              }}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] py-2.5 text-xs font-semibold text-white shadow-md"
+            >
+              <Download className="h-3.5 w-3.5" />
+              <span>{t('download')}</span>
               <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </button>
           </div>
         </div>
       )}
