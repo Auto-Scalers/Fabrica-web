@@ -17,7 +17,6 @@ import {
   Megaphone,
   TrendingUp,
   FileCheck,
-  Terminal,
   Smartphone,
   Layers,
   LayoutGrid,
@@ -26,13 +25,48 @@ import {
   CheckSquare,
   AlertTriangle,
   Monitor,
+  Download,
+  LogIn,
+  LayoutDashboard,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { useRouter } from '@/src/i18n/navigation'
+
+const AUTH_TOKEN_KEY = 'fabrica_auth_tokens'
 
 export default function Hero() {
   const t = useTranslations('hero')
+  const tn = useTranslations('nav')
+  const router = useRouter()
+  const [isAuthed, setIsAuthed] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    const read = () => {
+      try {
+        const raw = window.localStorage.getItem(AUTH_TOKEN_KEY)
+        const parsed = raw ? (JSON.parse(raw) as { access_token?: string }) : null
+        if (active) setIsAuthed(!!parsed?.access_token)
+      } catch {
+        if (active) setIsAuthed(false)
+      }
+    }
+    const raf = requestAnimationFrame(read)
+    return () => {
+      active = false
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  const goToAccount = () => {
+    if (isAuthed) {
+      router.push('/dashboard')
+    } else {
+      window.location.href = '/api/auth/authorize'
+    }
+  }
 
   const [selectedAgent, setSelectedAgent] = useState('dev')
   const [isRunning, setIsRunning] = useState(true)
@@ -266,18 +300,24 @@ const crewMembers = [
               borderRadius="12px"
               background="linear-gradient(90deg, #E8590C, #FF8A3D)"
               className="w-full sm:w-auto px-7 py-3.5 text-base font-semibold shadow-xl shadow-orange-950/50"
-              onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => router.push('/download')}
             >
-              <span>{t('ctaEarlyAccess')}</span>
+              <Download className="h-4 w-4" />
+              <span>{tn('download')}</span>
               <ArrowRight className="h-4 w-4" />
             </ShimmerButton>
-            <a
-              href="#command-center"
+            <button
+              type="button"
+              onClick={goToAccount}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-6 py-3.5 text-base font-medium text-[var(--text-strong)] hover:bg-[var(--overlay-10)] hover:border-[var(--border-subtle)] transition-all"
             >
-              <span>{t('ctaExplore')}</span>
-              <Terminal className="h-4 w-4 text-orange-400" />
-            </a>
+              {isAuthed ? (
+                <LayoutDashboard className="h-4 w-4 text-orange-400" />
+              ) : (
+                <LogIn className="h-4 w-4 text-orange-400" />
+              )}
+              <span>{isAuthed ? tn('dashboard') : tn('signIn')}</span>
+            </button>
           </div>
 
           <div className="relative z-10 pt-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[var(--text-muted)] font-mono text-start">

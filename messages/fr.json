@@ -25,8 +25,6 @@
     "platformDesktop": "macOS • Windows • Linux Desktop",
     "platformMobile": "iOS & Android Companion mobile",
     "platformSetup": "Apportez vos propres agents CLI et vos clés",
-    "ctaEarlyAccess": "Accéder en avant-première",
-    "ctaExplore": "Explorer le centre de commande",
     "pillarZeroPrompt": "Exécution événementielle",
     "pillarZeroPromptSub": "Les tâches se déclenchent sur les complétions de tâches, les seuils de budget et les portes d'approbation",
     "pillarEisenhower": "Canaux style Slack",

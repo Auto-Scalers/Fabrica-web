@@ -11,8 +11,8 @@ export const Footer = () => {
   const footerLinks = {
     product: [
       { name: t('links.crews'), href: '#crew' },
-      { name: t('links.commandCenter'), href: '#command-center' },
-      { name: t('links.worktrees'), href: '#command-center' },
+      { name: t('links.commandCenter'), href: '#how-it-works' },
+      { name: t('links.worktrees'), href: '#how-it-works' },
       { name: t('links.controlLayer'), href: '#controls' },
     ],
     capabilities: [
