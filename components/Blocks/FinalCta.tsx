@@ -64,7 +64,7 @@ export const FinalCta = () => {
           <button
             type="button"
             onClick={() => {
-              window.location.href = '/api/auth/authorize'
+              router.push('/login')
             }}
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-7 py-3.5 text-base font-medium text-[var(--text-strong)] transition-all hover:border-[var(--border-subtle)] hover:bg-[var(--overlay-10)] sm:w-auto"
           >

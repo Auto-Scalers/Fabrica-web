@@ -786,6 +786,19 @@
     "authError": "Could not load your workspace. Please sign in again.",
     "artifactTitle": "Untitled artifact"
   },
+  "login": {
+    "badge": "FABRICA ACCESS",
+    "title": "Sign in to Fabrica",
+    "lede": "Sign in with GitHub to access your Fabrica dashboard.",
+    "githubButton": "Sign in with GitHub",
+    "newHere": "New here?",
+    "signupNote": "Your Fabrica account is created automatically when you sign in with GitHub. Download the app to run your first crew.",
+    "downloadLink": "Download the app",
+    "signingIn": "Signing you in...",
+    "errorTitle": "We couldn't sign you in",
+    "errorBody": "The GitHub sign-in didn't complete. Please try again.",
+    "backHome": "Back to home"
+  },
   "footer": {
     "tagline": "A desktop platform that manages CLI agents through local terminals — for founders, builders, and operators.",
     "operational": "All Systems Operational (v3.0.4)",

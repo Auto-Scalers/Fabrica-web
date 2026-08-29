@@ -6,15 +6,23 @@ export async function GET(req: NextRequest) {
     const code = req.nextUrl.searchParams.get('code')
     const state = req.nextUrl.searchParams.get('state')
     const error = req.nextUrl.searchParams.get('error')
+    const localeParam = req.nextUrl.searchParams.get('locale')
+    const locale = localeParam === 'fr' || localeParam === 'ar' ? localeParam : 'en'
 
     if (error) {
       const errorDesc = req.nextUrl.searchParams.get('error_description') || error
       console.error('OAuth error:', errorDesc)
-      return NextResponse.json({ error: errorDesc }, { status: 400 })
+      const loginUrl = new URL(`/${locale}/login`, req.nextUrl.origin)
+      loginUrl.searchParams.set('error', error)
+      loginUrl.searchParams.set('error_description', errorDesc)
+      return NextResponse.redirect(loginUrl)
     }
 
     if (!code) {
-      return NextResponse.json({ error: 'Missing code parameter' }, { status: 400 })
+      const loginUrl = new URL(`/${locale}/login`, req.nextUrl.origin)
+      loginUrl.searchParams.set('error', 'missing_code')
+      loginUrl.searchParams.set('error_description', 'Missing code parameter')
+      return NextResponse.redirect(loginUrl)
     }
 
     const supabase = getSupabaseAnon()
@@ -31,9 +39,10 @@ export async function GET(req: NextRequest) {
 
     const { session, user } = data
 
-    // Redirect URL — web sign-in lands on the dashboard (tokens stay in the
-    // fragment, not server logs); desktop app can override via AUTH_REDIRECT_URL.
-    const redirectBase = process.env.AUTH_REDIRECT_URL || `${req.nextUrl.origin}/dashboard`
+    // Redirect URL — web sign-in lands on /login (tokens stay in the fragment,
+    // not server logs); /login parses them and forwards to /dashboard. The
+    // desktop app can override this via AUTH_REDIRECT_URL.
+    const redirectBase = process.env.AUTH_REDIRECT_URL || `${req.nextUrl.origin}/${locale}/login`
     const redirectUrl = new URL(redirectBase)
 
     // Pass tokens in fragment (not logged to server logs) for client pickup

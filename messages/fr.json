@@ -786,6 +786,19 @@
     "authError": "Impossible de charger votre espace. Veuillez vous reconnecter.",
     "artifactTitle": "Artifact sans titre"
   },
+  "login": {
+    "badge": "ACCÈS FABRICA",
+    "title": "Se connecter à Fabrica",
+    "lede": "Connectez-vous avec GitHub pour accéder à votre tableau de bord Fabrica.",
+    "githubButton": "Se connecter avec GitHub",
+    "newHere": "Nouveau ici ?",
+    "signupNote": "Votre compte Fabrica est créé automatiquement lors de la connexion avec GitHub. Téléchargez l'application pour lancer votre première équipe.",
+    "downloadLink": "Télécharger l'application",
+    "signingIn": "Connexion en cours...",
+    "errorTitle": "Impossible de vous connecter",
+    "errorBody": "La connexion avec GitHub n'a pas abouti. Veuillez réessayer.",
+    "backHome": "Retour à l'accueil"
+  },
   "footer": {
     "tagline": "Une plateforme desktop qui gère les agents CLI via des terminaux locaux — pour les fondateurs, bâtisseurs et opérateurs.",
     "operational": "Tous les systèmes opérationnels (v3.0.4)",
