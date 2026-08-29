@@ -223,30 +223,70 @@
     },
     "kanbanCols": {
       "backlog": [
-        { "agent": "Researcher", "priority": "High" },
-        { "agent": "Marketer", "priority": "Medium" }
+        {
+          "agent": "Researcher",
+          "priority": "High"
+        },
+        {
+          "agent": "Marketer",
+          "priority": "Medium"
+        }
       ],
       "inProgress": [
-        { "agent": "Developer", "priority": "Urgent", "branch": "worktree/auth-guard" },
-        { "agent": "Analyst", "priority": "High", "branch": "ops/fin-model" }
+        {
+          "agent": "Developer",
+          "priority": "Urgent",
+          "branch": "worktree/auth-guard"
+        },
+        {
+          "agent": "Analyst",
+          "priority": "High",
+          "branch": "ops/fin-model"
+        }
       ],
       "approval": [
-        { "agent": "Developer", "priority": "High", "risk": "Payment Critical" }
+        {
+          "agent": "Developer",
+          "priority": "High",
+          "risk": "Payment Critical"
+        }
       ],
       "verified": [
-        { "agent": "Marketer", "priority": "High" },
-        { "agent": "Developer", "priority": "Medium" }
+        {
+          "agent": "Marketer",
+          "priority": "High"
+        },
+        {
+          "agent": "Developer",
+          "priority": "Medium"
+        }
       ]
     },
     "eisenhowerTasks": {
-      "t1": { "agent": "Developer" },
-      "t2": { "agent": "Developer" },
-      "t3": { "agent": "Researcher" },
-      "t4": { "agent": "Analyst" },
-      "t5": { "agent": "Marketer" },
-      "t6": { "agent": "Developer" },
-      "t7": { "agent": "Fabrica Engine" },
-      "t8": { "agent": "Fabrica Engine" }
+      "t1": {
+        "agent": "Developer"
+      },
+      "t2": {
+        "agent": "Developer"
+      },
+      "t3": {
+        "agent": "Researcher"
+      },
+      "t4": {
+        "agent": "Analyst"
+      },
+      "t5": {
+        "agent": "Marketer"
+      },
+      "t6": {
+        "agent": "Developer"
+      },
+      "t7": {
+        "agent": "Fabrica Engine"
+      },
+      "t8": {
+        "agent": "Fabrica Engine"
+      }
     }
   },
   "pain": {
@@ -325,9 +365,9 @@
         "output": "campaigns/launch-angles-v3.md",
         "coreAngle": "The Anti-Chat IDE: Replace 14 Browser Tabs with 1 Crew Command Center",
         "targetPersona": "Solo SaaS Builders, Technical Consultants & Agency Leads",
-        "hook1": "\u201cEvery AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.\u201d",
-        "hook2": "\u201cStop being the founder, dev, copywriter, and analyst all at once. Direct the crew.\u201d",
-        "hook3": "\u201cSet the goal once. Your crew runs it day and night.\u201d",
+        "hook1": "“Every AI tool forgets your schema at 11 PM. Fabrica remembers across your entire project.”",
+        "hook2": "“Stop being the founder, dev, copywriter, and analyst all at once. Direct the crew.”",
+        "hook3": "“Set the goal once. Your crew runs it day and night.”",
         "distributionPlan": "Hacker News Show HN + X Deep Dive Thread + Founder Substack Edition"
       },
       "analyst": {
@@ -670,7 +710,7 @@
     "badge": "TRANSPARENT PRICING",
     "headline": "Predictable investment.",
     "headlineGradient": "Zero runaway bills.",
-      "paragraph": "Fabrica does not call LLMs or mark up inference. One flat subscription covers the entire platform — predictable costs for predictable output.",
+    "paragraph": "Fabrica does not call LLMs or mark up inference. One flat subscription covers the entire platform — predictable costs for predictable output.",
     "monthly": "Monthly",
     "annual": "Annual",
     "save20": "SAVE 20%",
@@ -803,7 +843,46 @@
     "relayStandby": "Pair your desktop or mobile app to activate the relay.",
     "loading": "Loading your workspace...",
     "authError": "Could not load your workspace. Please sign in again.",
-    "artifactTitle": "Untitled artifact"
+    "artifactTitle": "Untitled artifact",
+    "welcome": "Welcome",
+    "greeting": "Welcome back, {name}",
+    "downloadApp": "Download app",
+    "downloadAppDesc": "Get Fabrica for desktop and mobile",
+    "openDocs": "Open docs",
+    "openDocsDesc": "Guides and API reference",
+    "invite": "Invite",
+    "inviteDesc": "Copy your invite link",
+    "inviteCopied": "Invite link copied",
+    "connectDesktop": "Connect your desktop app",
+    "connectDesktopDesc": "Pair Fabrica on desktop or mobile to activate the relay and sync your work across devices.",
+    "relayPaired": "Desktop app connected",
+    "relayPairedDesc": "Your relay is live. Artifacts and agents sync across your devices.",
+    "relayNotPaired": "Not paired",
+    "relayPairingCode": "Pairing code",
+    "relayHowTo": "Open Fabrica on your device, choose \"Pair with web\", and enter this code.",
+    "relayCopy": "Copy code",
+    "relayCopied": "Copied",
+    "relayRegenerate": "Regenerate",
+    "relayPair": "Pair device",
+    "activeOrg": "Active organization",
+    "noActiveOrg": "No active organization",
+    "switchOrg": "Switch organization",
+    "orgSwitcher": "Organization switcher",
+    "noOrganizationsHint": "Create one from the desktop app to collaborate with your team.",
+    "on": "On",
+    "off": "Off",
+    "capabilitiesEmpty": "No capability flags yet.",
+    "usage": "Usage",
+    "usageRelay": "Relay",
+    "usageBeta": "Beta access — no usage limits applied yet.",
+    "updated": "Updated",
+    "copyShare": "Copy share link",
+    "shareCopied": "Share link copied",
+    "emptyArtifactsTitle": "No artifacts yet",
+    "emptyArtifactsDesc": "Share a file from the Fabrica desktop app to see it here.",
+    "shareFirst": "Share from desktop",
+    "retry": "Retry",
+    "backHome": "Back to home"
   },
   "login": {
     "badge": "FABRICA ACCESS",
