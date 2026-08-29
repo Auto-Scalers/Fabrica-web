@@ -16,16 +16,16 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 33 |
+| Total tasks | 38 |
 | ✅ DONE | 33 |
-| 🔶 IN_PROGRESS | 0 |
+| 🔶 IN_PROGRESS | 5 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 100% |
+| Completion | 87% |
 
-_Last recount: 2026-08-29 (WEB-CTA added + flipped DONE — all 33/33 tasks complete)_
+_Last recount: 2026-08-29 (5 Phase 8 tasks dispatched to workers: WEB-W33 nav, WEB-W34 download, WEB-W35 auth, WEB-W36 dashboard, WEB-W37 hide pricing — all IN_PROGRESS)_
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -184,6 +184,23 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 
 ---
 
+## Phase 8 — Top-Bar Nav + Download / Auth / Dashboard Enhancements (WEB-UX2)
+
+> Follow-up to Phase 7 (WEB-CTA). WEB-CTA replaced the **bottom** FinalCta email-capture with Download + Sign in buttons and shipped the `/download` + `/dashboard` pages. This phase targets the **top navigation bar** (still showing the old "Get Early Access" button) and meaningfully enhances the three pages WEB-CTA created as minimal scaffolds.
+>
+> WHAT THIS GROUP DOES: top-bar nav buttons, richer installer page, polished login/signup → dashboard handoff, and a higher-fidelity authenticated dashboard workspace.
+> WHAT THIS GROUP DOES NOT DO: re-place the bottom FinalCta (already DONE in WEB-CTA); change API auth contracts (those live in API Routes + Fabrica-app lockstep).
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| WEB-W33 | Top-bar nav: replace "Get Early Access" button with two actions — **Download** (primary, → /download) and **Sign in / Dashboard** (secondary, → /api/auth/authorize for OAuth; or → /dashboard if already authed). Apply to desktop nav + mobile drawer nav. Keep i18n parity (en/fr/ar) — add `nav.download` + `nav.signIn` / `nav.dashboard` keys; remove/replace `nav.getEarlyAccess`. Honor existing navbar Strikingly/ShimmerButton styling + dark theme/copper palette. | 🔶 IN_PROGRESS | Worker `term_f886d746` (ctx_d6358586dd8a, run_bd4ac74e357b) in worktree `web-W33-nav`. Dispatched 2026-08-29. |
+| WEB-W34 | Enhance the `/download` installer page — go beyond a bare list of GitHub Release links. Add: platform detection (auto-highlight the user's OS), prominent primary download CTA per platform (Windows .exe / macOS .dmg / Linux .AppImage / Android .apk), copy for what Fabrica is + "free to start", secondary links (release notes → /whats-new, GitHub Releases, checksums/verify), mobile-companion note (phone↔desktop relay), and i18n parity. Server Component for static parts; client island for OS detection. Keep brand voice grounded in the 3 internal marketing files. | ⬜ TODO | Depends on existing `app/[locale]/download/page.tsx` from WEB-CTA. Do not break build. |
+| WEB-W35 | Enhance login / sign-up → dashboard flow. The OAuth browser flow already lands on /dashboard (WEB-CTA). Enhance: a branded `/login` (or sign-in) entry that explains "Sign in with GitHub to access your Fabrica dashboard", handles the returning-from-OAuth hash, shows loading/error states, and a clear "New here? Download the app" path. Add sign-up framing (account created via GitHub OAuth; link to download). Ensure token-hash parsing, session state, and redirect-to-/dashboard are robust and mobile-friendly. i18n parity for all new copy. | ⬜ TODO | Cross-project note: auth contract = `/api/auth/authorize` (GitHub OAuth, returns 302). Relay pairing (mobile) is X1-dependent on Fabrica-app. |
+| WEB-W36 | Enhance the authenticated `/dashboard` workspace. Current scaffold (WEB-CTA) shows profile/orgs/capabilities/recent artifacts/relay. Elevate to a real workspace: clearer empty states, "Connect your desktop app" / relay-pairing CTA, recent artifacts grid with share links, org switcher, usage/capabilities panel, quick actions (Download app, Open docs, Invite), and responsive layout. Keep the token-hash read + Supabase session logic; improve UX, loading/error/empty states, and i18n parity. | ⬜ TODO | Cross-project: artifacts/share = WEB-W5 (`/api/share/*`); relay = Fabrica-relay (X1). |
+| WEB-W37 | Hide the pricing section from the landing page — Fabrica is going free for now. Remove/hide the pricing block (and its nav link `#pricing` in the top bar) without deleting the underlying component or copy (keep for later re-enable). Ensure no dead anchor references remain (nav + footer + scroll-spy SECTION_IDS). Keep i18n keys intact. Re-verify build + scroll anchors. | ⬜ TODO | Out-of-scope: bottom FinalCta + download/auth/dashboard (Phase 8 W33-W36). Check `components/` pricing section + navbar/footer/scroll-spy references to `#pricing`. |
+
+---
+
 ## Infrastructure Notes
 
 **Supabase project:** `xoynlmscwkimaopkavkj.supabase.co` (shared with app)
@@ -259,12 +276,12 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 
 | Field | Value |
 |---|---|
-| **Current Group** | WEB-CTA ✅ added (Phase 7) — **ALL 33/33 tasks DONE** |
-| **Current Task** | none — idle, awaiting PM push |
-| **Last Action** | WEB-CTA: replaced email-capture CTA with Download+Sign in, added /download + /dashboard pages, wired OAuth → /dashboard, removed orphan /api/early-access, i18n parity en/fr/ar. Build clean, 0 new lint errors |
-| **Next Action** | PM: commit & push to deploy (FinalCta two-button CTA, /download installer page, /dashboard authenticated workspace, OAuth browser flow landing on /dashboard). Optional: lint cleanup of 46 pre-existing errors (out of scope) |
-| **Blockers** | none |
-| **Last Checkpoint** | 2026-08-29T18:40Z |
+| **Current Group** | Phase 8 — WEB-UX2 (5 new tasks) |
+| **Current Task** | none — idle, awaiting orchestrator dispatch |
+| **Last Action** | Added WEB-W33 (top-bar nav: Download + Sign in/Dashboard), WEB-W34 (enhance /download), WEB-W35 (enhance login/signup → dashboard), WEB-W36 (enhance /dashboard), WEB-W37 (hide pricing section — going free). Rollup recounted 38 total / 33 DONE / 5 TODO. |
+| **Next Action** | Orchestrator: dispatch WEB-W33 (top-bar nav) + WEB-W37 (hide pricing) first as they touch navbar/sections; then WEB-W34/WEB-W35/WEB-W36 in parallel (different files). Note WEB-CTA already shipped bottom FinalCta + scaffold pages. |
+| **Blockers** | WEB-W35/WEB-W36 touch relay/artifacts (X1 cross-project, Fabrica-app) — enhance UX only, don't block on backend |
+| **Last Checkpoint** | 2026-08-29 |
 
 ---
 
@@ -343,7 +360,7 @@ On heartbeat kick:
 
 _Created: Aug 2026. Migrated from `Fabrica-web-tasks.md` per `.Fabrica-board/Fabrica-Schema.md`; original left unmodified._
 
-_Last updated: 2026-08-23_
+_Last updated: 2026-08-29_
 
 ---
 
