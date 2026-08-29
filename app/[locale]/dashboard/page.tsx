@@ -166,7 +166,7 @@ export default function DashboardPage() {
           <button
             type="button"
             onClick={() => {
-              window.location.href = '/api/auth/authorize'
+              window.location.href = '/login'
             }}
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-orange-950/50"
           >

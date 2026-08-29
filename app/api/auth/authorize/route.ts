@@ -12,7 +12,11 @@ export async function GET(req: NextRequest) {
     }
 
     const provider = req.nextUrl.searchParams.get('provider') || 'github'
-    const redirectTo = req.nextUrl.searchParams.get('redirect_to') || `${req.nextUrl.origin}/api/auth/callback`
+    const localeParam = req.nextUrl.searchParams.get('locale')
+    const locale = localeParam === 'fr' || localeParam === 'ar' ? localeParam : 'en'
+    const redirectTo =
+      req.nextUrl.searchParams.get('redirect_to') ||
+      `${req.nextUrl.origin}/api/auth/callback?locale=${locale}`
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider as 'github' | 'google',
