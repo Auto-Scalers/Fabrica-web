@@ -796,13 +796,30 @@
     "badge": "احصل على فابريكا",
     "title": "تنزيل فابريكا",
     "subtitle": "احصل على فابريكا لجهازك أو هاتفك. اختر منصتك أدناه ونزّل المثبّت مباشرة — دون تسجيل.",
+    "whatIs": "فابريكا هي مركز قيادة على سطح المكتب يشغّل وكلاء CLI لديك — Claude Code وCodex وOpenCode وCursor وغيرهم — كطواقم متوازية. وجّه العمل؛ واحتفظ بالتحكّم.",
+    "freeToStart": "مجّاني للبدء. أحضر مفاتيح الوكلاء الخاصة بك وشغّلها محليًا — لا حساب مطلوب للتنزيل.",
     "preBeta": "فابريكا في مرحلة ما قبل بيتا. هذه هي أحدث البنيات المستقرة — فقط نزّلها وشغّلها.",
+    "recommended": "موصى به لجهازك",
     "allReleases": "عرض كل الإصدارات على GitHub",
+    "releaseNotes": "ملاحظات الإصدار",
+    "verifyChecksums": "تحقّق من المجاميع الاختبارية",
+    "downloadButton": "تنزيل",
     "platforms": {
-      "windows": { "name": "Windows", "detail": "لـ Windows 10 و11 • مثبّت .exe" },
-      "android": { "name": "هاتف Android", "detail": "لجهاز Android الخاص بك • .apk" }
+      "windows": { "name": "Windows", "detail": "Windows 10 و11 • مثبّت .exe" },
+      "macos": { "name": "macOS", "detail": "macOS 12+ • صورة قرص .dmg" },
+      "linux": { "name": "Linux", "detail": "أي توزيع حديث • .AppImage" },
+      "android": { "name": "هاتف Android", "detail": "Android 8+ • .apk" }
     },
-    "downloadButton": "تنزيل"
+    "mobileCompanionTitle": "هاتفك جزء من الطاقم",
+    "mobileCompanionBody": "ثبّت تطبيق Android واقرنه بفابريكا على سطح المكتب. ابدأ مهمة وأنت في الخارج، واستكملها على مكتبك — يبقي الترحيل الهاتف وسطح المكتب متزامنين.",
+    "mobileCompanionCta": "احصل على تطبيق Android"
+  },
+  "whatsNew": {
+    "badge": "ملاحظات الإصدار",
+    "title": "جديد فابريكا",
+    "subtitle": "كل بنية، بلغة واضحة — ما تغيّر، ما صدر، وأين تجده.",
+    "versionLabel": "الإصدار",
+    "viewRelease": "عرض الإصدار الكامل"
   },
   "dashboard": {
     "badge": "مساحة عملك",

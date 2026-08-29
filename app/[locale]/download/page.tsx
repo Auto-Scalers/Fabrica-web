@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/src/i18n/routing";
-import { ArrowRight, Monitor, Smartphone, Github, Download } from "lucide-react";
+import { Link } from "@/src/i18n/navigation";
+import { ArrowRight, Github, ShieldCheck, Smartphone, FileText } from "lucide-react";
+import { OsPlatformGrid, type Platform } from "@/components/download/OsPlatformGrid";
 
 interface Params {
   locale: string;
@@ -12,19 +14,26 @@ export function generateStaticParams(): Params[] {
 }
 
 const RELEASES_URL = "https://github.com/Auto-Scalers/Fabrica-app/releases";
+const LATEST_RELEASE_URL = `${RELEASES_URL}/latest`;
 
-const DOWNLOADS = [
+const DOWNLOADS: { key: Platform["key"]; href: string }[] = [
   {
     key: "windows",
-    icon: Monitor,
     href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-windows-setup.exe",
   },
   {
+    key: "macos",
+    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-macos.dmg",
+  },
+  {
+    key: "linux",
+    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-linux.AppImage",
+  },
+  {
     key: "android",
-    icon: Smartphone,
     href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-android.apk",
   },
-] as const;
+];
 
 export async function generateMetadata({
   params,
@@ -47,6 +56,12 @@ export default async function DownloadPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "download" });
 
+  const platforms: Platform[] = DOWNLOADS.map((p) => ({
+    ...p,
+    name: t(`platforms.${p.key}.name`),
+    detail: t(`platforms.${p.key}.detail`),
+  }));
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[var(--surface-page)] text-[var(--text-strong)]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent pointer-events-none" />
@@ -68,54 +83,83 @@ export default async function DownloadPage({
           {t("subtitle")}
         </p>
 
+        {/* What Fabrica is */}
+        <p className="mx-auto max-w-2xl text-base leading-relaxed text-[var(--text-muted)]">
+          {t("whatIs")}
+        </p>
+
+        {/* Free to start */}
+        <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 px-4 py-1.5 font-mono text-sm text-orange-300">
+          {t("freeToStart")}
+        </p>
+
         {/* Pre-beta note */}
         <p className="mx-auto max-w-2xl font-mono text-sm text-[var(--text-muted)]">
           {t("preBeta")}
         </p>
 
-        {/* Installer grid */}
-        <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2">
-          {DOWNLOADS.map((p) => {
-            const Icon = p.icon;
-            return (
-              <a
-                key={p.key}
-                href={p.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5 text-start transition-all hover:border-orange-500/50 hover:bg-[var(--overlay-10)]"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <span className="flex-1">
-                  <span className="block text-base font-semibold">
-                    {t(`platforms.${p.key}.name`)}
-                  </span>
-                  <span className="block text-xs text-[var(--text-muted)]">
-                    {t(`platforms.${p.key}.detail`)}
-                  </span>
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-950/40">
-                  <Download className="h-4 w-4" />
-                  {t("downloadButton")}
-                </span>
-              </a>
-            );
-          })}
+        {/* Installer grid (client island for OS detection) */}
+        <OsPlatformGrid
+          platforms={platforms}
+          recommendedLabel={t("recommended")}
+          downloadLabel={t("downloadButton")}
+        />
+
+        {/* Secondary links */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-2">
+          <Link
+            href="/whats-new"
+            className="inline-flex items-center gap-2 font-mono text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-strong)]"
+          >
+            <FileText className="h-4 w-4" />
+            {t("releaseNotes")}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <a
+            href={RELEASES_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-strong)]"
+          >
+            <Github className="h-4 w-4" />
+            {t("allReleases")}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href={LATEST_RELEASE_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 font-mono text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-strong)]"
+          >
+            <ShieldCheck className="h-4 w-4" />
+            {t("verifyChecksums")}
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
 
-        {/* All releases link */}
-        <a
-          href={RELEASES_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text-strong)]"
-        >
-          <Github className="h-4 w-4" />
-          {t("allReleases")}
-          <ArrowRight className="h-4 w-4" />
-        </a>
+        {/* Mobile companion note */}
+        <div className="mx-auto mt-4 max-w-2xl rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6 text-start">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400">
+              <Smartphone className="h-5 w-5" />
+            </span>
+            <div className="flex-1">
+              <h2 className="text-base font-semibold">{t("mobileCompanionTitle")}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                {t("mobileCompanionBody")}
+              </p>
+              <a
+                href="https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-android.apk"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 font-mono text-sm text-orange-400 transition-colors hover:text-orange-300"
+              >
+                {t("mobileCompanionCta")}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -756,13 +756,30 @@
     "badge": "OBTENIR FABRICA",
     "title": "Télécharger Fabrica",
     "subtitle": "Installez Fabrica sur votre ordinateur ou votre téléphone. Choisissez votre plateforme ci-dessous et téléchargez l'installateur directement — sans inscription.",
+    "whatIs": "Fabrica est un poste de commande de bureau qui exécute vos agents CLI — Claude Code, Codex, OpenCode, Cursor et bien plus — en équipages parallèles. Dirigez le travail ; gardez le contrôle.",
+    "freeToStart": "Gratuit pour commencer. Apportez vos propres clés d'agent et exécutez localement — aucun compte requis pour télécharger.",
     "preBeta": "Fabrica est en pré-bêta. Ce sont les dernières versions stables — téléchargez et lancez.",
+    "recommended": "Recommandé pour votre appareil",
     "allReleases": "Voir toutes les releases sur GitHub",
+    "releaseNotes": "Notes de version",
+    "verifyChecksums": "Vérifier les checksums",
+    "downloadButton": "Télécharger",
     "platforms": {
-      "windows": { "name": "Windows", "detail": "Pour Windows 10 & 11 • installateur .exe" },
-      "android": { "name": "Téléphone Android", "detail": "Pour votre appareil Android • .apk" }
+      "windows": { "name": "Windows", "detail": "Windows 10 & 11 • installateur .exe" },
+      "macos": { "name": "macOS", "detail": "macOS 12+ • image disque .dmg" },
+      "linux": { "name": "Linux", "detail": "Toute distro récente • .AppImage" },
+      "android": { "name": "Téléphone Android", "detail": "Android 8+ • .apk" }
     },
-    "downloadButton": "Télécharger"
+    "mobileCompanionTitle": "Votre téléphone fait partie de l'équipage",
+    "mobileCompanionBody": "Installez l'application Android et associez-la à Fabrica sur bureau. Démarrez une tâche en déplacement, reprenez-la à votre bureau — le relais garde téléphone et bureau synchronisés.",
+    "mobileCompanionCta": "Obtenir l'appli Android"
+  },
+  "whatsNew": {
+    "badge": "NOTES DE VERSION",
+    "title": "Nouveautés de Fabrica",
+    "subtitle": "Chaque build, en toute clarté — ce qui a changé, ce qui est livré, et où le récupérer.",
+    "versionLabel": "Version",
+    "viewRelease": "Voir la release complète"
   },
   "dashboard": {
     "badge": "VOTRE ESPACE",

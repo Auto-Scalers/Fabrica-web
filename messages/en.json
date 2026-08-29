@@ -756,13 +756,30 @@
     "badge": "GET FABRICA",
     "title": "Download Fabrica",
     "subtitle": "Grab Fabrica for your computer or your phone. Pick your platform below and download the installer directly — no sign-up needed.",
+    "whatIs": "Fabrica is a desktop command center that runs your CLI agents — Claude Code, Codex, OpenCode, Cursor, and more — as parallel crews. Direct the work; keep the control.",
+    "freeToStart": "Free to start. Bring your own agent keys and run locally — no account required to download.",
     "preBeta": "Fabrica is in pre-beta. These are the latest stable builds — just download and run.",
+    "recommended": "Recommended for your device",
     "allReleases": "View all releases on GitHub",
+    "releaseNotes": "Release notes",
+    "verifyChecksums": "Verify checksums",
+    "downloadButton": "Download",
     "platforms": {
-      "windows": { "name": "Windows", "detail": "For Windows 10 & 11 • .exe installer" },
-      "android": { "name": "Android phone", "detail": "For your Android device • .apk" }
+      "windows": { "name": "Windows", "detail": "Windows 10 & 11 • .exe installer" },
+      "macos": { "name": "macOS", "detail": "macOS 12+ • .dmg disk image" },
+      "linux": { "name": "Linux", "detail": "Any modern distro • .AppImage" },
+      "android": { "name": "Android", "detail": "Android 8+ • .apk" }
     },
-    "downloadButton": "Download"
+    "mobileCompanionTitle": "Your phone is part of the crew",
+    "mobileCompanionBody": "Install the Android app and pair it with Fabrica on desktop. Start a task on the go, pick it up at your desk — the relay keeps phone and desktop in sync.",
+    "mobileCompanionCta": "Get the Android app"
+  },
+  "whatsNew": {
+    "badge": "RELEASE NOTES",
+    "title": "What's new in Fabrica",
+    "subtitle": "Every build, in plain language — what changed, what shipped, and where to grab it.",
+    "versionLabel": "Version",
+    "viewRelease": "View full release"
   },
   "dashboard": {
     "badge": "YOUR WORKSPACE",
