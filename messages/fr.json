@@ -753,14 +753,12 @@
   "download": {
     "badge": "OBTENIR FABRICA",
     "title": "Télécharger Fabrica",
-    "subtitle": "Le centre de commande de bureau pour vos équipes d'agents CLI — disponible sur macOS, Windows, Linux et Android.",
-    "preBeta": "Fabrica est en pré-bêta. Les builds sont publiés sur GitHub Releases — récupérez l'installateur pour votre plateforme ci-dessous.",
+    "subtitle": "Installez Fabrica sur votre ordinateur ou votre téléphone. Choisissez votre plateforme ci-dessous et téléchargez l'installateur directement — sans inscription.",
+    "preBeta": "Fabrica est en pré-bêta. Ce sont les dernières versions stables — téléchargez et lancez.",
     "allReleases": "Voir toutes les releases sur GitHub",
     "platforms": {
-      "macos": { "name": "macOS", "detail": "Apple Silicon & Intel • .dmg" },
-      "windows": { "name": "Windows", "detail": "x64 / ARM64 • .exe" },
-      "linux": { "name": "Linux", "detail": ".AppImage / .deb" },
-      "android": { "name": "Android", "detail": "App compagnon • .apk" }
+      "windows": { "name": "Windows", "detail": "Pour Windows 10 & 11 • installateur .exe" },
+      "android": { "name": "Téléphone Android", "detail": "Pour votre appareil Android • .apk" }
     },
     "downloadButton": "Télécharger"
   },

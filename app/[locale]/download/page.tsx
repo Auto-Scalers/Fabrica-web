@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/src/i18n/routing";
-import { ArrowRight, Apple, Monitor, Terminal, Smartphone, Github, Download } from "lucide-react";
+import { ArrowRight, Monitor, Smartphone, Github, Download } from "lucide-react";
 
 interface Params {
   locale: string;
@@ -13,11 +13,17 @@ export function generateStaticParams(): Params[] {
 
 const RELEASES_URL = "https://github.com/Auto-Scalers/Fabrica-app/releases";
 
-const PLATFORMS = [
-  { key: "macos", icon: Apple },
-  { key: "windows", icon: Monitor },
-  { key: "linux", icon: Terminal },
-  { key: "android", icon: Smartphone },
+const DOWNLOADS = [
+  {
+    key: "windows",
+    icon: Monitor,
+    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-windows-setup.exe",
+  },
+  {
+    key: "android",
+    icon: Smartphone,
+    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-android.apk",
+  },
 ] as const;
 
 export async function generateMetadata({
@@ -69,12 +75,12 @@ export default async function DownloadPage({
 
         {/* Installer grid */}
         <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2">
-          {PLATFORMS.map((p) => {
+          {DOWNLOADS.map((p) => {
             const Icon = p.icon;
             return (
               <a
                 key={p.key}
-                href={RELEASES_URL}
+                href={p.href}
                 target="_blank"
                 rel="noreferrer"
                 className="group flex items-center gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5 text-start transition-all hover:border-orange-500/50 hover:bg-[var(--overlay-10)]"

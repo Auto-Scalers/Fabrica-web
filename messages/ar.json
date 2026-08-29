@@ -793,14 +793,12 @@
   "download": {
     "badge": "احصل على فابريكا",
     "title": "تنزيل فابريكا",
-    "subtitle": "مركز قيادة سطح المكتب لطواقم وكلاء CLI لديك — متاح لـ macOS وWindows وLinux وAndroid.",
-    "preBeta": "فابريكا في مرحلة ما قبل بيتا. تُنشر البنيات على GitHub Releases — احصل على مثبّت منصتك أدناه.",
+    "subtitle": "احصل على فابريكا لجهازك أو هاتفك. اختر منصتك أدناه ونزّل المثبّت مباشرة — دون تسجيل.",
+    "preBeta": "فابريكا في مرحلة ما قبل بيتا. هذه هي أحدث البنيات المستقرة — فقط نزّلها وشغّلها.",
     "allReleases": "عرض كل الإصدارات على GitHub",
     "platforms": {
-      "macos": { "name": "macOS", "detail": "Apple Silicon وIntel • .dmg" },
-      "windows": { "name": "Windows", "detail": "x64 / ARM64 • .exe" },
-      "linux": { "name": "Linux", "detail": ".AppImage / .deb" },
-      "android": { "name": "Android", "detail": "تطبيق المرافق • .apk" }
+      "windows": { "name": "Windows", "detail": "لـ Windows 10 و11 • مثبّت .exe" },
+      "android": { "name": "هاتف Android", "detail": "لجهاز Android الخاص بك • .apk" }
     },
     "downloadButton": "تنزيل"
   },
