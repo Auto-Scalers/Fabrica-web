@@ -17,15 +17,15 @@
 | Metric | Value |
 |---|---|
 | Total tasks | 45 |
-| ✅ DONE | 41 |
-| 🔶 IN_PROGRESS | 4 |
+| ✅ DONE | 43 |
+| 🔶 IN_PROGRESS | 2 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 91% |
+| Completion | 96% |
 
-_Last recount: 2026-08-29 (WEB-ICON-THEME DONE ✅ — navbar + login + download + dashboard + Hero (x2) + FinalCta brand logo now swaps between dark/light variants via Tailwind `dark:` variant (two `<img>` + CSS-only). Footer unchanged (fixed dark bg). npm run build + lint clean. Also: WEB-ICON DONE ✅ — root-orchestrator verified on disk: `public/fabrica-logo_icon.png` + `_light.png` + `app/icon.png` + `app/apple-icon.png` all match the PM's source PNGs; navbar/footer/login/download/dashboard `<img>` references all point at the new art, footer correctly uses the light variant. WEB-W38 DONE+MERGED; WEB-W39 + WEB-W40 + WEB-W41 IN_PROGRESS.)_
+_Last recount: 2026-08-29 (WEB-ICON-THEME + WEB-ICON DONE ✅ — committed + pushed by PM: brand-art svg→png swap, dark/light variants, Tailwind `dark:` across navbar/login/download/dashboard/Hero/FinalCta). WEB-W38 DONE+MERGED. WEB-W40 + WEB-W40a DONE+MERGED ✅ (docs index `app/[locale]/docs/page.tsx` added, catch-all converted `[[...slug]]`→`[...slug]` (required) to avoid Next.js 16 specificity conflict, i18n parity en/fr/ar, build clean 27 routes). WEB-W39 + WEB-W41 IN_PROGRESS.)_
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -111,6 +111,8 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 | # | Task | Status | Notes |
 |---|------|--------|-------|
 | WEB-W11 | `/docs/*` — documentation pages | ✅ DONE | Created layout, catch-all page, sidebar, prose, content, nav. Build compiles. Zero orca/stablyai refs. |
+| WEB-W40 | Add `/docs` index page + i18n + fix catch-all path | ✅ DONE | Worker `term_4e11a915`. Added `app/[locale]/docs/page.tsx` (the new index), added `docs.indexTitle`/`indexSubtitle` to en/fr/ar.json, plus a small `generateStaticParams` fix to skip empty keys. Build claimed clean; see WEB-W40a for the path-corruption fix that followed. |
+| WEB-W40a | FIX the docs catch-all directory corruption | ✅ DONE | Worker `term_4e11a915`. The original docs commit (39bdf75) had the catch-all at the literal `app/[locale]/docs/[/[...slug/]/]/page.tsx` (a real-but-corrupt path with literal `[/.../]/` brackets in the directory name). Moved to the proper catch-all `app/[locale]/docs/[...slug]/page.tsx` (used non-optional `[...slug]` because Next.js 16 rejects `[[...slug]]` + a separate `page.tsx` index at the same level with `You cannot define a route with the same specificity as an optional catch-all route`). Deleted the three garbage directories. Final layout: `app/[locale]/docs/page.tsx` (index), `app/[locale]/docs/layout.tsx` (existing), `app/[locale]/docs/[...slug]/page.tsx` (catch-all, restored). Build clean: routes `/[locale]/docs` and `/[locale]/docs/[...slug]` (NOT the broken `/[...slug/]/`). Lint clean vs W40 baseline (56 problems / 46 errors / 10 warnings — identical, 0 new). Evidence: `build-w40a.txt`, `lint-w40a.txt`. Deviation from spec: task said `[[...slug]]` (optional); resolved as `[...slug]` (non-optional) to keep the separate index page; semantics: `/[locale]/docs` shows index, `/[locale]/docs/foo` shows article. |
 
 ---
 
@@ -292,11 +294,11 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 
 | Field | Value |
 |---|---|
-| **Current Group** | Phase 8 — WEB-UX2 (6 tasks: W33–W37 DONE+MERGED, WEB-W38 DONE+MERGED, WEB-W39 IN_PROGRESS) |
-| **Current Task** | WEB-W39 — remove stale hero "Get Early Access" + "Explore Command Center" CTAs + fix Footer dead #command-center links (IN_PROGRESS, worker `term_697b3731`) |
-| **Last Action** | W33–W37 + WEB-W38 all merged into Fabrica-web main (conflicts resolved, `npm run build` clean). WEB-W38: back-to-home control + Sign-in copper border shipped. WEB-W39 dispatched to remove leftover hero/footer buttons. |
-| **Next Action** | Orchestrator review WEB-W39 → merge. Then PM commit & push → Vercel deploy. Verify live: top-bar Download+Sign in + Back to home, /download, /login → /dashboard, pricing absent, hero CTAs = Download/Sign in (no Get Early Access / Explore Command Center). |
-| **Blockers** | G4-ENV: Supabase GitHub OAuth provider not enabled (sign-in returns 400 "provider not enabled") — backend config, not web code. |
+| **Current Group** | Phase 8 + Docs Site (W33–W38 DONE+MERGED, W40+W40a DONE+MERGED, W39 + W41 IN_PROGRESS) |
+| **Current Task** | WEB-W39 (hero/footer stale CTA removal) + WEB-W41 (login investigation proposal — already on disk) |
+| **Last Action** | WEB-W40 + WEB-W40a merged: `/docs` index page shipped (`app/[locale]/docs/page.tsx`), required catch-all `[...slug]` (avoided Next 16 specificity conflict), i18n parity en/fr/ar, `npm run build` clean (27 routes). |
+| **Next Action** | Orchestrator review + merge WEB-W39 when it reports. Mark W41 ✅ DONE (research deliverable). Then PM commit & push → Vercel deploy. |
+| **Blockers** | G4-ENV: Supabase GitHub OAuth provider not enabled (sign-in 400) — backend config. |
 | **Last Checkpoint** | 2026-08-29 |
 
 ---
@@ -370,11 +372,11 @@ On heartbeat kick:
 | `term_bda12904-6de6-4710-9c10-5ee280e82292` | worker | WEB-W37 hide pricing section | `run_bd4ac74e357b / task_621371a23275 / ctx_8d27b23ead49` | RELEASED (merged into main; #pricing anchors removed) | Aug 29 2026 | web-W37-pricing | ✅ |
 | `term_8bda54f0-7cb9-4dc4-92ec-4eb711f22fd1` | worker | WEB-W38 back-to-landing + Sign in border | `run_55c168e35a3f / task_4d3f2e5813b2 / ctx_796242ae6306` | RELEASED (reviewed ✅, merged into main; worktree removed) | Aug 29 2026 | web-W38-backhome | ✅ |
 | `term_697b3731-87fa-445b-9563-6fc5c6f0ff37` | worker | WEB-W39 remove hero/footer stale CTAs | `run_55c168e35a3f / task_a84a9118f405 / ctx_3d1ab38451a6` | IN_PROGRESS (editing Hero.tsx + Footer.tsx + messages) | Aug 29 2026 | web-W39-hero | no |
-| `term_7e3f5fa6-7194-4fa1-8ea0-6d099a702455` | worker | WEB-W40 add /docs index page | `run_55c168e35a3f / task_f6302ba37bc0 / ctx_9186e006dd94` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W40-docs | no |
-| `term_4e11a915-354a-4338-b725-25c40426fb69` | worker | WEB-W40a fix docs catch-all path corruption | `run_55c168e35a3f / task_5af16f191b2f / ctx_5833424f5d45` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W40a-fix | no |
-| `term_e0d4676e-beb4-41e7-8138-ca4845b80da4` | worker | WEB-W41 cross-folder login investigation + proposal | `run_55c168e35a3f / task_e981ed1c40b5 / ctx_6b74f5c455da` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W41-login | no |
-| `term_local_web_theme` | worker | WEB-ICON-THEME theme-adaptive logo swap | `task_web_icon_theme / ctx_local` | RELEASED (done) | Aug 29 2026 | Fabrica-web/ | n/a |
-| `term_local_web_theme_hero` | worker | WEB-ICON-THEME Hero (x2) + FinalCta theme swap | `task_web_icon_theme_hero / ctx_local / term_local_web_theme_hero` | RELEASED (done) | Aug 29 2026 | Fabrica-web/ | n/a |
+| `term_7e3f5fa6-7194-4fa1-8ea0-6d099a702455` | worker | WEB-W40 add /docs index page (superseded by W40a) | `run_55c168e35a3f / task_f6302ba37bc0 / ctx_9186e006dd94` | RELEASED (superseded — W40a delivered the index + catch-all fix; merged into main) | Aug 29 2026 | web-W40-docs | ✅ |
+| `term_4e11a915-354a-4338-b725-25c40426fb69` | worker | WEB-W40a fix docs catch-all + add /docs index | `run_55c168e35a3f / task_5af16f191b2f / ctx_5833424f5d45` | RELEASED (reviewed ✅, merged into main; cc39a4f — required catch-all `[...slug]` + index page.tsx, i18n parity, build clean 27 routes) | Aug 29 2026 | web-W40a-fix | ✅ |
+| `term_e0d4676e-beb4-41e7-8138-ca4845b80da4` | worker | WEB-W41 cross-folder login investigation + proposal | `run_55c168e35a3f / task_e981ed1c40b5 / ctx_6b74f5c455da` | IN_PROGRESS (proposal on disk, awaiting worker_done) | Aug 29 2026 | web-W41-login | no |
+| `term_local_web_theme` | worker | WEB-ICON-THEME theme-adaptive logo swap | `task_web_icon_theme / ctx_local` | RELEASED (done; committed + pushed by PM) | Aug 29 2026 | Fabrica-web/ | n/a |
+| `term_local_web_theme_hero` | worker | WEB-ICON-THEME Hero (x2) + FinalCta theme swap | `task_web_icon_theme_hero / ctx_local / term_local_web_theme_hero` | RELEASED (done; committed + pushed by PM) | Aug 29 2026 | Fabrica-web/ | n/a |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 

@@ -13,6 +13,10 @@
     "dashboard": "Dashboard",
     "backToHome": "Back to home"
   },
+  "docs": {
+    "indexTitle": "Fabrica documentation",
+    "indexSubtitle": "Guides, concepts, and reference for running your crew of AI coding agents — from install to design mode."
+  },
   "hero": {
     "badgeLabel": "The Next AI Exit",
     "badgeSub": "Desktop CLI Agent Management Platform",
