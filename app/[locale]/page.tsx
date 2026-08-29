@@ -10,7 +10,6 @@ import { BeyondCodeSection } from "@/components/Blocks/BeyondCodeSection";
 import { IntegrationsMarquee } from "@/components/Blocks/IntegrationsMarquee";
 import { WhyFabrica } from "@/components/Blocks/FeatureSection";
 import { ComparisonSection } from "@/components/Blocks/ComparisonSection";
-import { PricingSection } from "@/components/Blocks/PricingSection";
 import { FaqSection } from "@/components/Blocks/FaqSection";
 import { FinalCta } from "@/components/Blocks/FinalCta";
 
@@ -52,9 +51,6 @@ export default function Home() {
 
       {/* 12. Proof: Comparison matrix vs doing it alone and generic chat tools */}
       <ComparisonSection />
-
-      {/* 13. Pricing: Transparent tiers with built-in financial guardrails */}
-      <PricingSection />
 
       {/* 14. FAQ: Technical & architectural depth in an accordion */}
       <FaqSection />

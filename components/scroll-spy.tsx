@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-const SECTION_IDS = ['product', 'crew', 'how-it-works', 'controls', 'comparison', 'pricing', 'faq', 'waitlist']
+const SECTION_IDS = ['product', 'crew', 'how-it-works', 'controls', 'comparison', 'faq', 'waitlist']
 
 export function ScrollSpy() {
   useEffect(() => {
