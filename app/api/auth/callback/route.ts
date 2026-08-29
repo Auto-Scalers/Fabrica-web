@@ -31,8 +31,9 @@ export async function GET(req: NextRequest) {
 
     const { session, user } = data
 
-    // Redirect URL — desktop app registers a custom scheme or a web fallback
-    const redirectBase = process.env.AUTH_REDIRECT_URL || req.nextUrl.origin
+    // Redirect URL — web sign-in lands on the dashboard (tokens stay in the
+    // fragment, not server logs); desktop app can override via AUTH_REDIRECT_URL.
+    const redirectBase = process.env.AUTH_REDIRECT_URL || `${req.nextUrl.origin}/dashboard`
     const redirectUrl = new URL(redirectBase)
 
     // Pass tokens in fragment (not logged to server logs) for client pickup

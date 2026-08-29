@@ -16,8 +16,8 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 32 |
-| ✅ DONE | 32 |
+| Total tasks | 33 |
+| ✅ DONE | 33 |
 | 🔶 IN_PROGRESS | 0 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
@@ -25,7 +25,7 @@
 | ❌ CANCELLED | 0 |
 | Completion | 100% |
 
-_Last recount: 2026-08-24 (script-scanned: W19 verified DONE — all 32/32 tasks complete)_
+_Last recount: 2026-08-29 (WEB-CTA added + flipped DONE — all 33/33 tasks complete)_
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -174,6 +174,16 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 
 ---
 
+## Phase 7 — CTA → Download / Sign-in + Dashboard (WEB-CTA)
+
+> Replace the email-capture "Get Early Access" CTA with two actions (Download + Sign in); add a /download installer page and an authenticated /dashboard; wire the OAuth browser flow to land on /dashboard. Cross-project note: G4-ENV worker only sets Vercel env (no source edits) — no conflict.
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| WEB-CTA | FinalCta: two buttons — Download (primary ShimmerButton → /download via router.push) and Sign in (secondary → /api/auth/authorize browser OAuth); new `app/[locale]/download/page.tsx` (Server Component) lists Windows/macOS/Linux/Android installers linking to GitHub Releases; new `app/[locale]/dashboard/page.tsx` (client) reads token hash, shows profile/orgs/capabilities/recent artifacts/relay; `GET /api/auth/authorize` returns 302 to OAuth URL; callback redirects to /dashboard (tokens in hash); removed orphaned `/api/early-access` route + fetches; i18n cta.getEarlyAccess→download+signIn, added `download`+`dashboard` namespaces (en/fr/ar parity) | ✅ DONE | Worker `term_9f2c4a17` (self-assigned). Build clean: Next 16.3.1, TS ✓, 17/17 pages, `/[locale]/download` + `/[locale]/dashboard` present. Lint: 0 NEW errors (46 pre-existing out of scope — docs-content unescaped entities, `require()` in scripts, `any` in request.ts, `no-html-link` in `/docs`). No Orca/Stably branding. |
+
+---
+
 ## Infrastructure Notes
 
 **Supabase project:** `xoynlmscwkimaopkavkj.supabase.co` (shared with app)
@@ -190,6 +200,40 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 **Environment variables:**
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+
+### G4-ENV — Vercel env (2026-08-28)
+
+> **STATUS: NOT APPLIED — BLOCKED by Vercel CLI auth.** `vercel whoami` failed
+> (worker timeout / EPIPE); `VERCEL_TOKEN` unset; `vercel login` non-interactive.
+> The PM must set these manually in the Vercel dashboard → project `fabrica-ai`,
+> target **Production** (and Preview/Development if needed).
+
+**Required env vars (exact names the new `/api/v1/desktop/*` + `/api/v1/artifacts/*` routes read):**
+
+| Env var | Source / reader | Notes |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | `lib/supabase-auth.ts`, `lib/supabase.ts`, session/authorize routes | Supabase project URL. Falls back to `SUPABASE_URL`. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `lib/supabase-auth.ts`, admin fallback | Anon key. Falls back to `SUPABASE_ANON_KEY`. |
+| `SUPABASE_SERVICE_ROLE_KEY` | `lib/supabase.ts:58` `getSupabaseAdmin()` | **Mandatory** for `/api/v1/artifacts` GET/POST (`route.ts:25,86`). |
+| `FABRICA_RELAY_JWT_SECRET` | `app/api/v1/desktop/auth/relay-token/route.ts:37` | HMAC secret for relay JWT mint. Must match Fabrica-relay worker. |
+
+**Optional:**
+- `FABRICA_OAUTH_PROVIDER` — `authorize/route.ts:44` (default `github`).
+
+**Generated secret (set as `FABRICA_RELAY_JWT_SECRET`):**
+```
+78f77f31506d77d3c65bb721e36da6ae3530853abbaabb222bf01ccd4a0f1893
+```
+
+**Apply commands (once authenticated):**
+```
+vercel env add NEXT_PUBLIC_SUPABASE_URL      <value> production fabrica-ai
+vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY <value> production fabrica-ai
+vercel env add SUPABASE_SERVICE_ROLE_KEY      <value> production fabrica-ai
+vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae3530853abbaabb222bf01ccd4a0f1893 production fabrica-ai
+```
+
+**DB schema:** `supabase/migrations/0001_fabrica_artifacts.sql` creates `public.fabrica_artifacts` + RLS owner policies. Non-destructive (`CREATE TABLE/INDEX IF NOT EXISTS`). Decision: **KEEP** the `supabase/` folder (defines the artifacts table).
 
 ---
 
@@ -215,12 +259,12 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 
 | Field | Value |
 |---|---|
-| **Current Group** | run_31a1a28a59a3 complete — W3 ✅ + W19 ✅; **ALL 32/32 tasks DONE** |
+| **Current Group** | WEB-CTA ✅ added (Phase 7) — **ALL 33/33 tasks DONE** |
 | **Current Task** | none — idle, awaiting PM push |
-| **Last Action** | Reviewed W19 mobile audit diff (RTL props, touch targets, object-cover), flipped DONE |
-| **Next Action** | PM: commit & push to deploy all local fixes (nudge schema, changelog prose, nav scroll-mt, refresh 400s, mobile/RTL fixes). Optional follow-up: lint cleanup (51 pre-existing), PM visual check on a real phone |
+| **Last Action** | WEB-CTA: replaced email-capture CTA with Download+Sign in, added /download + /dashboard pages, wired OAuth → /dashboard, removed orphan /api/early-access, i18n parity en/fr/ar. Build clean, 0 new lint errors |
+| **Next Action** | PM: commit & push to deploy (FinalCta two-button CTA, /download installer page, /dashboard authenticated workspace, OAuth browser flow landing on /dashboard). Optional: lint cleanup of 46 pre-existing errors (out of scope) |
 | **Blockers** | none |
-| **Last Checkpoint** | 2026-08-24T13:25Z |
+| **Last Checkpoint** | 2026-08-29T18:40Z |
 
 ---
 
@@ -285,6 +329,7 @@ On heartbeat kick:
 | `term_ca035e02-320b-444a-9afa-c0d3649e3768` | worker | LIVE-VERIFY-2 (post env fix) | `run_31a1a28a59a3 / task_73c4fbe8cc6a / ctx_8239fa832ade` | RELEASED (env fix confirmed live: authorize/logout 200; terminal stopped) | Aug 24 2026 | Fabrica-web/ (active worktree) | n/a |
 | `term_9d547abb-308f-4bbd-bf9c-560217c2349e` | worker | WEB-W3 refresh polish | `run_31a1a28a59a3 / task_1f9d160c0ead / ctx_5707350cc3c6` | RELEASED (diff verified: 400 on bad JSON; terminal stopped) | Aug 24 2026 | Fabrica-web/ (active worktree) | n/a |
 | `term_3a912103-fe5e-4079-a2fd-e2db89a6efe8` | worker | WEB-W19 mobile audit closeout | `run_31a1a28a59a3 / task_517861b72f41 / ctx_d100c84f83b4` | RELEASED (diff verified: RTL + touch targets + object-cover; terminal stopped) | Aug 24 2026 | Fabrica-web/ (active worktree) | n/a |
+| `term_9f2c4a17-2b3c-4d1e-8f5a-1c6e7b9a0d42` | worker | WEB-CTA (CTA→Download/Sign-in + /download + /dashboard + OAuth flow) | `task_5bbe58249b8e` | RELEASED (build clean, 0 new lint errors, i18n parity en/fr/ar; terminal stopped) | Aug 29 2026 | Fabrica-web/ | n/a |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 

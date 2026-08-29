@@ -29,7 +29,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 })
     }
 
-    return NextResponse.json({ url: data.url })
+    // Browser flow: redirect straight to the provider's OAuth URL so a plain
+    // link (e.g. the "Sign in" CTA) starts the flow without a client round-trip.
+    return NextResponse.redirect(data.url, 302)
   } catch (err: unknown) {
     console.error('Auth authorize error:', err)
     return NextResponse.json(
