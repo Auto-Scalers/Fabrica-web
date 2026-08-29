@@ -10,7 +10,8 @@
     "docs": "Docs",
     "download": "Download",
     "signIn": "Sign in",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "backToHome": "Back to home"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",

@@ -152,7 +152,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={startOAuth}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-6 py-3 text-base font-semibold text-white shadow-xl shadow-orange-950/50 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-orange-300/70 bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-6 py-3 text-base font-semibold text-white shadow-xl shadow-orange-950/50 transition-all hover:border-orange-200 sm:w-auto"
             >
               <Github className="h-4 w-4" />
               {t("githubButton")}
@@ -196,15 +196,15 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={startOAuth}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-orange-950/50"
-        >
-          <Github className="h-4 w-4" />
-          {t("githubButton")}
-          <ArrowRight className="h-4 w-4" />
-        </button>
+            <button
+              type="button"
+              onClick={startOAuth}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-orange-300/70 bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-orange-950/50 transition-all hover:border-orange-200"
+            >
+              <Github className="h-4 w-4" />
+              {t("githubButton")}
+              <ArrowRight className="h-4 w-4" />
+            </button>
 
         <div className="w-full border-t border-[var(--border-faint)] pt-6">
           <p className="text-sm leading-relaxed text-[var(--text-muted)]">

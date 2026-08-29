@@ -16,14 +16,14 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 38 |
+| Total tasks | 39 |
 | ✅ DONE | 38 |
 | 🔶 IN_PROGRESS | 0 |
-| ✅ DONE | 0 |
+| 👀 VERIFY | 1 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 100% |
+| Completion | 97% |
 
 _Last recount: 2026-08-29 (ALL 5 Phase 8 tasks DONE + MERGED into Fabrica-web main. Build clean: /[locale]/login, /whats-new, /download, /dashboard all registered. Conflict resolution: navbar.tsx W33+W37 combined; dashboard.tsx took W36 rebuild + re-applied W35 /login re-auth link; messages/*.json kept 4-platform list + all namespaces.)_
 
@@ -198,6 +198,7 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 | WEB-W35 | Enhance login / sign-up → dashboard flow. The OAuth browser flow already lands on /dashboard (WEB-CTA). Enhance: a branded `/login` (or sign-in) entry that explains "Sign in with GitHub to access your Fabrica dashboard", handles the returning-from-OAuth hash, shows loading/error states, and a clear "New here? Download the app" path. Add sign-up framing (account created via GitHub OAuth; link to download). Ensure token-hash parsing, session state, and redirect-to-/dashboard are robust and mobile-friendly. i18n parity for all new copy. | ✅ DONE | Orchestrator-verified: `app/[locale]/login/page.tsx` exists; no orca/stablyai branding; login i18n namespace added en/fr/ar (line ~789). Worker `term_7295705a` (ctx_a2fbde7c5934). Build + lint claimed clean. NOTE: also edited `app/[locale]/dashboard/page.tsx` (CTA→/login) + `components/Blocks/FinalCta.tsx` + callback/authorize routes — overlaps `dashboard/page.tsx` with WEB-W36 (full rebuild). Resolve at merge. |
 | WEB-W36 | Enhance the authenticated `/dashboard` workspace. Current scaffold (WEB-CTA) shows profile/orgs/capabilities/recent artifacts/relay. Elevate to a real workspace: clearer empty states, "Connect your desktop app" / relay-pairing CTA, recent artifacts grid with share links, org switcher, usage/capabilities panel, quick actions (Download app, Open docs, Invite), and responsive layout. Keep the token-hash read + Supabase session logic; improve UX, loading/error/empty states, and i18n parity. | ✅ DONE | Orchestrator-verified: no orca/stablyai branding; dashboard rebuilt (33 new dashboard i18n keys en/fr/ar parity). Worker `term_6f707b1d` (ctx_6300ab36aaf2). Build + lint claimed clean. MERGE NOTE: full rewrite of `app/[locale]/dashboard/page.tsx` — SAME file WEB-W35 edited (CTA→/login). Take W36 as authoritative dashboard, then re-apply W35's /login routing intent onto it. |
 | WEB-W37 | Hide the pricing section from the landing page — Fabrica is going free for now. Remove/hide the pricing block (and its nav link `#pricing` in the top bar) without deleting the underlying component or copy (keep for later re-enable). Ensure no dead anchor references remain (nav + footer + scroll-spy SECTION_IDS). Keep i18n keys intact. Re-verify build + scroll anchors. | ✅ DONE | Orchestrator-verified: grep `#pricing` in .tsx = 0 hits; `PricingSection` only its own component file (import/render removed from page.tsx); no orca/stablyai branding. Worker `term_bda12904` (ctx_8d27b23ead49). Build claimed clean. MERGE NOTE: also edited `components/navbar.tsx` (removed #pricing link) — same file as WEB-W33; merge W33 first, then rebase W37 onto it. |
+| WEB-W38 | Top-bar UX sweep: (a) add a locale-aware "Back to home" control (next-intl `Link` → `/`) on every non-landing page (download, login, whats-new, dashboard, docs) placed top-left near logo via the shared navbar, gated to non-root routes; (b) make the nav Sign in / Dashboard button clearly more visible with a copper/amber border (same treatment on the /login primary OAuth CTA) without downgrading the Download button; keep i18n parity (en/fr/ar) for `nav.backToHome`. | 👀 VERIFY | Worker `term_8bda54f0`: added `nav.backToHome` (en/fr/ar = "Back to home"/"Retour à l'accueil"/"العودة إلى الرئيسية"); navbar shows the control on non-root routes (desktop pill after logo + mobile drawer, IntlLink href="/"); Sign in/Dashboard button border changed `border-subtle` → `border-orange-500/60` + copper bg + orange icon (desktop + mobile); /login githubButton given `border-2 border-orange-300/70`. Build clean; lint shows only pre-existing errors (docs-content unescaped entities, scripts/require, request.ts any, no-html-link) — 0 new from changed files. No orca/stablyai branding. Awaiting orchestrator review. |
 
 ---
 
@@ -276,11 +277,11 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 
 | Field | Value |
 |---|---|
-| **Current Group** | Phase 8 — WEB-UX2 (5 tasks, ALL DONE + MERGED) |
-| **Current Task** | none — idle, awaiting PM commit & push to deploy |
-| **Last Action** | Phase 8 complete: W33 (nav Download+Sign in), W34 (/download enhanced + /whats-new page), W35 (/login branded page + OAuth→/login routing), W36 (/dashboard rebuilt), W37 (pricing hidden). All 5 merged into Fabrica-web main, conflicts resolved, `npm run build` clean (17+ routes). Not pushed (PM does that). |
-| **Next Action** | PM: commit & push Fabrica-web main → Vercel deploy. Verify live: top-bar Download+Sign in, /download, /login → /dashboard, pricing section absent, scroll anchors intact. |
-| **Blockers** | none (relay/artifacts X1 is backend-only; UX shipped) |
+| **Current Group** | Phase 8 — WEB-UX2 (6 tasks: 5 DONE+MERGED, 1 VERIFY) |
+| **Current Task** | WEB-W38 — VERIFY (awaiting orchestrator review) |
+| **Last Action** | WEB-W38 implemented: shared navbar "Back to home" control (locale-aware, top-left, non-root routes only) added to download/login/whats-new/dashboard/docs; nav Sign in/Dashboard button + /login OAuth CTA given copper/amber border; Download button untouched. `nav.backToHome` added en/fr/ar. `npm run build` clean, 0 new lint errors. |
+| **Next Action** | Orchestrator review WEB-W38 → flip VERIFY→DONE. Then PM commit & push → Vercel deploy. Verify live: top-bar Back to home on sub-pages, Sign in button copper border, /login CTA copper border. |
+| **Blockers** | none |
 | **Last Checkpoint** | 2026-08-29 |
 
 ---
@@ -352,6 +353,7 @@ On heartbeat kick:
 | `term_7295705a-c17e-4fe5-8035-cce7406ffd25` | worker | WEB-W35 enhance login/signup→dashboard | `run_bd4ac74e357b / task_9af3f7c023b1 / ctx_a2fbde7c5934` | RELEASED (merged into main; /login routing applied) | Aug 29 2026 | web-W35-auth | ✅ |
 | `term_6f707b1d-c851-43cd-95e3-6a83e2a3a4e7` | worker | WEB-W36 enhance /dashboard | `run_bd4ac74e357b / task_16d4a0955487 / ctx_6300ab36aaf2` | RELEASED (merged into main; dashboard rebuild authoritative) | Aug 29 2026 | web-W36-dash | ✅ |
 | `term_bda12904-6de6-4710-9c10-5ee280e82292` | worker | WEB-W37 hide pricing section | `run_bd4ac74e357b / task_621371a23275 / ctx_8d27b23ead49` | RELEASED (merged into main; #pricing anchors removed) | Aug 29 2026 | web-W37-pricing | ✅ |
+| `term_8bda54f0-7cb9-4dc4-92ec-4eb711f22fd1` | worker | WEB-W38 back-home control + Sign in visibility | `task_4d3f2e5813b2 / ctx_796242ae6306` | IN_PROGRESS (implemented, status VERIFY, awaiting orchestrator review) | Aug 29 2026 | web-W38-backhome | — |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 
