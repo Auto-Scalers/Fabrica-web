@@ -111,40 +111,42 @@ export const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-[var(--border-subtle)] transition-all">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--overlay-5)] border border-[var(--border-subtle)] p-1 shadow-lg shadow-black/40 transition-transform group-hover:scale-105">
-            <img
-              src="/fabrica-logo_icon.png"
-              alt="Fabrica Logo"
-              className="h-full w-full object-contain block dark:hidden"
-            />
-            <img
-              src="/fabrica-logo_icon_light.png"
-              alt="Fabrica Logo"
-              className="h-full w-full object-contain hidden dark:block"
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-lg font-bold tracking-tight text-[var(--text-strong)] flex items-center gap-1.5">
-              Fabrica
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-orange-950/60 border border-orange-500/30 text-orange-400 font-normal">
-                v3.0
-              </span>
-            </span>
-          </div>
-        </Link>
+        <div className="flex items-center gap-3">
+          {/* Back to home (non-landing pages) */}
+          {pathname !== "/" && (
+            <IntlLink
+              href="/"
+              aria-label={t('backToHome')}
+              className="hidden items-center justify-center rounded-lg p-1.5 text-[var(--text-muted)] transition-colors hover:text-orange-300 md:inline-flex"
+            >
+              <Home className="h-4 w-4" />
+            </IntlLink>
+          )}
 
-        {/* Back to home (non-landing pages) */}
-        {pathname !== "/" && (
-          <IntlLink
-            href="/"
-            className="hidden items-center gap-1.5 rounded-xl border border-orange-500/60 bg-orange-950/30 px-3 py-1.5 text-xs font-medium text-orange-300 transition-all hover:bg-orange-950/50 hover:text-orange-200 md:inline-flex"
-          >
-            <Home className="h-3.5 w-3.5" />
-            <span>{t('backToHome')}</span>
-          </IntlLink>
-        )}
+          {/* Brand Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--overlay-5)] border border-[var(--border-subtle)] p-1 shadow-lg shadow-black/40 transition-transform group-hover:scale-105">
+              <img
+                src="/fabrica-logo_icon.png"
+                alt="Fabrica Logo"
+                className="h-full w-full object-contain block dark:hidden"
+              />
+              <img
+                src="/fabrica-logo_icon_light.png"
+                alt="Fabrica Logo"
+                className="h-full w-full object-contain hidden dark:block"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold tracking-tight text-[var(--text-strong)] flex items-center gap-1.5">
+                Fabrica
+                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-orange-950/60 border border-orange-500/30 text-orange-400 font-normal">
+                  v3.0
+                </span>
+              </span>
+            </div>
+          </Link>
+        </div>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[var(--text-muted)]">
