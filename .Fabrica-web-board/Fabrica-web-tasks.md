@@ -25,7 +25,7 @@
 | ❌ CANCELLED | 0 |
 | Completion | 94% |
 
-_Last recount: 2026-08-29 — W48 DONE ✅ (desktop routes already shipped, confirmed in `1bae555`). **PM confirmed URL prefix:** `Fabrica-app/src/main/fabrica-profiles/profile-cloud-auth-config.ts:96-118` hard-codes `/v1/desktop/auth/*` (no `/api`) via `endpoint(apiBaseUrl, '/v1/desktop/auth/...')` — mismatch with the web's `/api/v1/desktop/auth/*`. **PM clarified W47 scope:** "do it like the legacy-fabrica" = replicate legacy's Supabase login/signup/recovery **handling** (NOT the UI/UX). Read `Fabrica-atlas/_sources/legacy-fabrica/frontend-next/components/auth/supabase.ts` — legacy's pattern is a singleton browser `createClient(supabaseUrl, supabaseAnonKey)` with `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` + `isSupabaseConfigured()` guard, plus a `lib/api/auth.api` re-export layer, and the page calls `supabase.auth.signInWithPassword` / `signUp` / `resetPasswordForEmail` / `updateUser` / `signInWithOAuth` directly. The current Fabrica-web has NO browser Supabase client (only server-side `lib/supabase-auth.ts`). **WEB-W49 IN_PROGRESS:** move 8 desktop auth + 2 artifacts routes `/api/v1/*` → `/v1/*` and update 2 dashboard callers. **WEB-W47 IN_PROGRESS (in parallel):** full `/login` rework — add `lib/supabase-browser.ts` (mirror legacy singleton + guard) + `lib/api/auth.api.ts` (re-export layer), rewrite `app/[locale]/login/page.tsx` to call `supabase.auth.*` directly per legacy, add Google button + email/password + recovery + toasts + `?intent=web|desktop|pair` + Pair-a-phone panel + `app/v1/desktop/auth/invites/route.ts` (under the new no-`/api` prefix), i18n parity en/fr/ar, RTL Arabic, strict §6.0 DNA guardrails. G4-ENV (Supabase GitHub OAuth enable) still pending — PM action.__
+_Last recount: 2026-08-29 — W48 DONE ✅ (desktop routes already shipped, confirmed in `1bae555`). **PM confirmed URL prefix:** `Fabrica-app/src/main/fabrica-profiles/profile-cloud-auth-config.ts:96-118` hard-codes `/v1/desktop/auth/*` (no `/api`) via `endpoint(apiBaseUrl, '/v1/desktop/auth/...')` — mismatch with the web's `/api/v1/desktop/auth/*`. **PM clarified W47 scope:** "do it like the legacy-fabrica" = replicate legacy's Supabase login/signup/recovery **handling** (NOT the UI/UX). Read `Fabrica-atlas/_sources/legacy-fabrica/frontend-next/components/auth/supabase.ts` — legacy's pattern is a singleton browser `createClient(supabaseUrl, supabaseAnonKey)` with `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` + `isSupabaseConfigured()` guard, plus a `lib/api/auth.api` re-export layer, and the page calls `supabase.auth.signInWithPassword` / `signUp` / `resetPasswordForEmail` / `updateUser` / `signInWithOAuth` directly. The current Fabrica-web has NO browser Supabase client (only server-side `lib/supabase-auth.ts`). **WEB-W49 IN_PROGRESS:** move 8 desktop auth + 2 artifacts routes `/api/v1/*` → `/v1/*` and update 2 dashboard callers. **WEB-W47 IN_PROGRESS (in parallel):** full `/login` rework — add `lib/supabase-browser.ts` (mirror legacy singleton + guard) + `lib/api/auth.api.ts` (re-export layer), rewrite `app/[locale]/login/page.tsx` to call `supabase.auth.*` directly per legacy, add Google button + email/password + recovery + toasts + `?intent=web|desktop|pair` + Pair-a-phone panel + `app/v1/desktop/auth/invites/route.ts` (under the new no-`/api` prefix), i18n parity en/fr/ar, RTL Arabic, strict §6.0 DNA guardrails. **G4-ENV ✅ APPLIED (PM, 2026-08-29):** Vercel env for `fabrica-ai` deployed to Production + Preview; Supabase providers GitHub + Google + email/password enabled with recovery. The sign-in 400 should resolve on next deploy. No blockers remaining._
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -241,10 +241,15 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 
 ### G4-ENV — Vercel env (2026-08-28)
 
-> **STATUS: NOT APPLIED — BLOCKED by Vercel CLI auth.** `vercel whoami` failed
-> (worker timeout / EPIPE); `VERCEL_TOKEN` unset; `vercel login` non-interactive.
-> The PM must set these manually in the Vercel dashboard → project `fabrica-ai`,
-> target **Production** (and Preview/Development if needed).
+> **STATUS: ✅ APPLIED (2026-08-29, PM).** The Vercel dashboard env for the
+> `fabrica-ai` project (Production + Preview) was set manually by the PM and
+> the deploy succeeded. **Supabase providers enabled:** GitHub OAuth, Google
+> OAuth, and email/password (with recovery). The sign-in 400 "Unsupported
+> provider: provider is not enabled" should now resolve on next deploy — the
+> `/api/auth/authorize` route already accepts `provider: 'github' | 'google'`
+> (`app/api/auth/authorize/route.ts:44`) and the email/password + recovery
+> flow will be added by WEB-W47 (mirror legacy-fabrica's `supabase.auth.*`
+> direct calls via the new `lib/supabase-browser.ts` singleton).
 
 **Required env vars (exact names the new `/api/v1/desktop/*` + `/api/v1/artifacts/*` routes read):**
 
@@ -301,7 +306,7 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 | **Current Task** | WEB-W49 (move 8 desktop auth + 2 artifacts routes `/api/v1/*` → `/v1/*` to match desktop) + WEB-W47 (full `/login` rework: mirror legacy-fabrica Supabase wiring — singleton browser client + `supabase.auth.*` direct calls + `lib/supabase-browser.ts` + `lib/api/auth.api.ts`; dark/copper page per §6.0) |
 | **Last Action** | PM confirmed URL prefix (`profile-cloud-auth-config.ts:96-118` hard-codes `/v1/desktop/auth/*` no `/api`). Read legacy-fabrica Supabase wiring (`components/auth/supabase.ts` = singleton `createClient` + `isSupabaseConfigured()`; `api.ts` re-exports; `oauth/page.tsx` calls `supabase.auth.*` directly). W49 + W47 dispatched in parallel. |
 | **Next Action** | Orchestrator: review W49 (URL-prefix move) on worker_done → merge. Review W47 (login rework) on worker_done against the full §6.0.3 13-item checklist (dark/copper, server components, next-intl parity en/fr/ar, no new deps, no Orca/Stably, `ai.autoscalers.fabrica` App ID, `fabrica://` deep link, RTL Arabic, no pre-auth telemetry, copy grounded in the three marketing files, no relay-side login surface) + the legacy-wiring mirror (lib/supabase-browser.ts singleton + isSupabaseConfigured + direct supabase.auth.* calls) → merge. |
-| **Blockers** | G4-ENV: Supabase GitHub OAuth provider not enabled (sign-in 400) — backend config, PM action. |
+| **Blockers** | none — G4-ENV ✅ applied (Vercel env deployed; Supabase GitHub + Google + email/password providers enabled). |
 | **Last Checkpoint** | 2026-08-29 |
 
 ---
