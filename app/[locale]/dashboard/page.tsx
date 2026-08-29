@@ -296,7 +296,8 @@ export default function DashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent pointer-events-none" />
         <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 py-32 text-center">
           <Badge variant="copper-outline" className="h-auto gap-2 px-4 py-1.5 font-mono text-sm">
-            <img src="/fabrica-logo_icon.svg" alt="" className="h-5 w-5 object-contain" />
+            <img src="/fabrica-logo_icon.png" alt="" className="h-5 w-5 object-contain block dark:hidden" />
+            <img src="/fabrica-logo_icon_light.png" alt="" className="h-5 w-5 object-contain hidden dark:block" />
             <span>{t("badge")}</span>
           </Badge>
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">{t("title")}</h1>
@@ -329,7 +330,8 @@ export default function DashboardPage() {
             </span>
             <div className="space-y-1.5">
               <Badge variant="copper-outline" className="h-auto gap-2 px-3 py-1 font-mono text-xs">
-                <img src="/fabrica-logo_icon.svg" alt="" className="h-4 w-4 object-contain" />
+                <img src="/fabrica-logo_icon.png" alt="" className="h-4 w-4 object-contain block dark:hidden" />
+                <img src="/fabrica-logo_icon_light.png" alt="" className="h-4 w-4 object-contain hidden dark:block" />
                 <span>{t("badge")}</span>
               </Badge>
               <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">

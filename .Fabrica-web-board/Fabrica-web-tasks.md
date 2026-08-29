@@ -16,16 +16,16 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 40 |
-| ✅ DONE | 39 |
-| 🔶 IN_PROGRESS | 1 |
+| Total tasks | 45 |
+| ✅ DONE | 41 |
+| 🔶 IN_PROGRESS | 4 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 98% |
+| Completion | 91% |
 
-_Last recount: 2026-08-29 (WEB-W38 dispatched + WEB-W39 dispatched — back-to-landing/Sign-in border + remove stale hero/footer buttons)_
+_Last recount: 2026-08-29 (WEB-ICON-THEME DONE ✅ — navbar + login + download + dashboard + Hero (x2) + FinalCta brand logo now swaps between dark/light variants via Tailwind `dark:` variant (two `<img>` + CSS-only). Footer unchanged (fixed dark bg). npm run build + lint clean. Also: WEB-ICON DONE ✅ — root-orchestrator verified on disk: `public/fabrica-logo_icon.png` + `_light.png` + `app/icon.png` + `app/apple-icon.png` all match the PM's source PNGs; navbar/footer/login/download/dashboard `<img>` references all point at the new art, footer correctly uses the light variant. WEB-W38 DONE+MERGED; WEB-W39 + WEB-W40 + WEB-W41 IN_PROGRESS.)_
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -127,6 +127,18 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 
 ---
 
+## Brand Assets
+
+> WHAT THIS GROUP DOES: swap brand icon/logo art so the web landing site matches the desktop app's new Fabrica brand.
+> WHAT THIS GROUP DOES NOT DO: change marketing copy, blog text, or any unrelated content.
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| WEB-ICON | Replace ALL web brand icons/logos with new Fabrica art | ✅ DONE | Old Orca SVG logo `public/fabrica-logo_icon.svg` + favicon `app/icon.svg` replaced with new brand PNGs copied into Fabrica-web: `public/fabrica-logo_icon.png` (dark — navbar, hero x2, login, download, dashboard x2, FinalCta on light/neutral bg) + `public/fabrica-logo_icon_light.png` (footer on dark bg `#07080C`) + `app/icon.png` (favicon) + `app/apple-icon.png` (apple-touch). All 10 `<img>`/metadata references updated; 0 references to old `.svg`/orca/stably remain. `npm run build` clean (TS ✓, `/icon.png`+`/apple-icon.png` routes emitted); lint = 46 pre-existing errors only, 0 new. |
+| WEB-ICON-THEME | Theme-adaptive brand logo: swap dark/light variants via Tailwind `dark:` | ✅ DONE | navbar + login + download + dashboard + Hero (x2) + FinalCta brand logo now swaps between dark/light variants via Tailwind `dark:` variant (two `<img>` + CSS-only). Footer unchanged (fixed dark bg). Hero/FinalCta sit on the page's theme-adaptive background so they were also included for full theme consistency on themed backgrounds. npm run build + lint clean. |
+
+---
+
 ## Phase 6 — Landing Page Enhancement
 
 > **CRITICAL:** Every element of the landing page must be derived from the 3 internal marketing files. Read each file line by line, word by word. No copy should exist that doesn't align with these files.
@@ -200,6 +212,8 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 | WEB-W37 | Hide the pricing section from the landing page — Fabrica is going free for now. Remove/hide the pricing block (and its nav link `#pricing` in the top bar) without deleting the underlying component or copy (keep for later re-enable). Ensure no dead anchor references remain (nav + footer + scroll-spy SECTION_IDS). Keep i18n keys intact. Re-verify build + scroll anchors. | ✅ DONE | Orchestrator-verified: grep `#pricing` in .tsx = 0 hits; `PricingSection` only its own component file (import/render removed from page.tsx); no orca/stablyai branding. Worker `term_bda12904` (ctx_8d27b23ead49). Build claimed clean. MERGE NOTE: also edited `components/navbar.tsx` (removed #pricing link) — same file as WEB-W33; merge W33 first, then rebase W37 onto it. |
 | WEB-W38 | (a) Add a "Back to home / landing page" control on every non-landing page so users can return to the site root. Apply to `/[locale]/download`, `/[locale]/login`, `/[locale]/whats-new`, and `/[locale]/dashboard` (consider `/docs` too if it shares the nav chrome). Use the locale-aware `Link` from `@/src/i18n/navigation` pointing to `/` (the localized home), placed consistently (e.g. top-left of each page, near the logo/nav). (b) Make the **Sign in** button clearly more visible — add a visible copper/amber border to the top-bar nav Sign in / Dashboard button; also apply the same treatment to the primary sign-in CTA on `/login`. Do NOT downgrade the Download button. Keep i18n parity (en/fr/ar) for `nav.backToHome`. | ✅ DONE | Orchestrator-verified: `nav.backToHome` added en/fr/ar; navbar shows locale-aware `IntlLink href="/"` on non-root routes only (desktop pill + mobile drawer, copper border `border-orange-500/60`); nav Sign in/Dashboard button given copper border; /login githubButton has `border-2 border-orange-300/70`; Download untouched; no orca/stablyai branding; imports (`IntlLink`, `usePathname`, `Home`) resolve. Worker `term_8bda54f0` (ctx_796242ae6306, run_55c168e35a3f) in worktree `web-W38-backhome`. MERGED into main 2026-08-29. |
 | WEB-W39 | Remove the stale "Get Early Access" + "Explore Command Center" buttons. In `components/Blocks/Hero.tsx` (lines ~263-280) the two hero CTAs are `ctaEarlyAccess` (scrolls to #waitlist) and `ctaExplore` (href `#command-center`) — replace them with the new canonical actions Download (primary ShimmerButton → /download) + Sign in (secondary → /login or /api/auth/authorize) to match the top-bar nav; do NOT leave the hero without a CTA. In `components/Blocks/Footer.tsx` (lines 14-15) `links.commandCenter` and `links.worktrees` both point to the DEAD `#command-center` anchor (section was renamed to `#how-it-works` in W29) — repoint both to `#how-it-works`. i18n: drop the now-unused `ctaEarlyAccess`/`ctaExplore` keys from en/fr/ar (or leave if reused); reuse existing `nav.download`/`nav.signIn`. Do NOT touch the navbar (done in W33) or pricing (hidden in W37). Build + lint clean, no orca/stablyai branding. | 🔶 IN_PROGRESS | Worker `term_697b3731` (ctx_3d1ab38451a6, run_55c168e35a3f) in worktree `web-W39-hero`. Dispatched 2026-08-29. |
+| WEB-W40a | FIX the W40 docs catch-all directory corruption. The W40 worker accidentally moved the catch-all page to a nonsensical git path `app/[locale]/docs/[/[...slug/]/]/page.tsx` (git ls-files confirms) and created three garbage nested empty bracket directories: `app/[locale]/docs/[` (with nested `[[...slug` and `]` children), `app/[locale]/docs/[[...slug`, and `app/[locale]/docs/[[...slug]`. Steps: (1) `git mv` the page back to the correct path `app/[locale]/docs/[[...slug]]/page.tsx`. (2) `git rm -rf` the three garbage dirs (or `rm -rf` if untracked). (3) Final layout must be: `app/[locale]/docs/page.tsx` (W40 index), `app/[locale]/docs/layout.tsx` (existing), `app/[locale]/docs/[[...slug]]/page.tsx` (restored catch-all). (4) `npm run build` from Fabrica-web/ — routes table must show `/[locale]/docs` and `/[locale]/docs/[[...slug]]` (NOT the broken path). Capture to `build-w40a.txt`. (5) `npm run lint` → `lint-w40a.txt`; 0 new errors vs `lint-w40.txt` baseline. (6) `git status` clean of garbage. Commit on top of W40 work-in-progress: `WEB-W40: fix docs catch-all path corruption + add /docs index`. Update WEB-W40 row → ✅ DONE + WEB-W40a row in Session Ledger. DO NOT merge — orchestrator merges. | 🔶 IN_PROGRESS | Worker `term_4e11a915` (ctx_5833424f5d45, run_55c168e35a3f) in worktree `web-W40a-fix`. Dispatched 2026-08-29. |
+| WEB-W41 | Cross-folder LOGIN/AUTH investigation + design proposal (READ-ONLY — do NOT edit any source; only write the proposal doc). Enumerate every distinct login/auth type needed in (a) Fabrica-web (`app/[locale]/login/page.tsx`, `app/api/auth/*`), (b) Fabrica-relay (`Fabrica-relay/` repo — phone↔desktop pairing/auth), (c) Fabrica-app (`Fabrica-app/` Electron desktop app — sign-in / device pairing / relay connection). For each state WHAT it needs + HOW it should work. Assess whether ALL can be initiated/completed from ONE UI (the web `/login` page) and what that unified page must support. Compare against `Fabrica-atlas/_sources/legacy-fabrica/frontend-next/app/` (`page.tsx`, `onboard/page.tsx`, `oauth/page.tsx`, `dashboard/page.tsx` + any auth components) and propose whether the web `/login` can/should look and flow EXACTLY like legacy-fabrica's login (spec what to replicate: layout, copy, OAuth button, branding). Write the proposal to `.Fabrica-web-board/WEB-W41-login-proposal.md` and summarize in worker_done. READ-ONLY across Fabrica-relay & Fabrica-app (read freely, never modify). Research only — do NOT run build or edit web source except the proposal file. | 🔶 IN_PROGRESS | Worker `term_e0d4676e` (ctx_6b74f5c455da, run_55c168e35a3f) in worktree `web-W41-login`. Dispatched 2026-08-29. |
 
 ---
 
@@ -355,6 +369,12 @@ On heartbeat kick:
 | `term_6f707b1d-c851-43cd-95e3-6a83e2a3a4e7` | worker | WEB-W36 enhance /dashboard | `run_bd4ac74e357b / task_16d4a0955487 / ctx_6300ab36aaf2` | RELEASED (merged into main; dashboard rebuild authoritative) | Aug 29 2026 | web-W36-dash | ✅ |
 | `term_bda12904-6de6-4710-9c10-5ee280e82292` | worker | WEB-W37 hide pricing section | `run_bd4ac74e357b / task_621371a23275 / ctx_8d27b23ead49` | RELEASED (merged into main; #pricing anchors removed) | Aug 29 2026 | web-W37-pricing | ✅ |
 | `term_8bda54f0-7cb9-4dc4-92ec-4eb711f22fd1` | worker | WEB-W38 back-to-landing + Sign in border | `run_55c168e35a3f / task_4d3f2e5813b2 / ctx_796242ae6306` | RELEASED (reviewed ✅, merged into main; worktree removed) | Aug 29 2026 | web-W38-backhome | ✅ |
+| `term_697b3731-87fa-445b-9563-6fc5c6f0ff37` | worker | WEB-W39 remove hero/footer stale CTAs | `run_55c168e35a3f / task_a84a9118f405 / ctx_3d1ab38451a6` | IN_PROGRESS (editing Hero.tsx + Footer.tsx + messages) | Aug 29 2026 | web-W39-hero | no |
+| `term_7e3f5fa6-7194-4fa1-8ea0-6d099a702455` | worker | WEB-W40 add /docs index page | `run_55c168e35a3f / task_f6302ba37bc0 / ctx_9186e006dd94` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W40-docs | no |
+| `term_4e11a915-354a-4338-b725-25c40426fb69` | worker | WEB-W40a fix docs catch-all path corruption | `run_55c168e35a3f / task_5af16f191b2f / ctx_5833424f5d45` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W40a-fix | no |
+| `term_e0d4676e-beb4-41e7-8138-ca4845b80da4` | worker | WEB-W41 cross-folder login investigation + proposal | `run_55c168e35a3f / task_e981ed1c40b5 / ctx_6b74f5c455da` | IN_PROGRESS (dispatched) | Aug 29 2026 | web-W41-login | no |
+| `term_local_web_theme` | worker | WEB-ICON-THEME theme-adaptive logo swap | `task_web_icon_theme / ctx_local` | RELEASED (done) | Aug 29 2026 | Fabrica-web/ | n/a |
+| `term_local_web_theme_hero` | worker | WEB-ICON-THEME Hero (x2) + FinalCta theme swap | `task_web_icon_theme_hero / ctx_local / term_local_web_theme_hero` | RELEASED (done) | Aug 29 2026 | Fabrica-web/ | n/a |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 

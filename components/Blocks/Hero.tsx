@@ -210,9 +210,14 @@ const crewMembers = [
         <div className="text-center max-w-4xl mx-auto space-y-6">
           <div className="relative z-10 inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-3.5 py-1 text-xs sm:text-sm font-medium text-orange-400 backdrop-blur-md">
             <img
-              src="/fabrica-logo_icon.svg"
+              src="/fabrica-logo_icon.png"
               alt=""
-              className="h-4 w-4 object-contain"
+              className="h-4 w-4 object-contain block dark:hidden"
+            />
+            <img
+              src="/fabrica-logo_icon_light.png"
+              alt=""
+              className="h-4 w-4 object-contain hidden dark:block"
             />
             <span className="font-mono uppercase tracking-wider text-[11px] sm:text-xs">{t('badgeLabel')}</span>
             <span className="text-[var(--text-subtle)]">|</span>
@@ -326,9 +331,14 @@ const crewMembers = [
                 <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
                 <span className="ml-2 text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5">
                   <img
-                    src="/fabrica-logo_icon.svg"
+                    src="/fabrica-logo_icon.png"
                     alt=""
-                    className="h-4 w-4 object-contain"
+                    className="h-4 w-4 object-contain block dark:hidden"
+                  />
+                  <img
+                    src="/fabrica-logo_icon_light.png"
+                    alt=""
+                    className="h-4 w-4 object-contain hidden dark:block"
                   />
                   {t('windowTitle')}
                 </span>

@@ -115,9 +115,14 @@ export const Navbar = () => {
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--overlay-5)] border border-[var(--border-subtle)] p-1 shadow-lg shadow-black/40 transition-transform group-hover:scale-105">
             <img
-              src="/fabrica-logo_icon.svg"
+              src="/fabrica-logo_icon.png"
               alt="Fabrica Logo"
-              className="h-full w-full object-contain"
+              className="h-full w-full object-contain block dark:hidden"
+            />
+            <img
+              src="/fabrica-logo_icon_light.png"
+              alt="Fabrica Logo"
+              className="h-full w-full object-contain hidden dark:block"
             />
           </div>
           <div className="flex flex-col">

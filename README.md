@@ -48,7 +48,7 @@ lib/
   utils.ts            # cn() class merge helper
 public/
   images/             # Photography + carousel/showcase assets
-  fabrica-logo_icon.svg
+  fabrica-logo_icon.png
 ```
 
 ## Environment Variables

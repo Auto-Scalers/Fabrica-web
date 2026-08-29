@@ -30,9 +30,14 @@ export const FinalCta = () => {
         {/* Badge */}
         <Badge variant="copper-outline" className="h-auto gap-2 px-4 py-1.5 font-mono text-sm">
           <img
-            src="/fabrica-logo_icon.svg"
+            src="/fabrica-logo_icon.png"
             alt=""
-            className="h-5 w-5 object-contain"
+            className="h-5 w-5 object-contain block dark:hidden"
+          />
+          <img
+            src="/fabrica-logo_icon_light.png"
+            alt=""
+            className="h-5 w-5 object-contain hidden dark:block"
           />
           <span>{t('badge')}</span>
         </Badge>

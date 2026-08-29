@@ -45,7 +45,7 @@ export const Footer = () => {
             <Link href="/" className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--overlay-5)] border border-[var(--border-subtle)] p-1 text-[var(--text-strong)]">
                 <img
-                  src="/fabrica-logo_icon.svg"
+                  src="/fabrica-logo_icon_light.png"
                   alt="Fabrica Logo"
                   className="h-full w-full object-contain"
                 />

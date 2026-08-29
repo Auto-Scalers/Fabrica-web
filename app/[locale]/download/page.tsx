@@ -69,7 +69,8 @@ export default async function DownloadPage({
       <div className="relative z-10 mx-auto max-w-5xl space-y-10 px-4 py-24 text-center sm:px-6 sm:py-32">
         {/* Badge */}
         <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-950/30 px-4 py-1.5 font-mono text-sm text-orange-400">
-          <img src="/fabrica-logo_icon.svg" alt="" className="h-5 w-5 object-contain" />
+          <img src="/fabrica-logo_icon.png" alt="" className="h-5 w-5 object-contain block dark:hidden" />
+          <img src="/fabrica-logo_icon_light.png" alt="" className="h-5 w-5 object-contain hidden dark:block" />
           {t("badge")}
         </span>
 
