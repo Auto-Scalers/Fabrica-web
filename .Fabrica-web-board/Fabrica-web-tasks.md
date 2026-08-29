@@ -16,8 +16,8 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 38 |
-| ✅ DONE | 38 |
+| Total tasks | 40 |
+| ✅ DONE | 40 |
 | 🔶 IN_PROGRESS | 0 |
 | ✅ DONE | 0 |
 | ⬜ TODO | 0 |
@@ -25,7 +25,7 @@
 | ❌ CANCELLED | 0 |
 | Completion | 100% |
 
-_Last recount: 2026-08-29 (ALL 5 Phase 8 tasks DONE + MERGED into Fabrica-web main. Build clean: /[locale]/login, /whats-new, /download, /dashboard all registered. Conflict resolution: navbar.tsx W33+W37 combined; dashboard.tsx took W36 rebuild + re-applied W35 /login re-auth link; messages/*.json kept 4-platform list + all namespaces.)_
+_Last recount: 2026-08-29 (WEB-W40 + WEB-W40a DONE on web-W40a-fix branch — docs index added, i18n parity, catch-all path corruption fixed to /[locale]/docs/[...slug]; build clean 27 routes; lint identical to baseline 56/46/10. Not yet merged.)_
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -111,6 +111,8 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 | # | Task | Status | Notes |
 |---|------|--------|-------|
 | WEB-W11 | `/docs/*` — documentation pages | ✅ DONE | Created layout, catch-all page, sidebar, prose, content, nav. Build compiles. Zero orca/stablyai refs. |
+| WEB-W40 | Add `/docs` index page + i18n + fix catch-all path | ✅ DONE | Worker `term_4e11a915`. Added `app/[locale]/docs/page.tsx` (the new index), added `docs.indexTitle`/`indexSubtitle` to en/fr/ar.json, plus a small `generateStaticParams` fix to skip empty keys. Build claimed clean; see WEB-W40a for the path-corruption fix that followed. |
+| WEB-W40a | FIX the docs catch-all directory corruption | ✅ DONE | Worker `term_4e11a915`. The original docs commit (39bdf75) had the catch-all at the literal `app/[locale]/docs/[/[...slug/]/]/page.tsx` (a real-but-corrupt path with literal `[/.../]/` brackets in the directory name). Moved to the proper catch-all `app/[locale]/docs/[...slug]/page.tsx` (used non-optional `[...slug]` because Next.js 16 rejects `[[...slug]]` + a separate `page.tsx` index at the same level with `You cannot define a route with the same specificity as an optional catch-all route`). Deleted the three garbage directories. Final layout: `app/[locale]/docs/page.tsx` (index), `app/[locale]/docs/layout.tsx` (existing), `app/[locale]/docs/[...slug]/page.tsx` (catch-all, restored). Build clean: routes `/[locale]/docs` and `/[locale]/docs/[...slug]` (NOT the broken `/[...slug/]/`). Lint clean vs W40 baseline (56 problems / 46 errors / 10 warnings — identical, 0 new). Evidence: `build-w40a.txt`, `lint-w40a.txt`. Deviation from spec: task said `[[...slug]]` (optional); resolved as `[...slug]` (non-optional) to keep the separate index page; semantics: `/[locale]/docs` shows index, `/[locale]/docs/foo` shows article. |
 
 ---
 
@@ -276,10 +278,10 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 
 | Field | Value |
 |---|---|
-| **Current Group** | Phase 8 — WEB-UX2 (5 tasks, ALL DONE + MERGED) |
-| **Current Task** | none — idle, awaiting PM commit & push to deploy |
-| **Last Action** | Phase 8 complete: W33 (nav Download+Sign in), W34 (/download enhanced + /whats-new page), W35 (/login branded page + OAuth→/login routing), W36 (/dashboard rebuilt), W37 (pricing hidden). All 5 merged into Fabrica-web main, conflicts resolved, `npm run build` clean (17+ routes). Not pushed (PM does that). |
-| **Next Action** | PM: commit & push Fabrica-web main → Vercel deploy. Verify live: top-bar Download+Sign in, /download, /login → /dashboard, pricing section absent, scroll anchors intact. |
+| **Current Group** | Docs Site (W40 + W40a DONE on web-W40a-fix, not yet merged) |
+| **Current Task** | none — idle, awaiting orchestrator merge of web-W40a-fix |
+| **Last Action** | WEB-W40 + WEB-W40a complete: docs index page added at `app/[locale]/docs/page.tsx`, en/fr/ar.json `docs.indexTitle`/`indexSubtitle` added, catch-all path corruption fixed to `app/[locale]/docs/[...slug]/page.tsx` (used non-optional `[...slug]` because Next.js 16 rejects `[[...slug]]` + a separate index page at the same level). `npm run build` clean (27 routes, both `/[locale]/docs` and `/[locale]/docs/[...slug]` present). `npm run lint` matches pre-fix baseline (56 problems / 46 errors / 10 warnings). Evidence: `build-w40a.txt`, `lint-w40a.txt`. |
+| **Next Action** | Orchestrator: merge web-W40a-fix → Fabrica-web main, then commit & push → Vercel deploy. Verify live: /docs shows index, /docs/foo shows article, no broken `/.../.../...` paths. |
 | **Blockers** | none (relay/artifacts X1 is backend-only; UX shipped) |
 | **Last Checkpoint** | 2026-08-29 |
 
@@ -352,6 +354,7 @@ On heartbeat kick:
 | `term_7295705a-c17e-4fe5-8035-cce7406ffd25` | worker | WEB-W35 enhance login/signup→dashboard | `run_bd4ac74e357b / task_9af3f7c023b1 / ctx_a2fbde7c5934` | RELEASED (merged into main; /login routing applied) | Aug 29 2026 | web-W35-auth | ✅ |
 | `term_6f707b1d-c851-43cd-95e3-6a83e2a3a4e7` | worker | WEB-W36 enhance /dashboard | `run_bd4ac74e357b / task_16d4a0955487 / ctx_6300ab36aaf2` | RELEASED (merged into main; dashboard rebuild authoritative) | Aug 29 2026 | web-W36-dash | ✅ |
 | `term_bda12904-6de6-4710-9c10-5ee280e82292` | worker | WEB-W37 hide pricing section | `run_bd4ac74e357b / task_621371a23275 / ctx_8d27b23ead49` | RELEASED (merged into main; #pricing anchors removed) | Aug 29 2026 | web-W37-pricing | ✅ |
+| `term_4e11a915-354a-4338-b725-25c40426fb69` | worker | WEB-W40 + WEB-W40a | `task_5af16f191b2f / ctx_5833424f5d45` | RELEASED (web-W40a-fix: docs index page added, en/fr/ar i18n parity, catch-all corruption fixed to `[...slug]`; build clean 27 routes, lint matches baseline 56/46/10; deviation from spec: used non-optional `[...slug]` instead of `[[...slug]]` due to Next.js 16 rejecting optional catch-all + separate index; not yet merged) | Aug 29 2026 | web-W40a-fix | — |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 

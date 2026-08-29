@@ -12,6 +12,10 @@
     "signIn": "Se connecter",
     "dashboard": "Tableau de bord"
   },
+  "docs": {
+    "indexTitle": "Documentation Fabrica",
+    "indexSubtitle": "Guides, concepts et références pour piloter votre équipe d'agents de code IA — de l'installation au Design Mode."
+  },
   "hero": {
     "badgeLabel": "The Next AI Exit",
     "badgeSub": "Plateforme desktop de gestion d'agents CLI",

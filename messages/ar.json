@@ -12,6 +12,10 @@
     "signIn": "تسجيل الدخول",
     "dashboard": "لوحة التحكم"
   },
+  "docs": {
+    "indexTitle": "وثائق Fabrica",
+    "indexSubtitle": "أدلة ومفاهيم ومراجع لتشغيل فريقك من وكلاء البرمجة بالذكاء الاصطناعي — من التثبيت إلى وضع التصميم."
+  },
   "hero": {
     "badgeLabel": "The Next AI Exit",
     "badgeSub": "منصة سطح مكتب لإدارة وكلاء CLI",

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { docs } from "@/lib/docs-content";
 import { Prose } from "@/components/docs/Prose";
@@ -18,7 +17,8 @@ export function generateStaticParams(): Params[] {
   const out: Params[] = [];
   for (const locale of routing.locales) {
     for (const key of Object.keys(docs)) {
-      out.push({ locale, slug: key ? key.split("/") : undefined });
+      if (!key) continue;
+      out.push({ locale, slug: key.split("/") });
     }
   }
   return out;
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
-}): Promise<Metadata> {
+}) {
   const { slug } = await params;
   const doc = docs[keyFromSlug(slug)];
   if (!doc) return { title: "Docs — Fabrica" };
