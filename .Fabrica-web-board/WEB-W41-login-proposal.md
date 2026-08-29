@@ -12,14 +12,20 @@
 
 ## 0. TL;DR
 
-1. There are **three distinct auth types** across the three repos, and
-   they are *not* the same kind of "sign in":
-   - **Web dashboard sign-in** (human, browser, Supabase OAuth).
+1. There are **three distinct identity flows** across the three repos,
+   but only **two of them are human "logins"** — the third is
+   machine-to-machine device authentication and is *not* a UI concern:
+   - **Web dashboard sign-in** (human, browser, Supabase OAuth) — the
+     only place a user types a credential.
    - **Desktop-app sign-in** (Electron, PKCE against the web's FABRICA
-     Cloud auth endpoints, loopback callback).
+     Cloud auth endpoints, loopback callback) — same Supabase identity,
+     different redirect target.
    - **Relay device pairing** (phone ↔ desktop, NaCl box + HMAC
      challenge-response via the relay WebSocket; invite tokens /
-     device credentials).
+     device credentials) — **not a login**. No human credential, no
+     UI, no signup. The relay trusts the Supabase access_token the
+     desktop already obtained and the host keypair registered against
+     that same Supabase user.
 2. A **single web `/login` UI can serve (1) and (2) and *display*
    pairing material for (3)**, but (3) itself cannot be *completed* from
    the browser — the phone still must hold the relay WebSocket. The
@@ -28,7 +34,18 @@
 3. The new `/login` page should adopt legacy-fabrica's `/oauth` page
    pattern (light, centered SaaS-Gateway card, OAuth providers +
    email/recovery), but re-skinned onto the current Fabrica dark /
-   copper palette. See §6 for the full spec.
+   copper palette. See §6 for the full spec and §6.0 for the DNA
+   guardrails the implementation must protect.
+4. **No relay-side login is needed and none should be built.** The
+   relay's existing trust chain (Supabase JWT signature + host NaCl
+   keypair + invite / device-credential tokens) already covers
+   authorization. The only blockers are upstream: (a) the web
+   `/login` must work end-to-end, (b) the web must expose
+   `/v1/desktop/auth/*` so the desktop can complete PKCE, and (c)
+   the Supabase GitHub / Google OAuth provider must be enabled in
+   the Supabase project (G4-ENV). When those three land, the relay
+   inherits the identity automatically with **zero relay code
+   changes**.
 
 ---
 
@@ -99,6 +116,22 @@ possession of the host private key via the challenge-response) and the
 *phone* as an unauthenticated peer carrying a credential issued by the
 host. A user authenticates by completing the **web OAuth** so the
 desktop has a Supabase access_token to present to `/v1/assign`.
+
+> **No login is performed at the relay — and none should be built.**
+> The relay's three "auth" surfaces are all *device authentication*,
+> not human login: (a) the host's NaCl challenge-response proves it
+> holds the private key bound to its Supabase user record (no
+> password, no token from a human); (b) the phone's invite token or
+> device credential is machine-issued by the host, never typed by
+> anyone; (c) `/v1/assign`'s `Bearer <supabase_access_token>` is just
+> the *same* Supabase token the desktop already got from the web
+> OAuth flow. There is no relay-side signup, no relay-side
+> password reset, no relay-side user record, and no relay UI.
+> The only way to "unlock" the relay for a user is to complete the
+> upstream web sign-in (and, for the desktop, to land the
+> `/v1/desktop/auth/*` routes — see §3.1). When those land, the
+> relay inherits identity automatically; no relay code change is
+> required or desired.
 
 ### 1.3 Fabrica-app (Electron desktop)
 
@@ -259,6 +292,17 @@ audiences. Duplicating them in `/v1/desktop/auth/authorize` and
 rule "one file = one writer".
 
 ### 3.3 What can and cannot be unified
+
+> **Read the last four rows of this table as "device authentication,"
+> not "login."** Web dashboard sign-in and Desktop PKCE sign-in are
+> the only two *human* login flows; the relay challenge-response, the
+> invite / device-credential handshake, and the resume / rebind path
+> are machine-to-machine device authentication that happen *after* a
+> human has already authenticated. They are correctly **not** unified
+> into the web UI, and we should not try to — the browser is the wrong
+> runtime for NaCl proofs and WebSocket-to-Durable-Object sessions. The
+> point of this table is to draw that line explicitly so the page
+> design doesn't pretend otherwise.
 
 | Flow | Initiated from `/login`? | Completed from `/login`? |
 |---|---|---|
@@ -474,6 +518,165 @@ Files reviewed:
 
 > **Status:** proposal. Implement in a follow-up task; this task is
 > read-only.
+
+### 6.0 DNA preservation — guardrails the implementation must protect
+
+The login page is a high-traffic, high-leverage surface and the first
+thing a new user sees of the brand. It must not drift Fabrica's
+identity. This section grounds the spec in
+`.Fabrica-Board/Fabrica-DNA.md` (mission, vision, values, anti-goals)
+and `Fabrica-web/AGENTS.md` (tech stack, conventions, DoD). The
+implementer and the reviewer must clear **every** checkbox in §6.0.3
+before merging the login change.
+
+#### 6.0.1 The guardrails (what the page must do)
+
+1. **Dark / copper forge palette — no light surface.** Use the
+   existing Tailwind v4 tokens and CSS variables (`#E8590C` /
+   `#FF8A3D` gradient, `var(--surface-page)`, `var(--border-subtle)`,
+   `var(--text-strong)`, `var(--text-muted)`, `var(--overlay-5)`,
+   `var(--border-faint)`). Legacy-fabrica's light `#FAF9F6` page and
+   the blurred dashboard mock are **not** reproduced. The card may
+   darken to `bg-zinc-900/80 backdrop-blur` for the three-zone
+   structure, but the page stays dark. (See §6.2 card chrome.)
+2. **Local-first framing.** The desktop is local-first (DNA Values:
+   "Your data, your agents, your machine. No cloud dependency.").
+   Copy on the web login must not imply cloud lock-in. The
+   Supabase identity exists to give the *user* a portable account
+   that unlocks the web dashboard, the desktop, and the relay — not
+   to anchor them. No "your data in our cloud" framing.
+3. **Business-first language.** The audience is non-technical
+   founders and operators (DNA Mission: "non-technical founders to
+   build and run AI-powered businesses"). No developer jargon in
+   user-facing copy. "PKCE", "OAuth scope", "access token", "JWT",
+   "id_token" never appear in user-facing strings. Recovery flow
+   says "Forgot your password?", not "Reset your credential."
+4. **Universal control surface.** Everything the user needs to sign
+   in is in the page UI. No CLI steps ("run `fabrica auth login`"),
+   no developer console, no "paste this token here", no test-mode
+   toggles, no raw JSON viewers. (DNA Anti-Goals: "Never ship
+   features that require CLI or code to use.")
+5. **Server Components by default.** `app/[locale]/login/page.tsx`
+   stays a `'use client'` component only where it must
+   (OAuth start, URL-fragment parsing, `?intent` routing, token
+   persistence). Anything that can be server-rendered (the card
+   chrome, the providers list, the recovery form's static markup)
+   moves to a server component. (AGENTS.md: "Server Components by
+   default — only add 'use client' when truly needed.")
+6. **next-intl i18n parity.** Every new key added in
+   `messages/en.json` is mirrored in `messages/fr.json` and
+   `messages/ar.json` with identical structure. No hardcoded
+   English in JSX. Locale is preserved across the OAuth round-trip
+   (the callback echoes the locale into `/{locale}/login`; the
+   desktop's `?locale=` survives the loopback redirect). The
+   Arabic layout must be tested — the card and the provider buttons
+   must remain correct under `dir="rtl"`.
+7. **No new dependencies.** Use the existing Supabase client,
+   `lucide-react` icons, shadcn/ui `Badge` / `Button`,
+   `AnimatedThemeToggler`, and Tailwind v4 tokens. QR rendering
+   for the pair panel is done **inline as SVG** (mirror the
+   existing inline-SVG OAuth icons in legacy `/oauth`); do **not**
+   add `qrcode` or any new package. (AGENTS.md: "Do NOT add new
+   dependencies without explicit instruction.")
+8. **No Orca / Stably / `saas-landing-page` branding.** Page meta
+   (`<title>`, `<meta name="description">`, OG tags, structured
+   data), footers, and error toasts all say **Fabrica** with the
+   copper-dot wordmark `Fab<span class="text-orange-400">.</span>`.
+   No legacy string slips in. (AGENTS.md: "No Orca/Stably
+   branding in page copy or meta tags.")
+9. **App ID + deep link contract.** The desktop's loopback callback
+   is constructed in the context of App ID `ai.autoscalers.fabrica`
+   (DNA App ID table). The mobile deep link for the pair panel is
+   `fabrica://pair?token=<inviteToken>` (DNA Deep link protocol).
+   The desktop's `state` correlation, the `redirect_to`, and the
+   invite QR all use these canonical identifiers — no ad-hoc
+   strings.
+10. **Transparency in loading and error.** The page must never throw
+    the user into a dead end. Every async state has a visible
+    spinner + copy. Every failure has a recoverable path
+    (transient → bottom-right toast, catastrophic → full state with
+    retry). No silent failures, no bare `console.error`, no infinite
+    spinners. (DNA Value: "Transparency — You see what agents do,
+    why they do it, and can intervene anytime.")
+11. **Copy grounded in the three marketing files.** Every new
+    user-facing string on the login page (the badge, the title, the
+    lede, the provider button labels, the email-form labels, the
+    recovery flow copy, the pair panel copy, the footer, the
+    toasts) traces to one of the three internal marketing files in
+    `_sources/`: `brand-guidelines`, `positioning-statement`,
+    `competitor-landscape`. (AGENTS.md Definition of Done: "Copy
+    grounding: every landing-page string traces to one of the 3
+    internal marketing files.")
+12. **No telemetry without consent.** PostHog (per DNA
+    Infrastructure table, owned by Fabrica-app) only fires after
+    explicit opt-in. The login page must **not** phone home before
+    the user signs in. No pre-auth analytics, no A/B-test beacons,
+    no third-party scripts loaded on the login page.
+
+#### 6.0.2 The anti-goals the page must NOT violate
+
+Mirroring `.Fabrica-Board/Fabrica-DNA.md` §"Anti-Goals":
+
+- The login page must **not** require cloud connectivity to *use
+  Fabrica itself*. The desktop is local-first; the web login is
+  only for the web dashboard, and signing out of the web must not
+  break the desktop. The two products are independent.
+- The login page must **not** sell user data or metadata. The
+  Supabase user record is owned by the user; the page makes no
+  claim on it beyond authentication.
+- The login page must **not** build a walled garden. The identity
+  is a portable Supabase user record; the OAuth provider list is
+  open (GitHub + Google today, any OIDC provider in principle); no
+  proprietary lock-in.
+- The login page must **not** optimize for developer ergonomics at
+  the expense of business-user UX. No "test mode" toggles, no
+  scope-explainer UI, no raw JSON. The user is a founder, not an
+  engineer.
+- The login page must **not** require CLI or code. Everything is
+  in the page. The desktop's "Sign in" button opens the web page in
+  the system browser; the user clicks through; that's it.
+
+#### 6.0.3 Pre-merge checklist
+
+The implementer and the reviewer run this before merging the login
+change:
+
+- [ ] Every new i18n key is present in `messages/en.json`,
+  `messages/fr.json`, `messages/ar.json` with identical structure
+  (no missing translations, no hardcoded English in JSX).
+- [ ] `npm run lint` and `npm run build` both pass clean from
+  `Fabrica-web/`.
+- [ ] No `Orca`, `Stably`, `stablyai`, or `saas-landing-page`
+  strings in the diff (grep the changed files).
+- [ ] No new entries in `dependencies` or `devDependencies` in
+  `package.json`.
+- [ ] Page tested in dark mode (the only mode — the page must not
+  ship a light surface or a theme toggle on the login screen).
+- [ ] No raw `<style dangerouslySetInnerHTML>` blocks and no
+  per-element `style={{…}}` objects in the login component (use
+  Tailwind v4 + the existing CSS variables).
+- [ ] App ID `ai.autoscalers.fabrica` referenced where the desktop
+  loopback callback is constructed
+  (`Fabrica-app/.../profile-cloud-auth-config.ts` and the new
+  `app/v1/desktop/auth/authorize/route.ts`).
+- [ ] Mobile deep link `fabrica://pair?token=…` used for the pair
+  panel.
+- [ ] Locale survives the OAuth round-trip (test by triggering
+  `?locale=ar` and confirming the callback returns to `/ar/login`).
+- [ ] Arabic RTL layout renders correctly (card centered, provider
+  buttons right-aligned, divider mirrored).
+- [ ] All user-facing copy traces to one of the three marketing
+  files in `_sources/`
+  (`brand-guidelines`, `positioning-statement`,
+  `competitor-landscape`).
+- [ ] No silent failures — every `await` has a visible loading or
+  error state; every OAuth error renders a recoverable toast (not
+  a full-page red screen for transient failures).
+- [ ] No pre-auth analytics or third-party scripts on the login
+  page (PostHog only fires after the user signs in, per DNA).
+- [ ] No relay-side login surface was added
+  (the relay has no login form, by design — see §1.2 and the
+  TL;DR).
 
 ### 6.1 URL contract
 
