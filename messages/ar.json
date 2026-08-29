@@ -10,7 +10,8 @@
     "docs": "الوثائق",
     "download": "تنزيل",
     "signIn": "تسجيل الدخول",
-    "dashboard": "لوحة التحكم"
+    "dashboard": "لوحة التحكم",
+    "backToHome": "العودة إلى الرئيسية"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",

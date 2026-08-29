@@ -9,6 +9,7 @@ import {
   Download,
   LogIn,
   LayoutDashboard,
+  Home,
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter, usePathname, Link as IntlLink } from '@/src/i18n/navigation'
@@ -129,6 +130,17 @@ export const Navbar = () => {
           </div>
         </Link>
 
+        {/* Back to home (non-landing pages) */}
+        {pathname !== "/" && (
+          <IntlLink
+            href="/"
+            className="hidden items-center gap-1.5 rounded-xl border border-orange-500/60 bg-orange-950/30 px-3 py-1.5 text-xs font-medium text-orange-300 transition-all hover:bg-orange-950/50 hover:text-orange-200 md:inline-flex"
+          >
+            <Home className="h-3.5 w-3.5" />
+            <span>{t('backToHome')}</span>
+          </IntlLink>
+        )}
+
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[var(--text-muted)]">
           {navLinks.map(renderNavItem)}
@@ -141,12 +153,12 @@ export const Navbar = () => {
           <button
             type="button"
             onClick={goToAccount}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-4 py-2 text-xs font-medium text-[var(--text-strong)] transition-all hover:bg-[var(--overlay-10)]"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-orange-500/60 bg-orange-950/30 px-4 py-2 text-xs font-semibold text-orange-200 shadow-sm shadow-orange-950/40 transition-all hover:border-orange-400/80 hover:bg-orange-950/50"
           >
             {isAuthed ? (
-              <LayoutDashboard className="h-3.5 w-3.5 text-orange-400" />
+              <LayoutDashboard className="h-3.5 w-3.5 text-orange-300" />
             ) : (
-              <LogIn className="h-3.5 w-3.5 text-orange-400" />
+              <LogIn className="h-3.5 w-3.5 text-orange-300" />
             )}
             <span>{isAuthed ? t('dashboard') : t('signIn')}</span>
           </button>
@@ -176,6 +188,16 @@ export const Navbar = () => {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-[var(--border-subtle)] bg-background/95 backdrop-blur-2xl px-4 py-6 space-y-4">
+          {pathname !== "/" && (
+            <IntlLink
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-orange-500/60 bg-orange-950/30 py-2.5 text-xs font-semibold text-orange-200 transition-all hover:border-orange-400/80 hover:bg-orange-950/50"
+            >
+              <Home className="h-3.5 w-3.5" />
+              <span>{t('backToHome')}</span>
+            </IntlLink>
+          )}
           <nav className="flex flex-col space-y-3 text-sm font-medium text-[var(--text-muted)]">
             {navLinks.map((link) => {
               const el = renderNavItem(link);
@@ -216,12 +238,12 @@ export const Navbar = () => {
                 setMobileMenuOpen(false)
                 goToAccount()
               }}
-              className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--overlay-5)] py-2.5 text-xs font-semibold text-[var(--text-strong)] transition-all hover:bg-[var(--overlay-10)]"
+              className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-orange-500/60 bg-orange-950/30 py-2.5 text-xs font-semibold text-orange-200 shadow-sm shadow-orange-950/40 transition-all hover:border-orange-400/80 hover:bg-orange-950/50"
             >
               {isAuthed ? (
-                <LayoutDashboard className="h-3.5 w-3.5 text-orange-400" />
+                <LayoutDashboard className="h-3.5 w-3.5 text-orange-300" />
               ) : (
-                <LogIn className="h-3.5 w-3.5 text-orange-400" />
+                <LogIn className="h-3.5 w-3.5 text-orange-300" />
               )}
               <span>{isAuthed ? t('dashboard') : t('signIn')}</span>
             </button>

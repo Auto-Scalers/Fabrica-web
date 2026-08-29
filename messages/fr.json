@@ -10,7 +10,8 @@
     "docs": "Docs",
     "download": "Télécharger",
     "signIn": "Se connecter",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "backToHome": "Retour à l'accueil"
   },
   "hero": {
     "badgeLabel": "The Next AI Exit",
