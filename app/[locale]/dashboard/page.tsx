@@ -170,11 +170,11 @@ export default function DashboardPage() {
       try {
         const headers = { Authorization: `Bearer ${tk.access_token}` };
         const [capRes, artRes] = await Promise.all([
-          fetch("/api/v1/desktop/auth/capabilities", {
+          fetch("/v1/desktop/auth/capabilities", {
             method: "POST",
             headers,
           }),
-          fetch("/api/v1/artifacts", { headers }),
+          fetch("/v1/artifacts", { headers }),
         ]);
 
         if (capRes.ok) {
@@ -204,7 +204,7 @@ export default function DashboardPage() {
       setSwitchingOrg(true);
       setOrgMenuOpen(false);
       try {
-        const res = await fetch("/api/v1/desktop/auth/org", {
+        const res = await fetch("/v1/desktop/auth/org", {
           method: "POST",
           headers: { Authorization: `Bearer ${tokens.access_token}` },
           body: JSON.stringify({ orgId }),

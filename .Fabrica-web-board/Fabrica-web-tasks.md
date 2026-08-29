@@ -16,8 +16,8 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 45 |
-| ✅ DONE | 45 |
+| Total tasks | 46 |
+| ✅ DONE | 46 |
 | 🔶 IN_PROGRESS | 0 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
@@ -25,7 +25,7 @@
 | ❌ CANCELLED | 0 |
 | Completion | 100% |
 
-_Last recount: 2026-08-29 — **ALL 45 TASKS DONE ✅ (100%)**. WEB-ICON-THEME + WEB-ICON DONE (committed + pushed by PM: brand-art svg→png swap, dark/light variants, Tailwind `dark:`). WEB-W38 DONE+MERGED (back-to-home + Sign-in copper border). WEB-W40 + WEB-W40a DONE+MERGED (docs index `app/[locale]/docs/page.tsx`, catch-all `[[...slug]]`→`[...slug]`, i18n parity en/fr/ar, build clean 27 routes). WEB-W39 DONE+MERGED (hero CTAs → Download+Sign in/Dashboard, footer `#command-center` → `#how-it-works`, `ctaEarlyAccess`/`ctaExplore` removed from en/fr/ar.json). WEB-W41 DONE (research deliverable: 665-line login investigation proposal at `.Fabrica-web-board/WEB-W41-login-proposal.md` — read-only, no source changes)._
+_Last recount: 2026-08-30 — **ALL 46 TASKS DONE ✅ (100%)**. WEB-W49 DONE+COMMITTED in worktree `web-W49-prefix` (branch `Auto-Scalers/web-W49-prefix`): moved 8 desktop-auth + 2 artifacts routes from `/api/v1/*` → `/v1/*` to match the desktop app's hard-coded URL prefix; 3 fetch calls in dashboard/page.tsx updated; `/api/auth/*` (Supabase web OAuth) untouched per spec. Build clean (29 routes), 0 new lint errors (64 problems / 46 errors / 18 warnings — +8 warnings vs W40a are pre-existing drift from WEB-ICON-THEME's double `<img>` lines on main, verified by `git stash` test). DO NOT MERGE — orchestrator merges._
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -82,6 +82,7 @@ _Legacy mapping applied in migration: `IN PROGRESS→IN_PROGRESS`, `[~]→VERIFY
 | WEB-W5 | `/api/share/*` — Artifact sharing CRUD | ✅ DONE | Live PASS: GET list + GET [id] both 401 Unauthorized as expected |
 | WEB-W6 | `/api/diagnostics/*` — Crash/feedback upload | ✅ DONE | Live PASS: GET + POST both 401 auth-gated |
 | WEB-W7 | `/api/telemetry` — Analytics events (fallback) | ✅ DONE | Live PASS: POST-only confirmed via GET 405 |
+| WEB-W49 | Move the 8 desktop auth + 2 artifacts routes from `/api/v1/*` to `/v1/*` to match the desktop's hard-coded URL prefix (per `Fabrica-app/src/main/cloud/profile-cloud-auth-config.ts:96-118`). | ✅ DONE | Worker `term_local_web_w49` (ctx_dispatch_w49, run_55c168e35a3f). `git mv` of 8 desktop-auth + 2 artifacts route files (`app/api/v1/desktop/auth/{authorize,capabilities,logout,org,profile,refresh,relay-token,session}/route.ts` + `app/api/v1/artifacts/{,[id]/}route.ts`) → `app/v1/desktop/auth/<same>/route.ts` + `app/v1/artifacts/<same>`. Updated 3 `fetch()` calls in `app/[locale]/dashboard/page.tsx` (lines 173/177/207) to drop `/api` prefix. Doc-comment headers inside moved route files + `lib/fabrica-cloud.ts` updated to reference `/v1/*`. `/api/auth/*` Supabase web OAuth routes untouched (out of scope per spec). `npm run build` clean: routes table shows `/v1/desktop/auth/{authorize,capabilities,logout,org,profile,refresh,relay-token,session}` + `/v1/artifacts{,/[id]}` (no `/api` prefix). Evidence: `build-w49.txt` (29 routes, TS ✓, 57/57 static pages). `npm run lint` → 64 problems (46 errors / 18 warnings). **Errors: 46, identical to W40a baseline (0 new).** Warning count is 18 vs W40a 10 (+8 — pre-existing drift from WEB-ICON-THEME double `<img>` lines added on main after W40a; same delta reproduced by `git stash` test = zero warnings introduced by W49). Evidence: `lint-w49.txt`, `lint-w49-pre.txt`. DO NOT MERGE — orchestrator merges. |
 
 ---
 
@@ -294,12 +295,12 @@ vercel env add FABRICA_RELAY_JWT_SECRET       78f77f31506d77d3c65bb721e36da6ae35
 
 | Field | Value |
 |---|---|
-| **Current Group** | Phase 8 + Docs Site + Login Research (all shipped: W33–W41 DONE, 45/45 = 100%) |
-| **Current Task** | none — Phase 8 complete |
-| **Last Action** | WEB-W39 merged: hero CTAs replaced (Download ShimmerButton + Sign in/Dashboard button), footer `#command-center` → `#how-it-works`, `ctaEarlyAccess`/`ctaExplore` removed from en/fr/ar.json. WEB-W41 marked ✅ DONE: 665-line login investigation proposal at `.Fabrica-web-board/WEB-W41-login-proposal.md` (read-only, no source changes). |
-| **Next Action** | PM: commit & push Fabrica-web main → Vercel deploy. Verify live: `/docs` index, hero Download+Sign in, back-to-home on sub-pages, pricing hidden. Then decide on W41 proposal follow-ups (add `/v1/desktop/auth/*`, email/recovery, legacy-style login). |
+| **Current Group** | Phase 8 + Docs Site + Login Research + W49 route-prefix migration (all shipped: W33–W49 DONE, 46/46 = 100%) |
+| **Current Task** | none — Phase 8 + W49 complete |
+| **Last Action** | WEB-W49 committed in worktree `web-W49-prefix` (branch `Auto-Scalers/web-W49-prefix`): 8 desktop-auth + 2 artifacts routes moved from `/api/v1/*` → `/v1/*` to match the desktop app's hard-coded URL prefix (per `profile-cloud-auth-config.ts:96-118`); 3 fetch calls in `app/[locale]/dashboard/page.tsx` (lines 173/177/207) updated; doc-comment headers + `lib/fabrica-cloud.ts` updated; `/api/auth/*` (Supabase web OAuth) untouched. Build clean (29 routes, 57/57 static), 0 new lint errors (46/46 = W40a baseline; +8 warnings pre-existing drift from WEB-ICON-THEME). DO NOT MERGE — orchestrator merges. |
+| **Next Action** | Orchestrator: merge W49 branch into main → Vercel auto-deploy. Verify live: `/v1/desktop/auth/authorize`, `/v1/desktop/auth/capabilities`, `/v1/artifacts` 401/200 responses from `fabrica-ai.vercel.app`. Then continue with W41 proposal follow-ups (web `/login` accepts `?intent=web|desktop|pair`, optional email/recovery). |
 | **Blockers** | G4-ENV: Supabase GitHub OAuth provider not enabled (sign-in 400) — backend config. |
-| **Last Checkpoint** | 2026-08-29 |
+| **Last Checkpoint** | 2026-08-30 |
 
 ---
 
@@ -377,6 +378,7 @@ On heartbeat kick:
 | `term_e0d4676e-beb4-41e7-8138-ca4845b80da4` | worker | WEB-W41 cross-folder login investigation + proposal | `run_55c168e35a3f / task_e981ed1c40b5 / ctx_6b74f5c455da` | RELEASED (research deliverable on disk; no source merge — proposal only) | Aug 29 2026 | web-W41-login | n/a |
 | `term_local_web_theme` | worker | WEB-ICON-THEME theme-adaptive logo swap | `task_web_icon_theme / ctx_local` | RELEASED (done; committed + pushed by PM) | Aug 29 2026 | Fabrica-web/ | n/a |
 | `term_local_web_theme_hero` | worker | WEB-ICON-THEME Hero (x2) + FinalCta theme swap | `task_web_icon_theme_hero / ctx_local / term_local_web_theme_hero` | RELEASED (done; committed + pushed by PM) | Aug 29 2026 | Fabrica-web/ | n/a |
+| `term_0d279474-469f-4abc-8235-f069b271cdb0` | worker | WEB-W49 move desktop auth + artifacts routes from `/api/v1/*` → `/v1/*` | `task_38376ba8ab37 / ctx_fecdbf17441f / run_55c168e35a3f` | RELEASED (build clean 29 routes incl. `/v1/desktop/auth/{authorize,capabilities,logout,org,profile,refresh,relay-token,session}` + `/v1/artifacts{,/[id]}`; lint 46 errors = W40a baseline, 0 new errors; +8 warnings pre-existing drift from WEB-ICON-THEME, verified by stash test) | Aug 30 2026 | web-W49-prefix | n/a (DO NOT MERGE — orchestrator merges) |
 
 > Note: pushed commit `334413b` → origin/main (Aug 2026). Vercel auto-deploys.
 
@@ -390,7 +392,7 @@ On heartbeat kick:
 
 _Created: Aug 2026. Migrated from `Fabrica-web-tasks.md` per `.Fabrica-board/Fabrica-Schema.md`; original left unmodified._
 
-_Last updated: 2026-08-29_
+_Last updated: 2026-08-30_
 
 ---
 

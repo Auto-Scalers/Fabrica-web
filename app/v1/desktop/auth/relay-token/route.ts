@@ -4,7 +4,7 @@ import { getSupabaseUser, mintRelayJwt } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/relay-token
+// POST /v1/desktop/auth/relay-token
 //
 // Mints a short-lived relay session token the desktop presents to Fabrica-relay
 // (relay-session-broker.exchangeRelayAuthorization). The desktop sends the

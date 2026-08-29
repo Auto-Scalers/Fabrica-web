@@ -5,7 +5,7 @@ import { buildSessionExchange } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/refresh
+// POST /v1/desktop/auth/refresh
 //
 // Rotates the desktop's session using its refresh token. Returns the same
 // FABRICACloudSessionExchangeResponse shape as /session.

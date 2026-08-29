@@ -4,7 +4,7 @@ import { getSupabaseUser, buildSelectOrgResponse } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/capabilities
+// POST /v1/desktop/auth/capabilities
 //
 // Returns the signed-in account's current capabilities, cloud summary, and orgs.
 // Called by the desktop to refresh capability flags without rotating tokens.

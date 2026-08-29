@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// GET /api/v1/desktop/auth/authorize
+// GET /v1/desktop/auth/authorize
 //
 // The desktop opens this URL in the system browser as the first leg of an
 // OAuth PKCE flow. The query parameters are produced by the desktop's PKCE

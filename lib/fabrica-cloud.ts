@@ -4,7 +4,7 @@ import { getSupabaseAnon } from '@/lib/supabase-auth'
 import { NextRequest } from 'next/server'
 
 // Shared helpers for the Fabrica Cloud desktop backend (Option 1 real backend).
-// These power the routes under /api/v1/desktop/auth/* and /api/v1/artifacts/*.
+// These power the routes under /v1/desktop/auth/* and /v1/artifacts/*.
 
 export type FabricaCloudSummary = {
   cloudProfileId: string

@@ -5,7 +5,7 @@ import { getSupabaseUser } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/logout
+// POST /v1/desktop/auth/logout
 //
 // Clears the desktop's cloud session. The desktop sends the persisted refresh
 // token; we best-effort revoke it via Supabase admin, then return success. The

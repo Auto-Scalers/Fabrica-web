@@ -5,7 +5,7 @@ import { buildSessionExchange, exchangePkceCode } from '@/lib/fabrica-cloud'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// POST /api/v1/desktop/auth/session
+// POST /v1/desktop/auth/session
 //
 // Second leg of the desktop PKCE flow. The desktop sends the code + verifier it
 // obtained from its loopback redirect, and we exchange them with Supabase for a
