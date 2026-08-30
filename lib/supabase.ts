@@ -3,45 +3,124 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 export interface Database {
   public: {
     Tables: {
-      early_access_signups: {
+      fabrica_artifacts: {
+        Row: {
+          slug: string
+          user_id: string
+          title: string | null
+          original_file_name: string | null
+          source_content_type: string
+          rendered_content_type: string
+          content: string
+          edit_token: string
+          share_url: string
+          byte_size: number
+          created_at: string
+          updated_at: string
+          expires_at: string | null
+        }
+        Insert: {
+          slug: string
+          user_id: string
+          title?: string | null
+          original_file_name?: string | null
+          source_content_type?: string
+          rendered_content_type?: string
+          content: string
+          edit_token: string
+          share_url: string
+          byte_size?: number
+          created_at?: string
+          updated_at?: string
+          expires_at?: string | null
+        }
+        Update: {
+          slug?: string
+          user_id?: string
+          title?: string | null
+          original_file_name?: string | null
+          source_content_type?: string
+          rendered_content_type?: string
+          content?: string
+          edit_token?: string
+          share_url?: string
+          byte_size?: number
+          created_at?: string
+          updated_at?: string
+          expires_at?: string | null
+        }
+      }
+      diagnostics: {
         Row: {
           id: string
-          email: string
-          platform: string | null
-          referrer: string | null
-          company: string | null
-          team_size: string | null
+          user_id: string
+          type: string
+          app_version: string
+          os: string
+          error: string | null
+          stack: string | null
           message: string | null
-          use_case: string | null
-          timeline: string | null
-          updated_at: string | null
+          screenshot: string | null
+          metadata: Record<string, unknown> | null
           created_at: string
         }
         Insert: {
           id?: string
-          email: string
-          platform?: string | null
-          referrer?: string | null
-          company?: string | null
-          team_size?: string | null
+          user_id: string
+          type: string
+          app_version: string
+          os: string
+          error?: string | null
+          stack?: string | null
           message?: string | null
-          use_case?: string | null
-          timeline?: string | null
-          updated_at?: string | null
+          screenshot?: string | null
+          metadata?: Record<string, unknown> | null
           created_at?: string
         }
         Update: {
           id?: string
-          email?: string
-          platform?: string | null
-          referrer?: string | null
-          company?: string | null
-          team_size?: string | null
+          user_id?: string
+          type?: string
+          app_version?: string
+          os?: string
+          error?: string | null
+          stack?: string | null
           message?: string | null
-          use_case?: string | null
-          timeline?: string | null
-          updated_at?: string | null
+          screenshot?: string | null
+          metadata?: Record<string, unknown> | null
           created_at?: string
+        }
+      }
+      fabrica_pair_invites: {
+        Row: {
+          id: string
+          user_id: string
+          relay_host_id: string
+          relay_device_id: string
+          invite_token: string
+          max_attempts: number
+          created_at: string
+          expires_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          relay_host_id: string
+          relay_device_id?: string
+          invite_token: string
+          max_attempts?: number
+          created_at?: string
+          expires_at: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          relay_host_id?: string
+          relay_device_id?: string
+          invite_token?: string
+          max_attempts?: number
+          created_at?: string
+          expires_at?: string
         }
       }
     }
