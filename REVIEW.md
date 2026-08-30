@@ -1,5 +1,11 @@
 # Fabrica App I/O Systems — Review
 
+## Later Tasks (instructions received, not executed yet)
+
+_Pending user feedback: instructions will be added here as they arrive. Questions answered in chat. Nothing executed until user confirms._
+
+---
+
 Compiled from Fabrica-app source, Fabrica-relay source, Fabrica-atlas legacy-fabrica, Fabrica-web routes, and previous audit results.
 
 ---
