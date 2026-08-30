@@ -30,7 +30,8 @@ export async function GET(req: NextRequest) {
     })
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 })
+      const errorUrl = `${req.nextUrl.origin}/${locale}/login?error=${encodeURIComponent(error.message)}`
+      return NextResponse.redirect(errorUrl, 302)
     }
 
     // Browser flow: redirect straight to the provider's OAuth URL so a plain
