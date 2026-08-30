@@ -16,16 +16,16 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 48 |
+| Total tasks | 49 |
 | ✅ DONE | 48 |
 | 🔶 IN_PROGRESS | 0 |
 | 👀 VERIFY | 0 |
-| ⬜ TODO | 0 |
+| ⬜ TODO | 1 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 100% |
+| Completion | 98% |
 
-_Last recount: 2026-08-30 — **Phase 9 COMPLETE — all 48 unique tasks DONE ✅ (100%)**. Deduplicated WEB-W40a (cross-listed in both Docs Site and Phase 8 tables). **WEB-W47 DONE+MERGED ✅** (commit `a24888b`): full `/login` rework — `lib/supabase-browser.ts` (singleton + `isSupabaseConfigured()` guard, mirrors legacy `components/auth/supabase.ts`) + `lib/api/auth.api.ts` (`signInWithPassword` / `signUp` / `resetPasswordForEmail` / `updateUser` / `signInWithOAuth` wrappers calling `supabase.auth.*` directly, mirrors legacy re-export) + rewrite of `app/[locale]/login/page.tsx` (three-zone dark/copper card, Google+GitHub+email/password+recovery+toasts+`?intent=web|desktop|pair`+Pair-a-phone panel with inline-SVG QR + `fabrica://pair?token=…&app=ai.autoscalers.fabrica` deep link) + new `app/v1/desktop/auth/invites/route.ts` (Bearer auth, under no-`/api` prefix post-W49) + new `components/login/{toast-provider.tsx,pairing-code.ts}` + i18n parity en/fr/ar. Build clean (30 routes, 57/57 static); lint 0 new errors / -1 warning vs W40a baseline (63 problems / 46 errors / 17 warnings). §6.0.3 13-item checklist at `.Fabrica-web-board/WEB-W47-checklist.md` (11 CLEARED, 2 PM follow-ups deferred: #11 marketing copy ground-truth, #13 Vercel Analytics pre-auth on `/login`). Earlier: W48 DONE ✅ (audit), W49 DONE+MERGED ✅ (`cf5303c`), W38/W39/W40a/W41 all DONE+MERGED. G4-ENV ✅ APPLIED (Vercel env deployed; Supabase GitHub+Google+email/password enabled). **PM:** commit & push to deploy live sign-in (Google, GitHub, email/password + recovery)._
+_Last recount: 2026-08-30 — **Phase 9 COMPLETE (48/48 DONE)**. **Phase 10 added: WEB-W50 (DB audit)** — scanning all sub-projects for Supabase table references, reconciling schema, generating clean migration SQL. DB is messy from early-access → relay → desktop-phone → ad-hoc feature additions._
 
 ## Parallelism & Anti-Overlap Policy
 
@@ -426,4 +426,12 @@ _Last updated: 2026-08-29_
 ## CROSS-PROJECT NOTE from Fabrica-app (Aug 23, APP-ORCH) #2
 
 - **Live changelog.json release-notes copy contains old-brand prose:** the entry served at /whats-new/changelog.json includes text like 'Orca is now Fabrica - a full rebrand...'. Desktop app What's New renders this to users - old-brand word visible in UI. Recommend rewording the entry copy to avoid leading with the old name (end-to-end parse otherwise VALIDATED PASS by Fabrica-app LIVE-PARSER-CHECK). Also D7 from prior note stands: nudge.json schema still mismatches the app parser.
+
+---
+
+## Phase 10 — Database Audit & Cleanup
+
+| ID | Task | Status | Notes |
+|---|---|---|---|
+| WEB-W50 | **DB schema audit across all sub-projects.** Scan Fabrica-web, Fabrica-app, Fabrica-relay, Fabrica-atlas, Fabrica-plugins for all Supabase table references, column usage, RLS policies, and SQL migrations. Generate a unified DB schema inventory. Then produce a clean `supabase/migrations/` SQL file with the final schema. | ⬜ TODO | DB is messy — early-access signup came first, then relay/desktop-phone auth, then many features added ad-hoc. Need to understand what tables exist, what each project expects, and reconcile. |
 
