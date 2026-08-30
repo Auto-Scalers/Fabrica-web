@@ -16,16 +16,16 @@
 
 | Metric | Value |
 |---|---|
-| Total tasks | 49 |
+| Total tasks | 48 |
 | ✅ DONE | 48 |
 | 🔶 IN_PROGRESS | 0 |
 | 👀 VERIFY | 0 |
 | ⬜ TODO | 0 |
 | 🚫 BLOCKED | 0 |
 | ❌ CANCELLED | 0 |
-| Completion | 98% |
+| Completion | 100% |
 
-_Last recount: 2026-08-30 — **Phase 9 COMPLETE — all 49 tasks DONE ✅ (98%)**. **WEB-W47 DONE+MERGED ✅** (commit `a24888b`): full `/login` rework — `lib/supabase-browser.ts` (singleton + `isSupabaseConfigured()` guard, mirrors legacy `components/auth/supabase.ts`) + `lib/api/auth.api.ts` (`signInWithPassword` / `signUp` / `resetPasswordForEmail` / `updateUser` / `signInWithOAuth` wrappers calling `supabase.auth.*` directly, mirrors legacy re-export) + rewrite of `app/[locale]/login/page.tsx` (three-zone dark/copper card, Google+GitHub+email/password+recovery+toasts+`?intent=web|desktop|pair`+Pair-a-phone panel with inline-SVG QR + `fabrica://pair?token=…&app=ai.autoscalers.fabrica` deep link) + new `app/v1/desktop/auth/invites/route.ts` (Bearer auth, under no-`/api` prefix post-W49) + new `components/login/{toast-provider.tsx,pairing-code.ts}` + i18n parity en/fr/ar. Build clean (30 routes, 57/57 static); lint 0 new errors / -1 warning vs W40a baseline (63 problems / 46 errors / 17 warnings). §6.0.3 13-item checklist at `.Fabrica-web-board/WEB-W47-checklist.md` (11 CLEARED, 2 PM follow-ups deferred: #11 marketing copy ground-truth, #13 Vercel Analytics pre-auth on `/login`). Earlier: W48 DONE ✅ (audit), W49 DONE+MERGED ✅ (`cf5303c`), W38/W39/W40a/W41 all DONE+MERGED. G4-ENV ✅ APPLIED (Vercel env deployed; Supabase GitHub+Google+email/password enabled). **PM:** commit & push to deploy live sign-in (Google, GitHub, email/password + recovery)._
+_Last recount: 2026-08-30 — **Phase 9 COMPLETE — all 48 unique tasks DONE ✅ (100%)**. Deduplicated WEB-W40a (cross-listed in both Docs Site and Phase 8 tables). **WEB-W47 DONE+MERGED ✅** (commit `a24888b`): full `/login` rework — `lib/supabase-browser.ts` (singleton + `isSupabaseConfigured()` guard, mirrors legacy `components/auth/supabase.ts`) + `lib/api/auth.api.ts` (`signInWithPassword` / `signUp` / `resetPasswordForEmail` / `updateUser` / `signInWithOAuth` wrappers calling `supabase.auth.*` directly, mirrors legacy re-export) + rewrite of `app/[locale]/login/page.tsx` (three-zone dark/copper card, Google+GitHub+email/password+recovery+toasts+`?intent=web|desktop|pair`+Pair-a-phone panel with inline-SVG QR + `fabrica://pair?token=…&app=ai.autoscalers.fabrica` deep link) + new `app/v1/desktop/auth/invites/route.ts` (Bearer auth, under no-`/api` prefix post-W49) + new `components/login/{toast-provider.tsx,pairing-code.ts}` + i18n parity en/fr/ar. Build clean (30 routes, 57/57 static); lint 0 new errors / -1 warning vs W40a baseline (63 problems / 46 errors / 17 warnings). §6.0.3 13-item checklist at `.Fabrica-web-board/WEB-W47-checklist.md` (11 CLEARED, 2 PM follow-ups deferred: #11 marketing copy ground-truth, #13 Vercel Analytics pre-auth on `/login`). Earlier: W48 DONE ✅ (audit), W49 DONE+MERGED ✅ (`cf5303c`), W38/W39/W40a/W41 all DONE+MERGED. G4-ENV ✅ APPLIED (Vercel env deployed; Supabase GitHub+Google+email/password enabled). **PM:** commit & push to deploy live sign-in (Google, GitHub, email/password + recovery)._
 
 ## Parallelism & Anti-Overlap Policy
 
