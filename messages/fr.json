@@ -889,8 +889,71 @@
   },
   "login": {
     "badge": "ACCÈS FABRICA",
+    "wordmark": "Fabrica.",
+    "subtitle": "Espace de travail sécurisé pour vos équipes desktop.",
+    "providers": {
+      "google": "Continuer avec Google",
+      "github": "Continuer avec GitHub"
+    },
+    "divider": "ou utiliser l'authentification par email",
+    "email": {
+      "tabSignIn": "Connexion",
+      "tabSignUp": "Inscription",
+      "emailLabel": "Adresse email",
+      "passwordLabel": "Mot de passe",
+      "forgotLink": "Mot de passe oublié ?",
+      "signInSubmit": "Se connecter",
+      "signUpSubmit": "Créer un compte",
+      "invalidEmail": "Veuillez saisir une adresse email valide.",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères."
+    },
+    "recovery": {
+      "requestTitle": "Réinitialisez votre mot de passe",
+      "requestBody": "Saisissez votre email et nous vous enverrons un lien de récupération sécurisé.",
+      "emailLabel": "Adresse email",
+      "submit": "Envoyer le lien de récupération",
+      "newTitle": "Définir un nouveau mot de passe",
+      "newBody": "Choisissez un mot de passe robuste pour finaliser la récupération de votre compte.",
+      "passwordLabel": "Nouveau mot de passe",
+      "newSubmit": "Enregistrer le nouveau mot de passe"
+    },
+    "pair": {
+      "title": "Associer un téléphone",
+      "subtitle": "Scannez ce code dans l'application mobile Fabrica ou collez-le manuellement.",
+      "scanLabel": "Scanner avec l'application mobile Fabrica",
+      "codeLabel": "Code d'association",
+      "copyCode": "Copier le code",
+      "copied": "Code copié",
+      "openApp": "Ouvrir dans l'application mobile",
+      "waiting": "En attente de la connexion du téléphone…",
+      "waitingHint": "Le téléphone utilise ce code pour autoriser un tunnel relais privé. Rien ne se passe dans le navigateur.",
+      "polling": "Actualisation du code d'association…",
+      "error": "Impossible de charger un code d'association. Vérifiez que l'application Fabrica est en cours d'exécution et connectée."
+    },
+    "footer": {
+      "backHome": "Retour à l'accueil",
+      "newHere": "Nouveau ici ?",
+      "downloadLink": "Télécharger l'application"
+    },
+    "toast": {
+      "recoverySent": "Lien de récupération envoyé. Vérifiez votre boîte de réception.",
+      "recoverySuccess": "Mot de passe mis à jour. Connexion en cours…",
+      "oauthError": "La connexion a échoué. Veuillez réessayer.",
+      "signInFailed": "Impossible de vous connecter avec ces identifiants.",
+      "signUpFailed": "Impossible de créer ce compte.",
+      "updateFailed": "Impossible de mettre à jour votre mot de passe.",
+      "copiedCode": "Code d'association copié.",
+      "pairError": "Impossible de charger un code d'association. Réessayez dans un instant."
+    },
+    "loading": {
+      "signingIn": "Connexion en cours…",
+      "connecting": "Connexion…",
+      "sending": "Envoi du lien de récupération…",
+      "saving": "Enregistrement du nouveau mot de passe…",
+      "creating": "Création du compte…"
+    },
     "title": "Se connecter à Fabrica",
-    "lede": "Connectez-vous avec GitHub pour accéder à votre tableau de bord Fabrica.",
+    "lede": "Connectez-vous avec GitHub ou Google pour accéder à votre tableau de bord Fabrica.",
     "githubButton": "Se connecter avec GitHub",
     "newHere": "Nouveau ici ?",
     "signupNote": "Votre compte Fabrica est créé automatiquement lors de la connexion avec GitHub. Téléchargez l'application pour lancer votre première équipe.",
