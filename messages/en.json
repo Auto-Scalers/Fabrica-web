@@ -889,8 +889,71 @@
   },
   "login": {
     "badge": "FABRICA ACCESS",
+    "wordmark": "Fabrica.",
+    "subtitle": "Secure workspace for desktop crews.",
+    "providers": {
+      "google": "Continue with Google",
+      "github": "Continue with GitHub"
+    },
+    "divider": "or use email auth",
+    "email": {
+      "tabSignIn": "Sign In",
+      "tabSignUp": "Sign Up",
+      "emailLabel": "Email address",
+      "passwordLabel": "Password",
+      "forgotLink": "Forgot password?",
+      "signInSubmit": "Sign in",
+      "signUpSubmit": "Create account",
+      "invalidEmail": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters."
+    },
+    "recovery": {
+      "requestTitle": "Reset your password",
+      "requestBody": "Enter your email and we'll send a secure recovery link.",
+      "emailLabel": "Email address",
+      "submit": "Send recovery link",
+      "newTitle": "Set a new password",
+      "newBody": "Choose a strong password to finish recovering your account.",
+      "passwordLabel": "New password",
+      "newSubmit": "Save new password"
+    },
+    "pair": {
+      "title": "Pair a phone",
+      "subtitle": "Scan this code in the Fabrica mobile companion, or paste the code manually.",
+      "scanLabel": "Scan with the Fabrica mobile app",
+      "codeLabel": "Pairing code",
+      "copyCode": "Copy code",
+      "copied": "Code copied",
+      "openApp": "Open in mobile app",
+      "waiting": "Waiting for the phone to connect…",
+      "waitingHint": "The phone uses this code to authorize a private relay tunnel. Nothing happens in the browser.",
+      "polling": "Refreshing pairing code…",
+      "error": "We couldn't load a pairing code. Make sure the Fabrica desktop app is running and signed in."
+    },
+    "footer": {
+      "backHome": "Back to home",
+      "newHere": "New here?",
+      "downloadLink": "Download the app"
+    },
+    "toast": {
+      "recoverySent": "Recovery link sent. Check your inbox.",
+      "recoverySuccess": "Password updated. Signing you in…",
+      "oauthError": "Sign-in failed. Please try again.",
+      "signInFailed": "We couldn't sign you in with those credentials.",
+      "signUpFailed": "We couldn't create that account.",
+      "updateFailed": "We couldn't update your password.",
+      "copiedCode": "Pairing code copied.",
+      "pairError": "Couldn't load a pairing code. Retry in a moment."
+    },
+    "loading": {
+      "signingIn": "Signing you in…",
+      "connecting": "Connecting…",
+      "sending": "Sending recovery link…",
+      "saving": "Saving new password…",
+      "creating": "Creating account…"
+    },
     "title": "Sign in to Fabrica",
-    "lede": "Sign in with GitHub to access your Fabrica dashboard.",
+    "lede": "Sign in with GitHub or Google to access your Fabrica dashboard.",
     "githubButton": "Sign in with GitHub",
     "newHere": "New here?",
     "signupNote": "Your Fabrica account is created automatically when you sign in with GitHub. Download the app to run your first crew.",
