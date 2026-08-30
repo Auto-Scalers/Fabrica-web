@@ -33,7 +33,7 @@ function err(message: string): AuthApiError {
 
 export async function signInWithPassword(
   input: SignInWithPasswordInput
-): Promise<AuthApiError | { user: { id: string; email?: string } | null }> {
+): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: boolean }> {
   if (!isSupabaseConfigured()) return err('Supabase not configured')
   const supabase = getSupabaseBrowser()
   if (!supabase) return err('Supabase not configured')
@@ -44,12 +44,15 @@ export async function signInWithPassword(
   })
 
   if (error) return err(error.message)
-  return { user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null }
+  return {
+    user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null,
+    session: Boolean(data.session),
+  }
 }
 
 export async function signUp(
   input: SignUpInput
-): Promise<AuthApiError | { user: { id: string; email?: string } | null }> {
+): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: boolean }> {
   if (!isSupabaseConfigured()) return err('Supabase not configured')
   const supabase = getSupabaseBrowser()
   if (!supabase) return err('Supabase not configured')
@@ -60,7 +63,10 @@ export async function signUp(
   })
 
   if (error) return err(error.message)
-  return { user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null }
+  return {
+    user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null,
+    session: Boolean(data.session),
+  }
 }
 
 export async function resetPasswordForEmail(

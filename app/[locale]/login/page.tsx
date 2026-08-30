@@ -276,16 +276,19 @@ function LoginPageInner() {
         )
         return
       }
-      // Email sign-in does not return access tokens in the same shape as
-      // OAuth; the page keeps the user on /login and waits for them to
-      // confirm via the email-link flow OR they can re-trigger OAuth. We
-      // treat the response as a successful registration confirmation.
-      if (emailTab === 'signUp') {
-        showToast(t('toast.signUpFailed'), 'info')
-        // Switch them to sign-in so they can immediately try their new password.
-        setEmailTab('signIn')
+      if (emailTab === 'signIn') {
+        showToast(t('toast.signInSuccess'), 'success')
+        setMode({ kind: 'verifying' })
+        router.replace('/dashboard')
       } else {
-        showToast(t('toast.signInFailed'), 'info')
+        if (result.session) {
+          showToast(t('toast.signInSuccess'), 'success')
+          setMode({ kind: 'verifying' })
+          router.replace('/dashboard')
+        } else {
+          showToast(t('toast.signUpSuccess'), 'success')
+          setEmailTab('signIn')
+        }
       }
     },
     [email, emailTab, password, showToast, t],

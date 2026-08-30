@@ -940,6 +940,8 @@
       "recoverySuccess": "Password updated. Signing you in…",
       "oauthError": "Sign-in failed. Please try again.",
       "signInFailed": "We couldn't sign you in with those credentials.",
+      "signInSuccess": "Signed in successfully.",
+      "signUpSuccess": "Account created. Check your inbox to confirm your email.",
       "signUpFailed": "We couldn't create that account.",
       "updateFailed": "We couldn't update your password.",
       "copiedCode": "Pairing code copied.",

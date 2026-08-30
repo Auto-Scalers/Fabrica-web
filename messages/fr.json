@@ -940,6 +940,8 @@
       "recoverySuccess": "Mot de passe mis à jour. Connexion en cours…",
       "oauthError": "La connexion a échoué. Veuillez réessayer.",
       "signInFailed": "Impossible de vous connecter avec ces identifiants.",
+      "signInSuccess": "Connexion réussie.",
+      "signUpSuccess": "Compte créé. Vérifiez votre boîte de réception pour confirmer votre e-mail.",
       "signUpFailed": "Impossible de créer ce compte.",
       "updateFailed": "Impossible de mettre à jour votre mot de passe.",
       "copiedCode": "Code d'association copié.",
