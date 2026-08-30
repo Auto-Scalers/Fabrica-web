@@ -64,7 +64,7 @@ export default function Hero() {
     if (isAuthed) {
       router.push('/dashboard')
     } else {
-      window.location.href = '/api/auth/authorize'
+      router.push('/login')
     }
   }
 

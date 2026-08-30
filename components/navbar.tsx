@@ -49,7 +49,7 @@ export const Navbar = () => {
     if (isAuthed) {
       router.push('/dashboard')
     } else {
-      window.location.href = '/api/auth/authorize'
+      router.push('/login')
     }
   }
 
