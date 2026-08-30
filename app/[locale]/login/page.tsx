@@ -277,11 +277,15 @@ function LoginPageInner() {
         return
       }
       if (emailTab === 'signIn') {
+        if (result.session) {
+          storeTokens(result.session)
+        }
         showToast(t('toast.signInSuccess'), 'success')
         setMode({ kind: 'verifying' })
         router.replace('/dashboard')
       } else {
         if (result.session) {
+          storeTokens(result.session)
           showToast(t('toast.signInSuccess'), 'success')
           setMode({ kind: 'verifying' })
           router.replace('/dashboard')

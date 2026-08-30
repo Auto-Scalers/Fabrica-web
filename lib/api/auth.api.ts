@@ -31,9 +31,17 @@ function err(message: string): AuthApiError {
   return { error: message }
 }
 
+export type SessionTokens = {
+  access_token: string
+  refresh_token: string
+  expires_at?: string
+  user_id?: string
+  email?: string
+}
+
 export async function signInWithPassword(
   input: SignInWithPasswordInput
-): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: boolean }> {
+): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: SessionTokens | null }> {
   if (!isSupabaseConfigured()) return err('Supabase not configured')
   const supabase = getSupabaseBrowser()
   if (!supabase) return err('Supabase not configured')
@@ -46,13 +54,21 @@ export async function signInWithPassword(
   if (error) return err(error.message)
   return {
     user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null,
-    session: Boolean(data.session),
+    session: data.session
+      ? {
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+          expires_at: String(data.session.expires_at),
+          user_id: data.user?.id,
+          email: data.user?.email ?? undefined,
+        }
+      : null,
   }
 }
 
 export async function signUp(
   input: SignUpInput
-): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: boolean }> {
+): Promise<AuthApiError | { user: { id: string; email?: string } | null; session: SessionTokens | null }> {
   if (!isSupabaseConfigured()) return err('Supabase not configured')
   const supabase = getSupabaseBrowser()
   if (!supabase) return err('Supabase not configured')
@@ -65,7 +81,15 @@ export async function signUp(
   if (error) return err(error.message)
   return {
     user: data.user ? { id: data.user.id, email: data.user.email ?? undefined } : null,
-    session: Boolean(data.session),
+    session: data.session
+      ? {
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+          expires_at: String(data.session.expires_at),
+          user_id: data.user?.id,
+          email: data.user?.email ?? undefined,
+        }
+      : null,
   }
 }
 
