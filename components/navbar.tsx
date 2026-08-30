@@ -39,9 +39,14 @@ export const Navbar = () => {
       }
     }
     const raf = requestAnimationFrame(read)
+
+    const onStorage = () => read()
+    window.addEventListener('storage', onStorage)
+
     return () => {
       active = false
       cancelAnimationFrame(raf)
+      window.removeEventListener('storage', onStorage)
     }
   }, [])
 

@@ -62,6 +62,7 @@ function readTokensFromHash(): { tokens: Tokens | null; error: string | null } {
 function storeTokens(tokens: Tokens) {
   try {
     window.localStorage.setItem(TOKEN_KEY, JSON.stringify(tokens))
+    window.dispatchEvent(new Event('storage'))
   } catch {
     /* ignore */
   }
