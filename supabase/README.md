@@ -3,23 +3,20 @@
 ## What you need to do
 
 1. Go to https://supabase.com/dashboard/project/xoynlmscwkimaopkavkj/sql/new
-2. Paste the entire contents of `APPLY_THIS.sql`
-3. Click **Run**
+2. Paste the contents of these files one after another, in order:
+   - `migrations/0002_diagnostics.sql`
+   - `migrations/0003_fabrica_pair_invites.sql`
+   - `migrations/0004_drop_dead_tables.sql`
+3. Click **Run** after each one (or paste all three and run once — they're idempotent with `IF NOT EXISTS`)
 
-This creates:
-- `diagnostics` table (for crash/feedback from desktop app)
-- `fabrica_pair_invites` table (for phone-desktop pairing)
-- Drops dead `early_access_signups` table
+## Migrations
 
-## What was already done in code
-
-- Deleted dead routes: `/api/share/*`, `/api/telemetry`
-- Updated `Database` type in `lib/supabase.ts` to match real tables
-- Created migration files in `migrations/`:
-  - `0001_fabrica_artifacts.sql` (already applied — table exists)
-  - `0002_diagnostics.sql`
-  - `0003_fabrica_pair_invites.sql`
-  - `0004_drop_dead_tables.sql`
+| File | Status | Purpose |
+|------|--------|---------|
+| `migrations/0001_fabrica_artifacts.sql` | ✅ Already applied | Artifact storage |
+| `migrations/0002_diagnostics.sql` | ⏳ Needs apply | Crash reports + feedback |
+| `migrations/0003_fabrica_pair_invites.sql` | ⏳ Needs apply | Phone-desktop pairing |
+| `migrations/0004_drop_dead_tables.sql` | ⏳ Needs apply | Drops dead `early_access_signups` |
 
 ## Final schema (3 tables)
 
