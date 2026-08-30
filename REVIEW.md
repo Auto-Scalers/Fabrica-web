@@ -4,6 +4,20 @@
 
 _Pending user feedback: instructions will be added here as they arrive. Questions answered in chat. Nothing executed until user confirms._
 
+### User feedback — Relay + Pairing section
+
+**Q1 (line 32):** "from where did i get that JWT ?" (`FABRICA_RELAY_JWT_SECRET`)
+- Source: Vercel `.env.local` / Vercel env vars / Cloudflare `wrangler.toml`. Must match Supabase JWT secret (derived from `SUPABASE_SERVICE_ROLE_KEY` or configured separately). See `fabrica-cloud.ts:166-201` (`mintRelayJwt()`).
+
+**Q2 (lines 36-37):** "if no relay in Orca, from where we get the need of this relay at first place and how orca handled the alternative ?"
+- Orca had NO relay, NO pairing, NO mobile connection. The desktop handled everything locally (workspace files in GCS, harness agent in Cloud Run). Phone/mobile was never part of Orca.
+- Fabrica added relay because the product has a mobile companion app (`Fabrica-app/mobile/`). Relay is the bridge for phone↔desktop when not on same LAN. Without relay, pairing is impossible across networks.
+
+**Q3 (lines 41-43):** `/login?intent=pair` — do we really need it? Plus: need dashboard relay status section (link/unlink) + automatic linking option when user logs in to both desktop and APK.
+- Need: `/login?intent=pair` is used by web login page (`PairPanel`) to show pairing code when user is signed in. Also handles deep link `fabrica://pair`.
+- Need added: Dashboard section showing relay status + link/unlink buttons. Auto-link when both desktop and APK are logged in.
+- Instruction: Add to Later Tasks (not executed yet).
+
 ---
 
 Compiled from Fabrica-app source, Fabrica-relay source, Fabrica-atlas legacy-fabrica, Fabrica-web routes, and previous audit results.
