@@ -12,12 +12,12 @@
 
 **Q2 (lines 36-37):** "if no relay in Orca, from where we get the need of this relay at first place and how orca handled the alternative ?"
 
-- **CORRECTED:** Orca = original Fabrica (pre-rebrand name, `.backup/orca/` + `Fabrica-atlas/_sources/legacy-fabrica/`). The original product had NO mobile app, NO pairing, NO relay — desktop handled everything locally (workspace files in GCS, harness agent in Cloud Run).
-- Relay/pairing/mobile were ADDED post-rebrand as NEW product features (`Fabrica-app/mobile/`, `Fabrica-relay/`). There was no "alternative" in Orca — mobile connection simply didn't exist. The pairing feature exists because Fabrica (post-rebrand) has a mobile companion app that needs to connect to the desktop.
+- **CORRECTED (verified against `.backup/orca/`):** Orca = original Fabrica (pre-rebrand name). The original product HAD full mobile/pairing/relay — production-grade React Native + Expo mobile app, QR pairing, E2EE key exchange, WebSocket transport, and Cloudflare Workers relay (Director + Cell Durable Objects). `Fabrica-atlas/_sources/legacy-fabrica/` is the OLD web-only version (no mobile references).
+- What changed post-rebrand: `Fabrica-relay/` is a fresh Cloudflare Workers relay server replacing Orca's relay infrastructure. The pairing/relay/mobile features were carried forward from Orca, not invented post-rebrand. The "answer" in my previous review was wrong — Orca DID have these features.
 
 **Q3 (lines 41-43):** `/login?intent=pair` — do we really need it? Plus: need dashboard relay status section (link/unlink) + automatic linking option when user logs in to both desktop and APK.
 
-- Need: `/login?intent=pair` is used by web login page (`PairPanel`) to show pairing code when user is signed in. Also handles deep link `fabrica://pair`.
+- **CORRECTED:** `/login?intent=pair` is NOT the right place for web-based pairing. Web pairing belongs in the user dashboard (later task), not on the login page. The `PairPanel` on `/login` was a shortcut but not the intended UX. Pairing from the dashboard is more natural — user is already authenticated, sees relay status, and can link/unlink devices.
 - Need added: Dashboard section showing relay status + link/unlink buttons. Auto-link when both desktop and APK are logged in.
 
 ---
