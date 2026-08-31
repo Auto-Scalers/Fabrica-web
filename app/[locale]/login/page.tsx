@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Link, useRouter } from '@/src/i18n/navigation'
-import { AlertTriangle, ArrowLeft, ArrowRight, Check, Copy, Github, KeyRound, Loader2, Lock, Mail, RefreshCw, Smartphone } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, ArrowRight, Github, KeyRound, Loader2, Lock, Mail } from 'lucide-react'
 import { ToastProvider, useToast } from '@/components/login/toast-provider'
 import {
   resetPasswordForEmail,
@@ -12,10 +12,8 @@ import {
   updateUser,
 } from '@/lib/api/auth.api'
 import { isSupabaseConfigured } from '@/lib/supabase-browser'
-import { makeInviteCode, renderPairingSvg } from '@/components/login/pairing-code'
 
 const TOKEN_KEY = 'fabrica_auth_tokens'
-const APP_ID = 'ai.autoscalers.fabrica' as const
 
 type Tokens = {
   access_token: string
@@ -31,7 +29,6 @@ type Mode =
   | { kind: 'error'; message: string }
   | { kind: 'forgot' }
   | { kind: 'newPassword' }
-  | { kind: 'pair' }
 
 type EmailTab = 'signIn' | 'signUp'
 
@@ -88,7 +85,7 @@ function clearHashError() {
 }
 
 function readQuery(): {
-  intent: 'web' | 'desktop' | 'pair' | null
+  intent: 'web' | 'desktop' | null
   redirectTo: string | null
   state: string | null
   recovery: boolean
@@ -107,8 +104,8 @@ function readQuery(): {
   }
   const params = new URLSearchParams(window.location.search)
   const rawIntent = params.get('intent')
-  const intent: 'web' | 'desktop' | 'pair' | null =
-    rawIntent === 'desktop' || rawIntent === 'pair' ? rawIntent : rawIntent === 'web' ? 'web' : null
+  const intent: 'web' | 'desktop' | null =
+    rawIntent === 'desktop' ? rawIntent : rawIntent === 'web' ? 'web' : null
   return {
     intent,
     redirectTo: params.get('redirect_to'),
@@ -137,10 +134,6 @@ function tokensFromStorage(): Tokens | null {
   }
 }
 
-function formatInviteToken(code: string): string {
-  const groups = code.match(/.{1,4}/g) ?? [code]
-  return groups.join('-')
-}
 
 export default function LoginPage() {
   return (
@@ -157,7 +150,6 @@ function LoginPageInner() {
   const { showToast } = useToast()
 
   const [mode, setMode] = useState<Mode>({ kind: 'idle' })
-  const [intent, setIntent] = useState<'web' | 'desktop' | 'pair' | null>(null)
   const [emailTab, setEmailTab] = useState<EmailTab>('signIn')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -165,7 +157,6 @@ function LoginPageInner() {
   const [newPassword, setNewPassword] = useState('')
   const [oauthProvider, setOauthProvider] = useState<'github' | 'google' | null>(null)
   const [oauthPending, setOauthPending] = useState(false)
-  const [signedInTokens, setSignedInTokens] = useState<Tokens | null>(null)
   const hydrated = useRef(false)
 
   // ────────────── Auth hydration ──────────────
@@ -174,7 +165,6 @@ function LoginPageInner() {
       const query = readQuery()
       const fragmentRecovery = readFragmentType() === 'recovery'
       const recovery = query.recovery || fragmentRecovery
-      setIntent(query.intent)
 
       // Returning from OAuth.
       const { tokens, error } = readTokensFromHash()
@@ -202,12 +192,6 @@ function LoginPageInner() {
       // Already signed in.
       const existing = tokensFromStorage()
       if (existing) {
-        if (query.intent === 'pair') {
-          setSignedInTokens(existing)
-          setMode({ kind: 'pair' })
-          hydrated.current = true
-          return
-        }
         if (query.intent === 'desktop' && query.redirectTo) {
           const dest = new URL(query.redirectTo)
           if (query.state) dest.searchParams.set('state', query.state)
@@ -225,8 +209,6 @@ function LoginPageInner() {
         setMode({ kind: 'newPassword' })
       }
 
-      // Intent=pair without session — degrade to idle so the user can sign
-      // in first; after sign-in we'll come back via the fragment branch.
       hydrated.current = true
     }
     queueMicrotask(handle)
@@ -239,15 +221,15 @@ function LoginPageInner() {
       setOauthProvider(provider)
       setOauthPending(true)
       const baseParams = new URLSearchParams({ locale, provider })
-      if (intent === 'desktop') {
-        const query = readQuery()
-        if (query.redirectTo) baseParams.set('redirect_to', query.redirectTo)
+      const query = readQuery()
+      if (query.intent === 'desktop' && query.redirectTo) {
+        baseParams.set('redirect_to', query.redirectTo)
         if (query.state) baseParams.set('state', query.state)
       }
       // Server-side authorize endpoint redirects 302 to the provider.
       window.location.href = `/api/auth/authorize?${baseParams.toString()}`
     },
-    [intent, locale, oauthPending],
+    [locale, oauthPending],
   )
 
   // ────────────── Email sign in / sign up ──────────────
@@ -296,7 +278,7 @@ function LoginPageInner() {
         }
       }
     },
-    [email, emailTab, password, showToast, t],
+    [email, emailTab, password, showToast, t, router],
   )
 
   // ────────────── Forgot password ──────────────
@@ -381,10 +363,6 @@ function LoginPageInner() {
         </div>
       </main>
     )
-  }
-
-  if (mode.kind === 'pair') {
-    return <PairPanel tokens={signedInTokens!} t={t} showToast={showToast} />
   }
 
   return (
@@ -835,141 +813,6 @@ function NewPasswordForm({
   )
 }
 
-// ─────────────────────── Pair panel ───────────────────────
-
-function PairPanel({
-  tokens,
-  t,
-  showToast,
-}: {
-  tokens: Tokens
-  t: ReturnType<typeof useTranslations<'login'>>
-  showToast: (message: string, tone?: 'success' | 'info' | 'error') => void
-}) {
-  const initialCode = useMemo(() => makeInviteCode(), [])
-  const [code, setCode] = useState<string>(initialCode)
-  const [svg, setSvg] = useState<string>(() => renderPairingSvg(initialCode))
-  const [loading, setLoading] = useState(false)
-  const [copied, setCopied] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const formatted = useMemo(() => formatInviteToken(code), [code])
-  const deepLink = useMemo(
-    () => `fabrica://pair?token=${encodeURIComponent(code)}&app=${encodeURIComponent(APP_ID)}`,
-    [code],
-  )
-
-  const refresh = useCallback(async () => {
-    let next: string | null = null
-    let fetchError: string | null = null
-    try {
-      const res = await fetch('/v1/desktop/auth/invites?relayHostId=self', {
-        headers: { Authorization: `Bearer ${tokens.access_token}` },
-      })
-      if (res.ok) {
-        const data = (await res.json()) as { inviteToken?: string }
-        if (data.inviteToken) next = data.inviteToken
-      } else if (res.status !== 404) {
-        fetchError = t('pair.error')
-      }
-    } catch {
-      fetchError = t('pair.error')
-    }
-    if (next === null) next = makeInviteCode()
-    setCode(next)
-    setSvg(renderPairingSvg(next))
-    setError(fetchError)
-    setLoading(false)
-  }, [t, tokens.access_token])
-
-  // Pull the latest invite on mount; the desktop is the source of truth.
-  // We use a ref-gated microtask deferral so no setState runs inside the
-  // effect body itself (the eslint react-hooks rule dislikes that).
-  const ranOnce = useRef(false)
-  useEffect(() => {
-    if (ranOnce.current) return
-    ranOnce.current = true
-    queueMicrotask(() => {
-      setLoading(true)
-      setError(null)
-      void refresh()
-    })
-  }, [refresh])
-
-  const copyCode = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(code)
-      setCopied(true)
-      showToast(t('toast.copiedCode'), 'success')
-      window.setTimeout(() => setCopied(false), 2000)
-    } catch {
-      showToast(t('pair.error'), 'error')
-    }
-  }, [code, showToast, t])
-
-  return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--surface-page)] text-[var(--text-strong)]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-orange-600/15 via-orange-950/10 to-transparent pointer-events-none" />
-      <div className="relative z-10 mx-auto flex w-full max-w-md flex-col px-4 py-12 sm:py-16">
-        <Card>
-          <CardHeader subtitle={t('pair.subtitle')} />
-          <CardBody>
-            <div className="flex flex-col items-center gap-4">
-              <div
-                className="rounded-2xl border border-[var(--border-subtle)] bg-zinc-950/70 p-4 shadow-inner shadow-black/40"
-                dangerouslySetInnerHTML={{ __html: svg }}
-                aria-label={t('pair.scanLabel')}
-              />
-              <p className="text-center text-xs text-[var(--text-muted)]">
-                {t('pair.scanLabel')}
-              </p>
-              <div className="w-full space-y-2">
-                <p className="text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">
-                  {t('pair.codeLabel')}
-                </p>
-                <div className="flex items-center gap-2">
-                  <code className="flex-1 truncate rounded-lg border border-[var(--border-subtle)] bg-zinc-950/60 px-3 py-2 font-mono text-base font-bold tracking-[0.2em] text-orange-300">
-                    {formatted}
-                  </code>
-                  <button
-                    type="button"
-                    onClick={copyCode}
-                    className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--overlay-5)] px-3 text-xs font-medium hover:bg-[var(--overlay-10)]"
-                  >
-                    {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                    {copied ? t('pair.copied') : t('pair.copyCode')}
-                  </button>
-                </div>
-              </div>
-              <a
-                href={deepLink}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-orange-300/40 bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-orange-950/40 transition-all hover:from-[#D04A09] hover:to-[#F07A2D]"
-              >
-                <Smartphone className="h-4 w-4" />
-                {t('pair.openApp')}
-              </a>
-              <p className="text-center text-xs text-[var(--text-muted)]">
-                {t('pair.waitingHint')}
-              </p>
-              {error && (
-                <p className="text-center text-xs text-amber-400/80">{error}</p>
-              )}
-              <button
-                type="button"
-                onClick={refresh}
-                disabled={loading}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-strong)]"
-              >
-                {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
-                {loading ? t('pair.polling') : t('pair.waiting')}
-              </button>
-            </div>
-          </CardBody>
-          <CardFooter t={t} />
-        </Card>
-      </div>
-    </main>
-  )
-}
 
 // ─────────────────────── Loading shell ───────────────────────
 

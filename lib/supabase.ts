@@ -49,6 +49,7 @@ export interface Database {
           updated_at?: string
           expires_at?: string | null
         }
+        Relationships: []
       }
       diagnostics: {
         Row: {
@@ -66,7 +67,7 @@ export interface Database {
         }
         Insert: {
           id?: string
-          user_id: string
+          user_id?: string
           type: string
           app_version: string
           os: string
@@ -90,40 +91,12 @@ export interface Database {
           metadata?: Record<string, unknown> | null
           created_at?: string
         }
-      }
-      fabrica_pair_invites: {
-        Row: {
-          id: string
-          user_id: string
-          relay_host_id: string
-          relay_device_id: string
-          invite_token: string
-          max_attempts: number
-          created_at: string
-          expires_at: string
-        }
-        Insert: {
-          id?: string
-          user_id: string
-          relay_host_id: string
-          relay_device_id?: string
-          invite_token: string
-          max_attempts?: number
-          created_at?: string
-          expires_at: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          relay_host_id?: string
-          relay_device_id?: string
-          invite_token?: string
-          max_attempts?: number
-          created_at?: string
-          expires_at?: string
-        }
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
 

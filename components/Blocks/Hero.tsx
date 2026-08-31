@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
@@ -610,7 +610,7 @@ const crewMembers = [
                         />
                       </div>
                       <p className="text-[10px] text-emerald-400 font-mono">
-                        Ã¢Å"â€œ {t('hardAutoStop')}
+                        ✔ {t('hardAutoStop')}
                       </p>
                     </div>
 

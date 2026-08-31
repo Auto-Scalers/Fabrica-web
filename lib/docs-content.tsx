@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Callout } from "@/components/docs/Prose";
 
 export interface DocEntry {
@@ -41,11 +42,11 @@ export const docs: Record<string, DocEntry> = {
           </li>
         </ul>
 
-        <h2>Who it's for</h2>
+        <h2>Who it&apos;s for</h2>
         <p>
           Fabrica is designed for people who already write code for a living and
           want to use AI as leverage — not as a replacement. It assumes you read
-          diffs, care about commits, and keep a worktree tidy. If you're looking
+          diffs, care about commits, and keep a worktree tidy. If you&apos;re looking
           for a no-code tool, Fabrica is not that.
         </p>
 
@@ -69,11 +70,11 @@ export const docs: Record<string, DocEntry> = {
 
         <Callout type="tip" title="Next steps">
           <p>
-            Head to <a href="/docs/install">Install</a>, then walk through{" "}
-            <a href="/docs/first-session">Your first crew session</a> — the
-            single most important page in these docs. When you're ready to move
+            Head to <Link href="/docs/install">Install</Link>, then walk through{" "}
+            <Link href="/docs/first-session">Your first crew session</Link> — the
+            single most important page in these docs. When you&apos;re ready to move
             agents off the laptop, start with{" "}
-            <a href="/docs/ways-to-run">Ways to run Fabrica</a>.
+            <Link href="/docs/ways-to-run">Ways to run Fabrica</Link>.
           </p>
         </Callout>
       </>
@@ -137,7 +138,7 @@ export const docs: Record<string, DocEntry> = {
         <p>
           Want to run <code>fabrica serve</code> on a headless Linux box? See the
           server guide, then jump to{" "}
-          <a href="/docs/ways-to-run">Ways to run Fabrica</a>.
+          <Link href="/docs/ways-to-run">Ways to run Fabrica</Link>.
         </p>
 
         <Callout type="warn" title="Before you start">
@@ -161,7 +162,7 @@ export const docs: Record<string, DocEntry> = {
         <p>
           The fastest way to feel Fabrica is to run the same task in three
           isolated worktrees at once, then compare the diffs and merge the best
-          one. Here's the whole flow in under five minutes.
+          one. Here&apos;s the whole flow in under five minutes.
         </p>
 
         <h2>1. Open a repo</h2>
@@ -174,7 +175,7 @@ export const docs: Record<string, DocEntry> = {
         <p>
           From the command bar, create three worktrees pointed at the same base
           branch. Assign each one the same task, e.g.{" "}
-          <em>"Add input validation to the login form."</em>
+           <em>&quot;Add input validation to the login form.&quot;</em>
         </p>
         <pre>
           <code>{`fabrica worktree create --name try-a --task "login validation"
@@ -185,7 +186,7 @@ fabrica worktree create --name try-c --task "login validation"`}</code>
         <h2>3. Let them run</h2>
         <p>
           Each worktree gets its own agent terminal. Watch them stream in
-          parallel. Because they're isolated, none of them can clobber your
+          parallel. Because they&apos;re isolated, none of them can clobber your
           <code>main</code> branch.
         </p>
 
@@ -197,7 +198,7 @@ fabrica worktree create --name try-c --task "login validation"`}</code>
 
         <Callout type="tip" title="Pro move">
           <p>
-            Keep the three attempts around until you've merged. You can cherry-pick
+            Keep the three attempts around until you&apos;ve merged. You can cherry-pick
             the best lines from each before deleting the losers.
           </p>
         </Callout>
@@ -213,7 +214,7 @@ fabrica worktree create --name try-c --task "login validation"`}</code>
     body: (
       <>
         <p>
-          Fabrica runs on your desktop by default, but your agents don't have to.
+          Fabrica runs on your desktop by default, but your agents don&apos;t have to.
           Move compute anywhere you control without losing the IDE.
         </p>
 
@@ -242,13 +243,13 @@ fabrica worktree create --name try-c --task "login validation"`}</code>
         <p>
           Spin up a per-workspace cloud environment for heavy parallel sweeps,
           then tear it down when the work is done. Great for 24/7 background
-          daemons that shouldn't tie up your laptop.
+          daemons that shouldn&apos;t tie up your laptop.
         </p>
 
         <Callout type="info" title="Bring your own keys">
           <p>
             On every target, your API keys, SSH credentials, and OAuth tokens
-            stay encrypted locally. They're only decrypted in memory during
+            stay encrypted locally. They&apos;re only decrypted in memory during
             isolated task execution — never egressed to a third party.
           </p>
         </Callout>
@@ -295,7 +296,7 @@ fabrica worktree create --name exp/redesign --agent claude`}</code>
         <p>
           A worktree is a real git checkout. You can <code>cd</code> in and run
           plain git commands at any time — Fabrica never hides the underlying
-          repo from you. When you're done, merge the branch and delete the
+          repo from you. When you&apos;re done, merge the branch and delete the
           worktree.
         </p>
 
@@ -318,7 +319,7 @@ fabrica worktree create --name exp/redesign --agent claude`}</code>
     body: (
       <>
         <p>
-          Every agent runs in its own terminal. Fabrica's terminal is
+          Every agent runs in its own terminal. Fabrica&apos;s terminal is
           Ghostty-class: GPU-rendered, fast, and built for splits.
         </p>
 
@@ -361,22 +362,22 @@ fabrica worktree create --name exp/redesign --agent claude`}</code>
 
         <h2>What gets captured</h2>
         <ul>
-          <li>The element's HTML and computed CSS.</li>
+          <li>The element&apos;s HTML and computed CSS.</li>
           <li>A cropped screenshot of the element in context.</li>
           <li>The surrounding DOM path so the agent can locate it again.</li>
         </ul>
 
         <h2>Why it matters</h2>
         <p>
-          Instead of describing a bug in prose ("the button is off by a few
-          pixels"), you point. The agent receives precise, actionable context
+          Instead of describing a bug in prose (&quot;the button is off by a few
+          pixels&quot;), you point. The agent receives precise, actionable context
           and ships a tighter diff on the first try.
         </p>
 
         <Callout type="info" title="Pair with Computer Use">
           <p>
             Need real UI interaction — not just inspection? See{" "}
-            <a href="/docs/cli/computer-use">Computer Use</a> for letting agents
+            <Link href="/docs/cli/computer-use">Computer Use</Link> for letting agents
             operate desktop apps through the accessibility tree.
           </p>
         </Callout>
@@ -392,14 +393,14 @@ fabrica worktree create --name exp/redesign --agent claude`}</code>
     body: (
       <>
         <p>
-          Review is a first-class workflow in Fabrica. You don't approve blind —
+          Review is a first-class workflow in Fabrica. You don&apos;t approve blind —
           you read the diff, leave notes, and send them straight back to the
           agent.
         </p>
 
         <h2>Comment on any line</h2>
         <p>
-          Open a worktree's diff and drop an inline comment anywhere. Ask for a
+          Open a worktree&apos;s diff and drop an inline comment anywhere. Ask for a
           rename, flag a regression, or suggest a cleaner approach.
         </p>
 
@@ -519,7 +520,7 @@ fabrica fill  "email" "you@foundry.dev"`}</code>
         <h2>What you can automate</h2>
         <ul>
           <li>Create and tear down worktrees.</li>
-          <li>Take and restore snapshots of a worktree's state.</li>
+          <li>Take and restore snapshots of a worktree&apos;s state.</li>
           <li>Operate the embedded browser with <code>click</code> and <code>fill</code>.</li>
           <li>Chain commands into scripts for repeatable crew routines.</li>
         </ul>
@@ -527,7 +528,7 @@ fabrica fill  "email" "you@foundry.dev"`}</code>
         <Callout type="info" title="See also">
           <p>
             For driving real desktop UI, combine the CLI with{" "}
-            <a href="/docs/cli/computer-use">Computer Use</a>.
+            <Link href="/docs/cli/computer-use">Computer Use</Link>.
           </p>
         </Callout>
       </>
@@ -549,7 +550,7 @@ fabrica fill  "email" "you@foundry.dev"`}</code>
         <h2>How it works</h2>
         <p>
           Fabrica reads the accessibility tree of a target window, sends it to
-          the agent, and executes the agent's chosen actions (click, type,
+          the agent, and executes the agent&apos;s chosen actions (click, type,
           scroll). Every step is logged so you can audit what happened.
         </p>
 

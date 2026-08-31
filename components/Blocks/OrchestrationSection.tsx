@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -257,7 +257,7 @@ export const OrchestrationSection = () => {
                 <div className="space-y-1.5 text-[11px] text-[var(--text-muted)]">
                   <div className="text-[var(--text-strong)]">Task: Token pricing & latency benchmarks</div>
                   <div>Status: Polling Stripe vs Paddle latency specs</div>
-                  <div className="text-emerald-400">Ã¢Å"â€œ {t('sourcedPapers')}</div>
+                  <div className="text-emerald-400">✔ {t('sourcedPapers')}</div>
                 </div>
                 {/* Progress bar */}
                 <div className="space-y-1 pt-1">
@@ -291,7 +291,7 @@ export const OrchestrationSection = () => {
                     {t('mergeReady')}
                   </p>
                   <div className="p-2 rounded bg-black/40 border border-[var(--border-faint)] text-[10px] text-emerald-300">
-                    Ã¢Å"â€œ {t('diffChecked')}
+                    ✔ {t('diffChecked')}
                   </div>
                 </div>
 
@@ -346,7 +346,7 @@ export const OrchestrationSection = () => {
                 </div>
                 <div className="pt-2 flex justify-between items-center text-[10px] text-[var(--text-muted)]">
                   <span>{t('astClean')}</span>
-                  <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('readyDispatch')}</span>
+                  <span className="text-emerald-400 font-bold">✔ {t('readyDispatch')}</span>
                 </div>
               </div>
             </div>
@@ -370,9 +370,9 @@ export const OrchestrationSection = () => {
                     <span className="text-emerald-400">{t('active')}</span>
                   </div>
                   <p className="text-[var(--text-muted)]">$ git worktree add ../auth-branch -b feat/jwt</p>
-                  <p className="text-[var(--text-strong)]">Ã¢Å"â€œ Created worktree in 14ms</p>
+                  <p className="text-[var(--text-strong)]">✔ Created worktree in 14ms</p>
                   <p className="text-[var(--text-muted)]">$ npx vitest run --silent</p>
-                  <p className="text-emerald-400">Ã¢Å"â€œ 8 tests passed (0 failures)</p>
+                  <p className="text-emerald-400">✔ 8 tests passed (0 failures)</p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-black border border-blue-500/30 space-y-1.5">
@@ -381,8 +381,8 @@ export const OrchestrationSection = () => {
                     <span className="text-blue-400">{t('streaming')}</span>
                   </div>
                   <p className="text-[var(--text-muted)]">$ fabrica research --deep --topic=&apos;stripe vs lemon&apos;</p>
-                  <p className="text-blue-300">Ã¢â€ â€™ Polling 34 merchant of record pricing tiers</p>
-                  <p className="text-[var(--text-strong)]">Ã¢Å"â€œ Generated structured comparative analysis</p>
+                  <p className="text-blue-300">→ Polling 34 merchant of record pricing tiers</p>
+                  <p className="text-[var(--text-strong)]">✔ Generated structured comparative analysis</p>
                 </div>
               </div>
             </div>
@@ -407,15 +407,15 @@ export const OrchestrationSection = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px]">
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
                     <span className="text-[var(--text-muted)] block">{t('step1Label')}</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step1Status')}</span>
+                    <span className="text-emerald-400 font-bold">✔ {t('step1Status')}</span>
                   </div>
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
                     <span className="text-[var(--text-muted)] block">{t('step2Label')}</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step2Status')}</span>
+                    <span className="text-emerald-400 font-bold">✔ {t('step2Status')}</span>
                   </div>
                   <div className="p-2.5 rounded bg-[var(--overlay-weak)] border border-[var(--border-faint)]">
                     <span className="text-[var(--text-muted)] block">{t('step3Label')}</span>
-                    <span className="text-emerald-400 font-bold">Ã¢Å"â€œ {t('step3Status')}</span>
+                    <span className="text-emerald-400 font-bold">✔ {t('step3Status')}</span>
                   </div>
                 </div>
               </div>
