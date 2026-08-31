@@ -13,12 +13,21 @@
 **Q2 (lines 36-37):** "if no relay in Orca, from where we get the need of this relay at first place and how orca handled the alternative ?"
 
 - **CORRECTED (verified against `.backup/orca/`):** Orca = original Fabrica (pre-rebrand name). The original product HAD full mobile/pairing/relay — production-grade React Native + Expo mobile app, QR pairing, E2EE key exchange, WebSocket transport, and Cloudflare Workers relay (Director + Cell Durable Objects). `Fabrica-atlas/_sources/legacy-fabrica/` is the OLD web-only version (no mobile references).
-- What changed post-rebrand: `Fabrica-relay/` is a fresh Cloudflare Workers relay server replacing Orca's relay infrastructure. The pairing/relay/mobile features were carried forward from Orca, not invented post-rebrand. The "answer" in my previous review was wrong — Orca DID have these features.
+- What changed post-rebrand: `Fabrica-relay/` is a fresh Cloudflare Workers relay server replacing Orca's relay infrastructure. The pairing/relay/mobile features were carried forward from Orca, not invented post-rebrand.
 
 **Q3 (lines 41-43):** `/login?intent=pair` — do we really need it? Plus: need dashboard relay status section (link/unlink) + automatic linking option when user logs in to both desktop and APK.
 
 - **CORRECTED:** `/login?intent=pair` is NOT the right place for web-based pairing. Web pairing belongs in the user dashboard (later task), not on the login page. The `PairPanel` on `/login` was a shortcut but not the intended UX. Pairing from the dashboard is more natural — user is already authenticated, sees relay status, and can link/unlink devices.
-- Need added: Dashboard section showing relay status + link/unlink buttons. Auto-link when both desktop and APK are logged in.
+- Need todo: remove the `/login?intent=pair` and add: Dashboard section showing relay status + manual link/unlink buttons option and an Auto-link when both desktop and APK are logged in option.
+
+### Relay auth revert (executed)
+
+- **Reverted** 3 Supabase integration files in `Fabrica-app/` back to Orca's original behavior:
+  - `relay-session-broker.ts`: Raw `authorization.relayToken` (no Supabase wrapper)
+  - `relay-auth-coordinator.ts`: Removed Supabase shortcut, back to `readContext()` flow
+  - `relay-http-client.ts`: Raw `input.relayToken` as Bearer token
+  - `mobile-relay-pairing-offer.ts`: Case-sensitive URL comparison
+- `pnpm typecheck` passed clean. No changes needed in `Fabrica-relay/`.
 
 ---
 
@@ -51,18 +60,18 @@ No Supabase tables for relay.
 
 ### Auth
 
-Desktop presents a Supabase JWT (`FABRICA_RELAY_JWT_SECRET`). Phone presents invite token or resume token.
+Desktop presents a HS256 JWT signed with `FABRICA_RELAY_JWT_SECRET` (raw cloud token, identical to Orca). Phone presents invite token or resume token.
 
 ### Orca vs Fabrica
 
-- **Orca**: No relay concept. No phone pairing. No WebSocket bridge.
-- **Fabrica**: Full relay system with pairing, invites, resume, lease drain, E2EE v2 framing. Used by `/v1/desktop/auth/relay-token` endpoint.
+- **Orca** (pre-rebrand, `.backup/orca/`): Had full relay system — WebSocket transport, mobile relay (Director + Cell Durable Objects via Cloudflare Workers), SSH relay daemon (`src/relay/`), E2EE, pairing, phone-to-desktop bridge. All production-grade.
+- **Fabrica** (post-rebrand): Relay carried forward from Orca with rebranding (`orca` -> `FABRICA` in env vars, RPC methods, handshake types). `Fabrica-relay/` is a fresh Cloudflare Workers relay server replacing Orca's relay infrastructure. Wire protocol has breaking handshake change (`orca-relay-handshake` -> `FABRICA-RELAY-handshake`). Supabase integration was added then reverted — relay auth now uses raw cloud tokens (identical to Orca).
 
 ### Where to see it
 
 - Desktop: Settings &gt; Mobile (QR code pairing), pair-confirm screen
 - Phone: `app/pair-scan.tsx`, `app/pair-confirm.tsx`, `app/pair.tsx` (handles `FABRICA://pair` deep links)
-- Web: `/login?intent=pair` (shows pairing code + deep link `fabrica://pair?token=...`)
+- Web: `/login` page (pairing code + deep link `fabrica://pair?token=...`). NOTE: `/login?intent=pair` is being removed — web pairing will move to dashboard.
 
 ### Status
 
@@ -100,14 +109,14 @@ Creates a trusted connection between desktop (host) and phone (companion). Gener
 
 ### Orca vs Fabrica
 
-- **Orca**: No pairing concept. No mobile connection. No relay.
-- **Fabrica**: Full pairing flow with invite/recovery, pairing journal (`mobile-relay-pairing-journal.ts`), recovery logic (`mobile-relay-pairing-recovery.ts`), keychain storage (`pairing-keychain.ts`).
+- **Orca** (pre-rebrand): Had full pairing system — QR code scanning, device token management, E2EE key exchange, relay invite tokens, protocol versioning (v2). Mobile app (`mobile/`) with 200+ source files covering pairing, transport, workspace management, voice dictation, diagnostics.
+- **Fabrica** (post-rebrand): Pairing carried forward from Orca with rebranding. Desktop UI strings updated (`"Orca Mobile"` -> `"Fabrica Mobile"`). Mobile app rebranded (`name: "fabrica-mobile"`, `bundleIdentifier: "com.autoscalers.fabrica.mobile"`). EAS project config added. Pairing flow is identical to Orca.
 
 ### Where to see it
 
 - Desktop: Settings &gt; Mobile, pair panel
 - Phone: `/pair-scan`, `/pair-confirm`, `/pair` (handles deep links)
-- Web: `/login?intent=pair` (PairPanel component)
+- Web: `/login` page (PairPanel component). NOTE: `/login?intent=pair` is being removed — web pairing will move to dashboard.
 
 ### Status
 
@@ -217,14 +226,14 @@ Two separate systems: crash reports (automatic) and user feedback (manual dialog
 2. Desktop loads `SupabaseAccountSignInCard.tsx` (renderer)
 3. User signs in with email/password (`supabase.auth.signInWithPassword()` via `lib/supabase-browser.ts`)
 4. Session stored in `{userData}/supabase-auth-storage.json` (custom JSON adapter, since Electron main doesn't have localStorage)
-5. Desktop uses `getSupabaseAccessToken()` for relay authentication (`FABRICA_RELAY_JWT_SECRET` signs JWTs for relay)
+5. Desktop uses `mintRelayJwt()` to create relay JWTs signed with `FABRICA_RELAY_JWT_SECRET` (raw cloud tokens, identical to Orca)
 
 ### Web Auth Flow
 
 - `/api/auth/authorize` → `supabase.auth.signInWithOAuth()`
 - `/api/auth/callback` → `exchangeCodeForSession()`
 - `/api/auth/refresh` → `refreshSession()`
-- `/login` page (`app/[locale]/login/page.tsx`) → email/password + Google + GitHub + pairing + recovery
+- `/login` page (`app/[locale]/login/page.tsx`) → email/password + Google + GitHub + recovery. NOTE: `/login?intent=pair` is being removed — web pairing will move to dashboard.
 - Token storage: `window.localStorage.getItem('fabrica_auth_tokens')`
 
 ### DB / Tables
@@ -246,8 +255,8 @@ Two separate systems: crash reports (automatic) and user feedback (manual dialog
 
 ### Orca vs Fabrica
 
-- **Orca**: Uses `x-tenant-id` header for auth (no real user authentication). Uses `supabase.auth.getSession()` but doesn't use OAuth or session persistence.
-- **Fabrica**: Full OAuth + PKCE flow, email/password, session persistence (JSON file for desktop, localStorage for web), Bearer token validation on every protected route (`getUserFromRequest()` / `getSupabaseUser()`), desktop auth routes (`/v1/desktop/auth/*` — 8 routes for profile, org, capabilities, relay token, invites, session, refresh, logout).
+- **Orca** (pre-rebrand): Uses `x-tenant-id` header for auth (no real user authentication). Uses `supabase.auth.getSession()` but doesn't use OAuth or session persistence.
+- **Fabrica** (post-rebrand): Full OAuth + PKCE flow, email/password, session persistence (JSON file for desktop, localStorage for web), Bearer token validation on every protected route (`getUserFromRequest()` / `getSupabaseUser()`), desktop auth routes (`/v1/desktop/auth/*` — 8 routes for profile, org, capabilities, relay token, invites, session, refresh, logout).
 
 ---
 
@@ -367,11 +376,25 @@ When desktop connects to relay:
 
 1. Desktop reads Supabase JWT from session storage (`supabase-auth-storage.json`)
 2. `mintRelayJwt()` in `fabrica-cloud.ts` creates a new JWT:
-  - Header: `{ alg: 'HS256', typ: 'JWT' }`
-  - Payload: `{ sub: userId, relayHostId, hostPublicKeyB64, iat, exp }` (15 min TTL)
-  - Signature: HMAC-SHA256(`FABRICA_RELAY_JWT_SECRET`, base64(header) + "." + base64(payload))
+   - Header: `{ alg: 'HS256', typ: 'JWT' }`
+   - Payload: `{ sub: userId, relayHostId, hostPublicKeyB64, iat, exp }` (15 min TTL)
+   - Signature: HMAC-SHA256(`FABRICA_RELAY_JWT_SECRET`, base64(header) + "." + base64(payload))
 3. Desktop sends `Authorization: Bearer <relayToken>` on relay director requests
 4. Relay validates JWT using `FABRICA_RELAY_JWT_SECRET` (Cloudflare Worker env var)
+
+### Auth flow (identical to Orca)
+
+- `relay-session-broker.ts`: Uses raw `authorization.relayToken` from cloud endpoint (no Supabase wrapper)
+- `relay-auth-coordinator.ts`: Runs `readContext()` flow (no Supabase shortcut)
+- `relay-http-client.ts`: Sends `input.relayToken` as Bearer token (no Supabase override)
+- `mobile-relay-pairing-offer.ts`: Case-sensitive URL comparison (identical to Orca)
+
+### Reverted Supabase integration
+
+The following Supabase integrations were added post-fork then reverted (no value added):
+- `getRelayAuthToken()` wrapper in `relay-session-broker.ts` and `relay-http-client.ts`
+- `getSupabaseAccessToken()` shortcut in `relay-auth-coordinator.ts`
+- `.toLowerCase()` in `mobile-relay-pairing-offer.ts`
 
 ### Env var dependency
 
@@ -380,10 +403,17 @@ When desktop connects to relay:
   - Cloudflare relay worker (`wrangler.toml` / Workers env)
   - Desktop build (baked into bundle via electron-vite.config.ts)
 
+### Relay backend (Fabrica-relay)
+
+- Accepts **any HS256 JWT signed with `FABRICA_RELAY_JWT_SECRET`**
+- Zero coupling to Supabase — no Supabase imports, env vars, or JWT verification
+- Validates only HMAC-SHA256 signature, not issuer/audience/expiry claims
+- No changes needed — already compatible with raw cloud tokens
+
 ### Status
 
-✅ Code is complete (`fabrica-cloud.ts` has `mintRelayJwt()` + `getRelayAuthToken()`).
-⚠️ Must verify the secret matches across all 3 environments. The user hasn't confirmed this.
+✅ Code matches Orca's original relay auth flow (after revert).
+⚠️ Must verify `FABRICA_RELAY_JWT_SECRET` matches across all 3 environments.
 
 ---
 
@@ -439,6 +469,7 @@ Desktop can open an embedded browser (webview) with cookie import from Firefox/C
 | Kill-List            | Plugin kill-list            | ✅ Empty array         | Not visible                             | None                               |
 | Plugins (Portuguese) | `pt-BR.json` (15K lines)    | ⚠️ Needs rebrand      | Not visible in web                      | Separate sub-project               |
 | Agent Hooks          | Runtime events              | ✅ Code exists         | Not visible in web                      | Part of relay                      |
+| Relay Auth           | Desktop → relay JWT         | ✅ Reverted to Orca    | `relay-session-broker.ts`               | Verify JWT secret matches          |
 | OpenCode DB          | Read-only session scan      | ✅ Read-only           | Not visible (AI Vault feature)          | Read-only access                   |
 | Codex State          | Read-only backfill check    | ✅ Read-only           | Not visible                             | Read-only access                   |
 | Browser Cookies      | Firefox/Chromium import     | ✅ Read-only           | Not visible                             | Read-only                          |
