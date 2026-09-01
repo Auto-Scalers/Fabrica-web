@@ -12,7 +12,7 @@
 | W1-W25    | Landing page (Hero, Crew, Feature, Control, Comparison, Pricing, FAQ, FinalCta, Footer), i18n, dark theme, deploy                | ✅ DONE |       |
 | W26-W39   | Auth: login page (email/password + Google + GitHub OAuth), Supabase session handling, desktop auth routes (`/v1/desktop/auth/*`) | ✅ DONE |       |
 | W40a-W40e | Landing page polish: animation, responsive, SEO, accessibility, performance                                                      | ✅ DONE |       |
-| W44-W49   | API routes: `/v1/artifacts` CRUD, `/v1/feedback`, early-access, docs (MDX), download page, whats-new page                        | ✅ DONE |       |
+| W44-W49   | API routes: `/v1/artifacts` CRUD, `/api/diagnostics/*` (token, upload), `/diagnostics/delete/*`, early-access, docs (MDX), download page, whats-new page | ✅ DONE |       |
 | W51       | Login page: removed `/login?intent=pair` PairPanel (relay pairing moved to dashboard)                                            | ✅ DONE |       |
 | W54       | Dashboard: profile (email, name, userId) + artifacts list (Open, Copy link, Delete) — all from Supabase via RLS                  | ✅ DONE |       |
 
@@ -20,9 +20,11 @@
 ## Supabase Tables
 
 
-| Table               | Purpose                                 | RLS       |
-| ------------------- | --------------------------------------- | --------- |
-| `fabrica_artifacts` | User artifacts (created by desktop app) | ✅ Enabled |
+| Table                 | Purpose                                        | RLS       |
+| --------------------- | ---------------------------------------------- | --------- |
+| `fabrica_artifacts`   | User artifacts (created by desktop app)        | ✅ Enabled |
+| `diagnostics`         | Crash reports from desktop bundle upload       | None      |
+| `diagnostic_uploads`  | Short-lived tokens for two-step upload flow    | None      |
 
 
 ---
@@ -68,7 +70,9 @@
 | `GET /v1/artifacts/[id]`            | Get single artifact       |
 | `PUT /v1/artifacts/[id]`            | Update artifact           |
 | `DELETE /v1/artifacts/[id]`         | Delete artifact           |
-| `POST /v1/feedback`                 | Submit crash report       |
+| `POST /api/diagnostics/token`       | Get upload token (step 1) |
+| `POST /api/diagnostics/upload`      | Upload NDJSON bundle (step 2) |
+| `POST /diagnostics/delete/[ticketId]` | Delete uploaded bundle (step 3) |
 | `GET /v1/desktop/auth/session`      | Desktop session check     |
 | `POST /v1/desktop/auth/authorize`   | Desktop auth              |
 | `POST /v1/desktop/auth/refresh`     | Desktop token refresh     |

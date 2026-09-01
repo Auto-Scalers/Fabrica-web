@@ -93,6 +93,33 @@ export interface Database {
         }
         Relationships: []
       }
+      diagnostic_uploads: {
+        Row: {
+          id: string
+          bundle_submission_id: string
+          upload_token: string
+          max_bytes: number
+          expires_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          bundle_submission_id: string
+          upload_token: string
+          max_bytes?: number
+          expires_at: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          bundle_submission_id?: string
+          upload_token?: string
+          max_bytes?: number
+          expires_at?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>

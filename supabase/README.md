@@ -5,9 +5,8 @@
 1. Go to https://supabase.com/dashboard/project/xoynlmscwkimaopkavkj/sql/new
 2. Paste the contents of these files one after another, in order:
    - `migrations/0002_diagnostics.sql`
-   - `migrations/0003_fabrica_pair_invites.sql`
-   - `migrations/0004_drop_dead_tables.sql`
-3. Click **Run** after each one (or paste all three and run once — they're idempotent with `IF NOT EXISTS`)
+   - `migrations/0003_diagnostic_uploads.sql`
+3. Click **Run** after each one (or paste both and run once — they're idempotent with `IF NOT EXISTS`)
 
 ## Migrations
 
@@ -15,16 +14,15 @@
 |------|--------|---------|
 | `migrations/0001_fabrica_artifacts.sql` | ✅ Already applied | Artifact storage |
 | `migrations/0002_diagnostics.sql` | ⏳ Needs apply | Crash reports + feedback |
-| `migrations/0003_fabrica_pair_invites.sql` | ⏳ Needs apply | Phone-desktop pairing |
-| `migrations/0004_drop_dead_tables.sql` | ⏳ Needs apply | Drops dead `early_access_signups` |
+| `migrations/0003_diagnostic_uploads.sql` | ⏳ Needs apply | Token-based bundle upload flow |
 
 ## Final schema (3 tables)
 
 | Table | Purpose | RLS |
 |-------|---------|-----|
 | `fabrica_artifacts` | Publishable HTML/Markdown docs with share URLs | owner read/insert/update/delete |
-| `diagnostics` | Crash reports + feedback from desktop | owner read/insert |
-| `fabrica_pair_invites` | Phone-desktop pairing invite tokens | owner read/insert/delete |
+| `diagnostics` | Crash reports + feedback from desktop | none (admin client only) |
+| `diagnostic_uploads` | Short-lived tokens for two-step bundle upload | none (admin client only) |
 
 ## Auth: email confirmation
 

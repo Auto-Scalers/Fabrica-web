@@ -56,7 +56,9 @@ npm run dev        # http://localhost:3000
 | `GET /v1/artifacts/[id]` | Get single artifact |
 | `PUT /v1/artifacts/[id]` | Update artifact |
 | `DELETE /v1/artifacts/[id]` | Delete artifact |
-| `POST /v1/feedback` | Submit crash report |
+| `POST /api/diagnostics/token` | Get upload token (step 1) |
+| `POST /api/diagnostics/upload` | Upload NDJSON bundle (step 2) |
+| `POST /diagnostics/delete/[ticketId]` | Delete uploaded bundle (step 3) |
 | `GET /v1/desktop/auth/session` | Desktop session check |
 | `POST /v1/desktop/auth/authorize` | Desktop auth |
 | `POST /v1/desktop/auth/refresh` | Desktop token refresh |
@@ -79,9 +81,10 @@ app/
     docs/                 # Documentation (MDX)
     whats-new/page.tsx    # Changelog
   api/auth/               # Supabase OAuth routes
+  api/diagnostics/        # Token + upload for crash bundles
   v1/artifacts/           # Artifact CRUD
-  v1/feedback/            # Crash reports
   v1/desktop/auth/        # Desktop app auth
+  diagnostics/            # Delete uploaded bundles
 components/
   Blocks/                 # Landing sections (Hero, Crew, Feature, ...)
   navbar.tsx              # Fixed nav with mobile drawer

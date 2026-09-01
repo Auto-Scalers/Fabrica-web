@@ -56,9 +56,10 @@ A task is DONE only when ALL of these hold:
 ```
 app/                — Next.js App Router pages and layouts
 app/api/auth/       — Supabase OAuth routes (callback, session, logout, refresh, authorize)
+app/api/diagnostics/ — Token + upload for crash bundles (two-step flow)
 app/v1/artifacts/   — Artifact CRUD (list, get, update, delete — RLS enforced)
-app/v1/feedback/    — Crash report submission
 app/v1/desktop/     — Desktop app auth routes (session, authorize, refresh, logout, capabilities, profile, org, relay-token)
+app/diagnostics/    — Delete uploaded bundles by ticket ID
 components/         — React components (navbar, Blocks/, download/, docs/, ui/)
 lib/                — Utilities, Supabase clients, docs content
 messages/           — i18n translation files (en, fr, ar)

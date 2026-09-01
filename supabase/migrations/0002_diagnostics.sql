@@ -1,12 +1,12 @@
--- Diagnostics table: stores crash reports and feedback from the desktop app.
--- Referenced by app/v1/feedback/route.ts.
--- user_id is TEXT (not uuid) because /v1/feedback accepts anonymous
--- submissions identified by github login string, not Supabase auth UUIDs.
+-- Diagnostics table: stores crash reports from the desktop app's two-step
+-- bundle upload flow (see app/api/diagnostics/token + upload routes).
+-- user_id is TEXT (not uuid) because the upload flow identifies submissions
+-- by bundle_submission_id, not Supabase auth UUIDs.
 
 CREATE TABLE IF NOT EXISTS public.diagnostics (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id     text NOT NULL DEFAULT 'anonymous',
-  type        text NOT NULL CHECK (type IN ('crash', 'feedback')),
+  type        text NOT NULL DEFAULT 'crash',
   app_version text NOT NULL,
   os          text NOT NULL,
   error       text,
