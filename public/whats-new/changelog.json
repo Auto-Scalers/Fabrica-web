@@ -1,5 +1,11 @@
 [
   {
+    "version": "0.0.44",
+    "title": "Beta Testing Release",
+    "description": "First downloadable beta — Windows installer and Android APK ready for physical testing. Includes support links, relay wire-format fixes, and plugin marketplace backend.",
+    "releaseNotesUrl": "https://github.com/Auto-Scalers/Fabrica-app/releases/tag/v0.0.44"
+  },
+  {
     "version": "1.4.178-rc.2",
     "title": "Reborn as Fabrica",
     "description": "Fabrica is here — a full rebrand with a new dark forge look, the plugin marketplace with safety kill-list enforcement, and a faster relay handshake.",
