@@ -173,7 +173,10 @@ function LoginPageInner() {
         clearFragment()
         if (query.intent === 'desktop' && query.redirectTo) {
           const dest = new URL(query.redirectTo)
+          dest.searchParams.set('access_token', tokens.access_token)
+          dest.searchParams.set('refresh_token', tokens.refresh_token)
           if (query.state) dest.searchParams.set('state', query.state)
+          setMode({ kind: 'verifying' })
           window.location.replace(dest.toString())
           return
         }
@@ -194,7 +197,10 @@ function LoginPageInner() {
       if (existing) {
         if (query.intent === 'desktop' && query.redirectTo) {
           const dest = new URL(query.redirectTo)
+          dest.searchParams.set('access_token', existing.access_token)
+          dest.searchParams.set('refresh_token', existing.refresh_token)
           if (query.state) dest.searchParams.set('state', query.state)
+          setMode({ kind: 'verifying' })
           window.location.replace(dest.toString())
           return
         }
@@ -220,12 +226,23 @@ function LoginPageInner() {
       if (oauthPending) return
       setOauthProvider(provider)
       setOauthPending(true)
-      const baseParams = new URLSearchParams({ locale, provider })
       const query = readQuery()
       if (query.intent === 'desktop' && query.redirectTo) {
-        baseParams.set('redirect_to', query.redirectTo)
-        if (query.state) baseParams.set('state', query.state)
+        // Desktop PKCE: forward all params to the desktop authorize endpoint.
+        const params = new URLSearchParams()
+        params.set('provider', provider)
+        params.set('redirect_uri', query.redirectTo)
+        if (query.state) params.set('state', query.state)
+        for (const key of ['code_challenge', 'code_challenge_method', 'nonce', 'scope', 'client_id', 'local_profile_id']) {
+          const val = new URLSearchParams(window.location.search).get(key)
+          if (val) params.set(key, val)
+        }
+        window.location.href = `/v1/desktop/auth/authorize?${params.toString()}`
+        return
       }
+      const baseParams = new URLSearchParams({ locale, provider })
+      if (query.redirectTo) baseParams.set('redirect_to', query.redirectTo)
+      if (query.state) baseParams.set('state', query.state)
       // Server-side authorize endpoint redirects 302 to the provider.
       window.location.href = `/api/auth/authorize?${baseParams.toString()}`
     },
@@ -263,12 +280,34 @@ function LoginPageInner() {
         if (result.session) {
           storeTokens(result.session)
         }
+        const query = readQuery()
+        if (query.intent === 'desktop' && query.redirectTo && result.session) {
+          const dest = new URL(query.redirectTo)
+          dest.searchParams.set('access_token', result.session.access_token)
+          dest.searchParams.set('refresh_token', result.session.refresh_token)
+          if (query.state) dest.searchParams.set('state', query.state)
+          showToast(t('toast.signInSuccess'), 'success')
+          setMode({ kind: 'verifying' })
+          window.location.replace(dest.toString())
+          return
+        }
         showToast(t('toast.signInSuccess'), 'success')
         setMode({ kind: 'verifying' })
         router.replace('/dashboard')
       } else {
         if (result.session) {
           storeTokens(result.session)
+          const query = readQuery()
+          if (query.intent === 'desktop' && query.redirectTo) {
+            const dest = new URL(query.redirectTo)
+            dest.searchParams.set('access_token', result.session.access_token)
+            dest.searchParams.set('refresh_token', result.session.refresh_token)
+            if (query.state) dest.searchParams.set('state', query.state)
+            showToast(t('toast.signInSuccess'), 'success')
+            setMode({ kind: 'verifying' })
+            window.location.replace(dest.toString())
+            return
+          }
           showToast(t('toast.signInSuccess'), 'success')
           setMode({ kind: 'verifying' })
           router.replace('/dashboard')
