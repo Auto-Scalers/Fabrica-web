@@ -1,6 +1,6 @@
 # Fabrica-web — Task File
 
-*Last updated: 2026-08-31*
+*Last updated: 2026-09-01*
 
 ---
 
@@ -15,6 +15,18 @@
 | W44-W49   | API routes: `/v1/artifacts` CRUD, `/api/diagnostics/*` (token, upload), `/diagnostics/delete/*`, early-access, docs (MDX), download page, whats-new page | ✅ DONE |       |
 | W51       | Login page: removed `/login?intent=pair` PairPanel (relay pairing moved to dashboard)                                            | ✅ DONE |       |
 | W54       | Dashboard: profile (email, name, userId) + artifacts list (Open, Copy link, Delete) — all from Supabase via RLS                  | ✅ DONE |       |
+
+
+## Pending Tasks
+
+> Blocked on Fabrica-marketing M4-M6 (Align with product). Cannot start until marketing delivers updated brand files.
+
+| # | Task | Status | Depends on | Notes |
+|---|------|--------|------------|-------|
+| W55 | Fetch onorca.dev landing page for design reference — analyse layout, structure, copy patterns, visual hierarchy | ⬜ TODO | — | Inspiration source: https://www.onorca.dev/ |
+| W56 | Update landing page copy — rewrite Hero, Feature, Control, Comparison, Pricing, FAQ, FinalCta sections using updated brand guidelines + positioning from marketing | ⬜ TODO | MKT-M4, MKT-M5, W55 | Copy must reflect actual Fabrica-app features |
+| W57 | Update landing page images — replace screenshots, icons, visuals to match current Fabrica-app UI | ⬜ TODO | MKT-M4, MKT-M6 | Generate new screenshots from app |
+| W58 | Sync i18n — update en.json, fr.json, ar.json with any new/changed copy keys | ⬜ TODO | W56 | Three locales must stay in sync |
 
 
 ## Supabase Tables
@@ -36,8 +48,8 @@
 | ----------- | ----------------------------------------- |
 | ✅ DONE      | 51                                        |
 | ❌ CANCELLED | 3 (W50b, W52, W53 — relay/device pairing) |
-| ⬜ TODO      | 0                                         |
-| Completion  | 100%                                      |
+| ⬜ TODO      | 4 (W55-W58 — blocked on marketing M4-M6) |
+| Completion  | 93%                                       |
 
 
 ---
@@ -128,6 +140,24 @@ Three locales: `en`, `fr`, `ar` — must stay in sync.
 | `public/fabrica-logo_icon.png`       | Logo               |
 | `public/fabrica-logo_icon_light.png` | Light logo         |
 
+
+---
+
+## Checkpoint
+
+| Field | Value |
+|---|---|
+| **Status** | 51 done, 4 pending (blocked on marketing M4-M6). Ready to update landing page once brand files are refreshed. |
+| **Next Action** | Wait for MKT-M4/M5/M6 completion, then dispatch W55-W58 |
+| **Last Checkpoint** | 2026-09-01 |
+
+---
+
+## Session Ledger
+
+| Handle | Task | Status |
+|---|---|---|
+| — | — | No active sessions |
 
 ---
 
