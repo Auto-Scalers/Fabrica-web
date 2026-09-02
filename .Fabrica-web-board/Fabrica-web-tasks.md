@@ -27,7 +27,7 @@
 | W56 | Update landing page copy — rewrite Hero, Feature, Control, Comparison, Pricing, FAQ, FinalCta sections using updated brand guidelines + positioning from marketing | ⬜ TODO | MKT-M4, MKT-M5, W55 | Copy must reflect actual Fabrica-app features |
 | W57 | Update landing page images — replace screenshots, icons, visuals to match current Fabrica-app UI | ⬜ TODO | MKT-M4, MKT-M6 | Generate new screenshots from app |
 | W58 | Sync i18n — update en.json, fr.json, ar.json with any new/changed copy keys | ⬜ TODO | W56 | Three locales must stay in sync |
-| W59 | Update changelog.json + nudge.json for v0.0.5 release — replace 0.0.44 references with 0.0.5, update releaseNotesUrl to v0.0.5 tag | ✅ DONE | — | Static files in public/whats-new/ |
+| W59 | Update changelog.json + nudge.json for v0.0.6 release — replace 0.0.5 references with 0.0.6, update releaseNotesUrl to v0.0.6 tag | ✅ DONE | — | Static files in public/whats-new/ |
 
 
 ## Supabase Tables

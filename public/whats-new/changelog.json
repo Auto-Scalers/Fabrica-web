@@ -1,9 +1,9 @@
 [
   {
-    "version": "0.0.5",
+    "version": "0.0.6",
     "title": "Beta Release",
     "description": "Beta release with fresh builds — Windows installer, Android APK, and full rebrand verified.",
-    "releaseNotesUrl": "https://github.com/Auto-Scalers/Fabrica-app/releases/tag/v0.0.5"
+    "releaseNotesUrl": "https://github.com/Auto-Scalers/Fabrica-app/releases/tag/v0.0.6"
   },
   {
     "version": "0.0.44",
