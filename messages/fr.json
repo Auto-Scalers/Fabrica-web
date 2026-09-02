@@ -807,9 +807,10 @@
     "releaseNotes": "Notes de version",
     "verifyChecksums": "Vérifier les checksums",
     "downloadButton": "Télécharger",
+    "comingSoon": "Bientôt disponible",
     "platforms": {
       "windows": { "name": "Windows", "detail": "Windows 10 & 11 • installateur .exe" },
-      "macos": { "name": "macOS", "detail": "macOS 12+ • image disque .dmg" },
+      "macos": { "name": "macOS", "detail": "macOS 12+ • image disque .dmg — Bientôt disponible" },
       "linux": { "name": "Linux", "detail": "Toute distro récente • .AppImage" },
       "android": { "name": "Téléphone Android", "detail": "Android 8+ • .apk" }
     },

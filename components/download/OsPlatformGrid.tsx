@@ -9,6 +9,7 @@ export interface Platform {
   name: string;
   detail: string;
   href: string;
+  comingSoon?: boolean;
 }
 
 const ICONS: Record<Platform["key"], LucideIcon> = {
@@ -32,9 +33,10 @@ interface OsPlatformGridProps {
   platforms: Platform[];
   recommendedLabel: string;
   downloadLabel: string;
+  comingSoonLabel: string;
 }
 
-export function OsPlatformGrid({ platforms, recommendedLabel, downloadLabel }: OsPlatformGridProps) {
+export function OsPlatformGrid({ platforms, recommendedLabel, downloadLabel, comingSoonLabel }: OsPlatformGridProps) {
   const [detected, setDetected] = useState<Platform["key"] | null>(null);
 
   useEffect(() => {
@@ -47,21 +49,25 @@ export function OsPlatformGrid({ platforms, recommendedLabel, downloadLabel }: O
       {platforms.map((p) => {
         const Icon = ICONS[p.key];
         const isRecommended = detected === p.key;
+        const isComingSoon = p.comingSoon === true;
         return (
           <a
             key={p.key}
-            href={p.href}
-            target="_blank"
-            rel="noreferrer"
+            href={isComingSoon ? undefined : p.href}
+            target={isComingSoon ? undefined : "_blank"}
+            rel={isComingSoon ? undefined : "noreferrer"}
             data-platform={p.key}
+            aria-disabled={isComingSoon}
             className={[
               "group relative flex items-center gap-4 rounded-2xl border p-5 text-start transition-all",
-              isRecommended
-                ? "border-orange-500/70 bg-orange-500/10 ring-1 ring-orange-500/40"
-                : "border-[var(--border-subtle)] bg-[var(--surface-card)] hover:border-orange-500/50 hover:bg-[var(--overlay-10)]",
+              isComingSoon
+                ? "opacity-60 cursor-not-allowed border-[var(--border-subtle)] bg-[var(--surface-card)]"
+                : isRecommended
+                  ? "border-orange-500/70 bg-orange-500/10 ring-1 ring-orange-500/40"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-card)] hover:border-orange-500/50 hover:bg-[var(--overlay-10)]",
             ].join(" ")}
           >
-            {isRecommended && (
+            {isRecommended && !isComingSoon && (
               <span className="absolute -top-2.5 left-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-2.5 py-0.5 font-mono text-[11px] font-semibold text-white shadow-lg shadow-orange-950/40">
                 <BadgeCheck className="h-3.5 w-3.5" />
                 {recommendedLabel}
@@ -74,10 +80,16 @@ export function OsPlatformGrid({ platforms, recommendedLabel, downloadLabel }: O
               <span className="block text-base font-semibold">{p.name}</span>
               <span className="block text-xs text-[var(--text-muted)]">{p.detail}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-950/40">
-              <Download className="h-4 w-4" />
-              {downloadLabel}
-            </span>
+            {isComingSoon ? (
+              <span className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 py-2 font-mono text-xs text-[var(--text-muted)]">
+                {comingSoonLabel}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#E8590C] to-[#FF8A3D] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-orange-950/40">
+                <Download className="h-4 w-4" />
+                {downloadLabel}
+              </span>
+            )}
           </a>
         );
       })}

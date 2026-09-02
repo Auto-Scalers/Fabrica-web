@@ -16,14 +16,15 @@ export function generateStaticParams(): Params[] {
 const RELEASES_URL = "https://github.com/Auto-Scalers/Fabrica-app/releases";
 const LATEST_RELEASE_URL = `${RELEASES_URL}/latest`;
 
-const DOWNLOADS: { key: Platform["key"]; href: string }[] = [
+const DOWNLOADS: { key: Platform["key"]; href: string; comingSoon?: boolean }[] = [
   {
     key: "windows",
     href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-windows-setup.exe",
   },
   {
     key: "macos",
-    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-macos.dmg",
+    href: "",
+    comingSoon: true,
   },
   {
     key: "linux",
@@ -31,7 +32,7 @@ const DOWNLOADS: { key: Platform["key"]; href: string }[] = [
   },
   {
     key: "android",
-    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-android.apk",
+    href: "https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-v0.0.5.apk",
   },
 ];
 
@@ -104,6 +105,7 @@ export default async function DownloadPage({
           platforms={platforms}
           recommendedLabel={t("recommended")}
           downloadLabel={t("downloadButton")}
+          comingSoonLabel={t("comingSoon")}
         />
 
         {/* Secondary links */}
@@ -150,7 +152,7 @@ export default async function DownloadPage({
                 {t("mobileCompanionBody")}
               </p>
               <a
-                href="https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-android.apk"
+                href="https://github.com/Auto-Scalers/Fabrica-app/releases/latest/download/fabrica-v0.0.5.apk"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-3 inline-flex items-center gap-1.5 font-mono text-sm text-orange-400 transition-colors hover:text-orange-300"

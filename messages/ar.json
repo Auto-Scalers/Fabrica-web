@@ -807,9 +807,10 @@
     "releaseNotes": "ملاحظات الإصدار",
     "verifyChecksums": "تحقّق من المجاميع الاختبارية",
     "downloadButton": "تنزيل",
+    "comingSoon": "قريبًا",
     "platforms": {
       "windows": { "name": "Windows", "detail": "Windows 10 و11 • مثبّت .exe" },
-      "macos": { "name": "macOS", "detail": "macOS 12+ • صورة قرص .dmg" },
+      "macos": { "name": "macOS", "detail": "macOS 12+ • صورة قرص .dmg — قريبًا" },
       "linux": { "name": "Linux", "detail": "أي توزيع حديث • .AppImage" },
       "android": { "name": "هاتف Android", "detail": "Android 8+ • .apk" }
     },
